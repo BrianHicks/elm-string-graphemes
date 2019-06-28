@@ -2,6 +2,7 @@ module String.Segmentation exposing (graphemes)
 
 import Parser exposing ((|=), Parser, Step(..), loop)
 import String.Segmentation.CR as CR
+import String.Segmentation.Control as Control
 import String.Segmentation.LF as LF
 
 
@@ -16,6 +17,7 @@ graphemesLoop current =
         [ cons current (Parser.token "\u{000D}\n")
         , cons current CR.parser
         , cons current LF.parser
+        , cons current Control.parser
         , Parser.map (\_ -> Done (List.reverse current)) Parser.end
         ]
 
