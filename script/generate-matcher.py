@@ -29,20 +29,33 @@ out.append('parser = Parser.chompIf (\c -> Set.member c chars)')
 out.append('chars : Set Char')
 out.append('chars = [')
 
-for (i, match) in enumerate(classes[class_]):
+chars = []
+ranges = []
+
+for match in classes[class_]:
     if match['kind'] == 'range':
-        code = 'List.range 0x{} 0x{}'.format(
+        ranges.append('List.range 0x{} 0x{} -- {}'.format(
             match['start'],
             match['end'],
-        )
+            match['comment'],
+        ))
     elif match['kind'] == 'single':
-        code = '[ 0x{} ]'.format(match['codepoint'])
+        chars.append('0x{} -- {}'.format(
+            match['codepoint'],
+            match['comment']
+        ))
+    else:
+        print('I don\'t know how to handle a "{}"!'.format(match['kind']))
+        sys.exit(1)
 
-    out.append('    {}{} -- {}'.format(
-        ', ' if i > 0 else '',
-        code,
-        match['comment'],
-    ))
+if chars:
+    out.append('[{}\n    ]'.format('\n    ,'.join(chars)))
+
+if chars and ranges:
+    out.append(',    ')
+
+if ranges:
+    out.append('\n    ,'.join(ranges))
 
 out.append('    ]')
 out.append('    |> List.concat')
