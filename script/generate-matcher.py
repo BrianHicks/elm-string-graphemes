@@ -20,47 +20,42 @@ if class_ not in classes:
 out = []
 out.append('module {} exposing (chars, parser)'.format(module))
 out.append('import Parser exposing (Parser)')
-out.append('import Set exposing (Set)')
+out.append('import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)')
+out.append('import String.Segmentation.RangeSet.Range as Range')
 out.append('parser : Parser ()')
-out.append('parser = Parser.chompIf (\c -> Set.member c chars)')
+out.append('parser = Parser.chompIf (\c -> RangeSet.member c chars)')
 
 # CHARS
 
-out.append('chars : Set Char')
-out.append('chars = [')
+out.append('chars : RangeSet Char')
+out.append('chars = RangeSet.fromList [')
 
-chars = []
-ranges = []
 
-for match in classes[class_]:
+def elm_char(codepoint):
+    return "'\\u{%s}'" % codepoint
+
+
+for (i, match) in enumerate(classes[class_]):
     if match['kind'] == 'range':
-        ranges.append('List.range 0x{} 0x{} -- {}'.format(
-            match['start'],
-            match['end'],
-            match['comment'],
-        ))
+        code = 'Range.range {} {}'.format(
+            elm_char(match['start']),
+            elm_char(match['end']),
+        )
     elif match['kind'] == 'single':
-        chars.append('0x{} -- {}'.format(
-            match['codepoint'],
-            match['comment']
-        ))
+        code = 'Range.point {}'.format(
+            elm_char(match['codepoint']),
+        )
     else:
         print('I don\'t know how to handle a "{}"!'.format(match['kind']))
         sys.exit(1)
 
-if chars:
-    out.append('[{}\n    ]'.format('\n    ,'.join(chars)))
-
-if chars and ranges:
-    out.append(',    ')
-
-if ranges:
-    out.append('\n    ,'.join(ranges))
+    out.append('    {}{} -- {}'.format(
+        ',' if i > 0 else '',
+        code,
+        match['comment'],
+    ))
 
 out.append('    ]')
-out.append('    |> List.concat')
-out.append('    |> List.map Char.fromCode')
-out.append('    |> Set.fromList')
 
 # write out the final result
 

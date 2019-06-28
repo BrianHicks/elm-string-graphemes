@@ -6,6 +6,8 @@ import Set exposing (Set)
 import String.Segmentation as Segmentation
 import String.Segmentation.Control as Control
 import String.Segmentation.Prepend as Prepend
+import String.Segmentation.RangeSet as RangeSet
+import String.Segmentation.RangeSet.Range as Range
 import Test exposing (..)
 
 

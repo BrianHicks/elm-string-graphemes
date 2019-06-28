@@ -1,19 +1,18 @@
 module String.Segmentation.T exposing (chars, parser)
 
 import Parser exposing (Parser)
-import Set exposing (Set)
+import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
+import String.Segmentation.RangeSet.Range as Range
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf (\c -> Set.member c chars)
+    Parser.chompIf (\c -> RangeSet.member c chars)
 
 
-chars : Set Char
+chars : RangeSet Char
 chars =
-    [ List.range 0x11A8 0x11FF -- Lo  [88] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG SSANGNIEUN
-    , List.range 0xD7CB 0xD7FB -- Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
-    ]
-        |> List.concat
-        |> List.map Char.fromCode
-        |> Set.fromList
+    RangeSet.fromList
+        [ Range.range 'ᆨ' 'ᇿ' -- Lo  [88] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG SSANGNIEUN
+        , Range.range 'ퟋ' 'ퟻ' -- Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
+        ]

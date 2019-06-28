@@ -1,170 +1,168 @@
 module String.Segmentation.SpacingMark exposing (chars, parser)
 
 import Parser exposing (Parser)
-import Set exposing (Set)
+import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
+import String.Segmentation.RangeSet.Range as Range
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf (\c -> Set.member c chars)
+    Parser.chompIf (\c -> RangeSet.member c chars)
 
 
-chars : Set Char
+chars : RangeSet Char
 chars =
-    [ [ 0x0903 -- Mc       DEVANAGARI SIGN VISARGA
-      , 0x093B -- Mc       DEVANAGARI VOWEL SIGN OOE
-      , 0x0A03 -- Mc       GURMUKHI SIGN VISARGA
-      , 0x0A83 -- Mc       GUJARATI SIGN VISARGA
-      , 0x0AC9 -- Mc       GUJARATI VOWEL SIGN CANDRA O
-      , 0x0B40 -- Mc       ORIYA VOWEL SIGN II
-      , 0x0BBF -- Mc       TAMIL VOWEL SIGN I
-      , 0x0CBE -- Mc       KANNADA VOWEL SIGN AA
-      , 0x0E33 -- Lo       THAI CHARACTER SARA AM
-      , 0x0EB3 -- Lo       LAO VOWEL SIGN AM
-      , 0x0F7F -- Mc       TIBETAN SIGN RNAM BCAD
-      , 0x1031 -- Mc       MYANMAR VOWEL SIGN E
-      , 0x1084 -- Mc       MYANMAR VOWEL SIGN SHAN E
-      , 0x17B6 -- Mc       KHMER VOWEL SIGN AA
-      , 0x1A55 -- Mc       TAI THAM CONSONANT SIGN MEDIAL RA
-      , 0x1A57 -- Mc       TAI THAM CONSONANT SIGN LA TANG LAI
-      , 0x1B04 -- Mc       BALINESE SIGN BISAH
-      , 0x1B3B -- Mc       BALINESE VOWEL SIGN RA REPA TEDUNG
-      , 0x1B82 -- Mc       SUNDANESE SIGN PANGWISAD
-      , 0x1BA1 -- Mc       SUNDANESE CONSONANT SIGN PAMINGKAL
-      , 0x1BAA -- Mc       SUNDANESE SIGN PAMAAEH
-      , 0x1BE7 -- Mc       BATAK VOWEL SIGN E
-      , 0x1BEE -- Mc       BATAK VOWEL SIGN U
-      , 0x1CE1 -- Mc       VEDIC TONE ATHARVAVEDIC INDEPENDENT SVARITA
-      , 0x1CF7 -- Mc       VEDIC SIGN ATIKRAMA
-      , 0xA827 -- Mc       SYLOTI NAGRI VOWEL SIGN OO
-      , 0xA983 -- Mc       JAVANESE SIGN WIGNYAN
-      , 0xAA4D -- Mc       CHAM CONSONANT SIGN FINAL H
-      , 0xAAEB -- Mc       MEETEI MAYEK VOWEL SIGN II
-      , 0xAAF5 -- Mc       MEETEI MAYEK VOWEL SIGN VISARGA
-      , 0xABEC -- Mc       MEETEI MAYEK LUM IYEK
-      , 0x00011000 -- Mc       BRAHMI SIGN CANDRABINDU
-      , 0x00011002 -- Mc       BRAHMI SIGN VISARGA
-      , 0x00011082 -- Mc       KAITHI SIGN VISARGA
-      , 0x0001112C -- Mc       CHAKMA VOWEL SIGN E
-      , 0x00011182 -- Mc       SHARADA SIGN VISARGA
-      , 0x00011235 -- Mc       KHOJKI SIGN VIRAMA
-      , 0x0001133F -- Mc       GRANTHA VOWEL SIGN I
-      , 0x00011445 -- Mc       NEWA SIGN VISARGA
-      , 0x000114B9 -- Mc       TIRHUTA VOWEL SIGN E
-      , 0x000114BE -- Mc       TIRHUTA VOWEL SIGN AU
-      , 0x000114C1 -- Mc       TIRHUTA SIGN VISARGA
-      , 0x000115BE -- Mc       SIDDHAM SIGN VISARGA
-      , 0x0001163E -- Mc       MODI SIGN VISARGA
-      , 0x000116AC -- Mc       TAKRI SIGN VISARGA
-      , 0x000116B6 -- Mc       TAKRI SIGN VIRAMA
-      , 0x00011726 -- Mc       AHOM VOWEL SIGN E
-      , 0x00011838 -- Mc       DOGRA SIGN VISARGA
-      , 0x000119E4 -- Mc       NANDINAGARI VOWEL SIGN PRISHTHAMATRA E
-      , 0x00011A39 -- Mc       ZANABAZAR SQUARE SIGN VISARGA
-      , 0x00011A97 -- Mc       SOYOMBO SIGN VISARGA
-      , 0x00011C2F -- Mc       BHAIKSUKI VOWEL SIGN AA
-      , 0x00011C3E -- Mc       BHAIKSUKI SIGN VISARGA
-      , 0x00011CA9 -- Mc       MARCHEN SUBJOINED LETTER YA
-      , 0x00011CB1 -- Mc       MARCHEN VOWEL SIGN I
-      , 0x00011CB4 -- Mc       MARCHEN VOWEL SIGN O
-      , 0x00011D96 -- Mc       GUNJALA GONDI SIGN VISARGA
-      , 0x0001D166 -- Mc       MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
-      , 0x0001D16D -- Mc       MUSICAL SYMBOL COMBINING AUGMENTATION DOT
-      ]
-    , List.range 0x093E 0x0940 -- Mc   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
-    , List.range 0x0949 0x094C -- Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
-    , List.range 0x094E 0x094F -- Mc   [2] DEVANAGARI VOWEL SIGN PRISHTHAMATRA E..DEVANAGARI VOWEL SIGN AW
-    , List.range 0x0982 0x0983 -- Mc   [2] BENGALI SIGN ANUSVARA..BENGALI SIGN VISARGA
-    , List.range 0x09BF 0x09C0 -- Mc   [2] BENGALI VOWEL SIGN I..BENGALI VOWEL SIGN II
-    , List.range 0x09C7 0x09C8 -- Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
-    , List.range 0x09CB 0x09CC -- Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
-    , List.range 0x0A3E 0x0A40 -- Mc   [3] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN II
-    , List.range 0x0ABE 0x0AC0 -- Mc   [3] GUJARATI VOWEL SIGN AA..GUJARATI VOWEL SIGN II
-    , List.range 0x0ACB 0x0ACC -- Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
-    , List.range 0x0B02 0x0B03 -- Mc   [2] ORIYA SIGN ANUSVARA..ORIYA SIGN VISARGA
-    , List.range 0x0B47 0x0B48 -- Mc   [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
-    , List.range 0x0B4B 0x0B4C -- Mc   [2] ORIYA VOWEL SIGN O..ORIYA VOWEL SIGN AU
-    , List.range 0x0BC1 0x0BC2 -- Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
-    , List.range 0x0BC6 0x0BC8 -- Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
-    , List.range 0x0BCA 0x0BCC -- Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
-    , List.range 0x0C01 0x0C03 -- Mc   [3] TELUGU SIGN CANDRABINDU..TELUGU SIGN VISARGA
-    , List.range 0x0C41 0x0C44 -- Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
-    , List.range 0x0C82 0x0C83 -- Mc   [2] KANNADA SIGN ANUSVARA..KANNADA SIGN VISARGA
-    , List.range 0x0CC0 0x0CC1 -- Mc   [2] KANNADA VOWEL SIGN II..KANNADA VOWEL SIGN U
-    , List.range 0x0CC3 0x0CC4 -- Mc   [2] KANNADA VOWEL SIGN VOCALIC R..KANNADA VOWEL SIGN VOCALIC RR
-    , List.range 0x0CC7 0x0CC8 -- Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
-    , List.range 0x0CCA 0x0CCB -- Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
-    , List.range 0x0D02 0x0D03 -- Mc   [2] MALAYALAM SIGN ANUSVARA..MALAYALAM SIGN VISARGA
-    , List.range 0x0D3F 0x0D40 -- Mc   [2] MALAYALAM VOWEL SIGN I..MALAYALAM VOWEL SIGN II
-    , List.range 0x0D46 0x0D48 -- Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
-    , List.range 0x0D4A 0x0D4C -- Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
-    , List.range 0x0D82 0x0D83 -- Mc   [2] SINHALA SIGN ANUSVARAYA..SINHALA SIGN VISARGAYA
-    , List.range 0x0DD0 0x0DD1 -- Mc   [2] SINHALA VOWEL SIGN KETTI AEDA-PILLA..SINHALA VOWEL SIGN DIGA AEDA-PILLA
-    , List.range 0x0DD8 0x0DDE -- Mc   [7] SINHALA VOWEL SIGN GAETTA-PILLA..SINHALA VOWEL SIGN KOMBUVA HAA GAYANUKITTA
-    , List.range 0x0DF2 0x0DF3 -- Mc   [2] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA VOWEL SIGN DIGA GAYANUKITTA
-    , List.range 0x0F3E 0x0F3F -- Mc   [2] TIBETAN SIGN YAR TSHES..TIBETAN SIGN MAR TSHES
-    , List.range 0x103B 0x103C -- Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
-    , List.range 0x1056 0x1057 -- Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
-    , List.range 0x17BE 0x17C5 -- Mc   [8] KHMER VOWEL SIGN OE..KHMER VOWEL SIGN AU
-    , List.range 0x17C7 0x17C8 -- Mc   [2] KHMER SIGN REAHMUK..KHMER SIGN YUUKALEAPINTU
-    , List.range 0x1923 0x1926 -- Mc   [4] LIMBU VOWEL SIGN EE..LIMBU VOWEL SIGN AU
-    , List.range 0x1929 0x192B -- Mc   [3] LIMBU SUBJOINED LETTER YA..LIMBU SUBJOINED LETTER WA
-    , List.range 0x1930 0x1931 -- Mc   [2] LIMBU SMALL LETTER KA..LIMBU SMALL LETTER NGA
-    , List.range 0x1933 0x1938 -- Mc   [6] LIMBU SMALL LETTER TA..LIMBU SMALL LETTER LA
-    , List.range 0x1A19 0x1A1A -- Mc   [2] BUGINESE VOWEL SIGN E..BUGINESE VOWEL SIGN O
-    , List.range 0x1A6D 0x1A72 -- Mc   [6] TAI THAM VOWEL SIGN OY..TAI THAM VOWEL SIGN THAM AI
-    , List.range 0x1B3D 0x1B41 -- Mc   [5] BALINESE VOWEL SIGN LA LENGA TEDUNG..BALINESE VOWEL SIGN TALING REPA TEDUNG
-    , List.range 0x1B43 0x1B44 -- Mc   [2] BALINESE VOWEL SIGN PEPET TEDUNG..BALINESE ADEG ADEG
-    , List.range 0x1BA6 0x1BA7 -- Mc   [2] SUNDANESE VOWEL SIGN PANAELAENG..SUNDANESE VOWEL SIGN PANOLONG
-    , List.range 0x1BEA 0x1BEC -- Mc   [3] BATAK VOWEL SIGN I..BATAK VOWEL SIGN O
-    , List.range 0x1BF2 0x1BF3 -- Mc   [2] BATAK PANGOLAT..BATAK PANONGONAN
-    , List.range 0x1C24 0x1C2B -- Mc   [8] LEPCHA SUBJOINED LETTER YA..LEPCHA VOWEL SIGN UU
-    , List.range 0x1C34 0x1C35 -- Mc   [2] LEPCHA CONSONANT SIGN NYIN-DO..LEPCHA CONSONANT SIGN KANG
-    , List.range 0xA823 0xA824 -- Mc   [2] SYLOTI NAGRI VOWEL SIGN A..SYLOTI NAGRI VOWEL SIGN I
-    , List.range 0xA880 0xA881 -- Mc   [2] SAURASHTRA SIGN ANUSVARA..SAURASHTRA SIGN VISARGA
-    , List.range 0xA8B4 0xA8C3 -- Mc  [16] SAURASHTRA CONSONANT SIGN HAARU..SAURASHTRA VOWEL SIGN AU
-    , List.range 0xA952 0xA953 -- Mc   [2] REJANG CONSONANT SIGN H..REJANG VIRAMA
-    , List.range 0xA9B4 0xA9B5 -- Mc   [2] JAVANESE VOWEL SIGN TARUNG..JAVANESE VOWEL SIGN TOLONG
-    , List.range 0xA9BA 0xA9BB -- Mc   [2] JAVANESE VOWEL SIGN TALING..JAVANESE VOWEL SIGN DIRGA MURE
-    , List.range 0xA9BE 0xA9C0 -- Mc   [3] JAVANESE CONSONANT SIGN PENGKAL..JAVANESE PANGKON
-    , List.range 0xAA2F 0xAA30 -- Mc   [2] CHAM VOWEL SIGN O..CHAM VOWEL SIGN AI
-    , List.range 0xAA33 0xAA34 -- Mc   [2] CHAM CONSONANT SIGN YA..CHAM CONSONANT SIGN RA
-    , List.range 0xAAEE 0xAAEF -- Mc   [2] MEETEI MAYEK VOWEL SIGN AU..MEETEI MAYEK VOWEL SIGN AAU
-    , List.range 0xABE3 0xABE4 -- Mc   [2] MEETEI MAYEK VOWEL SIGN ONAP..MEETEI MAYEK VOWEL SIGN INAP
-    , List.range 0xABE6 0xABE7 -- Mc   [2] MEETEI MAYEK VOWEL SIGN YENAP..MEETEI MAYEK VOWEL SIGN SOUNAP
-    , List.range 0xABE9 0xABEA -- Mc   [2] MEETEI MAYEK VOWEL SIGN CHEINAP..MEETEI MAYEK VOWEL SIGN NUNG
-    , List.range 0x000110B0 0x000110B2 -- Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
-    , List.range 0x000110B7 0x000110B8 -- Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
-    , List.range 0x00011145 0x00011146 -- Mc   [2] CHAKMA VOWEL SIGN AA..CHAKMA VOWEL SIGN EI
-    , List.range 0x000111B3 0x000111B5 -- Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
-    , List.range 0x000111BF 0x000111C0 -- Mc   [2] SHARADA VOWEL SIGN AU..SHARADA SIGN VIRAMA
-    , List.range 0x0001122C 0x0001122E -- Mc   [3] KHOJKI VOWEL SIGN AA..KHOJKI VOWEL SIGN II
-    , List.range 0x00011232 0x00011233 -- Mc   [2] KHOJKI VOWEL SIGN O..KHOJKI VOWEL SIGN AU
-    , List.range 0x000112E0 0x000112E2 -- Mc   [3] KHUDAWADI VOWEL SIGN AA..KHUDAWADI VOWEL SIGN II
-    , List.range 0x00011302 0x00011303 -- Mc   [2] GRANTHA SIGN ANUSVARA..GRANTHA SIGN VISARGA
-    , List.range 0x00011341 0x00011344 -- Mc   [4] GRANTHA VOWEL SIGN U..GRANTHA VOWEL SIGN VOCALIC RR
-    , List.range 0x00011347 0x00011348 -- Mc   [2] GRANTHA VOWEL SIGN EE..GRANTHA VOWEL SIGN AI
-    , List.range 0x0001134B 0x0001134D -- Mc   [3] GRANTHA VOWEL SIGN OO..GRANTHA SIGN VIRAMA
-    , List.range 0x00011362 0x00011363 -- Mc   [2] GRANTHA VOWEL SIGN VOCALIC L..GRANTHA VOWEL SIGN VOCALIC LL
-    , List.range 0x00011435 0x00011437 -- Mc   [3] NEWA VOWEL SIGN AA..NEWA VOWEL SIGN II
-    , List.range 0x00011440 0x00011441 -- Mc   [2] NEWA VOWEL SIGN O..NEWA VOWEL SIGN AU
-    , List.range 0x000114B1 0x000114B2 -- Mc   [2] TIRHUTA VOWEL SIGN I..TIRHUTA VOWEL SIGN II
-    , List.range 0x000114BB 0x000114BC -- Mc   [2] TIRHUTA VOWEL SIGN AI..TIRHUTA VOWEL SIGN O
-    , List.range 0x000115B0 0x000115B1 -- Mc   [2] SIDDHAM VOWEL SIGN I..SIDDHAM VOWEL SIGN II
-    , List.range 0x000115B8 0x000115BB -- Mc   [4] SIDDHAM VOWEL SIGN E..SIDDHAM VOWEL SIGN AU
-    , List.range 0x00011630 0x00011632 -- Mc   [3] MODI VOWEL SIGN AA..MODI VOWEL SIGN II
-    , List.range 0x0001163B 0x0001163C -- Mc   [2] MODI VOWEL SIGN O..MODI VOWEL SIGN AU
-    , List.range 0x000116AE 0x000116AF -- Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
-    , List.range 0x00011720 0x00011721 -- Mc   [2] AHOM VOWEL SIGN A..AHOM VOWEL SIGN AA
-    , List.range 0x0001182C 0x0001182E -- Mc   [3] DOGRA VOWEL SIGN AA..DOGRA VOWEL SIGN II
-    , List.range 0x000119D1 0x000119D3 -- Mc   [3] NANDINAGARI VOWEL SIGN AA..NANDINAGARI VOWEL SIGN II
-    , List.range 0x000119DC 0x000119DF -- Mc   [4] NANDINAGARI VOWEL SIGN O..NANDINAGARI SIGN VISARGA
-    , List.range 0x00011A57 0x00011A58 -- Mc   [2] SOYOMBO VOWEL SIGN AI..SOYOMBO VOWEL SIGN AU
-    , List.range 0x00011D8A 0x00011D8E -- Mc   [5] GUNJALA GONDI VOWEL SIGN AA..GUNJALA GONDI VOWEL SIGN UU
-    , List.range 0x00011D93 0x00011D94 -- Mc   [2] GUNJALA GONDI VOWEL SIGN OO..GUNJALA GONDI VOWEL SIGN AU
-    , List.range 0x00011EF5 0x00011EF6 -- Mc   [2] MAKASAR VOWEL SIGN E..MAKASAR VOWEL SIGN O
-    , List.range 0x00016F51 0x00016F87 -- Mc  [55] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN UI
-    ]
-        |> List.concat
-        |> List.map Char.fromCode
-        |> Set.fromList
+    RangeSet.fromList
+        [ Range.point 'ः' -- Mc       DEVANAGARI SIGN VISARGA
+        , Range.point 'ऻ' -- Mc       DEVANAGARI VOWEL SIGN OOE
+        , Range.range 'ा' 'ी' -- Mc   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
+        , Range.range 'ॉ' 'ौ' -- Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
+        , Range.range 'ॎ' 'ॏ' -- Mc   [2] DEVANAGARI VOWEL SIGN PRISHTHAMATRA E..DEVANAGARI VOWEL SIGN AW
+        , Range.range 'ং' 'ঃ' -- Mc   [2] BENGALI SIGN ANUSVARA..BENGALI SIGN VISARGA
+        , Range.range 'ি' 'ী' -- Mc   [2] BENGALI VOWEL SIGN I..BENGALI VOWEL SIGN II
+        , Range.range 'ে' 'ৈ' -- Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
+        , Range.range 'ো' 'ৌ' -- Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
+        , Range.point 'ਃ' -- Mc       GURMUKHI SIGN VISARGA
+        , Range.range 'ਾ' 'ੀ' -- Mc   [3] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN II
+        , Range.point 'ઃ' -- Mc       GUJARATI SIGN VISARGA
+        , Range.range 'ા' 'ી' -- Mc   [3] GUJARATI VOWEL SIGN AA..GUJARATI VOWEL SIGN II
+        , Range.point 'ૉ' -- Mc       GUJARATI VOWEL SIGN CANDRA O
+        , Range.range 'ો' 'ૌ' -- Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
+        , Range.range 'ଂ' 'ଃ' -- Mc   [2] ORIYA SIGN ANUSVARA..ORIYA SIGN VISARGA
+        , Range.point 'ୀ' -- Mc       ORIYA VOWEL SIGN II
+        , Range.range 'େ' 'ୈ' -- Mc   [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
+        , Range.range 'ୋ' 'ୌ' -- Mc   [2] ORIYA VOWEL SIGN O..ORIYA VOWEL SIGN AU
+        , Range.point 'ி' -- Mc       TAMIL VOWEL SIGN I
+        , Range.range 'ு' 'ூ' -- Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
+        , Range.range 'ெ' 'ை' -- Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
+        , Range.range 'ொ' 'ௌ' -- Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
+        , Range.range 'ఁ' 'ః' -- Mc   [3] TELUGU SIGN CANDRABINDU..TELUGU SIGN VISARGA
+        , Range.range 'ు' 'ౄ' -- Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
+        , Range.range 'ಂ' 'ಃ' -- Mc   [2] KANNADA SIGN ANUSVARA..KANNADA SIGN VISARGA
+        , Range.point 'ಾ' -- Mc       KANNADA VOWEL SIGN AA
+        , Range.range 'ೀ' 'ು' -- Mc   [2] KANNADA VOWEL SIGN II..KANNADA VOWEL SIGN U
+        , Range.range 'ೃ' 'ೄ' -- Mc   [2] KANNADA VOWEL SIGN VOCALIC R..KANNADA VOWEL SIGN VOCALIC RR
+        , Range.range 'ೇ' 'ೈ' -- Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
+        , Range.range 'ೊ' 'ೋ' -- Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
+        , Range.range 'ം' 'ഃ' -- Mc   [2] MALAYALAM SIGN ANUSVARA..MALAYALAM SIGN VISARGA
+        , Range.range 'ി' 'ീ' -- Mc   [2] MALAYALAM VOWEL SIGN I..MALAYALAM VOWEL SIGN II
+        , Range.range 'െ' 'ൈ' -- Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
+        , Range.range 'ൊ' 'ൌ' -- Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
+        , Range.range 'ං' 'ඃ' -- Mc   [2] SINHALA SIGN ANUSVARAYA..SINHALA SIGN VISARGAYA
+        , Range.range 'ැ' 'ෑ' -- Mc   [2] SINHALA VOWEL SIGN KETTI AEDA-PILLA..SINHALA VOWEL SIGN DIGA AEDA-PILLA
+        , Range.range 'ෘ' 'ෞ' -- Mc   [7] SINHALA VOWEL SIGN GAETTA-PILLA..SINHALA VOWEL SIGN KOMBUVA HAA GAYANUKITTA
+        , Range.range 'ෲ' 'ෳ' -- Mc   [2] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA VOWEL SIGN DIGA GAYANUKITTA
+        , Range.point 'ำ' -- Lo       THAI CHARACTER SARA AM
+        , Range.point 'ຳ' -- Lo       LAO VOWEL SIGN AM
+        , Range.range '༾' '༿' -- Mc   [2] TIBETAN SIGN YAR TSHES..TIBETAN SIGN MAR TSHES
+        , Range.point 'ཿ' -- Mc       TIBETAN SIGN RNAM BCAD
+        , Range.point 'ေ' -- Mc       MYANMAR VOWEL SIGN E
+        , Range.range 'ျ' 'ြ' -- Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
+        , Range.range 'ၖ' 'ၗ' -- Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
+        , Range.point 'ႄ' -- Mc       MYANMAR VOWEL SIGN SHAN E
+        , Range.point 'ា' -- Mc       KHMER VOWEL SIGN AA
+        , Range.range 'ើ' 'ៅ' -- Mc   [8] KHMER VOWEL SIGN OE..KHMER VOWEL SIGN AU
+        , Range.range 'ះ' 'ៈ' -- Mc   [2] KHMER SIGN REAHMUK..KHMER SIGN YUUKALEAPINTU
+        , Range.range 'ᤣ' 'ᤦ' -- Mc   [4] LIMBU VOWEL SIGN EE..LIMBU VOWEL SIGN AU
+        , Range.range 'ᤩ' 'ᤫ' -- Mc   [3] LIMBU SUBJOINED LETTER YA..LIMBU SUBJOINED LETTER WA
+        , Range.range 'ᤰ' 'ᤱ' -- Mc   [2] LIMBU SMALL LETTER KA..LIMBU SMALL LETTER NGA
+        , Range.range 'ᤳ' 'ᤸ' -- Mc   [6] LIMBU SMALL LETTER TA..LIMBU SMALL LETTER LA
+        , Range.range 'ᨙ' 'ᨚ' -- Mc   [2] BUGINESE VOWEL SIGN E..BUGINESE VOWEL SIGN O
+        , Range.point 'ᩕ' -- Mc       TAI THAM CONSONANT SIGN MEDIAL RA
+        , Range.point 'ᩗ' -- Mc       TAI THAM CONSONANT SIGN LA TANG LAI
+        , Range.range 'ᩭ' 'ᩲ' -- Mc   [6] TAI THAM VOWEL SIGN OY..TAI THAM VOWEL SIGN THAM AI
+        , Range.point 'ᬄ' -- Mc       BALINESE SIGN BISAH
+        , Range.point 'ᬻ' -- Mc       BALINESE VOWEL SIGN RA REPA TEDUNG
+        , Range.range 'ᬽ' 'ᭁ' -- Mc   [5] BALINESE VOWEL SIGN LA LENGA TEDUNG..BALINESE VOWEL SIGN TALING REPA TEDUNG
+        , Range.range 'ᭃ' '᭄' -- Mc   [2] BALINESE VOWEL SIGN PEPET TEDUNG..BALINESE ADEG ADEG
+        , Range.point 'ᮂ' -- Mc       SUNDANESE SIGN PANGWISAD
+        , Range.point 'ᮡ' -- Mc       SUNDANESE CONSONANT SIGN PAMINGKAL
+        , Range.range 'ᮦ' 'ᮧ' -- Mc   [2] SUNDANESE VOWEL SIGN PANAELAENG..SUNDANESE VOWEL SIGN PANOLONG
+        , Range.point '᮪' -- Mc       SUNDANESE SIGN PAMAAEH
+        , Range.point 'ᯧ' -- Mc       BATAK VOWEL SIGN E
+        , Range.range 'ᯪ' 'ᯬ' -- Mc   [3] BATAK VOWEL SIGN I..BATAK VOWEL SIGN O
+        , Range.point 'ᯮ' -- Mc       BATAK VOWEL SIGN U
+        , Range.range '᯲' '᯳' -- Mc   [2] BATAK PANGOLAT..BATAK PANONGONAN
+        , Range.range 'ᰤ' 'ᰫ' -- Mc   [8] LEPCHA SUBJOINED LETTER YA..LEPCHA VOWEL SIGN UU
+        , Range.range 'ᰴ' 'ᰵ' -- Mc   [2] LEPCHA CONSONANT SIGN NYIN-DO..LEPCHA CONSONANT SIGN KANG
+        , Range.point '᳡' -- Mc       VEDIC TONE ATHARVAVEDIC INDEPENDENT SVARITA
+        , Range.point '\u{1CF7}' -- Mc       VEDIC SIGN ATIKRAMA
+        , Range.range 'ꠣ' 'ꠤ' -- Mc   [2] SYLOTI NAGRI VOWEL SIGN A..SYLOTI NAGRI VOWEL SIGN I
+        , Range.point 'ꠧ' -- Mc       SYLOTI NAGRI VOWEL SIGN OO
+        , Range.range 'ꢀ' 'ꢁ' -- Mc   [2] SAURASHTRA SIGN ANUSVARA..SAURASHTRA SIGN VISARGA
+        , Range.range 'ꢴ' 'ꣃ' -- Mc  [16] SAURASHTRA CONSONANT SIGN HAARU..SAURASHTRA VOWEL SIGN AU
+        , Range.range 'ꥒ' '꥓' -- Mc   [2] REJANG CONSONANT SIGN H..REJANG VIRAMA
+        , Range.point 'ꦃ' -- Mc       JAVANESE SIGN WIGNYAN
+        , Range.range 'ꦴ' 'ꦵ' -- Mc   [2] JAVANESE VOWEL SIGN TARUNG..JAVANESE VOWEL SIGN TOLONG
+        , Range.range 'ꦺ' 'ꦻ' -- Mc   [2] JAVANESE VOWEL SIGN TALING..JAVANESE VOWEL SIGN DIRGA MURE
+        , Range.range 'ꦾ' '꧀' -- Mc   [3] JAVANESE CONSONANT SIGN PENGKAL..JAVANESE PANGKON
+        , Range.range 'ꨯ' 'ꨰ' -- Mc   [2] CHAM VOWEL SIGN O..CHAM VOWEL SIGN AI
+        , Range.range 'ꨳ' 'ꨴ' -- Mc   [2] CHAM CONSONANT SIGN YA..CHAM CONSONANT SIGN RA
+        , Range.point 'ꩍ' -- Mc       CHAM CONSONANT SIGN FINAL H
+        , Range.point 'ꫫ' -- Mc       MEETEI MAYEK VOWEL SIGN II
+        , Range.range 'ꫮ' 'ꫯ' -- Mc   [2] MEETEI MAYEK VOWEL SIGN AU..MEETEI MAYEK VOWEL SIGN AAU
+        , Range.point 'ꫵ' -- Mc       MEETEI MAYEK VOWEL SIGN VISARGA
+        , Range.range 'ꯣ' 'ꯤ' -- Mc   [2] MEETEI MAYEK VOWEL SIGN ONAP..MEETEI MAYEK VOWEL SIGN INAP
+        , Range.range 'ꯦ' 'ꯧ' -- Mc   [2] MEETEI MAYEK VOWEL SIGN YENAP..MEETEI MAYEK VOWEL SIGN SOUNAP
+        , Range.range 'ꯩ' 'ꯪ' -- Mc   [2] MEETEI MAYEK VOWEL SIGN CHEINAP..MEETEI MAYEK VOWEL SIGN NUNG
+        , Range.point '꯬' -- Mc       MEETEI MAYEK LUM IYEK
+        , Range.point '𑀀' -- Mc       BRAHMI SIGN CANDRABINDU
+        , Range.point '𑀂' -- Mc       BRAHMI SIGN VISARGA
+        , Range.point '𑂂' -- Mc       KAITHI SIGN VISARGA
+        , Range.range '𑂰' '𑂲' -- Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
+        , Range.range '𑂷' '𑂸' -- Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
+        , Range.point '𑄬' -- Mc       CHAKMA VOWEL SIGN E
+        , Range.range '\u{11145}' '\u{11146}' -- Mc   [2] CHAKMA VOWEL SIGN AA..CHAKMA VOWEL SIGN EI
+        , Range.point '𑆂' -- Mc       SHARADA SIGN VISARGA
+        , Range.range '𑆳' '𑆵' -- Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
+        , Range.range '𑆿' '𑇀' -- Mc   [2] SHARADA VOWEL SIGN AU..SHARADA SIGN VIRAMA
+        , Range.range '𑈬' '𑈮' -- Mc   [3] KHOJKI VOWEL SIGN AA..KHOJKI VOWEL SIGN II
+        , Range.range '𑈲' '𑈳' -- Mc   [2] KHOJKI VOWEL SIGN O..KHOJKI VOWEL SIGN AU
+        , Range.point '𑈵' -- Mc       KHOJKI SIGN VIRAMA
+        , Range.range '𑋠' '𑋢' -- Mc   [3] KHUDAWADI VOWEL SIGN AA..KHUDAWADI VOWEL SIGN II
+        , Range.range '𑌂' '𑌃' -- Mc   [2] GRANTHA SIGN ANUSVARA..GRANTHA SIGN VISARGA
+        , Range.point '𑌿' -- Mc       GRANTHA VOWEL SIGN I
+        , Range.range '𑍁' '𑍄' -- Mc   [4] GRANTHA VOWEL SIGN U..GRANTHA VOWEL SIGN VOCALIC RR
+        , Range.range '𑍇' '𑍈' -- Mc   [2] GRANTHA VOWEL SIGN EE..GRANTHA VOWEL SIGN AI
+        , Range.range '𑍋' '𑍍' -- Mc   [3] GRANTHA VOWEL SIGN OO..GRANTHA SIGN VIRAMA
+        , Range.range '𑍢' '𑍣' -- Mc   [2] GRANTHA VOWEL SIGN VOCALIC L..GRANTHA VOWEL SIGN VOCALIC LL
+        , Range.range '\u{11435}' '\u{11437}' -- Mc   [3] NEWA VOWEL SIGN AA..NEWA VOWEL SIGN II
+        , Range.range '\u{11440}' '\u{11441}' -- Mc   [2] NEWA VOWEL SIGN O..NEWA VOWEL SIGN AU
+        , Range.point '\u{11445}' -- Mc       NEWA SIGN VISARGA
+        , Range.range '𑒱' '𑒲' -- Mc   [2] TIRHUTA VOWEL SIGN I..TIRHUTA VOWEL SIGN II
+        , Range.point '𑒹' -- Mc       TIRHUTA VOWEL SIGN E
+        , Range.range '𑒻' '𑒼' -- Mc   [2] TIRHUTA VOWEL SIGN AI..TIRHUTA VOWEL SIGN O
+        , Range.point '𑒾' -- Mc       TIRHUTA VOWEL SIGN AU
+        , Range.point '𑓁' -- Mc       TIRHUTA SIGN VISARGA
+        , Range.range '𑖰' '𑖱' -- Mc   [2] SIDDHAM VOWEL SIGN I..SIDDHAM VOWEL SIGN II
+        , Range.range '𑖸' '𑖻' -- Mc   [4] SIDDHAM VOWEL SIGN E..SIDDHAM VOWEL SIGN AU
+        , Range.point '𑖾' -- Mc       SIDDHAM SIGN VISARGA
+        , Range.range '𑘰' '𑘲' -- Mc   [3] MODI VOWEL SIGN AA..MODI VOWEL SIGN II
+        , Range.range '𑘻' '𑘼' -- Mc   [2] MODI VOWEL SIGN O..MODI VOWEL SIGN AU
+        , Range.point '𑘾' -- Mc       MODI SIGN VISARGA
+        , Range.point '𑚬' -- Mc       TAKRI SIGN VISARGA
+        , Range.range '𑚮' '𑚯' -- Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
+        , Range.point '𑚶' -- Mc       TAKRI SIGN VIRAMA
+        , Range.range '\u{11720}' '\u{11721}' -- Mc   [2] AHOM VOWEL SIGN A..AHOM VOWEL SIGN AA
+        , Range.point '\u{11726}' -- Mc       AHOM VOWEL SIGN E
+        , Range.range '\u{1182C}' '\u{1182E}' -- Mc   [3] DOGRA VOWEL SIGN AA..DOGRA VOWEL SIGN II
+        , Range.point '\u{11838}' -- Mc       DOGRA SIGN VISARGA
+        , Range.range '\u{119D1}' '\u{119D3}' -- Mc   [3] NANDINAGARI VOWEL SIGN AA..NANDINAGARI VOWEL SIGN II
+        , Range.range '\u{119DC}' '\u{119DF}' -- Mc   [4] NANDINAGARI VOWEL SIGN O..NANDINAGARI SIGN VISARGA
+        , Range.point '\u{119E4}' -- Mc       NANDINAGARI VOWEL SIGN PRISHTHAMATRA E
+        , Range.point '\u{11A39}' -- Mc       ZANABAZAR SQUARE SIGN VISARGA
+        , Range.range '\u{11A57}' '\u{11A58}' -- Mc   [2] SOYOMBO VOWEL SIGN AI..SOYOMBO VOWEL SIGN AU
+        , Range.point '\u{11A97}' -- Mc       SOYOMBO SIGN VISARGA
+        , Range.point '\u{11C2F}' -- Mc       BHAIKSUKI VOWEL SIGN AA
+        , Range.point '\u{11C3E}' -- Mc       BHAIKSUKI SIGN VISARGA
+        , Range.point '\u{11CA9}' -- Mc       MARCHEN SUBJOINED LETTER YA
+        , Range.point '\u{11CB1}' -- Mc       MARCHEN VOWEL SIGN I
+        , Range.point '\u{11CB4}' -- Mc       MARCHEN VOWEL SIGN O
+        , Range.range '\u{11D8A}' '\u{11D8E}' -- Mc   [5] GUNJALA GONDI VOWEL SIGN AA..GUNJALA GONDI VOWEL SIGN UU
+        , Range.range '\u{11D93}' '\u{11D94}' -- Mc   [2] GUNJALA GONDI VOWEL SIGN OO..GUNJALA GONDI VOWEL SIGN AU
+        , Range.point '\u{11D96}' -- Mc       GUNJALA GONDI SIGN VISARGA
+        , Range.range '\u{11EF5}' '\u{11EF6}' -- Mc   [2] MAKASAR VOWEL SIGN E..MAKASAR VOWEL SIGN O
+        , Range.range '𖽑' '\u{16F87}' -- Mc  [55] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN UI
+        , Range.point '𝅦' -- Mc       MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
+        , Range.point '𝅭' -- Mc       MUSICAL SYMBOL COMBINING AUGMENTATION DOT
+        ]

@@ -1,417 +1,415 @@
 module String.Segmentation.LV exposing (chars, parser)
 
 import Parser exposing (Parser)
-import Set exposing (Set)
+import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
+import String.Segmentation.RangeSet.Range as Range
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf (\c -> Set.member c chars)
+    Parser.chompIf (\c -> RangeSet.member c chars)
 
 
-chars : Set Char
+chars : RangeSet Char
 chars =
-    [ [ 0xAC00 -- Lo       HANGUL SYLLABLE GA
-      , 0xAC1C -- Lo       HANGUL SYLLABLE GAE
-      , 0xAC38 -- Lo       HANGUL SYLLABLE GYA
-      , 0xAC54 -- Lo       HANGUL SYLLABLE GYAE
-      , 0xAC70 -- Lo       HANGUL SYLLABLE GEO
-      , 0xAC8C -- Lo       HANGUL SYLLABLE GE
-      , 0xACA8 -- Lo       HANGUL SYLLABLE GYEO
-      , 0xACC4 -- Lo       HANGUL SYLLABLE GYE
-      , 0xACE0 -- Lo       HANGUL SYLLABLE GO
-      , 0xACFC -- Lo       HANGUL SYLLABLE GWA
-      , 0xAD18 -- Lo       HANGUL SYLLABLE GWAE
-      , 0xAD34 -- Lo       HANGUL SYLLABLE GOE
-      , 0xAD50 -- Lo       HANGUL SYLLABLE GYO
-      , 0xAD6C -- Lo       HANGUL SYLLABLE GU
-      , 0xAD88 -- Lo       HANGUL SYLLABLE GWEO
-      , 0xADA4 -- Lo       HANGUL SYLLABLE GWE
-      , 0xADC0 -- Lo       HANGUL SYLLABLE GWI
-      , 0xADDC -- Lo       HANGUL SYLLABLE GYU
-      , 0xADF8 -- Lo       HANGUL SYLLABLE GEU
-      , 0xAE14 -- Lo       HANGUL SYLLABLE GYI
-      , 0xAE30 -- Lo       HANGUL SYLLABLE GI
-      , 0xAE4C -- Lo       HANGUL SYLLABLE GGA
-      , 0xAE68 -- Lo       HANGUL SYLLABLE GGAE
-      , 0xAE84 -- Lo       HANGUL SYLLABLE GGYA
-      , 0xAEA0 -- Lo       HANGUL SYLLABLE GGYAE
-      , 0xAEBC -- Lo       HANGUL SYLLABLE GGEO
-      , 0xAED8 -- Lo       HANGUL SYLLABLE GGE
-      , 0xAEF4 -- Lo       HANGUL SYLLABLE GGYEO
-      , 0xAF10 -- Lo       HANGUL SYLLABLE GGYE
-      , 0xAF2C -- Lo       HANGUL SYLLABLE GGO
-      , 0xAF48 -- Lo       HANGUL SYLLABLE GGWA
-      , 0xAF64 -- Lo       HANGUL SYLLABLE GGWAE
-      , 0xAF80 -- Lo       HANGUL SYLLABLE GGOE
-      , 0xAF9C -- Lo       HANGUL SYLLABLE GGYO
-      , 0xAFB8 -- Lo       HANGUL SYLLABLE GGU
-      , 0xAFD4 -- Lo       HANGUL SYLLABLE GGWEO
-      , 0xAFF0 -- Lo       HANGUL SYLLABLE GGWE
-      , 0xB00C -- Lo       HANGUL SYLLABLE GGWI
-      , 0xB028 -- Lo       HANGUL SYLLABLE GGYU
-      , 0xB044 -- Lo       HANGUL SYLLABLE GGEU
-      , 0xB060 -- Lo       HANGUL SYLLABLE GGYI
-      , 0xB07C -- Lo       HANGUL SYLLABLE GGI
-      , 0xB098 -- Lo       HANGUL SYLLABLE NA
-      , 0xB0B4 -- Lo       HANGUL SYLLABLE NAE
-      , 0xB0D0 -- Lo       HANGUL SYLLABLE NYA
-      , 0xB0EC -- Lo       HANGUL SYLLABLE NYAE
-      , 0xB108 -- Lo       HANGUL SYLLABLE NEO
-      , 0xB124 -- Lo       HANGUL SYLLABLE NE
-      , 0xB140 -- Lo       HANGUL SYLLABLE NYEO
-      , 0xB15C -- Lo       HANGUL SYLLABLE NYE
-      , 0xB178 -- Lo       HANGUL SYLLABLE NO
-      , 0xB194 -- Lo       HANGUL SYLLABLE NWA
-      , 0xB1B0 -- Lo       HANGUL SYLLABLE NWAE
-      , 0xB1CC -- Lo       HANGUL SYLLABLE NOE
-      , 0xB1E8 -- Lo       HANGUL SYLLABLE NYO
-      , 0xB204 -- Lo       HANGUL SYLLABLE NU
-      , 0xB220 -- Lo       HANGUL SYLLABLE NWEO
-      , 0xB23C -- Lo       HANGUL SYLLABLE NWE
-      , 0xB258 -- Lo       HANGUL SYLLABLE NWI
-      , 0xB274 -- Lo       HANGUL SYLLABLE NYU
-      , 0xB290 -- Lo       HANGUL SYLLABLE NEU
-      , 0xB2AC -- Lo       HANGUL SYLLABLE NYI
-      , 0xB2C8 -- Lo       HANGUL SYLLABLE NI
-      , 0xB2E4 -- Lo       HANGUL SYLLABLE DA
-      , 0xB300 -- Lo       HANGUL SYLLABLE DAE
-      , 0xB31C -- Lo       HANGUL SYLLABLE DYA
-      , 0xB338 -- Lo       HANGUL SYLLABLE DYAE
-      , 0xB354 -- Lo       HANGUL SYLLABLE DEO
-      , 0xB370 -- Lo       HANGUL SYLLABLE DE
-      , 0xB38C -- Lo       HANGUL SYLLABLE DYEO
-      , 0xB3A8 -- Lo       HANGUL SYLLABLE DYE
-      , 0xB3C4 -- Lo       HANGUL SYLLABLE DO
-      , 0xB3E0 -- Lo       HANGUL SYLLABLE DWA
-      , 0xB3FC -- Lo       HANGUL SYLLABLE DWAE
-      , 0xB418 -- Lo       HANGUL SYLLABLE DOE
-      , 0xB434 -- Lo       HANGUL SYLLABLE DYO
-      , 0xB450 -- Lo       HANGUL SYLLABLE DU
-      , 0xB46C -- Lo       HANGUL SYLLABLE DWEO
-      , 0xB488 -- Lo       HANGUL SYLLABLE DWE
-      , 0xB4A4 -- Lo       HANGUL SYLLABLE DWI
-      , 0xB4C0 -- Lo       HANGUL SYLLABLE DYU
-      , 0xB4DC -- Lo       HANGUL SYLLABLE DEU
-      , 0xB4F8 -- Lo       HANGUL SYLLABLE DYI
-      , 0xB514 -- Lo       HANGUL SYLLABLE DI
-      , 0xB530 -- Lo       HANGUL SYLLABLE DDA
-      , 0xB54C -- Lo       HANGUL SYLLABLE DDAE
-      , 0xB568 -- Lo       HANGUL SYLLABLE DDYA
-      , 0xB584 -- Lo       HANGUL SYLLABLE DDYAE
-      , 0xB5A0 -- Lo       HANGUL SYLLABLE DDEO
-      , 0xB5BC -- Lo       HANGUL SYLLABLE DDE
-      , 0xB5D8 -- Lo       HANGUL SYLLABLE DDYEO
-      , 0xB5F4 -- Lo       HANGUL SYLLABLE DDYE
-      , 0xB610 -- Lo       HANGUL SYLLABLE DDO
-      , 0xB62C -- Lo       HANGUL SYLLABLE DDWA
-      , 0xB648 -- Lo       HANGUL SYLLABLE DDWAE
-      , 0xB664 -- Lo       HANGUL SYLLABLE DDOE
-      , 0xB680 -- Lo       HANGUL SYLLABLE DDYO
-      , 0xB69C -- Lo       HANGUL SYLLABLE DDU
-      , 0xB6B8 -- Lo       HANGUL SYLLABLE DDWEO
-      , 0xB6D4 -- Lo       HANGUL SYLLABLE DDWE
-      , 0xB6F0 -- Lo       HANGUL SYLLABLE DDWI
-      , 0xB70C -- Lo       HANGUL SYLLABLE DDYU
-      , 0xB728 -- Lo       HANGUL SYLLABLE DDEU
-      , 0xB744 -- Lo       HANGUL SYLLABLE DDYI
-      , 0xB760 -- Lo       HANGUL SYLLABLE DDI
-      , 0xB77C -- Lo       HANGUL SYLLABLE RA
-      , 0xB798 -- Lo       HANGUL SYLLABLE RAE
-      , 0xB7B4 -- Lo       HANGUL SYLLABLE RYA
-      , 0xB7D0 -- Lo       HANGUL SYLLABLE RYAE
-      , 0xB7EC -- Lo       HANGUL SYLLABLE REO
-      , 0xB808 -- Lo       HANGUL SYLLABLE RE
-      , 0xB824 -- Lo       HANGUL SYLLABLE RYEO
-      , 0xB840 -- Lo       HANGUL SYLLABLE RYE
-      , 0xB85C -- Lo       HANGUL SYLLABLE RO
-      , 0xB878 -- Lo       HANGUL SYLLABLE RWA
-      , 0xB894 -- Lo       HANGUL SYLLABLE RWAE
-      , 0xB8B0 -- Lo       HANGUL SYLLABLE ROE
-      , 0xB8CC -- Lo       HANGUL SYLLABLE RYO
-      , 0xB8E8 -- Lo       HANGUL SYLLABLE RU
-      , 0xB904 -- Lo       HANGUL SYLLABLE RWEO
-      , 0xB920 -- Lo       HANGUL SYLLABLE RWE
-      , 0xB93C -- Lo       HANGUL SYLLABLE RWI
-      , 0xB958 -- Lo       HANGUL SYLLABLE RYU
-      , 0xB974 -- Lo       HANGUL SYLLABLE REU
-      , 0xB990 -- Lo       HANGUL SYLLABLE RYI
-      , 0xB9AC -- Lo       HANGUL SYLLABLE RI
-      , 0xB9C8 -- Lo       HANGUL SYLLABLE MA
-      , 0xB9E4 -- Lo       HANGUL SYLLABLE MAE
-      , 0xBA00 -- Lo       HANGUL SYLLABLE MYA
-      , 0xBA1C -- Lo       HANGUL SYLLABLE MYAE
-      , 0xBA38 -- Lo       HANGUL SYLLABLE MEO
-      , 0xBA54 -- Lo       HANGUL SYLLABLE ME
-      , 0xBA70 -- Lo       HANGUL SYLLABLE MYEO
-      , 0xBA8C -- Lo       HANGUL SYLLABLE MYE
-      , 0xBAA8 -- Lo       HANGUL SYLLABLE MO
-      , 0xBAC4 -- Lo       HANGUL SYLLABLE MWA
-      , 0xBAE0 -- Lo       HANGUL SYLLABLE MWAE
-      , 0xBAFC -- Lo       HANGUL SYLLABLE MOE
-      , 0xBB18 -- Lo       HANGUL SYLLABLE MYO
-      , 0xBB34 -- Lo       HANGUL SYLLABLE MU
-      , 0xBB50 -- Lo       HANGUL SYLLABLE MWEO
-      , 0xBB6C -- Lo       HANGUL SYLLABLE MWE
-      , 0xBB88 -- Lo       HANGUL SYLLABLE MWI
-      , 0xBBA4 -- Lo       HANGUL SYLLABLE MYU
-      , 0xBBC0 -- Lo       HANGUL SYLLABLE MEU
-      , 0xBBDC -- Lo       HANGUL SYLLABLE MYI
-      , 0xBBF8 -- Lo       HANGUL SYLLABLE MI
-      , 0xBC14 -- Lo       HANGUL SYLLABLE BA
-      , 0xBC30 -- Lo       HANGUL SYLLABLE BAE
-      , 0xBC4C -- Lo       HANGUL SYLLABLE BYA
-      , 0xBC68 -- Lo       HANGUL SYLLABLE BYAE
-      , 0xBC84 -- Lo       HANGUL SYLLABLE BEO
-      , 0xBCA0 -- Lo       HANGUL SYLLABLE BE
-      , 0xBCBC -- Lo       HANGUL SYLLABLE BYEO
-      , 0xBCD8 -- Lo       HANGUL SYLLABLE BYE
-      , 0xBCF4 -- Lo       HANGUL SYLLABLE BO
-      , 0xBD10 -- Lo       HANGUL SYLLABLE BWA
-      , 0xBD2C -- Lo       HANGUL SYLLABLE BWAE
-      , 0xBD48 -- Lo       HANGUL SYLLABLE BOE
-      , 0xBD64 -- Lo       HANGUL SYLLABLE BYO
-      , 0xBD80 -- Lo       HANGUL SYLLABLE BU
-      , 0xBD9C -- Lo       HANGUL SYLLABLE BWEO
-      , 0xBDB8 -- Lo       HANGUL SYLLABLE BWE
-      , 0xBDD4 -- Lo       HANGUL SYLLABLE BWI
-      , 0xBDF0 -- Lo       HANGUL SYLLABLE BYU
-      , 0xBE0C -- Lo       HANGUL SYLLABLE BEU
-      , 0xBE28 -- Lo       HANGUL SYLLABLE BYI
-      , 0xBE44 -- Lo       HANGUL SYLLABLE BI
-      , 0xBE60 -- Lo       HANGUL SYLLABLE BBA
-      , 0xBE7C -- Lo       HANGUL SYLLABLE BBAE
-      , 0xBE98 -- Lo       HANGUL SYLLABLE BBYA
-      , 0xBEB4 -- Lo       HANGUL SYLLABLE BBYAE
-      , 0xBED0 -- Lo       HANGUL SYLLABLE BBEO
-      , 0xBEEC -- Lo       HANGUL SYLLABLE BBE
-      , 0xBF08 -- Lo       HANGUL SYLLABLE BBYEO
-      , 0xBF24 -- Lo       HANGUL SYLLABLE BBYE
-      , 0xBF40 -- Lo       HANGUL SYLLABLE BBO
-      , 0xBF5C -- Lo       HANGUL SYLLABLE BBWA
-      , 0xBF78 -- Lo       HANGUL SYLLABLE BBWAE
-      , 0xBF94 -- Lo       HANGUL SYLLABLE BBOE
-      , 0xBFB0 -- Lo       HANGUL SYLLABLE BBYO
-      , 0xBFCC -- Lo       HANGUL SYLLABLE BBU
-      , 0xBFE8 -- Lo       HANGUL SYLLABLE BBWEO
-      , 0xC004 -- Lo       HANGUL SYLLABLE BBWE
-      , 0xC020 -- Lo       HANGUL SYLLABLE BBWI
-      , 0xC03C -- Lo       HANGUL SYLLABLE BBYU
-      , 0xC058 -- Lo       HANGUL SYLLABLE BBEU
-      , 0xC074 -- Lo       HANGUL SYLLABLE BBYI
-      , 0xC090 -- Lo       HANGUL SYLLABLE BBI
-      , 0xC0AC -- Lo       HANGUL SYLLABLE SA
-      , 0xC0C8 -- Lo       HANGUL SYLLABLE SAE
-      , 0xC0E4 -- Lo       HANGUL SYLLABLE SYA
-      , 0xC100 -- Lo       HANGUL SYLLABLE SYAE
-      , 0xC11C -- Lo       HANGUL SYLLABLE SEO
-      , 0xC138 -- Lo       HANGUL SYLLABLE SE
-      , 0xC154 -- Lo       HANGUL SYLLABLE SYEO
-      , 0xC170 -- Lo       HANGUL SYLLABLE SYE
-      , 0xC18C -- Lo       HANGUL SYLLABLE SO
-      , 0xC1A8 -- Lo       HANGUL SYLLABLE SWA
-      , 0xC1C4 -- Lo       HANGUL SYLLABLE SWAE
-      , 0xC1E0 -- Lo       HANGUL SYLLABLE SOE
-      , 0xC1FC -- Lo       HANGUL SYLLABLE SYO
-      , 0xC218 -- Lo       HANGUL SYLLABLE SU
-      , 0xC234 -- Lo       HANGUL SYLLABLE SWEO
-      , 0xC250 -- Lo       HANGUL SYLLABLE SWE
-      , 0xC26C -- Lo       HANGUL SYLLABLE SWI
-      , 0xC288 -- Lo       HANGUL SYLLABLE SYU
-      , 0xC2A4 -- Lo       HANGUL SYLLABLE SEU
-      , 0xC2C0 -- Lo       HANGUL SYLLABLE SYI
-      , 0xC2DC -- Lo       HANGUL SYLLABLE SI
-      , 0xC2F8 -- Lo       HANGUL SYLLABLE SSA
-      , 0xC314 -- Lo       HANGUL SYLLABLE SSAE
-      , 0xC330 -- Lo       HANGUL SYLLABLE SSYA
-      , 0xC34C -- Lo       HANGUL SYLLABLE SSYAE
-      , 0xC368 -- Lo       HANGUL SYLLABLE SSEO
-      , 0xC384 -- Lo       HANGUL SYLLABLE SSE
-      , 0xC3A0 -- Lo       HANGUL SYLLABLE SSYEO
-      , 0xC3BC -- Lo       HANGUL SYLLABLE SSYE
-      , 0xC3D8 -- Lo       HANGUL SYLLABLE SSO
-      , 0xC3F4 -- Lo       HANGUL SYLLABLE SSWA
-      , 0xC410 -- Lo       HANGUL SYLLABLE SSWAE
-      , 0xC42C -- Lo       HANGUL SYLLABLE SSOE
-      , 0xC448 -- Lo       HANGUL SYLLABLE SSYO
-      , 0xC464 -- Lo       HANGUL SYLLABLE SSU
-      , 0xC480 -- Lo       HANGUL SYLLABLE SSWEO
-      , 0xC49C -- Lo       HANGUL SYLLABLE SSWE
-      , 0xC4B8 -- Lo       HANGUL SYLLABLE SSWI
-      , 0xC4D4 -- Lo       HANGUL SYLLABLE SSYU
-      , 0xC4F0 -- Lo       HANGUL SYLLABLE SSEU
-      , 0xC50C -- Lo       HANGUL SYLLABLE SSYI
-      , 0xC528 -- Lo       HANGUL SYLLABLE SSI
-      , 0xC544 -- Lo       HANGUL SYLLABLE A
-      , 0xC560 -- Lo       HANGUL SYLLABLE AE
-      , 0xC57C -- Lo       HANGUL SYLLABLE YA
-      , 0xC598 -- Lo       HANGUL SYLLABLE YAE
-      , 0xC5B4 -- Lo       HANGUL SYLLABLE EO
-      , 0xC5D0 -- Lo       HANGUL SYLLABLE E
-      , 0xC5EC -- Lo       HANGUL SYLLABLE YEO
-      , 0xC608 -- Lo       HANGUL SYLLABLE YE
-      , 0xC624 -- Lo       HANGUL SYLLABLE O
-      , 0xC640 -- Lo       HANGUL SYLLABLE WA
-      , 0xC65C -- Lo       HANGUL SYLLABLE WAE
-      , 0xC678 -- Lo       HANGUL SYLLABLE OE
-      , 0xC694 -- Lo       HANGUL SYLLABLE YO
-      , 0xC6B0 -- Lo       HANGUL SYLLABLE U
-      , 0xC6CC -- Lo       HANGUL SYLLABLE WEO
-      , 0xC6E8 -- Lo       HANGUL SYLLABLE WE
-      , 0xC704 -- Lo       HANGUL SYLLABLE WI
-      , 0xC720 -- Lo       HANGUL SYLLABLE YU
-      , 0xC73C -- Lo       HANGUL SYLLABLE EU
-      , 0xC758 -- Lo       HANGUL SYLLABLE YI
-      , 0xC774 -- Lo       HANGUL SYLLABLE I
-      , 0xC790 -- Lo       HANGUL SYLLABLE JA
-      , 0xC7AC -- Lo       HANGUL SYLLABLE JAE
-      , 0xC7C8 -- Lo       HANGUL SYLLABLE JYA
-      , 0xC7E4 -- Lo       HANGUL SYLLABLE JYAE
-      , 0xC800 -- Lo       HANGUL SYLLABLE JEO
-      , 0xC81C -- Lo       HANGUL SYLLABLE JE
-      , 0xC838 -- Lo       HANGUL SYLLABLE JYEO
-      , 0xC854 -- Lo       HANGUL SYLLABLE JYE
-      , 0xC870 -- Lo       HANGUL SYLLABLE JO
-      , 0xC88C -- Lo       HANGUL SYLLABLE JWA
-      , 0xC8A8 -- Lo       HANGUL SYLLABLE JWAE
-      , 0xC8C4 -- Lo       HANGUL SYLLABLE JOE
-      , 0xC8E0 -- Lo       HANGUL SYLLABLE JYO
-      , 0xC8FC -- Lo       HANGUL SYLLABLE JU
-      , 0xC918 -- Lo       HANGUL SYLLABLE JWEO
-      , 0xC934 -- Lo       HANGUL SYLLABLE JWE
-      , 0xC950 -- Lo       HANGUL SYLLABLE JWI
-      , 0xC96C -- Lo       HANGUL SYLLABLE JYU
-      , 0xC988 -- Lo       HANGUL SYLLABLE JEU
-      , 0xC9A4 -- Lo       HANGUL SYLLABLE JYI
-      , 0xC9C0 -- Lo       HANGUL SYLLABLE JI
-      , 0xC9DC -- Lo       HANGUL SYLLABLE JJA
-      , 0xC9F8 -- Lo       HANGUL SYLLABLE JJAE
-      , 0xCA14 -- Lo       HANGUL SYLLABLE JJYA
-      , 0xCA30 -- Lo       HANGUL SYLLABLE JJYAE
-      , 0xCA4C -- Lo       HANGUL SYLLABLE JJEO
-      , 0xCA68 -- Lo       HANGUL SYLLABLE JJE
-      , 0xCA84 -- Lo       HANGUL SYLLABLE JJYEO
-      , 0xCAA0 -- Lo       HANGUL SYLLABLE JJYE
-      , 0xCABC -- Lo       HANGUL SYLLABLE JJO
-      , 0xCAD8 -- Lo       HANGUL SYLLABLE JJWA
-      , 0xCAF4 -- Lo       HANGUL SYLLABLE JJWAE
-      , 0xCB10 -- Lo       HANGUL SYLLABLE JJOE
-      , 0xCB2C -- Lo       HANGUL SYLLABLE JJYO
-      , 0xCB48 -- Lo       HANGUL SYLLABLE JJU
-      , 0xCB64 -- Lo       HANGUL SYLLABLE JJWEO
-      , 0xCB80 -- Lo       HANGUL SYLLABLE JJWE
-      , 0xCB9C -- Lo       HANGUL SYLLABLE JJWI
-      , 0xCBB8 -- Lo       HANGUL SYLLABLE JJYU
-      , 0xCBD4 -- Lo       HANGUL SYLLABLE JJEU
-      , 0xCBF0 -- Lo       HANGUL SYLLABLE JJYI
-      , 0xCC0C -- Lo       HANGUL SYLLABLE JJI
-      , 0xCC28 -- Lo       HANGUL SYLLABLE CA
-      , 0xCC44 -- Lo       HANGUL SYLLABLE CAE
-      , 0xCC60 -- Lo       HANGUL SYLLABLE CYA
-      , 0xCC7C -- Lo       HANGUL SYLLABLE CYAE
-      , 0xCC98 -- Lo       HANGUL SYLLABLE CEO
-      , 0xCCB4 -- Lo       HANGUL SYLLABLE CE
-      , 0xCCD0 -- Lo       HANGUL SYLLABLE CYEO
-      , 0xCCEC -- Lo       HANGUL SYLLABLE CYE
-      , 0xCD08 -- Lo       HANGUL SYLLABLE CO
-      , 0xCD24 -- Lo       HANGUL SYLLABLE CWA
-      , 0xCD40 -- Lo       HANGUL SYLLABLE CWAE
-      , 0xCD5C -- Lo       HANGUL SYLLABLE COE
-      , 0xCD78 -- Lo       HANGUL SYLLABLE CYO
-      , 0xCD94 -- Lo       HANGUL SYLLABLE CU
-      , 0xCDB0 -- Lo       HANGUL SYLLABLE CWEO
-      , 0xCDCC -- Lo       HANGUL SYLLABLE CWE
-      , 0xCDE8 -- Lo       HANGUL SYLLABLE CWI
-      , 0xCE04 -- Lo       HANGUL SYLLABLE CYU
-      , 0xCE20 -- Lo       HANGUL SYLLABLE CEU
-      , 0xCE3C -- Lo       HANGUL SYLLABLE CYI
-      , 0xCE58 -- Lo       HANGUL SYLLABLE CI
-      , 0xCE74 -- Lo       HANGUL SYLLABLE KA
-      , 0xCE90 -- Lo       HANGUL SYLLABLE KAE
-      , 0xCEAC -- Lo       HANGUL SYLLABLE KYA
-      , 0xCEC8 -- Lo       HANGUL SYLLABLE KYAE
-      , 0xCEE4 -- Lo       HANGUL SYLLABLE KEO
-      , 0xCF00 -- Lo       HANGUL SYLLABLE KE
-      , 0xCF1C -- Lo       HANGUL SYLLABLE KYEO
-      , 0xCF38 -- Lo       HANGUL SYLLABLE KYE
-      , 0xCF54 -- Lo       HANGUL SYLLABLE KO
-      , 0xCF70 -- Lo       HANGUL SYLLABLE KWA
-      , 0xCF8C -- Lo       HANGUL SYLLABLE KWAE
-      , 0xCFA8 -- Lo       HANGUL SYLLABLE KOE
-      , 0xCFC4 -- Lo       HANGUL SYLLABLE KYO
-      , 0xCFE0 -- Lo       HANGUL SYLLABLE KU
-      , 0xCFFC -- Lo       HANGUL SYLLABLE KWEO
-      , 0xD018 -- Lo       HANGUL SYLLABLE KWE
-      , 0xD034 -- Lo       HANGUL SYLLABLE KWI
-      , 0xD050 -- Lo       HANGUL SYLLABLE KYU
-      , 0xD06C -- Lo       HANGUL SYLLABLE KEU
-      , 0xD088 -- Lo       HANGUL SYLLABLE KYI
-      , 0xD0A4 -- Lo       HANGUL SYLLABLE KI
-      , 0xD0C0 -- Lo       HANGUL SYLLABLE TA
-      , 0xD0DC -- Lo       HANGUL SYLLABLE TAE
-      , 0xD0F8 -- Lo       HANGUL SYLLABLE TYA
-      , 0xD114 -- Lo       HANGUL SYLLABLE TYAE
-      , 0xD130 -- Lo       HANGUL SYLLABLE TEO
-      , 0xD14C -- Lo       HANGUL SYLLABLE TE
-      , 0xD168 -- Lo       HANGUL SYLLABLE TYEO
-      , 0xD184 -- Lo       HANGUL SYLLABLE TYE
-      , 0xD1A0 -- Lo       HANGUL SYLLABLE TO
-      , 0xD1BC -- Lo       HANGUL SYLLABLE TWA
-      , 0xD1D8 -- Lo       HANGUL SYLLABLE TWAE
-      , 0xD1F4 -- Lo       HANGUL SYLLABLE TOE
-      , 0xD210 -- Lo       HANGUL SYLLABLE TYO
-      , 0xD22C -- Lo       HANGUL SYLLABLE TU
-      , 0xD248 -- Lo       HANGUL SYLLABLE TWEO
-      , 0xD264 -- Lo       HANGUL SYLLABLE TWE
-      , 0xD280 -- Lo       HANGUL SYLLABLE TWI
-      , 0xD29C -- Lo       HANGUL SYLLABLE TYU
-      , 0xD2B8 -- Lo       HANGUL SYLLABLE TEU
-      , 0xD2D4 -- Lo       HANGUL SYLLABLE TYI
-      , 0xD2F0 -- Lo       HANGUL SYLLABLE TI
-      , 0xD30C -- Lo       HANGUL SYLLABLE PA
-      , 0xD328 -- Lo       HANGUL SYLLABLE PAE
-      , 0xD344 -- Lo       HANGUL SYLLABLE PYA
-      , 0xD360 -- Lo       HANGUL SYLLABLE PYAE
-      , 0xD37C -- Lo       HANGUL SYLLABLE PEO
-      , 0xD398 -- Lo       HANGUL SYLLABLE PE
-      , 0xD3B4 -- Lo       HANGUL SYLLABLE PYEO
-      , 0xD3D0 -- Lo       HANGUL SYLLABLE PYE
-      , 0xD3EC -- Lo       HANGUL SYLLABLE PO
-      , 0xD408 -- Lo       HANGUL SYLLABLE PWA
-      , 0xD424 -- Lo       HANGUL SYLLABLE PWAE
-      , 0xD440 -- Lo       HANGUL SYLLABLE POE
-      , 0xD45C -- Lo       HANGUL SYLLABLE PYO
-      , 0xD478 -- Lo       HANGUL SYLLABLE PU
-      , 0xD494 -- Lo       HANGUL SYLLABLE PWEO
-      , 0xD4B0 -- Lo       HANGUL SYLLABLE PWE
-      , 0xD4CC -- Lo       HANGUL SYLLABLE PWI
-      , 0xD4E8 -- Lo       HANGUL SYLLABLE PYU
-      , 0xD504 -- Lo       HANGUL SYLLABLE PEU
-      , 0xD520 -- Lo       HANGUL SYLLABLE PYI
-      , 0xD53C -- Lo       HANGUL SYLLABLE PI
-      , 0xD558 -- Lo       HANGUL SYLLABLE HA
-      , 0xD574 -- Lo       HANGUL SYLLABLE HAE
-      , 0xD590 -- Lo       HANGUL SYLLABLE HYA
-      , 0xD5AC -- Lo       HANGUL SYLLABLE HYAE
-      , 0xD5C8 -- Lo       HANGUL SYLLABLE HEO
-      , 0xD5E4 -- Lo       HANGUL SYLLABLE HE
-      , 0xD600 -- Lo       HANGUL SYLLABLE HYEO
-      , 0xD61C -- Lo       HANGUL SYLLABLE HYE
-      , 0xD638 -- Lo       HANGUL SYLLABLE HO
-      , 0xD654 -- Lo       HANGUL SYLLABLE HWA
-      , 0xD670 -- Lo       HANGUL SYLLABLE HWAE
-      , 0xD68C -- Lo       HANGUL SYLLABLE HOE
-      , 0xD6A8 -- Lo       HANGUL SYLLABLE HYO
-      , 0xD6C4 -- Lo       HANGUL SYLLABLE HU
-      , 0xD6E0 -- Lo       HANGUL SYLLABLE HWEO
-      , 0xD6FC -- Lo       HANGUL SYLLABLE HWE
-      , 0xD718 -- Lo       HANGUL SYLLABLE HWI
-      , 0xD734 -- Lo       HANGUL SYLLABLE HYU
-      , 0xD750 -- Lo       HANGUL SYLLABLE HEU
-      , 0xD76C -- Lo       HANGUL SYLLABLE HYI
-      , 0xD788 -- Lo       HANGUL SYLLABLE HI
-      ]
-    ]
-        |> List.concat
-        |> List.map Char.fromCode
-        |> Set.fromList
+    RangeSet.fromList
+        [ Range.point '가' -- Lo       HANGUL SYLLABLE GA
+        , Range.point '개' -- Lo       HANGUL SYLLABLE GAE
+        , Range.point '갸' -- Lo       HANGUL SYLLABLE GYA
+        , Range.point '걔' -- Lo       HANGUL SYLLABLE GYAE
+        , Range.point '거' -- Lo       HANGUL SYLLABLE GEO
+        , Range.point '게' -- Lo       HANGUL SYLLABLE GE
+        , Range.point '겨' -- Lo       HANGUL SYLLABLE GYEO
+        , Range.point '계' -- Lo       HANGUL SYLLABLE GYE
+        , Range.point '고' -- Lo       HANGUL SYLLABLE GO
+        , Range.point '과' -- Lo       HANGUL SYLLABLE GWA
+        , Range.point '괘' -- Lo       HANGUL SYLLABLE GWAE
+        , Range.point '괴' -- Lo       HANGUL SYLLABLE GOE
+        , Range.point '교' -- Lo       HANGUL SYLLABLE GYO
+        , Range.point '구' -- Lo       HANGUL SYLLABLE GU
+        , Range.point '궈' -- Lo       HANGUL SYLLABLE GWEO
+        , Range.point '궤' -- Lo       HANGUL SYLLABLE GWE
+        , Range.point '귀' -- Lo       HANGUL SYLLABLE GWI
+        , Range.point '규' -- Lo       HANGUL SYLLABLE GYU
+        , Range.point '그' -- Lo       HANGUL SYLLABLE GEU
+        , Range.point '긔' -- Lo       HANGUL SYLLABLE GYI
+        , Range.point '기' -- Lo       HANGUL SYLLABLE GI
+        , Range.point '까' -- Lo       HANGUL SYLLABLE GGA
+        , Range.point '깨' -- Lo       HANGUL SYLLABLE GGAE
+        , Range.point '꺄' -- Lo       HANGUL SYLLABLE GGYA
+        , Range.point '꺠' -- Lo       HANGUL SYLLABLE GGYAE
+        , Range.point '꺼' -- Lo       HANGUL SYLLABLE GGEO
+        , Range.point '께' -- Lo       HANGUL SYLLABLE GGE
+        , Range.point '껴' -- Lo       HANGUL SYLLABLE GGYEO
+        , Range.point '꼐' -- Lo       HANGUL SYLLABLE GGYE
+        , Range.point '꼬' -- Lo       HANGUL SYLLABLE GGO
+        , Range.point '꽈' -- Lo       HANGUL SYLLABLE GGWA
+        , Range.point '꽤' -- Lo       HANGUL SYLLABLE GGWAE
+        , Range.point '꾀' -- Lo       HANGUL SYLLABLE GGOE
+        , Range.point '꾜' -- Lo       HANGUL SYLLABLE GGYO
+        , Range.point '꾸' -- Lo       HANGUL SYLLABLE GGU
+        , Range.point '꿔' -- Lo       HANGUL SYLLABLE GGWEO
+        , Range.point '꿰' -- Lo       HANGUL SYLLABLE GGWE
+        , Range.point '뀌' -- Lo       HANGUL SYLLABLE GGWI
+        , Range.point '뀨' -- Lo       HANGUL SYLLABLE GGYU
+        , Range.point '끄' -- Lo       HANGUL SYLLABLE GGEU
+        , Range.point '끠' -- Lo       HANGUL SYLLABLE GGYI
+        , Range.point '끼' -- Lo       HANGUL SYLLABLE GGI
+        , Range.point '나' -- Lo       HANGUL SYLLABLE NA
+        , Range.point '내' -- Lo       HANGUL SYLLABLE NAE
+        , Range.point '냐' -- Lo       HANGUL SYLLABLE NYA
+        , Range.point '냬' -- Lo       HANGUL SYLLABLE NYAE
+        , Range.point '너' -- Lo       HANGUL SYLLABLE NEO
+        , Range.point '네' -- Lo       HANGUL SYLLABLE NE
+        , Range.point '녀' -- Lo       HANGUL SYLLABLE NYEO
+        , Range.point '녜' -- Lo       HANGUL SYLLABLE NYE
+        , Range.point '노' -- Lo       HANGUL SYLLABLE NO
+        , Range.point '놔' -- Lo       HANGUL SYLLABLE NWA
+        , Range.point '놰' -- Lo       HANGUL SYLLABLE NWAE
+        , Range.point '뇌' -- Lo       HANGUL SYLLABLE NOE
+        , Range.point '뇨' -- Lo       HANGUL SYLLABLE NYO
+        , Range.point '누' -- Lo       HANGUL SYLLABLE NU
+        , Range.point '눠' -- Lo       HANGUL SYLLABLE NWEO
+        , Range.point '눼' -- Lo       HANGUL SYLLABLE NWE
+        , Range.point '뉘' -- Lo       HANGUL SYLLABLE NWI
+        , Range.point '뉴' -- Lo       HANGUL SYLLABLE NYU
+        , Range.point '느' -- Lo       HANGUL SYLLABLE NEU
+        , Range.point '늬' -- Lo       HANGUL SYLLABLE NYI
+        , Range.point '니' -- Lo       HANGUL SYLLABLE NI
+        , Range.point '다' -- Lo       HANGUL SYLLABLE DA
+        , Range.point '대' -- Lo       HANGUL SYLLABLE DAE
+        , Range.point '댜' -- Lo       HANGUL SYLLABLE DYA
+        , Range.point '댸' -- Lo       HANGUL SYLLABLE DYAE
+        , Range.point '더' -- Lo       HANGUL SYLLABLE DEO
+        , Range.point '데' -- Lo       HANGUL SYLLABLE DE
+        , Range.point '뎌' -- Lo       HANGUL SYLLABLE DYEO
+        , Range.point '뎨' -- Lo       HANGUL SYLLABLE DYE
+        , Range.point '도' -- Lo       HANGUL SYLLABLE DO
+        , Range.point '돠' -- Lo       HANGUL SYLLABLE DWA
+        , Range.point '돼' -- Lo       HANGUL SYLLABLE DWAE
+        , Range.point '되' -- Lo       HANGUL SYLLABLE DOE
+        , Range.point '됴' -- Lo       HANGUL SYLLABLE DYO
+        , Range.point '두' -- Lo       HANGUL SYLLABLE DU
+        , Range.point '둬' -- Lo       HANGUL SYLLABLE DWEO
+        , Range.point '뒈' -- Lo       HANGUL SYLLABLE DWE
+        , Range.point '뒤' -- Lo       HANGUL SYLLABLE DWI
+        , Range.point '듀' -- Lo       HANGUL SYLLABLE DYU
+        , Range.point '드' -- Lo       HANGUL SYLLABLE DEU
+        , Range.point '듸' -- Lo       HANGUL SYLLABLE DYI
+        , Range.point '디' -- Lo       HANGUL SYLLABLE DI
+        , Range.point '따' -- Lo       HANGUL SYLLABLE DDA
+        , Range.point '때' -- Lo       HANGUL SYLLABLE DDAE
+        , Range.point '땨' -- Lo       HANGUL SYLLABLE DDYA
+        , Range.point '떄' -- Lo       HANGUL SYLLABLE DDYAE
+        , Range.point '떠' -- Lo       HANGUL SYLLABLE DDEO
+        , Range.point '떼' -- Lo       HANGUL SYLLABLE DDE
+        , Range.point '뗘' -- Lo       HANGUL SYLLABLE DDYEO
+        , Range.point '뗴' -- Lo       HANGUL SYLLABLE DDYE
+        , Range.point '또' -- Lo       HANGUL SYLLABLE DDO
+        , Range.point '똬' -- Lo       HANGUL SYLLABLE DDWA
+        , Range.point '뙈' -- Lo       HANGUL SYLLABLE DDWAE
+        , Range.point '뙤' -- Lo       HANGUL SYLLABLE DDOE
+        , Range.point '뚀' -- Lo       HANGUL SYLLABLE DDYO
+        , Range.point '뚜' -- Lo       HANGUL SYLLABLE DDU
+        , Range.point '뚸' -- Lo       HANGUL SYLLABLE DDWEO
+        , Range.point '뛔' -- Lo       HANGUL SYLLABLE DDWE
+        , Range.point '뛰' -- Lo       HANGUL SYLLABLE DDWI
+        , Range.point '뜌' -- Lo       HANGUL SYLLABLE DDYU
+        , Range.point '뜨' -- Lo       HANGUL SYLLABLE DDEU
+        , Range.point '띄' -- Lo       HANGUL SYLLABLE DDYI
+        , Range.point '띠' -- Lo       HANGUL SYLLABLE DDI
+        , Range.point '라' -- Lo       HANGUL SYLLABLE RA
+        , Range.point '래' -- Lo       HANGUL SYLLABLE RAE
+        , Range.point '랴' -- Lo       HANGUL SYLLABLE RYA
+        , Range.point '럐' -- Lo       HANGUL SYLLABLE RYAE
+        , Range.point '러' -- Lo       HANGUL SYLLABLE REO
+        , Range.point '레' -- Lo       HANGUL SYLLABLE RE
+        , Range.point '려' -- Lo       HANGUL SYLLABLE RYEO
+        , Range.point '례' -- Lo       HANGUL SYLLABLE RYE
+        , Range.point '로' -- Lo       HANGUL SYLLABLE RO
+        , Range.point '롸' -- Lo       HANGUL SYLLABLE RWA
+        , Range.point '뢔' -- Lo       HANGUL SYLLABLE RWAE
+        , Range.point '뢰' -- Lo       HANGUL SYLLABLE ROE
+        , Range.point '료' -- Lo       HANGUL SYLLABLE RYO
+        , Range.point '루' -- Lo       HANGUL SYLLABLE RU
+        , Range.point '뤄' -- Lo       HANGUL SYLLABLE RWEO
+        , Range.point '뤠' -- Lo       HANGUL SYLLABLE RWE
+        , Range.point '뤼' -- Lo       HANGUL SYLLABLE RWI
+        , Range.point '류' -- Lo       HANGUL SYLLABLE RYU
+        , Range.point '르' -- Lo       HANGUL SYLLABLE REU
+        , Range.point '릐' -- Lo       HANGUL SYLLABLE RYI
+        , Range.point '리' -- Lo       HANGUL SYLLABLE RI
+        , Range.point '마' -- Lo       HANGUL SYLLABLE MA
+        , Range.point '매' -- Lo       HANGUL SYLLABLE MAE
+        , Range.point '먀' -- Lo       HANGUL SYLLABLE MYA
+        , Range.point '먜' -- Lo       HANGUL SYLLABLE MYAE
+        , Range.point '머' -- Lo       HANGUL SYLLABLE MEO
+        , Range.point '메' -- Lo       HANGUL SYLLABLE ME
+        , Range.point '며' -- Lo       HANGUL SYLLABLE MYEO
+        , Range.point '몌' -- Lo       HANGUL SYLLABLE MYE
+        , Range.point '모' -- Lo       HANGUL SYLLABLE MO
+        , Range.point '뫄' -- Lo       HANGUL SYLLABLE MWA
+        , Range.point '뫠' -- Lo       HANGUL SYLLABLE MWAE
+        , Range.point '뫼' -- Lo       HANGUL SYLLABLE MOE
+        , Range.point '묘' -- Lo       HANGUL SYLLABLE MYO
+        , Range.point '무' -- Lo       HANGUL SYLLABLE MU
+        , Range.point '뭐' -- Lo       HANGUL SYLLABLE MWEO
+        , Range.point '뭬' -- Lo       HANGUL SYLLABLE MWE
+        , Range.point '뮈' -- Lo       HANGUL SYLLABLE MWI
+        , Range.point '뮤' -- Lo       HANGUL SYLLABLE MYU
+        , Range.point '므' -- Lo       HANGUL SYLLABLE MEU
+        , Range.point '믜' -- Lo       HANGUL SYLLABLE MYI
+        , Range.point '미' -- Lo       HANGUL SYLLABLE MI
+        , Range.point '바' -- Lo       HANGUL SYLLABLE BA
+        , Range.point '배' -- Lo       HANGUL SYLLABLE BAE
+        , Range.point '뱌' -- Lo       HANGUL SYLLABLE BYA
+        , Range.point '뱨' -- Lo       HANGUL SYLLABLE BYAE
+        , Range.point '버' -- Lo       HANGUL SYLLABLE BEO
+        , Range.point '베' -- Lo       HANGUL SYLLABLE BE
+        , Range.point '벼' -- Lo       HANGUL SYLLABLE BYEO
+        , Range.point '볘' -- Lo       HANGUL SYLLABLE BYE
+        , Range.point '보' -- Lo       HANGUL SYLLABLE BO
+        , Range.point '봐' -- Lo       HANGUL SYLLABLE BWA
+        , Range.point '봬' -- Lo       HANGUL SYLLABLE BWAE
+        , Range.point '뵈' -- Lo       HANGUL SYLLABLE BOE
+        , Range.point '뵤' -- Lo       HANGUL SYLLABLE BYO
+        , Range.point '부' -- Lo       HANGUL SYLLABLE BU
+        , Range.point '붜' -- Lo       HANGUL SYLLABLE BWEO
+        , Range.point '붸' -- Lo       HANGUL SYLLABLE BWE
+        , Range.point '뷔' -- Lo       HANGUL SYLLABLE BWI
+        , Range.point '뷰' -- Lo       HANGUL SYLLABLE BYU
+        , Range.point '브' -- Lo       HANGUL SYLLABLE BEU
+        , Range.point '븨' -- Lo       HANGUL SYLLABLE BYI
+        , Range.point '비' -- Lo       HANGUL SYLLABLE BI
+        , Range.point '빠' -- Lo       HANGUL SYLLABLE BBA
+        , Range.point '빼' -- Lo       HANGUL SYLLABLE BBAE
+        , Range.point '뺘' -- Lo       HANGUL SYLLABLE BBYA
+        , Range.point '뺴' -- Lo       HANGUL SYLLABLE BBYAE
+        , Range.point '뻐' -- Lo       HANGUL SYLLABLE BBEO
+        , Range.point '뻬' -- Lo       HANGUL SYLLABLE BBE
+        , Range.point '뼈' -- Lo       HANGUL SYLLABLE BBYEO
+        , Range.point '뼤' -- Lo       HANGUL SYLLABLE BBYE
+        , Range.point '뽀' -- Lo       HANGUL SYLLABLE BBO
+        , Range.point '뽜' -- Lo       HANGUL SYLLABLE BBWA
+        , Range.point '뽸' -- Lo       HANGUL SYLLABLE BBWAE
+        , Range.point '뾔' -- Lo       HANGUL SYLLABLE BBOE
+        , Range.point '뾰' -- Lo       HANGUL SYLLABLE BBYO
+        , Range.point '뿌' -- Lo       HANGUL SYLLABLE BBU
+        , Range.point '뿨' -- Lo       HANGUL SYLLABLE BBWEO
+        , Range.point '쀄' -- Lo       HANGUL SYLLABLE BBWE
+        , Range.point '쀠' -- Lo       HANGUL SYLLABLE BBWI
+        , Range.point '쀼' -- Lo       HANGUL SYLLABLE BBYU
+        , Range.point '쁘' -- Lo       HANGUL SYLLABLE BBEU
+        , Range.point '쁴' -- Lo       HANGUL SYLLABLE BBYI
+        , Range.point '삐' -- Lo       HANGUL SYLLABLE BBI
+        , Range.point '사' -- Lo       HANGUL SYLLABLE SA
+        , Range.point '새' -- Lo       HANGUL SYLLABLE SAE
+        , Range.point '샤' -- Lo       HANGUL SYLLABLE SYA
+        , Range.point '섀' -- Lo       HANGUL SYLLABLE SYAE
+        , Range.point '서' -- Lo       HANGUL SYLLABLE SEO
+        , Range.point '세' -- Lo       HANGUL SYLLABLE SE
+        , Range.point '셔' -- Lo       HANGUL SYLLABLE SYEO
+        , Range.point '셰' -- Lo       HANGUL SYLLABLE SYE
+        , Range.point '소' -- Lo       HANGUL SYLLABLE SO
+        , Range.point '솨' -- Lo       HANGUL SYLLABLE SWA
+        , Range.point '쇄' -- Lo       HANGUL SYLLABLE SWAE
+        , Range.point '쇠' -- Lo       HANGUL SYLLABLE SOE
+        , Range.point '쇼' -- Lo       HANGUL SYLLABLE SYO
+        , Range.point '수' -- Lo       HANGUL SYLLABLE SU
+        , Range.point '숴' -- Lo       HANGUL SYLLABLE SWEO
+        , Range.point '쉐' -- Lo       HANGUL SYLLABLE SWE
+        , Range.point '쉬' -- Lo       HANGUL SYLLABLE SWI
+        , Range.point '슈' -- Lo       HANGUL SYLLABLE SYU
+        , Range.point '스' -- Lo       HANGUL SYLLABLE SEU
+        , Range.point '싀' -- Lo       HANGUL SYLLABLE SYI
+        , Range.point '시' -- Lo       HANGUL SYLLABLE SI
+        , Range.point '싸' -- Lo       HANGUL SYLLABLE SSA
+        , Range.point '쌔' -- Lo       HANGUL SYLLABLE SSAE
+        , Range.point '쌰' -- Lo       HANGUL SYLLABLE SSYA
+        , Range.point '썌' -- Lo       HANGUL SYLLABLE SSYAE
+        , Range.point '써' -- Lo       HANGUL SYLLABLE SSEO
+        , Range.point '쎄' -- Lo       HANGUL SYLLABLE SSE
+        , Range.point '쎠' -- Lo       HANGUL SYLLABLE SSYEO
+        , Range.point '쎼' -- Lo       HANGUL SYLLABLE SSYE
+        , Range.point '쏘' -- Lo       HANGUL SYLLABLE SSO
+        , Range.point '쏴' -- Lo       HANGUL SYLLABLE SSWA
+        , Range.point '쐐' -- Lo       HANGUL SYLLABLE SSWAE
+        , Range.point '쐬' -- Lo       HANGUL SYLLABLE SSOE
+        , Range.point '쑈' -- Lo       HANGUL SYLLABLE SSYO
+        , Range.point '쑤' -- Lo       HANGUL SYLLABLE SSU
+        , Range.point '쒀' -- Lo       HANGUL SYLLABLE SSWEO
+        , Range.point '쒜' -- Lo       HANGUL SYLLABLE SSWE
+        , Range.point '쒸' -- Lo       HANGUL SYLLABLE SSWI
+        , Range.point '쓔' -- Lo       HANGUL SYLLABLE SSYU
+        , Range.point '쓰' -- Lo       HANGUL SYLLABLE SSEU
+        , Range.point '씌' -- Lo       HANGUL SYLLABLE SSYI
+        , Range.point '씨' -- Lo       HANGUL SYLLABLE SSI
+        , Range.point '아' -- Lo       HANGUL SYLLABLE A
+        , Range.point '애' -- Lo       HANGUL SYLLABLE AE
+        , Range.point '야' -- Lo       HANGUL SYLLABLE YA
+        , Range.point '얘' -- Lo       HANGUL SYLLABLE YAE
+        , Range.point '어' -- Lo       HANGUL SYLLABLE EO
+        , Range.point '에' -- Lo       HANGUL SYLLABLE E
+        , Range.point '여' -- Lo       HANGUL SYLLABLE YEO
+        , Range.point '예' -- Lo       HANGUL SYLLABLE YE
+        , Range.point '오' -- Lo       HANGUL SYLLABLE O
+        , Range.point '와' -- Lo       HANGUL SYLLABLE WA
+        , Range.point '왜' -- Lo       HANGUL SYLLABLE WAE
+        , Range.point '외' -- Lo       HANGUL SYLLABLE OE
+        , Range.point '요' -- Lo       HANGUL SYLLABLE YO
+        , Range.point '우' -- Lo       HANGUL SYLLABLE U
+        , Range.point '워' -- Lo       HANGUL SYLLABLE WEO
+        , Range.point '웨' -- Lo       HANGUL SYLLABLE WE
+        , Range.point '위' -- Lo       HANGUL SYLLABLE WI
+        , Range.point '유' -- Lo       HANGUL SYLLABLE YU
+        , Range.point '으' -- Lo       HANGUL SYLLABLE EU
+        , Range.point '의' -- Lo       HANGUL SYLLABLE YI
+        , Range.point '이' -- Lo       HANGUL SYLLABLE I
+        , Range.point '자' -- Lo       HANGUL SYLLABLE JA
+        , Range.point '재' -- Lo       HANGUL SYLLABLE JAE
+        , Range.point '쟈' -- Lo       HANGUL SYLLABLE JYA
+        , Range.point '쟤' -- Lo       HANGUL SYLLABLE JYAE
+        , Range.point '저' -- Lo       HANGUL SYLLABLE JEO
+        , Range.point '제' -- Lo       HANGUL SYLLABLE JE
+        , Range.point '져' -- Lo       HANGUL SYLLABLE JYEO
+        , Range.point '졔' -- Lo       HANGUL SYLLABLE JYE
+        , Range.point '조' -- Lo       HANGUL SYLLABLE JO
+        , Range.point '좌' -- Lo       HANGUL SYLLABLE JWA
+        , Range.point '좨' -- Lo       HANGUL SYLLABLE JWAE
+        , Range.point '죄' -- Lo       HANGUL SYLLABLE JOE
+        , Range.point '죠' -- Lo       HANGUL SYLLABLE JYO
+        , Range.point '주' -- Lo       HANGUL SYLLABLE JU
+        , Range.point '줘' -- Lo       HANGUL SYLLABLE JWEO
+        , Range.point '줴' -- Lo       HANGUL SYLLABLE JWE
+        , Range.point '쥐' -- Lo       HANGUL SYLLABLE JWI
+        , Range.point '쥬' -- Lo       HANGUL SYLLABLE JYU
+        , Range.point '즈' -- Lo       HANGUL SYLLABLE JEU
+        , Range.point '즤' -- Lo       HANGUL SYLLABLE JYI
+        , Range.point '지' -- Lo       HANGUL SYLLABLE JI
+        , Range.point '짜' -- Lo       HANGUL SYLLABLE JJA
+        , Range.point '째' -- Lo       HANGUL SYLLABLE JJAE
+        , Range.point '쨔' -- Lo       HANGUL SYLLABLE JJYA
+        , Range.point '쨰' -- Lo       HANGUL SYLLABLE JJYAE
+        , Range.point '쩌' -- Lo       HANGUL SYLLABLE JJEO
+        , Range.point '쩨' -- Lo       HANGUL SYLLABLE JJE
+        , Range.point '쪄' -- Lo       HANGUL SYLLABLE JJYEO
+        , Range.point '쪠' -- Lo       HANGUL SYLLABLE JJYE
+        , Range.point '쪼' -- Lo       HANGUL SYLLABLE JJO
+        , Range.point '쫘' -- Lo       HANGUL SYLLABLE JJWA
+        , Range.point '쫴' -- Lo       HANGUL SYLLABLE JJWAE
+        , Range.point '쬐' -- Lo       HANGUL SYLLABLE JJOE
+        , Range.point '쬬' -- Lo       HANGUL SYLLABLE JJYO
+        , Range.point '쭈' -- Lo       HANGUL SYLLABLE JJU
+        , Range.point '쭤' -- Lo       HANGUL SYLLABLE JJWEO
+        , Range.point '쮀' -- Lo       HANGUL SYLLABLE JJWE
+        , Range.point '쮜' -- Lo       HANGUL SYLLABLE JJWI
+        , Range.point '쮸' -- Lo       HANGUL SYLLABLE JJYU
+        , Range.point '쯔' -- Lo       HANGUL SYLLABLE JJEU
+        , Range.point '쯰' -- Lo       HANGUL SYLLABLE JJYI
+        , Range.point '찌' -- Lo       HANGUL SYLLABLE JJI
+        , Range.point '차' -- Lo       HANGUL SYLLABLE CA
+        , Range.point '채' -- Lo       HANGUL SYLLABLE CAE
+        , Range.point '챠' -- Lo       HANGUL SYLLABLE CYA
+        , Range.point '챼' -- Lo       HANGUL SYLLABLE CYAE
+        , Range.point '처' -- Lo       HANGUL SYLLABLE CEO
+        , Range.point '체' -- Lo       HANGUL SYLLABLE CE
+        , Range.point '쳐' -- Lo       HANGUL SYLLABLE CYEO
+        , Range.point '쳬' -- Lo       HANGUL SYLLABLE CYE
+        , Range.point '초' -- Lo       HANGUL SYLLABLE CO
+        , Range.point '촤' -- Lo       HANGUL SYLLABLE CWA
+        , Range.point '쵀' -- Lo       HANGUL SYLLABLE CWAE
+        , Range.point '최' -- Lo       HANGUL SYLLABLE COE
+        , Range.point '쵸' -- Lo       HANGUL SYLLABLE CYO
+        , Range.point '추' -- Lo       HANGUL SYLLABLE CU
+        , Range.point '춰' -- Lo       HANGUL SYLLABLE CWEO
+        , Range.point '췌' -- Lo       HANGUL SYLLABLE CWE
+        , Range.point '취' -- Lo       HANGUL SYLLABLE CWI
+        , Range.point '츄' -- Lo       HANGUL SYLLABLE CYU
+        , Range.point '츠' -- Lo       HANGUL SYLLABLE CEU
+        , Range.point '츼' -- Lo       HANGUL SYLLABLE CYI
+        , Range.point '치' -- Lo       HANGUL SYLLABLE CI
+        , Range.point '카' -- Lo       HANGUL SYLLABLE KA
+        , Range.point '캐' -- Lo       HANGUL SYLLABLE KAE
+        , Range.point '캬' -- Lo       HANGUL SYLLABLE KYA
+        , Range.point '컈' -- Lo       HANGUL SYLLABLE KYAE
+        , Range.point '커' -- Lo       HANGUL SYLLABLE KEO
+        , Range.point '케' -- Lo       HANGUL SYLLABLE KE
+        , Range.point '켜' -- Lo       HANGUL SYLLABLE KYEO
+        , Range.point '켸' -- Lo       HANGUL SYLLABLE KYE
+        , Range.point '코' -- Lo       HANGUL SYLLABLE KO
+        , Range.point '콰' -- Lo       HANGUL SYLLABLE KWA
+        , Range.point '쾌' -- Lo       HANGUL SYLLABLE KWAE
+        , Range.point '쾨' -- Lo       HANGUL SYLLABLE KOE
+        , Range.point '쿄' -- Lo       HANGUL SYLLABLE KYO
+        , Range.point '쿠' -- Lo       HANGUL SYLLABLE KU
+        , Range.point '쿼' -- Lo       HANGUL SYLLABLE KWEO
+        , Range.point '퀘' -- Lo       HANGUL SYLLABLE KWE
+        , Range.point '퀴' -- Lo       HANGUL SYLLABLE KWI
+        , Range.point '큐' -- Lo       HANGUL SYLLABLE KYU
+        , Range.point '크' -- Lo       HANGUL SYLLABLE KEU
+        , Range.point '킈' -- Lo       HANGUL SYLLABLE KYI
+        , Range.point '키' -- Lo       HANGUL SYLLABLE KI
+        , Range.point '타' -- Lo       HANGUL SYLLABLE TA
+        , Range.point '태' -- Lo       HANGUL SYLLABLE TAE
+        , Range.point '탸' -- Lo       HANGUL SYLLABLE TYA
+        , Range.point '턔' -- Lo       HANGUL SYLLABLE TYAE
+        , Range.point '터' -- Lo       HANGUL SYLLABLE TEO
+        , Range.point '테' -- Lo       HANGUL SYLLABLE TE
+        , Range.point '텨' -- Lo       HANGUL SYLLABLE TYEO
+        , Range.point '톄' -- Lo       HANGUL SYLLABLE TYE
+        , Range.point '토' -- Lo       HANGUL SYLLABLE TO
+        , Range.point '톼' -- Lo       HANGUL SYLLABLE TWA
+        , Range.point '퇘' -- Lo       HANGUL SYLLABLE TWAE
+        , Range.point '퇴' -- Lo       HANGUL SYLLABLE TOE
+        , Range.point '툐' -- Lo       HANGUL SYLLABLE TYO
+        , Range.point '투' -- Lo       HANGUL SYLLABLE TU
+        , Range.point '퉈' -- Lo       HANGUL SYLLABLE TWEO
+        , Range.point '퉤' -- Lo       HANGUL SYLLABLE TWE
+        , Range.point '튀' -- Lo       HANGUL SYLLABLE TWI
+        , Range.point '튜' -- Lo       HANGUL SYLLABLE TYU
+        , Range.point '트' -- Lo       HANGUL SYLLABLE TEU
+        , Range.point '틔' -- Lo       HANGUL SYLLABLE TYI
+        , Range.point '티' -- Lo       HANGUL SYLLABLE TI
+        , Range.point '파' -- Lo       HANGUL SYLLABLE PA
+        , Range.point '패' -- Lo       HANGUL SYLLABLE PAE
+        , Range.point '퍄' -- Lo       HANGUL SYLLABLE PYA
+        , Range.point '퍠' -- Lo       HANGUL SYLLABLE PYAE
+        , Range.point '퍼' -- Lo       HANGUL SYLLABLE PEO
+        , Range.point '페' -- Lo       HANGUL SYLLABLE PE
+        , Range.point '펴' -- Lo       HANGUL SYLLABLE PYEO
+        , Range.point '폐' -- Lo       HANGUL SYLLABLE PYE
+        , Range.point '포' -- Lo       HANGUL SYLLABLE PO
+        , Range.point '퐈' -- Lo       HANGUL SYLLABLE PWA
+        , Range.point '퐤' -- Lo       HANGUL SYLLABLE PWAE
+        , Range.point '푀' -- Lo       HANGUL SYLLABLE POE
+        , Range.point '표' -- Lo       HANGUL SYLLABLE PYO
+        , Range.point '푸' -- Lo       HANGUL SYLLABLE PU
+        , Range.point '풔' -- Lo       HANGUL SYLLABLE PWEO
+        , Range.point '풰' -- Lo       HANGUL SYLLABLE PWE
+        , Range.point '퓌' -- Lo       HANGUL SYLLABLE PWI
+        , Range.point '퓨' -- Lo       HANGUL SYLLABLE PYU
+        , Range.point '프' -- Lo       HANGUL SYLLABLE PEU
+        , Range.point '픠' -- Lo       HANGUL SYLLABLE PYI
+        , Range.point '피' -- Lo       HANGUL SYLLABLE PI
+        , Range.point '하' -- Lo       HANGUL SYLLABLE HA
+        , Range.point '해' -- Lo       HANGUL SYLLABLE HAE
+        , Range.point '햐' -- Lo       HANGUL SYLLABLE HYA
+        , Range.point '햬' -- Lo       HANGUL SYLLABLE HYAE
+        , Range.point '허' -- Lo       HANGUL SYLLABLE HEO
+        , Range.point '헤' -- Lo       HANGUL SYLLABLE HE
+        , Range.point '혀' -- Lo       HANGUL SYLLABLE HYEO
+        , Range.point '혜' -- Lo       HANGUL SYLLABLE HYE
+        , Range.point '호' -- Lo       HANGUL SYLLABLE HO
+        , Range.point '화' -- Lo       HANGUL SYLLABLE HWA
+        , Range.point '홰' -- Lo       HANGUL SYLLABLE HWAE
+        , Range.point '회' -- Lo       HANGUL SYLLABLE HOE
+        , Range.point '효' -- Lo       HANGUL SYLLABLE HYO
+        , Range.point '후' -- Lo       HANGUL SYLLABLE HU
+        , Range.point '훠' -- Lo       HANGUL SYLLABLE HWEO
+        , Range.point '훼' -- Lo       HANGUL SYLLABLE HWE
+        , Range.point '휘' -- Lo       HANGUL SYLLABLE HWI
+        , Range.point '휴' -- Lo       HANGUL SYLLABLE HYU
+        , Range.point '흐' -- Lo       HANGUL SYLLABLE HEU
+        , Range.point '희' -- Lo       HANGUL SYLLABLE HYI
+        , Range.point '히' -- Lo       HANGUL SYLLABLE HI
+        ]

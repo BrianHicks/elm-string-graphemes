@@ -1,18 +1,17 @@
 module String.Segmentation.Regional_Indicator exposing (chars, parser)
 
 import Parser exposing (Parser)
-import Set exposing (Set)
+import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
+import String.Segmentation.RangeSet.Range as Range
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf (\c -> Set.member c chars)
+    Parser.chompIf (\c -> RangeSet.member c chars)
 
 
-chars : Set Char
+chars : RangeSet Char
 chars =
-    [ List.range 0x0001F1E6 0x0001F1FF -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
-    ]
-        |> List.concat
-        |> List.map Char.fromCode
-        |> Set.fromList
+    RangeSet.fromList
+        [ Range.range '🇦' '🇿' -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
+        ]
