@@ -1,8 +1,8 @@
-module String.RangeSet.RangeSpec exposing (compareSpec)
+module String.Segmentation.RangeSet.RangeSpec exposing (compareSpec)
 
 import Expect
 import Fuzz exposing (Fuzzer)
-import String.RangeSet.Range as Range exposing (..)
+import String.Segmentation.RangeSet.Range as Range exposing (..)
 import Test exposing (..)
 
 

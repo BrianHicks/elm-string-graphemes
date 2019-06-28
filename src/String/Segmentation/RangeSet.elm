@@ -1,6 +1,6 @@
-module String.RangeSet exposing (RangeSet, fromList, insert, member, toList)
+module String.Segmentation.RangeSet exposing (RangeSet, fromList, insert, member, toList)
 
-import String.RangeSet.Range as Range exposing (Range)
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 {-| Longer-term, this may make sense to release as a separate package.

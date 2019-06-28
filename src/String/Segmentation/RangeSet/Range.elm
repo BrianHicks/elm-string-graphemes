@@ -1,4 +1,4 @@
-module String.RangeSet.Range exposing (Order(..), Range, combine, compare, lowerBound, point, range, upperBound)
+module String.Segmentation.RangeSet.Range exposing (Order(..), Range, combine, compare, lowerBound, point, range, upperBound)
 
 
 type Range comparable
