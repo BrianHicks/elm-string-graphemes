@@ -11,6 +11,8 @@ parser =
 
 chars : Set Char
 chars =
-    (Set.fromList << List.concat)
-        [ List.map Char.fromCode (List.range 0x0001F1E6 0x0001F1FF) -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
-        ]
+    [ List.range 0x0001F1E6 0x0001F1FF -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
+    ]
+        |> List.concat
+        |> List.map Char.fromCode
+        |> Set.fromList

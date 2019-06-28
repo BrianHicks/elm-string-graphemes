@@ -11,6 +11,8 @@ parser =
 
 chars : Set Char
 chars =
-    (Set.fromList << List.concat)
-        [ [ '\u{000D}' ] -- Cc       <control-000D>
-        ]
+    [ [ 0x0D ] -- Cc       <control-000D>
+    ]
+        |> List.concat
+        |> List.map Char.fromCode
+        |> Set.fromList

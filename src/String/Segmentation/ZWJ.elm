@@ -11,6 +11,8 @@ parser =
 
 chars : Set Char
 chars =
-    (Set.fromList << List.concat)
-        [ [ '\u{200D}' ] -- Cf       ZERO WIDTH JOINER
-        ]
+    [ [ 0x200D ] -- Cf       ZERO WIDTH JOINER
+    ]
+        |> List.concat
+        |> List.map Char.fromCode
+        |> Set.fromList

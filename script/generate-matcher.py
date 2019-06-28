@@ -27,19 +27,16 @@ out.append('parser = Parser.chompIf (\c -> Set.member c chars)')
 # CHARS
 
 out.append('chars : Set Char')
-out.append('chars = (Set.fromList << List.concat) [')
-
-def elm_char(hex_codepoint):
-    return "'\\u{%s}'" % hex_codepoint
+out.append('chars = [')
 
 for (i, match) in enumerate(classes[class_]):
     if match['kind'] == 'range':
-        code = 'List.map Char.fromCode (List.range 0x{} 0x{})'.format(
+        code = 'List.range 0x{} 0x{}'.format(
             match['start'],
             match['end'],
         )
     elif match['kind'] == 'single':
-        code = '[ {} ]'.format(elm_char(match['codepoint']))
+        code = '[ 0x{} ]'.format(match['codepoint'])
 
     out.append('    {}{} -- {}'.format(
         ', ' if i > 0 else '',
@@ -48,6 +45,9 @@ for (i, match) in enumerate(classes[class_]):
     ))
 
 out.append('    ]')
+out.append('    |> List.concat')
+out.append('    |> List.map Char.fromCode')
+out.append('    |> Set.fromList')
 
 # write out the final result
 
