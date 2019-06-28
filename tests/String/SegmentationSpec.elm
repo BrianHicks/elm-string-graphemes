@@ -6,7 +6,7 @@ import Set exposing (Set)
 import String.Segmentation as Segmentation
 import String.Segmentation.Control as Control
 import String.Segmentation.Prepend as Prepend
-import String.Segmentation.RangeSet as RangeSet
+import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
 import String.Segmentation.RangeSet.Range as Range
 import Test exposing (..)
 
@@ -43,11 +43,19 @@ expectSplit c1 c2 =
         |> Expect.equal (Ok [ c1, c2 ])
 
 
-charsFuzzer : Set Char -> Fuzzer String
+charsFuzzer : RangeSet Char -> Fuzzer String
 charsFuzzer chars =
     chars
-        |> Set.toList
-        |> List.map (Fuzz.constant << String.fromList << List.singleton)
+        |> RangeSet.toList
+        |> List.map
+            (\range ->
+                Fuzz.map
+                    (String.fromList << List.singleton << Char.fromCode)
+                    (Fuzz.intRange
+                        (Char.toCode (Range.lowerBound range))
+                        (Char.toCode (Range.upperBound range))
+                    )
+            )
         |> Fuzz.oneOf
 
 
