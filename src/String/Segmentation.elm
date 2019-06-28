@@ -1,6 +1,6 @@
 module String.Segmentation exposing (graphemes)
 
-import Parser exposing ((|=), Parser, Step(..), loop)
+import Parser exposing ((|.), (|=), Parser, Step(..), backtrackable, loop)
 import String.Segmentation.CR as CR
 import String.Segmentation.Control as Control
 import String.Segmentation.LF as LF
@@ -15,7 +15,7 @@ graphemes input =
 graphemesLoop : List String -> Parser (Step (List String) (List String))
 graphemesLoop current =
     Parser.oneOf
-        [ cons current (Parser.token "\u{000D}\n")
+        [ cons current (backtrackable CR.parser |. LF.parser)
         , cons current CR.parser
         , cons current LF.parser
         , cons current Control.parser
