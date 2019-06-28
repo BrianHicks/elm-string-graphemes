@@ -6,7 +6,7 @@ import sys
 
 SECTIONS = defaultdict(list)
 
-CLASS_RE = re.compile(r'(?P<start>[0-9A-F]{4,5})(\.\.(?P<end>[0-9A-F]{4,5}))?\s+;\s(?P<class>\w+)\s#\s(?P<comment>.+)$')
+CLASS_RE = re.compile(r'(?P<start>[0-9A-F]{4,5})(\.\.(?P<end>[0-9A-F]{4,5}))?\s+;\s*(?P<class>\w+)\s*#\s(?P<comment>.+)$')
 
 for line in sys.stdin.read().split('\n'):
     out = CLASS_RE.match(line)
