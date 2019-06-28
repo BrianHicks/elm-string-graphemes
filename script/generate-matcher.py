@@ -37,7 +37,5 @@ for (i, match) in enumerate(classes[class_]):
         code,
     ))
 
-print('\n'.join(out))
-
-# with open(args.destination, 'w') as fh:
-#     fh.write('\n'.join(out))
+with open(args.destination, 'w') as fh:
+    fh.write('\n'.join(out))
