@@ -9,8 +9,9 @@ with import (builtins.fetchTarball rec {
 stdenv.mkDerivation {
   name = "elm-unicode-segmentation";
   buildInputs = [
-    git
     elmPackages.elm
     elmPackages.elm-format
+    git
+    gnumake
   ];
 }
