@@ -8,6 +8,20 @@ import String.Segmentation.LF as LF
 import String.Segmentation.Prepend as Prepend
 
 
+{-| Break a string into graphemes (the characters you percieve, as opposed to
+the bytes used to store the string or the codepoints used to make the
+character.)
+
+This will preserve things like accents, Hangul syllables, and emoji with skin
+tone.
+
+This uses the [Unicode TR29
+algorithm](http://www.unicode.org/reports/tr29/#Table_Combining_Char_Sequences_and_Grapheme_Clusters). There's
+also a [more visual description of the
+algorithm](https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.html)
+if you're interested in learning more.
+
+-}
 graphemes : String -> Result (List Parser.DeadEnd) (List String)
 graphemes input =
     Parser.run (loop [] graphemesLoop) input
