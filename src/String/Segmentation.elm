@@ -3,6 +3,7 @@ module String.Segmentation exposing (graphemes)
 import Parser exposing ((|.), (|=), Parser, Step(..), backtrackable, loop)
 import String.Segmentation.CR as CR
 import String.Segmentation.Control as Control
+import String.Segmentation.Hangul as Hangul
 import String.Segmentation.LF as LF
 import String.Segmentation.Prepend as Prepend
 
@@ -36,4 +37,9 @@ sequences =
     , LF.parser
     , Control.parser
     , Prepend.parser
+    , Hangul.parser
+
+    -- if we don't match any of these, we don't have a special case and can
+    -- ignore the character
+    , Parser.chompIf (\_ -> True)
     ]
