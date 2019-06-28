@@ -15,17 +15,17 @@ graphemes input =
 graphemesLoop : List String -> Parser (Step (List String) (List String))
 graphemesLoop current =
     Parser.oneOf
-        [ cons current (backtrackable CR.parser |. LF.parser)
-        , cons current CR.parser
-        , cons current LF.parser
-        , cons current Control.parser
-        , cons current Prepend.parser
+        [ grapheme current (backtrackable CR.parser |. LF.parser)
+        , grapheme current CR.parser
+        , grapheme current LF.parser
+        , grapheme current Control.parser
+        , grapheme current Prepend.parser
         , Parser.map (\_ -> Done (List.reverse current)) Parser.end
         ]
 
 
-cons : List String -> Parser a -> Parser (Step (List String) (List String))
-cons rest parser =
+grapheme : List String -> Parser a -> Parser (Step (List String) (List String))
+grapheme rest parser =
     parser
         |> Parser.getChompedString
         |> Parser.map (\new -> Loop (new :: rest))
