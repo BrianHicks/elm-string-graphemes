@@ -20,11 +20,13 @@ for line in sys.stdin.read().split('\n'):
             'kind': 'range',
             'start': data['start'],
             'end': data['end'],
+            'comment': data['comment'],
         }
     else:
         out = {
             'kind': 'single',
             'codepoint': data['start'],
+            'comment': data['comment'],
         }
 
     SECTIONS[data['class']].append(out)
