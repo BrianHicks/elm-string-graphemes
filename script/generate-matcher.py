@@ -19,6 +19,13 @@ if class_ not in classes:
 
 out = []
 out.append('module {} exposing (chars, parser, match)'.format(module))
+
+out.append('{-| Hey, this module was generated automatically. Please don\'t edit it.')
+out.append('')
+out.append('Run `make {}` instead!'.format(args.destination))
+out.append('')
+out.append('-}')
+
 out.append('import Parser exposing (Parser)')
 out.append('import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)')
 out.append('import String.Segmentation.RangeSet.Range as Range')
