@@ -1,6 +1,7 @@
 module String.SegmentationSpec exposing (graphemesSpec)
 
 import Data.Control as Control
+import Data.Prepend as Prepend
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer)
 import String.Segmentation as Segmentation
@@ -21,12 +22,9 @@ graphemesSpec =
                         |> Expect.equal (Ok [ "\n", "\u{000D}" ])
             ]
         , describe "control characters"
-            [ fuzz2 controlCharacter controlCharacter "always form new segments" <|
-                \c1 c2 ->
-                    (c1 ++ c2)
-                        |> Segmentation.graphemes
-                        |> Expect.equal (Ok [ c1, c2 ])
-            ]
+            [ fuzz2 controlCharacter controlCharacter "always form new segments" expectSplit ]
+        , describe "prepend characters"
+            [ fuzz2 prependCharacter prependCharacter "always form new segments" expectSplit ]
         ]
 
 
@@ -35,8 +33,25 @@ expectIdentity s =
     Expect.equal (Ok [ s ]) (Segmentation.graphemes s)
 
 
-controlCharacter : Fuzzer String
-controlCharacter =
-    Control.chars
+expectSplit : String -> String -> Expectation
+expectSplit c1 c2 =
+    (c1 ++ c2)
+        |> Segmentation.graphemes
+        |> Expect.equal (Ok [ c1, c2 ])
+
+
+charsFuzzer : List Char -> Fuzzer String
+charsFuzzer chars =
+    chars
         |> List.map (Fuzz.constant << String.fromList << List.singleton)
         |> Fuzz.oneOf
+
+
+controlCharacter : Fuzzer String
+controlCharacter =
+    charsFuzzer Control.chars
+
+
+prependCharacter : Fuzzer String
+prependCharacter =
+    charsFuzzer Prepend.chars
