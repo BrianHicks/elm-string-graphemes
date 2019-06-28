@@ -1,4 +1,4 @@
-module String.Segmentation.Matchers.Extended_Pictographic exposing (match)
+module String.Segmentation.Extended_Pictographic exposing (match)
 
 
 match : Char -> Bool

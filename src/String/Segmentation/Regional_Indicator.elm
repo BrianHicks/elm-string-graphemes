@@ -1,4 +1,4 @@
-module String.Segmentation.Matchers.Regional_Indicator exposing (match)
+module String.Segmentation.Regional_Indicator exposing (match)
 
 
 match : Char -> Bool

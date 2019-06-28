@@ -1,4 +1,4 @@
-module String.Segmentation.Matchers.CR exposing (match)
+module String.Segmentation.CR exposing (match)
 
 
 match : Char -> Bool

@@ -1,4 +1,4 @@
-module String.Segmentation.Matchers.SpacingMark exposing (match)
+module String.Segmentation.SpacingMark exposing (match)
 
 
 match : Char -> Bool

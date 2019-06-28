@@ -1,4 +1,4 @@
-module String.Segmentation.Matchers.LF exposing (match)
+module String.Segmentation.ZWJ exposing (match)
 
 
 match : Char -> Bool
@@ -7,4 +7,4 @@ match char =
         c =
             Char.toCode char
     in
-    c == 10
+    c == 8205
