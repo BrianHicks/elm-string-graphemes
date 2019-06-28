@@ -22,6 +22,7 @@ in
       elmTools.elm-test
       git
       gnumake
+      nodePackages.uglify-js
       python37
     ];
   }

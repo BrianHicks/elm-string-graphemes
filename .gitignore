@@ -1,2 +1,5 @@
-/elm-stuff
 /data/GraphemeBreakProperty.json
+/elm-stuff
+/size-benchmarks/*.gz
+/size-benchmarks/*.js
+/size-benchmarks/elm-stuff
