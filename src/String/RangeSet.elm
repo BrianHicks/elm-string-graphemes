@@ -1,4 +1,4 @@
-module String.RangeSet exposing (RangeSet, fromList, insert, member)
+module String.RangeSet exposing (RangeSet, fromList, insert, member, toList)
 
 import String.RangeSet.Range as Range exposing (Range)
 
@@ -13,6 +13,16 @@ type RangeSet comparable
 fromList : List (Range comparable) -> RangeSet comparable
 fromList =
     List.foldl insert Empty
+
+
+toList : RangeSet comparable -> List (Range comparable)
+toList rangeSet =
+    case rangeSet of
+        Empty ->
+            []
+
+        Branch here lt gt ->
+            toList lt ++ (here :: toList gt)
 
 
 insert : Range comparable -> RangeSet comparable -> RangeSet comparable
