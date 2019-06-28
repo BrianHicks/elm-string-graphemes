@@ -1,4 +1,11 @@
-module String.Segmentation.Extended_Pictographic exposing (match)
+module String.Segmentation.Extended_Pictographic exposing (match, parser)
+
+import Parser exposing (Parser)
+
+
+parser : Parser ()
+parser =
+    Parser.chompIf match
 
 
 match : Char -> Bool

@@ -1,4 +1,11 @@
-module String.Segmentation.Prepend exposing (match)
+module String.Segmentation.Prepend exposing (match, parser)
+
+import Parser exposing (Parser)
+
+
+parser : Parser ()
+parser =
+    Parser.chompIf match
 
 
 match : Char -> Bool

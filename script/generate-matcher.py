@@ -18,7 +18,10 @@ if class_ not in classes:
     sys.exit(1)
 
 out = []
-out.append('module {} exposing (match)'.format(module))
+out.append('module {} exposing (match, parser)'.format(module))
+out.append('import Parser exposing (Parser)')
+out.append('parser : Parser ()')
+out.append('parser = Parser.chompIf match')
 out.append('match : Char -> Bool')
 out.append('match char =')
 out.append('    let c = Char.toCode char in')
