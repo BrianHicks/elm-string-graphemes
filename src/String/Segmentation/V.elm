@@ -1,4 +1,4 @@
-module String.Segmentation.V exposing (chars, parser)
+module String.Segmentation.V exposing (chars, match, parser)
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
@@ -7,7 +7,12 @@ import String.Segmentation.RangeSet.Range as Range
 
 parser : Parser ()
 parser =
-    Parser.chompIf (\c -> RangeSet.member c chars)
+    Parser.chompIf match
+
+
+match : Char -> Bool
+match c =
+    RangeSet.member c chars
 
 
 chars : RangeSet Char

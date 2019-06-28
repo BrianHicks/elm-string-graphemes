@@ -18,12 +18,16 @@ if class_ not in classes:
     sys.exit(1)
 
 out = []
-out.append('module {} exposing (chars, parser)'.format(module))
+out.append('module {} exposing (chars, parser, match)'.format(module))
 out.append('import Parser exposing (Parser)')
 out.append('import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)')
 out.append('import String.Segmentation.RangeSet.Range as Range')
+
 out.append('parser : Parser ()')
-out.append('parser = Parser.chompIf (\c -> RangeSet.member c chars)')
+out.append('parser = Parser.chompIf match')
+
+out.append('match : Char -> Bool')
+out.append('match c = RangeSet.member c chars')
 
 # CHARS
 
