@@ -18,13 +18,13 @@ for line in sys.stdin.read().split('\n'):
     if data['end'] is not None:
         out = {
             'kind': 'range',
-            'start': int(data['start'], 16),
-            'end': int(data['end'], 16),
+            'start': data['start'],
+            'end': data['end'],
         }
     else:
         out = {
             'kind': 'single',
-            'codepoint': int(data['start'], 16),
+            'codepoint': data['start'],
         }
 
     SECTIONS[data['class']].append(out)

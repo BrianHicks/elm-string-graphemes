@@ -14,4 +14,4 @@ match char =
         c =
             Char.toCode char
     in
-    c >= 127462 && c <= 127487
+    c >= 0x0001F1E6 && c <= 0x0001F1FF

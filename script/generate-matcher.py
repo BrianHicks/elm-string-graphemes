@@ -28,9 +28,9 @@ out.append('    let c = Char.toCode char in')
 
 for (i, match) in enumerate(classes[class_]):
     if match['kind'] == 'range':
-        code = '(c >= {} && c <= {})'.format(match['start'], match['end'])
+        code = '(c >= 0x{} && c <= 0x{})'.format(match['start'], match['end'])
     elif match['kind'] == 'single':
-        code = '(c == {})'.format(match['codepoint'])
+        code = '(c == 0x{})'.format(match['codepoint'])
     else:
         print("I don't know how to deal with a '{}' match!".format(match['kind']))
         sys.exit(1)

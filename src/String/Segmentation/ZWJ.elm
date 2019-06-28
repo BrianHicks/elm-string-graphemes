@@ -14,4 +14,4 @@ match char =
         c =
             Char.toCode char
     in
-    c == 8205
+    c == 0x200D

@@ -14,4 +14,4 @@ match char =
         c =
             Char.toCode char
     in
-    c == 10
+    c == 0x0A

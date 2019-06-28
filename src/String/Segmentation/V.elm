@@ -14,5 +14,5 @@ match char =
         c =
             Char.toCode char
     in
-    (c >= 4448 && c <= 4519)
-        || (c >= 55216 && c <= 55238)
+    (c >= 0x1160 && c <= 0x11A7)
+        || (c >= 0xD7B0 && c <= 0xD7C6)
