@@ -1,18 +1,17 @@
-module String.Segmentation.V exposing (match, parser)
+module String.Segmentation.V exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    (c >= 0x1160 && c <= 0x11A7)
-        || (c >= 0xD7B0 && c <= 0xD7C6)
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ List.map Char.fromCode (List.range 0x1160 0x11A7) -- Lo  [72] HANGUL JUNGSEONG FILLER..HANGUL JUNGSEONG O-YAE
+        , List.map Char.fromCode (List.range 0xD7B0 0xD7C6) -- Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
+        ]

@@ -1,415 +1,414 @@
-module String.Segmentation.LVT exposing (match, parser)
+module String.Segmentation.LVT exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    (c >= 0xAC01 && c <= 0xAC1B)
-        || (c >= 0xAC1D && c <= 0xAC37)
-        || (c >= 0xAC39 && c <= 0xAC53)
-        || (c >= 0xAC55 && c <= 0xAC6F)
-        || (c >= 0xAC71 && c <= 0xAC8B)
-        || (c >= 0xAC8D && c <= 0xACA7)
-        || (c >= 0xACA9 && c <= 0xACC3)
-        || (c >= 0xACC5 && c <= 0xACDF)
-        || (c >= 0xACE1 && c <= 0xACFB)
-        || (c >= 0xACFD && c <= 0xAD17)
-        || (c >= 0xAD19 && c <= 0xAD33)
-        || (c >= 0xAD35 && c <= 0xAD4F)
-        || (c >= 0xAD51 && c <= 0xAD6B)
-        || (c >= 0xAD6D && c <= 0xAD87)
-        || (c >= 0xAD89 && c <= 0xADA3)
-        || (c >= 0xADA5 && c <= 0xADBF)
-        || (c >= 0xADC1 && c <= 0xADDB)
-        || (c >= 0xADDD && c <= 0xADF7)
-        || (c >= 0xADF9 && c <= 0xAE13)
-        || (c >= 0xAE15 && c <= 0xAE2F)
-        || (c >= 0xAE31 && c <= 0xAE4B)
-        || (c >= 0xAE4D && c <= 0xAE67)
-        || (c >= 0xAE69 && c <= 0xAE83)
-        || (c >= 0xAE85 && c <= 0xAE9F)
-        || (c >= 0xAEA1 && c <= 0xAEBB)
-        || (c >= 0xAEBD && c <= 0xAED7)
-        || (c >= 0xAED9 && c <= 0xAEF3)
-        || (c >= 0xAEF5 && c <= 0xAF0F)
-        || (c >= 0xAF11 && c <= 0xAF2B)
-        || (c >= 0xAF2D && c <= 0xAF47)
-        || (c >= 0xAF49 && c <= 0xAF63)
-        || (c >= 0xAF65 && c <= 0xAF7F)
-        || (c >= 0xAF81 && c <= 0xAF9B)
-        || (c >= 0xAF9D && c <= 0xAFB7)
-        || (c >= 0xAFB9 && c <= 0xAFD3)
-        || (c >= 0xAFD5 && c <= 0xAFEF)
-        || (c >= 0xAFF1 && c <= 0xB00B)
-        || (c >= 0xB00D && c <= 0xB027)
-        || (c >= 0xB029 && c <= 0xB043)
-        || (c >= 0xB045 && c <= 0xB05F)
-        || (c >= 0xB061 && c <= 0xB07B)
-        || (c >= 0xB07D && c <= 0xB097)
-        || (c >= 0xB099 && c <= 0xB0B3)
-        || (c >= 0xB0B5 && c <= 0xB0CF)
-        || (c >= 0xB0D1 && c <= 0xB0EB)
-        || (c >= 0xB0ED && c <= 0xB107)
-        || (c >= 0xB109 && c <= 0xB123)
-        || (c >= 0xB125 && c <= 0xB13F)
-        || (c >= 0xB141 && c <= 0xB15B)
-        || (c >= 0xB15D && c <= 0xB177)
-        || (c >= 0xB179 && c <= 0xB193)
-        || (c >= 0xB195 && c <= 0xB1AF)
-        || (c >= 0xB1B1 && c <= 0xB1CB)
-        || (c >= 0xB1CD && c <= 0xB1E7)
-        || (c >= 0xB1E9 && c <= 0xB203)
-        || (c >= 0xB205 && c <= 0xB21F)
-        || (c >= 0xB221 && c <= 0xB23B)
-        || (c >= 0xB23D && c <= 0xB257)
-        || (c >= 0xB259 && c <= 0xB273)
-        || (c >= 0xB275 && c <= 0xB28F)
-        || (c >= 0xB291 && c <= 0xB2AB)
-        || (c >= 0xB2AD && c <= 0xB2C7)
-        || (c >= 0xB2C9 && c <= 0xB2E3)
-        || (c >= 0xB2E5 && c <= 0xB2FF)
-        || (c >= 0xB301 && c <= 0xB31B)
-        || (c >= 0xB31D && c <= 0xB337)
-        || (c >= 0xB339 && c <= 0xB353)
-        || (c >= 0xB355 && c <= 0xB36F)
-        || (c >= 0xB371 && c <= 0xB38B)
-        || (c >= 0xB38D && c <= 0xB3A7)
-        || (c >= 0xB3A9 && c <= 0xB3C3)
-        || (c >= 0xB3C5 && c <= 0xB3DF)
-        || (c >= 0xB3E1 && c <= 0xB3FB)
-        || (c >= 0xB3FD && c <= 0xB417)
-        || (c >= 0xB419 && c <= 0xB433)
-        || (c >= 0xB435 && c <= 0xB44F)
-        || (c >= 0xB451 && c <= 0xB46B)
-        || (c >= 0xB46D && c <= 0xB487)
-        || (c >= 0xB489 && c <= 0xB4A3)
-        || (c >= 0xB4A5 && c <= 0xB4BF)
-        || (c >= 0xB4C1 && c <= 0xB4DB)
-        || (c >= 0xB4DD && c <= 0xB4F7)
-        || (c >= 0xB4F9 && c <= 0xB513)
-        || (c >= 0xB515 && c <= 0xB52F)
-        || (c >= 0xB531 && c <= 0xB54B)
-        || (c >= 0xB54D && c <= 0xB567)
-        || (c >= 0xB569 && c <= 0xB583)
-        || (c >= 0xB585 && c <= 0xB59F)
-        || (c >= 0xB5A1 && c <= 0xB5BB)
-        || (c >= 0xB5BD && c <= 0xB5D7)
-        || (c >= 0xB5D9 && c <= 0xB5F3)
-        || (c >= 0xB5F5 && c <= 0xB60F)
-        || (c >= 0xB611 && c <= 0xB62B)
-        || (c >= 0xB62D && c <= 0xB647)
-        || (c >= 0xB649 && c <= 0xB663)
-        || (c >= 0xB665 && c <= 0xB67F)
-        || (c >= 0xB681 && c <= 0xB69B)
-        || (c >= 0xB69D && c <= 0xB6B7)
-        || (c >= 0xB6B9 && c <= 0xB6D3)
-        || (c >= 0xB6D5 && c <= 0xB6EF)
-        || (c >= 0xB6F1 && c <= 0xB70B)
-        || (c >= 0xB70D && c <= 0xB727)
-        || (c >= 0xB729 && c <= 0xB743)
-        || (c >= 0xB745 && c <= 0xB75F)
-        || (c >= 0xB761 && c <= 0xB77B)
-        || (c >= 0xB77D && c <= 0xB797)
-        || (c >= 0xB799 && c <= 0xB7B3)
-        || (c >= 0xB7B5 && c <= 0xB7CF)
-        || (c >= 0xB7D1 && c <= 0xB7EB)
-        || (c >= 0xB7ED && c <= 0xB807)
-        || (c >= 0xB809 && c <= 0xB823)
-        || (c >= 0xB825 && c <= 0xB83F)
-        || (c >= 0xB841 && c <= 0xB85B)
-        || (c >= 0xB85D && c <= 0xB877)
-        || (c >= 0xB879 && c <= 0xB893)
-        || (c >= 0xB895 && c <= 0xB8AF)
-        || (c >= 0xB8B1 && c <= 0xB8CB)
-        || (c >= 0xB8CD && c <= 0xB8E7)
-        || (c >= 0xB8E9 && c <= 0xB903)
-        || (c >= 0xB905 && c <= 0xB91F)
-        || (c >= 0xB921 && c <= 0xB93B)
-        || (c >= 0xB93D && c <= 0xB957)
-        || (c >= 0xB959 && c <= 0xB973)
-        || (c >= 0xB975 && c <= 0xB98F)
-        || (c >= 0xB991 && c <= 0xB9AB)
-        || (c >= 0xB9AD && c <= 0xB9C7)
-        || (c >= 0xB9C9 && c <= 0xB9E3)
-        || (c >= 0xB9E5 && c <= 0xB9FF)
-        || (c >= 0xBA01 && c <= 0xBA1B)
-        || (c >= 0xBA1D && c <= 0xBA37)
-        || (c >= 0xBA39 && c <= 0xBA53)
-        || (c >= 0xBA55 && c <= 0xBA6F)
-        || (c >= 0xBA71 && c <= 0xBA8B)
-        || (c >= 0xBA8D && c <= 0xBAA7)
-        || (c >= 0xBAA9 && c <= 0xBAC3)
-        || (c >= 0xBAC5 && c <= 0xBADF)
-        || (c >= 0xBAE1 && c <= 0xBAFB)
-        || (c >= 0xBAFD && c <= 0xBB17)
-        || (c >= 0xBB19 && c <= 0xBB33)
-        || (c >= 0xBB35 && c <= 0xBB4F)
-        || (c >= 0xBB51 && c <= 0xBB6B)
-        || (c >= 0xBB6D && c <= 0xBB87)
-        || (c >= 0xBB89 && c <= 0xBBA3)
-        || (c >= 0xBBA5 && c <= 0xBBBF)
-        || (c >= 0xBBC1 && c <= 0xBBDB)
-        || (c >= 0xBBDD && c <= 0xBBF7)
-        || (c >= 0xBBF9 && c <= 0xBC13)
-        || (c >= 0xBC15 && c <= 0xBC2F)
-        || (c >= 0xBC31 && c <= 0xBC4B)
-        || (c >= 0xBC4D && c <= 0xBC67)
-        || (c >= 0xBC69 && c <= 0xBC83)
-        || (c >= 0xBC85 && c <= 0xBC9F)
-        || (c >= 0xBCA1 && c <= 0xBCBB)
-        || (c >= 0xBCBD && c <= 0xBCD7)
-        || (c >= 0xBCD9 && c <= 0xBCF3)
-        || (c >= 0xBCF5 && c <= 0xBD0F)
-        || (c >= 0xBD11 && c <= 0xBD2B)
-        || (c >= 0xBD2D && c <= 0xBD47)
-        || (c >= 0xBD49 && c <= 0xBD63)
-        || (c >= 0xBD65 && c <= 0xBD7F)
-        || (c >= 0xBD81 && c <= 0xBD9B)
-        || (c >= 0xBD9D && c <= 0xBDB7)
-        || (c >= 0xBDB9 && c <= 0xBDD3)
-        || (c >= 0xBDD5 && c <= 0xBDEF)
-        || (c >= 0xBDF1 && c <= 0xBE0B)
-        || (c >= 0xBE0D && c <= 0xBE27)
-        || (c >= 0xBE29 && c <= 0xBE43)
-        || (c >= 0xBE45 && c <= 0xBE5F)
-        || (c >= 0xBE61 && c <= 0xBE7B)
-        || (c >= 0xBE7D && c <= 0xBE97)
-        || (c >= 0xBE99 && c <= 0xBEB3)
-        || (c >= 0xBEB5 && c <= 0xBECF)
-        || (c >= 0xBED1 && c <= 0xBEEB)
-        || (c >= 0xBEED && c <= 0xBF07)
-        || (c >= 0xBF09 && c <= 0xBF23)
-        || (c >= 0xBF25 && c <= 0xBF3F)
-        || (c >= 0xBF41 && c <= 0xBF5B)
-        || (c >= 0xBF5D && c <= 0xBF77)
-        || (c >= 0xBF79 && c <= 0xBF93)
-        || (c >= 0xBF95 && c <= 0xBFAF)
-        || (c >= 0xBFB1 && c <= 0xBFCB)
-        || (c >= 0xBFCD && c <= 0xBFE7)
-        || (c >= 0xBFE9 && c <= 0xC003)
-        || (c >= 0xC005 && c <= 0xC01F)
-        || (c >= 0xC021 && c <= 0xC03B)
-        || (c >= 0xC03D && c <= 0xC057)
-        || (c >= 0xC059 && c <= 0xC073)
-        || (c >= 0xC075 && c <= 0xC08F)
-        || (c >= 0xC091 && c <= 0xC0AB)
-        || (c >= 0xC0AD && c <= 0xC0C7)
-        || (c >= 0xC0C9 && c <= 0xC0E3)
-        || (c >= 0xC0E5 && c <= 0xC0FF)
-        || (c >= 0xC101 && c <= 0xC11B)
-        || (c >= 0xC11D && c <= 0xC137)
-        || (c >= 0xC139 && c <= 0xC153)
-        || (c >= 0xC155 && c <= 0xC16F)
-        || (c >= 0xC171 && c <= 0xC18B)
-        || (c >= 0xC18D && c <= 0xC1A7)
-        || (c >= 0xC1A9 && c <= 0xC1C3)
-        || (c >= 0xC1C5 && c <= 0xC1DF)
-        || (c >= 0xC1E1 && c <= 0xC1FB)
-        || (c >= 0xC1FD && c <= 0xC217)
-        || (c >= 0xC219 && c <= 0xC233)
-        || (c >= 0xC235 && c <= 0xC24F)
-        || (c >= 0xC251 && c <= 0xC26B)
-        || (c >= 0xC26D && c <= 0xC287)
-        || (c >= 0xC289 && c <= 0xC2A3)
-        || (c >= 0xC2A5 && c <= 0xC2BF)
-        || (c >= 0xC2C1 && c <= 0xC2DB)
-        || (c >= 0xC2DD && c <= 0xC2F7)
-        || (c >= 0xC2F9 && c <= 0xC313)
-        || (c >= 0xC315 && c <= 0xC32F)
-        || (c >= 0xC331 && c <= 0xC34B)
-        || (c >= 0xC34D && c <= 0xC367)
-        || (c >= 0xC369 && c <= 0xC383)
-        || (c >= 0xC385 && c <= 0xC39F)
-        || (c >= 0xC3A1 && c <= 0xC3BB)
-        || (c >= 0xC3BD && c <= 0xC3D7)
-        || (c >= 0xC3D9 && c <= 0xC3F3)
-        || (c >= 0xC3F5 && c <= 0xC40F)
-        || (c >= 0xC411 && c <= 0xC42B)
-        || (c >= 0xC42D && c <= 0xC447)
-        || (c >= 0xC449 && c <= 0xC463)
-        || (c >= 0xC465 && c <= 0xC47F)
-        || (c >= 0xC481 && c <= 0xC49B)
-        || (c >= 0xC49D && c <= 0xC4B7)
-        || (c >= 0xC4B9 && c <= 0xC4D3)
-        || (c >= 0xC4D5 && c <= 0xC4EF)
-        || (c >= 0xC4F1 && c <= 0xC50B)
-        || (c >= 0xC50D && c <= 0xC527)
-        || (c >= 0xC529 && c <= 0xC543)
-        || (c >= 0xC545 && c <= 0xC55F)
-        || (c >= 0xC561 && c <= 0xC57B)
-        || (c >= 0xC57D && c <= 0xC597)
-        || (c >= 0xC599 && c <= 0xC5B3)
-        || (c >= 0xC5B5 && c <= 0xC5CF)
-        || (c >= 0xC5D1 && c <= 0xC5EB)
-        || (c >= 0xC5ED && c <= 0xC607)
-        || (c >= 0xC609 && c <= 0xC623)
-        || (c >= 0xC625 && c <= 0xC63F)
-        || (c >= 0xC641 && c <= 0xC65B)
-        || (c >= 0xC65D && c <= 0xC677)
-        || (c >= 0xC679 && c <= 0xC693)
-        || (c >= 0xC695 && c <= 0xC6AF)
-        || (c >= 0xC6B1 && c <= 0xC6CB)
-        || (c >= 0xC6CD && c <= 0xC6E7)
-        || (c >= 0xC6E9 && c <= 0xC703)
-        || (c >= 0xC705 && c <= 0xC71F)
-        || (c >= 0xC721 && c <= 0xC73B)
-        || (c >= 0xC73D && c <= 0xC757)
-        || (c >= 0xC759 && c <= 0xC773)
-        || (c >= 0xC775 && c <= 0xC78F)
-        || (c >= 0xC791 && c <= 0xC7AB)
-        || (c >= 0xC7AD && c <= 0xC7C7)
-        || (c >= 0xC7C9 && c <= 0xC7E3)
-        || (c >= 0xC7E5 && c <= 0xC7FF)
-        || (c >= 0xC801 && c <= 0xC81B)
-        || (c >= 0xC81D && c <= 0xC837)
-        || (c >= 0xC839 && c <= 0xC853)
-        || (c >= 0xC855 && c <= 0xC86F)
-        || (c >= 0xC871 && c <= 0xC88B)
-        || (c >= 0xC88D && c <= 0xC8A7)
-        || (c >= 0xC8A9 && c <= 0xC8C3)
-        || (c >= 0xC8C5 && c <= 0xC8DF)
-        || (c >= 0xC8E1 && c <= 0xC8FB)
-        || (c >= 0xC8FD && c <= 0xC917)
-        || (c >= 0xC919 && c <= 0xC933)
-        || (c >= 0xC935 && c <= 0xC94F)
-        || (c >= 0xC951 && c <= 0xC96B)
-        || (c >= 0xC96D && c <= 0xC987)
-        || (c >= 0xC989 && c <= 0xC9A3)
-        || (c >= 0xC9A5 && c <= 0xC9BF)
-        || (c >= 0xC9C1 && c <= 0xC9DB)
-        || (c >= 0xC9DD && c <= 0xC9F7)
-        || (c >= 0xC9F9 && c <= 0xCA13)
-        || (c >= 0xCA15 && c <= 0xCA2F)
-        || (c >= 0xCA31 && c <= 0xCA4B)
-        || (c >= 0xCA4D && c <= 0xCA67)
-        || (c >= 0xCA69 && c <= 0xCA83)
-        || (c >= 0xCA85 && c <= 0xCA9F)
-        || (c >= 0xCAA1 && c <= 0xCABB)
-        || (c >= 0xCABD && c <= 0xCAD7)
-        || (c >= 0xCAD9 && c <= 0xCAF3)
-        || (c >= 0xCAF5 && c <= 0xCB0F)
-        || (c >= 0xCB11 && c <= 0xCB2B)
-        || (c >= 0xCB2D && c <= 0xCB47)
-        || (c >= 0xCB49 && c <= 0xCB63)
-        || (c >= 0xCB65 && c <= 0xCB7F)
-        || (c >= 0xCB81 && c <= 0xCB9B)
-        || (c >= 0xCB9D && c <= 0xCBB7)
-        || (c >= 0xCBB9 && c <= 0xCBD3)
-        || (c >= 0xCBD5 && c <= 0xCBEF)
-        || (c >= 0xCBF1 && c <= 0xCC0B)
-        || (c >= 0xCC0D && c <= 0xCC27)
-        || (c >= 0xCC29 && c <= 0xCC43)
-        || (c >= 0xCC45 && c <= 0xCC5F)
-        || (c >= 0xCC61 && c <= 0xCC7B)
-        || (c >= 0xCC7D && c <= 0xCC97)
-        || (c >= 0xCC99 && c <= 0xCCB3)
-        || (c >= 0xCCB5 && c <= 0xCCCF)
-        || (c >= 0xCCD1 && c <= 0xCCEB)
-        || (c >= 0xCCED && c <= 0xCD07)
-        || (c >= 0xCD09 && c <= 0xCD23)
-        || (c >= 0xCD25 && c <= 0xCD3F)
-        || (c >= 0xCD41 && c <= 0xCD5B)
-        || (c >= 0xCD5D && c <= 0xCD77)
-        || (c >= 0xCD79 && c <= 0xCD93)
-        || (c >= 0xCD95 && c <= 0xCDAF)
-        || (c >= 0xCDB1 && c <= 0xCDCB)
-        || (c >= 0xCDCD && c <= 0xCDE7)
-        || (c >= 0xCDE9 && c <= 0xCE03)
-        || (c >= 0xCE05 && c <= 0xCE1F)
-        || (c >= 0xCE21 && c <= 0xCE3B)
-        || (c >= 0xCE3D && c <= 0xCE57)
-        || (c >= 0xCE59 && c <= 0xCE73)
-        || (c >= 0xCE75 && c <= 0xCE8F)
-        || (c >= 0xCE91 && c <= 0xCEAB)
-        || (c >= 0xCEAD && c <= 0xCEC7)
-        || (c >= 0xCEC9 && c <= 0xCEE3)
-        || (c >= 0xCEE5 && c <= 0xCEFF)
-        || (c >= 0xCF01 && c <= 0xCF1B)
-        || (c >= 0xCF1D && c <= 0xCF37)
-        || (c >= 0xCF39 && c <= 0xCF53)
-        || (c >= 0xCF55 && c <= 0xCF6F)
-        || (c >= 0xCF71 && c <= 0xCF8B)
-        || (c >= 0xCF8D && c <= 0xCFA7)
-        || (c >= 0xCFA9 && c <= 0xCFC3)
-        || (c >= 0xCFC5 && c <= 0xCFDF)
-        || (c >= 0xCFE1 && c <= 0xCFFB)
-        || (c >= 0xCFFD && c <= 0xD017)
-        || (c >= 0xD019 && c <= 0xD033)
-        || (c >= 0xD035 && c <= 0xD04F)
-        || (c >= 0xD051 && c <= 0xD06B)
-        || (c >= 0xD06D && c <= 0xD087)
-        || (c >= 0xD089 && c <= 0xD0A3)
-        || (c >= 0xD0A5 && c <= 0xD0BF)
-        || (c >= 0xD0C1 && c <= 0xD0DB)
-        || (c >= 0xD0DD && c <= 0xD0F7)
-        || (c >= 0xD0F9 && c <= 0xD113)
-        || (c >= 0xD115 && c <= 0xD12F)
-        || (c >= 0xD131 && c <= 0xD14B)
-        || (c >= 0xD14D && c <= 0xD167)
-        || (c >= 0xD169 && c <= 0xD183)
-        || (c >= 0xD185 && c <= 0xD19F)
-        || (c >= 0xD1A1 && c <= 0xD1BB)
-        || (c >= 0xD1BD && c <= 0xD1D7)
-        || (c >= 0xD1D9 && c <= 0xD1F3)
-        || (c >= 0xD1F5 && c <= 0xD20F)
-        || (c >= 0xD211 && c <= 0xD22B)
-        || (c >= 0xD22D && c <= 0xD247)
-        || (c >= 0xD249 && c <= 0xD263)
-        || (c >= 0xD265 && c <= 0xD27F)
-        || (c >= 0xD281 && c <= 0xD29B)
-        || (c >= 0xD29D && c <= 0xD2B7)
-        || (c >= 0xD2B9 && c <= 0xD2D3)
-        || (c >= 0xD2D5 && c <= 0xD2EF)
-        || (c >= 0xD2F1 && c <= 0xD30B)
-        || (c >= 0xD30D && c <= 0xD327)
-        || (c >= 0xD329 && c <= 0xD343)
-        || (c >= 0xD345 && c <= 0xD35F)
-        || (c >= 0xD361 && c <= 0xD37B)
-        || (c >= 0xD37D && c <= 0xD397)
-        || (c >= 0xD399 && c <= 0xD3B3)
-        || (c >= 0xD3B5 && c <= 0xD3CF)
-        || (c >= 0xD3D1 && c <= 0xD3EB)
-        || (c >= 0xD3ED && c <= 0xD407)
-        || (c >= 0xD409 && c <= 0xD423)
-        || (c >= 0xD425 && c <= 0xD43F)
-        || (c >= 0xD441 && c <= 0xD45B)
-        || (c >= 0xD45D && c <= 0xD477)
-        || (c >= 0xD479 && c <= 0xD493)
-        || (c >= 0xD495 && c <= 0xD4AF)
-        || (c >= 0xD4B1 && c <= 0xD4CB)
-        || (c >= 0xD4CD && c <= 0xD4E7)
-        || (c >= 0xD4E9 && c <= 0xD503)
-        || (c >= 0xD505 && c <= 0xD51F)
-        || (c >= 0xD521 && c <= 0xD53B)
-        || (c >= 0xD53D && c <= 0xD557)
-        || (c >= 0xD559 && c <= 0xD573)
-        || (c >= 0xD575 && c <= 0xD58F)
-        || (c >= 0xD591 && c <= 0xD5AB)
-        || (c >= 0xD5AD && c <= 0xD5C7)
-        || (c >= 0xD5C9 && c <= 0xD5E3)
-        || (c >= 0xD5E5 && c <= 0xD5FF)
-        || (c >= 0xD601 && c <= 0xD61B)
-        || (c >= 0xD61D && c <= 0xD637)
-        || (c >= 0xD639 && c <= 0xD653)
-        || (c >= 0xD655 && c <= 0xD66F)
-        || (c >= 0xD671 && c <= 0xD68B)
-        || (c >= 0xD68D && c <= 0xD6A7)
-        || (c >= 0xD6A9 && c <= 0xD6C3)
-        || (c >= 0xD6C5 && c <= 0xD6DF)
-        || (c >= 0xD6E1 && c <= 0xD6FB)
-        || (c >= 0xD6FD && c <= 0xD717)
-        || (c >= 0xD719 && c <= 0xD733)
-        || (c >= 0xD735 && c <= 0xD74F)
-        || (c >= 0xD751 && c <= 0xD76B)
-        || (c >= 0xD76D && c <= 0xD787)
-        || (c >= 0xD789 && c <= 0xD7A3)
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ List.map Char.fromCode (List.range 0xAC01 0xAC1B) -- Lo  [27] HANGUL SYLLABLE GAG..HANGUL SYLLABLE GAH
+        , List.map Char.fromCode (List.range 0xAC1D 0xAC37) -- Lo  [27] HANGUL SYLLABLE GAEG..HANGUL SYLLABLE GAEH
+        , List.map Char.fromCode (List.range 0xAC39 0xAC53) -- Lo  [27] HANGUL SYLLABLE GYAG..HANGUL SYLLABLE GYAH
+        , List.map Char.fromCode (List.range 0xAC55 0xAC6F) -- Lo  [27] HANGUL SYLLABLE GYAEG..HANGUL SYLLABLE GYAEH
+        , List.map Char.fromCode (List.range 0xAC71 0xAC8B) -- Lo  [27] HANGUL SYLLABLE GEOG..HANGUL SYLLABLE GEOH
+        , List.map Char.fromCode (List.range 0xAC8D 0xACA7) -- Lo  [27] HANGUL SYLLABLE GEG..HANGUL SYLLABLE GEH
+        , List.map Char.fromCode (List.range 0xACA9 0xACC3) -- Lo  [27] HANGUL SYLLABLE GYEOG..HANGUL SYLLABLE GYEOH
+        , List.map Char.fromCode (List.range 0xACC5 0xACDF) -- Lo  [27] HANGUL SYLLABLE GYEG..HANGUL SYLLABLE GYEH
+        , List.map Char.fromCode (List.range 0xACE1 0xACFB) -- Lo  [27] HANGUL SYLLABLE GOG..HANGUL SYLLABLE GOH
+        , List.map Char.fromCode (List.range 0xACFD 0xAD17) -- Lo  [27] HANGUL SYLLABLE GWAG..HANGUL SYLLABLE GWAH
+        , List.map Char.fromCode (List.range 0xAD19 0xAD33) -- Lo  [27] HANGUL SYLLABLE GWAEG..HANGUL SYLLABLE GWAEH
+        , List.map Char.fromCode (List.range 0xAD35 0xAD4F) -- Lo  [27] HANGUL SYLLABLE GOEG..HANGUL SYLLABLE GOEH
+        , List.map Char.fromCode (List.range 0xAD51 0xAD6B) -- Lo  [27] HANGUL SYLLABLE GYOG..HANGUL SYLLABLE GYOH
+        , List.map Char.fromCode (List.range 0xAD6D 0xAD87) -- Lo  [27] HANGUL SYLLABLE GUG..HANGUL SYLLABLE GUH
+        , List.map Char.fromCode (List.range 0xAD89 0xADA3) -- Lo  [27] HANGUL SYLLABLE GWEOG..HANGUL SYLLABLE GWEOH
+        , List.map Char.fromCode (List.range 0xADA5 0xADBF) -- Lo  [27] HANGUL SYLLABLE GWEG..HANGUL SYLLABLE GWEH
+        , List.map Char.fromCode (List.range 0xADC1 0xADDB) -- Lo  [27] HANGUL SYLLABLE GWIG..HANGUL SYLLABLE GWIH
+        , List.map Char.fromCode (List.range 0xADDD 0xADF7) -- Lo  [27] HANGUL SYLLABLE GYUG..HANGUL SYLLABLE GYUH
+        , List.map Char.fromCode (List.range 0xADF9 0xAE13) -- Lo  [27] HANGUL SYLLABLE GEUG..HANGUL SYLLABLE GEUH
+        , List.map Char.fromCode (List.range 0xAE15 0xAE2F) -- Lo  [27] HANGUL SYLLABLE GYIG..HANGUL SYLLABLE GYIH
+        , List.map Char.fromCode (List.range 0xAE31 0xAE4B) -- Lo  [27] HANGUL SYLLABLE GIG..HANGUL SYLLABLE GIH
+        , List.map Char.fromCode (List.range 0xAE4D 0xAE67) -- Lo  [27] HANGUL SYLLABLE GGAG..HANGUL SYLLABLE GGAH
+        , List.map Char.fromCode (List.range 0xAE69 0xAE83) -- Lo  [27] HANGUL SYLLABLE GGAEG..HANGUL SYLLABLE GGAEH
+        , List.map Char.fromCode (List.range 0xAE85 0xAE9F) -- Lo  [27] HANGUL SYLLABLE GGYAG..HANGUL SYLLABLE GGYAH
+        , List.map Char.fromCode (List.range 0xAEA1 0xAEBB) -- Lo  [27] HANGUL SYLLABLE GGYAEG..HANGUL SYLLABLE GGYAEH
+        , List.map Char.fromCode (List.range 0xAEBD 0xAED7) -- Lo  [27] HANGUL SYLLABLE GGEOG..HANGUL SYLLABLE GGEOH
+        , List.map Char.fromCode (List.range 0xAED9 0xAEF3) -- Lo  [27] HANGUL SYLLABLE GGEG..HANGUL SYLLABLE GGEH
+        , List.map Char.fromCode (List.range 0xAEF5 0xAF0F) -- Lo  [27] HANGUL SYLLABLE GGYEOG..HANGUL SYLLABLE GGYEOH
+        , List.map Char.fromCode (List.range 0xAF11 0xAF2B) -- Lo  [27] HANGUL SYLLABLE GGYEG..HANGUL SYLLABLE GGYEH
+        , List.map Char.fromCode (List.range 0xAF2D 0xAF47) -- Lo  [27] HANGUL SYLLABLE GGOG..HANGUL SYLLABLE GGOH
+        , List.map Char.fromCode (List.range 0xAF49 0xAF63) -- Lo  [27] HANGUL SYLLABLE GGWAG..HANGUL SYLLABLE GGWAH
+        , List.map Char.fromCode (List.range 0xAF65 0xAF7F) -- Lo  [27] HANGUL SYLLABLE GGWAEG..HANGUL SYLLABLE GGWAEH
+        , List.map Char.fromCode (List.range 0xAF81 0xAF9B) -- Lo  [27] HANGUL SYLLABLE GGOEG..HANGUL SYLLABLE GGOEH
+        , List.map Char.fromCode (List.range 0xAF9D 0xAFB7) -- Lo  [27] HANGUL SYLLABLE GGYOG..HANGUL SYLLABLE GGYOH
+        , List.map Char.fromCode (List.range 0xAFB9 0xAFD3) -- Lo  [27] HANGUL SYLLABLE GGUG..HANGUL SYLLABLE GGUH
+        , List.map Char.fromCode (List.range 0xAFD5 0xAFEF) -- Lo  [27] HANGUL SYLLABLE GGWEOG..HANGUL SYLLABLE GGWEOH
+        , List.map Char.fromCode (List.range 0xAFF1 0xB00B) -- Lo  [27] HANGUL SYLLABLE GGWEG..HANGUL SYLLABLE GGWEH
+        , List.map Char.fromCode (List.range 0xB00D 0xB027) -- Lo  [27] HANGUL SYLLABLE GGWIG..HANGUL SYLLABLE GGWIH
+        , List.map Char.fromCode (List.range 0xB029 0xB043) -- Lo  [27] HANGUL SYLLABLE GGYUG..HANGUL SYLLABLE GGYUH
+        , List.map Char.fromCode (List.range 0xB045 0xB05F) -- Lo  [27] HANGUL SYLLABLE GGEUG..HANGUL SYLLABLE GGEUH
+        , List.map Char.fromCode (List.range 0xB061 0xB07B) -- Lo  [27] HANGUL SYLLABLE GGYIG..HANGUL SYLLABLE GGYIH
+        , List.map Char.fromCode (List.range 0xB07D 0xB097) -- Lo  [27] HANGUL SYLLABLE GGIG..HANGUL SYLLABLE GGIH
+        , List.map Char.fromCode (List.range 0xB099 0xB0B3) -- Lo  [27] HANGUL SYLLABLE NAG..HANGUL SYLLABLE NAH
+        , List.map Char.fromCode (List.range 0xB0B5 0xB0CF) -- Lo  [27] HANGUL SYLLABLE NAEG..HANGUL SYLLABLE NAEH
+        , List.map Char.fromCode (List.range 0xB0D1 0xB0EB) -- Lo  [27] HANGUL SYLLABLE NYAG..HANGUL SYLLABLE NYAH
+        , List.map Char.fromCode (List.range 0xB0ED 0xB107) -- Lo  [27] HANGUL SYLLABLE NYAEG..HANGUL SYLLABLE NYAEH
+        , List.map Char.fromCode (List.range 0xB109 0xB123) -- Lo  [27] HANGUL SYLLABLE NEOG..HANGUL SYLLABLE NEOH
+        , List.map Char.fromCode (List.range 0xB125 0xB13F) -- Lo  [27] HANGUL SYLLABLE NEG..HANGUL SYLLABLE NEH
+        , List.map Char.fromCode (List.range 0xB141 0xB15B) -- Lo  [27] HANGUL SYLLABLE NYEOG..HANGUL SYLLABLE NYEOH
+        , List.map Char.fromCode (List.range 0xB15D 0xB177) -- Lo  [27] HANGUL SYLLABLE NYEG..HANGUL SYLLABLE NYEH
+        , List.map Char.fromCode (List.range 0xB179 0xB193) -- Lo  [27] HANGUL SYLLABLE NOG..HANGUL SYLLABLE NOH
+        , List.map Char.fromCode (List.range 0xB195 0xB1AF) -- Lo  [27] HANGUL SYLLABLE NWAG..HANGUL SYLLABLE NWAH
+        , List.map Char.fromCode (List.range 0xB1B1 0xB1CB) -- Lo  [27] HANGUL SYLLABLE NWAEG..HANGUL SYLLABLE NWAEH
+        , List.map Char.fromCode (List.range 0xB1CD 0xB1E7) -- Lo  [27] HANGUL SYLLABLE NOEG..HANGUL SYLLABLE NOEH
+        , List.map Char.fromCode (List.range 0xB1E9 0xB203) -- Lo  [27] HANGUL SYLLABLE NYOG..HANGUL SYLLABLE NYOH
+        , List.map Char.fromCode (List.range 0xB205 0xB21F) -- Lo  [27] HANGUL SYLLABLE NUG..HANGUL SYLLABLE NUH
+        , List.map Char.fromCode (List.range 0xB221 0xB23B) -- Lo  [27] HANGUL SYLLABLE NWEOG..HANGUL SYLLABLE NWEOH
+        , List.map Char.fromCode (List.range 0xB23D 0xB257) -- Lo  [27] HANGUL SYLLABLE NWEG..HANGUL SYLLABLE NWEH
+        , List.map Char.fromCode (List.range 0xB259 0xB273) -- Lo  [27] HANGUL SYLLABLE NWIG..HANGUL SYLLABLE NWIH
+        , List.map Char.fromCode (List.range 0xB275 0xB28F) -- Lo  [27] HANGUL SYLLABLE NYUG..HANGUL SYLLABLE NYUH
+        , List.map Char.fromCode (List.range 0xB291 0xB2AB) -- Lo  [27] HANGUL SYLLABLE NEUG..HANGUL SYLLABLE NEUH
+        , List.map Char.fromCode (List.range 0xB2AD 0xB2C7) -- Lo  [27] HANGUL SYLLABLE NYIG..HANGUL SYLLABLE NYIH
+        , List.map Char.fromCode (List.range 0xB2C9 0xB2E3) -- Lo  [27] HANGUL SYLLABLE NIG..HANGUL SYLLABLE NIH
+        , List.map Char.fromCode (List.range 0xB2E5 0xB2FF) -- Lo  [27] HANGUL SYLLABLE DAG..HANGUL SYLLABLE DAH
+        , List.map Char.fromCode (List.range 0xB301 0xB31B) -- Lo  [27] HANGUL SYLLABLE DAEG..HANGUL SYLLABLE DAEH
+        , List.map Char.fromCode (List.range 0xB31D 0xB337) -- Lo  [27] HANGUL SYLLABLE DYAG..HANGUL SYLLABLE DYAH
+        , List.map Char.fromCode (List.range 0xB339 0xB353) -- Lo  [27] HANGUL SYLLABLE DYAEG..HANGUL SYLLABLE DYAEH
+        , List.map Char.fromCode (List.range 0xB355 0xB36F) -- Lo  [27] HANGUL SYLLABLE DEOG..HANGUL SYLLABLE DEOH
+        , List.map Char.fromCode (List.range 0xB371 0xB38B) -- Lo  [27] HANGUL SYLLABLE DEG..HANGUL SYLLABLE DEH
+        , List.map Char.fromCode (List.range 0xB38D 0xB3A7) -- Lo  [27] HANGUL SYLLABLE DYEOG..HANGUL SYLLABLE DYEOH
+        , List.map Char.fromCode (List.range 0xB3A9 0xB3C3) -- Lo  [27] HANGUL SYLLABLE DYEG..HANGUL SYLLABLE DYEH
+        , List.map Char.fromCode (List.range 0xB3C5 0xB3DF) -- Lo  [27] HANGUL SYLLABLE DOG..HANGUL SYLLABLE DOH
+        , List.map Char.fromCode (List.range 0xB3E1 0xB3FB) -- Lo  [27] HANGUL SYLLABLE DWAG..HANGUL SYLLABLE DWAH
+        , List.map Char.fromCode (List.range 0xB3FD 0xB417) -- Lo  [27] HANGUL SYLLABLE DWAEG..HANGUL SYLLABLE DWAEH
+        , List.map Char.fromCode (List.range 0xB419 0xB433) -- Lo  [27] HANGUL SYLLABLE DOEG..HANGUL SYLLABLE DOEH
+        , List.map Char.fromCode (List.range 0xB435 0xB44F) -- Lo  [27] HANGUL SYLLABLE DYOG..HANGUL SYLLABLE DYOH
+        , List.map Char.fromCode (List.range 0xB451 0xB46B) -- Lo  [27] HANGUL SYLLABLE DUG..HANGUL SYLLABLE DUH
+        , List.map Char.fromCode (List.range 0xB46D 0xB487) -- Lo  [27] HANGUL SYLLABLE DWEOG..HANGUL SYLLABLE DWEOH
+        , List.map Char.fromCode (List.range 0xB489 0xB4A3) -- Lo  [27] HANGUL SYLLABLE DWEG..HANGUL SYLLABLE DWEH
+        , List.map Char.fromCode (List.range 0xB4A5 0xB4BF) -- Lo  [27] HANGUL SYLLABLE DWIG..HANGUL SYLLABLE DWIH
+        , List.map Char.fromCode (List.range 0xB4C1 0xB4DB) -- Lo  [27] HANGUL SYLLABLE DYUG..HANGUL SYLLABLE DYUH
+        , List.map Char.fromCode (List.range 0xB4DD 0xB4F7) -- Lo  [27] HANGUL SYLLABLE DEUG..HANGUL SYLLABLE DEUH
+        , List.map Char.fromCode (List.range 0xB4F9 0xB513) -- Lo  [27] HANGUL SYLLABLE DYIG..HANGUL SYLLABLE DYIH
+        , List.map Char.fromCode (List.range 0xB515 0xB52F) -- Lo  [27] HANGUL SYLLABLE DIG..HANGUL SYLLABLE DIH
+        , List.map Char.fromCode (List.range 0xB531 0xB54B) -- Lo  [27] HANGUL SYLLABLE DDAG..HANGUL SYLLABLE DDAH
+        , List.map Char.fromCode (List.range 0xB54D 0xB567) -- Lo  [27] HANGUL SYLLABLE DDAEG..HANGUL SYLLABLE DDAEH
+        , List.map Char.fromCode (List.range 0xB569 0xB583) -- Lo  [27] HANGUL SYLLABLE DDYAG..HANGUL SYLLABLE DDYAH
+        , List.map Char.fromCode (List.range 0xB585 0xB59F) -- Lo  [27] HANGUL SYLLABLE DDYAEG..HANGUL SYLLABLE DDYAEH
+        , List.map Char.fromCode (List.range 0xB5A1 0xB5BB) -- Lo  [27] HANGUL SYLLABLE DDEOG..HANGUL SYLLABLE DDEOH
+        , List.map Char.fromCode (List.range 0xB5BD 0xB5D7) -- Lo  [27] HANGUL SYLLABLE DDEG..HANGUL SYLLABLE DDEH
+        , List.map Char.fromCode (List.range 0xB5D9 0xB5F3) -- Lo  [27] HANGUL SYLLABLE DDYEOG..HANGUL SYLLABLE DDYEOH
+        , List.map Char.fromCode (List.range 0xB5F5 0xB60F) -- Lo  [27] HANGUL SYLLABLE DDYEG..HANGUL SYLLABLE DDYEH
+        , List.map Char.fromCode (List.range 0xB611 0xB62B) -- Lo  [27] HANGUL SYLLABLE DDOG..HANGUL SYLLABLE DDOH
+        , List.map Char.fromCode (List.range 0xB62D 0xB647) -- Lo  [27] HANGUL SYLLABLE DDWAG..HANGUL SYLLABLE DDWAH
+        , List.map Char.fromCode (List.range 0xB649 0xB663) -- Lo  [27] HANGUL SYLLABLE DDWAEG..HANGUL SYLLABLE DDWAEH
+        , List.map Char.fromCode (List.range 0xB665 0xB67F) -- Lo  [27] HANGUL SYLLABLE DDOEG..HANGUL SYLLABLE DDOEH
+        , List.map Char.fromCode (List.range 0xB681 0xB69B) -- Lo  [27] HANGUL SYLLABLE DDYOG..HANGUL SYLLABLE DDYOH
+        , List.map Char.fromCode (List.range 0xB69D 0xB6B7) -- Lo  [27] HANGUL SYLLABLE DDUG..HANGUL SYLLABLE DDUH
+        , List.map Char.fromCode (List.range 0xB6B9 0xB6D3) -- Lo  [27] HANGUL SYLLABLE DDWEOG..HANGUL SYLLABLE DDWEOH
+        , List.map Char.fromCode (List.range 0xB6D5 0xB6EF) -- Lo  [27] HANGUL SYLLABLE DDWEG..HANGUL SYLLABLE DDWEH
+        , List.map Char.fromCode (List.range 0xB6F1 0xB70B) -- Lo  [27] HANGUL SYLLABLE DDWIG..HANGUL SYLLABLE DDWIH
+        , List.map Char.fromCode (List.range 0xB70D 0xB727) -- Lo  [27] HANGUL SYLLABLE DDYUG..HANGUL SYLLABLE DDYUH
+        , List.map Char.fromCode (List.range 0xB729 0xB743) -- Lo  [27] HANGUL SYLLABLE DDEUG..HANGUL SYLLABLE DDEUH
+        , List.map Char.fromCode (List.range 0xB745 0xB75F) -- Lo  [27] HANGUL SYLLABLE DDYIG..HANGUL SYLLABLE DDYIH
+        , List.map Char.fromCode (List.range 0xB761 0xB77B) -- Lo  [27] HANGUL SYLLABLE DDIG..HANGUL SYLLABLE DDIH
+        , List.map Char.fromCode (List.range 0xB77D 0xB797) -- Lo  [27] HANGUL SYLLABLE RAG..HANGUL SYLLABLE RAH
+        , List.map Char.fromCode (List.range 0xB799 0xB7B3) -- Lo  [27] HANGUL SYLLABLE RAEG..HANGUL SYLLABLE RAEH
+        , List.map Char.fromCode (List.range 0xB7B5 0xB7CF) -- Lo  [27] HANGUL SYLLABLE RYAG..HANGUL SYLLABLE RYAH
+        , List.map Char.fromCode (List.range 0xB7D1 0xB7EB) -- Lo  [27] HANGUL SYLLABLE RYAEG..HANGUL SYLLABLE RYAEH
+        , List.map Char.fromCode (List.range 0xB7ED 0xB807) -- Lo  [27] HANGUL SYLLABLE REOG..HANGUL SYLLABLE REOH
+        , List.map Char.fromCode (List.range 0xB809 0xB823) -- Lo  [27] HANGUL SYLLABLE REG..HANGUL SYLLABLE REH
+        , List.map Char.fromCode (List.range 0xB825 0xB83F) -- Lo  [27] HANGUL SYLLABLE RYEOG..HANGUL SYLLABLE RYEOH
+        , List.map Char.fromCode (List.range 0xB841 0xB85B) -- Lo  [27] HANGUL SYLLABLE RYEG..HANGUL SYLLABLE RYEH
+        , List.map Char.fromCode (List.range 0xB85D 0xB877) -- Lo  [27] HANGUL SYLLABLE ROG..HANGUL SYLLABLE ROH
+        , List.map Char.fromCode (List.range 0xB879 0xB893) -- Lo  [27] HANGUL SYLLABLE RWAG..HANGUL SYLLABLE RWAH
+        , List.map Char.fromCode (List.range 0xB895 0xB8AF) -- Lo  [27] HANGUL SYLLABLE RWAEG..HANGUL SYLLABLE RWAEH
+        , List.map Char.fromCode (List.range 0xB8B1 0xB8CB) -- Lo  [27] HANGUL SYLLABLE ROEG..HANGUL SYLLABLE ROEH
+        , List.map Char.fromCode (List.range 0xB8CD 0xB8E7) -- Lo  [27] HANGUL SYLLABLE RYOG..HANGUL SYLLABLE RYOH
+        , List.map Char.fromCode (List.range 0xB8E9 0xB903) -- Lo  [27] HANGUL SYLLABLE RUG..HANGUL SYLLABLE RUH
+        , List.map Char.fromCode (List.range 0xB905 0xB91F) -- Lo  [27] HANGUL SYLLABLE RWEOG..HANGUL SYLLABLE RWEOH
+        , List.map Char.fromCode (List.range 0xB921 0xB93B) -- Lo  [27] HANGUL SYLLABLE RWEG..HANGUL SYLLABLE RWEH
+        , List.map Char.fromCode (List.range 0xB93D 0xB957) -- Lo  [27] HANGUL SYLLABLE RWIG..HANGUL SYLLABLE RWIH
+        , List.map Char.fromCode (List.range 0xB959 0xB973) -- Lo  [27] HANGUL SYLLABLE RYUG..HANGUL SYLLABLE RYUH
+        , List.map Char.fromCode (List.range 0xB975 0xB98F) -- Lo  [27] HANGUL SYLLABLE REUG..HANGUL SYLLABLE REUH
+        , List.map Char.fromCode (List.range 0xB991 0xB9AB) -- Lo  [27] HANGUL SYLLABLE RYIG..HANGUL SYLLABLE RYIH
+        , List.map Char.fromCode (List.range 0xB9AD 0xB9C7) -- Lo  [27] HANGUL SYLLABLE RIG..HANGUL SYLLABLE RIH
+        , List.map Char.fromCode (List.range 0xB9C9 0xB9E3) -- Lo  [27] HANGUL SYLLABLE MAG..HANGUL SYLLABLE MAH
+        , List.map Char.fromCode (List.range 0xB9E5 0xB9FF) -- Lo  [27] HANGUL SYLLABLE MAEG..HANGUL SYLLABLE MAEH
+        , List.map Char.fromCode (List.range 0xBA01 0xBA1B) -- Lo  [27] HANGUL SYLLABLE MYAG..HANGUL SYLLABLE MYAH
+        , List.map Char.fromCode (List.range 0xBA1D 0xBA37) -- Lo  [27] HANGUL SYLLABLE MYAEG..HANGUL SYLLABLE MYAEH
+        , List.map Char.fromCode (List.range 0xBA39 0xBA53) -- Lo  [27] HANGUL SYLLABLE MEOG..HANGUL SYLLABLE MEOH
+        , List.map Char.fromCode (List.range 0xBA55 0xBA6F) -- Lo  [27] HANGUL SYLLABLE MEG..HANGUL SYLLABLE MEH
+        , List.map Char.fromCode (List.range 0xBA71 0xBA8B) -- Lo  [27] HANGUL SYLLABLE MYEOG..HANGUL SYLLABLE MYEOH
+        , List.map Char.fromCode (List.range 0xBA8D 0xBAA7) -- Lo  [27] HANGUL SYLLABLE MYEG..HANGUL SYLLABLE MYEH
+        , List.map Char.fromCode (List.range 0xBAA9 0xBAC3) -- Lo  [27] HANGUL SYLLABLE MOG..HANGUL SYLLABLE MOH
+        , List.map Char.fromCode (List.range 0xBAC5 0xBADF) -- Lo  [27] HANGUL SYLLABLE MWAG..HANGUL SYLLABLE MWAH
+        , List.map Char.fromCode (List.range 0xBAE1 0xBAFB) -- Lo  [27] HANGUL SYLLABLE MWAEG..HANGUL SYLLABLE MWAEH
+        , List.map Char.fromCode (List.range 0xBAFD 0xBB17) -- Lo  [27] HANGUL SYLLABLE MOEG..HANGUL SYLLABLE MOEH
+        , List.map Char.fromCode (List.range 0xBB19 0xBB33) -- Lo  [27] HANGUL SYLLABLE MYOG..HANGUL SYLLABLE MYOH
+        , List.map Char.fromCode (List.range 0xBB35 0xBB4F) -- Lo  [27] HANGUL SYLLABLE MUG..HANGUL SYLLABLE MUH
+        , List.map Char.fromCode (List.range 0xBB51 0xBB6B) -- Lo  [27] HANGUL SYLLABLE MWEOG..HANGUL SYLLABLE MWEOH
+        , List.map Char.fromCode (List.range 0xBB6D 0xBB87) -- Lo  [27] HANGUL SYLLABLE MWEG..HANGUL SYLLABLE MWEH
+        , List.map Char.fromCode (List.range 0xBB89 0xBBA3) -- Lo  [27] HANGUL SYLLABLE MWIG..HANGUL SYLLABLE MWIH
+        , List.map Char.fromCode (List.range 0xBBA5 0xBBBF) -- Lo  [27] HANGUL SYLLABLE MYUG..HANGUL SYLLABLE MYUH
+        , List.map Char.fromCode (List.range 0xBBC1 0xBBDB) -- Lo  [27] HANGUL SYLLABLE MEUG..HANGUL SYLLABLE MEUH
+        , List.map Char.fromCode (List.range 0xBBDD 0xBBF7) -- Lo  [27] HANGUL SYLLABLE MYIG..HANGUL SYLLABLE MYIH
+        , List.map Char.fromCode (List.range 0xBBF9 0xBC13) -- Lo  [27] HANGUL SYLLABLE MIG..HANGUL SYLLABLE MIH
+        , List.map Char.fromCode (List.range 0xBC15 0xBC2F) -- Lo  [27] HANGUL SYLLABLE BAG..HANGUL SYLLABLE BAH
+        , List.map Char.fromCode (List.range 0xBC31 0xBC4B) -- Lo  [27] HANGUL SYLLABLE BAEG..HANGUL SYLLABLE BAEH
+        , List.map Char.fromCode (List.range 0xBC4D 0xBC67) -- Lo  [27] HANGUL SYLLABLE BYAG..HANGUL SYLLABLE BYAH
+        , List.map Char.fromCode (List.range 0xBC69 0xBC83) -- Lo  [27] HANGUL SYLLABLE BYAEG..HANGUL SYLLABLE BYAEH
+        , List.map Char.fromCode (List.range 0xBC85 0xBC9F) -- Lo  [27] HANGUL SYLLABLE BEOG..HANGUL SYLLABLE BEOH
+        , List.map Char.fromCode (List.range 0xBCA1 0xBCBB) -- Lo  [27] HANGUL SYLLABLE BEG..HANGUL SYLLABLE BEH
+        , List.map Char.fromCode (List.range 0xBCBD 0xBCD7) -- Lo  [27] HANGUL SYLLABLE BYEOG..HANGUL SYLLABLE BYEOH
+        , List.map Char.fromCode (List.range 0xBCD9 0xBCF3) -- Lo  [27] HANGUL SYLLABLE BYEG..HANGUL SYLLABLE BYEH
+        , List.map Char.fromCode (List.range 0xBCF5 0xBD0F) -- Lo  [27] HANGUL SYLLABLE BOG..HANGUL SYLLABLE BOH
+        , List.map Char.fromCode (List.range 0xBD11 0xBD2B) -- Lo  [27] HANGUL SYLLABLE BWAG..HANGUL SYLLABLE BWAH
+        , List.map Char.fromCode (List.range 0xBD2D 0xBD47) -- Lo  [27] HANGUL SYLLABLE BWAEG..HANGUL SYLLABLE BWAEH
+        , List.map Char.fromCode (List.range 0xBD49 0xBD63) -- Lo  [27] HANGUL SYLLABLE BOEG..HANGUL SYLLABLE BOEH
+        , List.map Char.fromCode (List.range 0xBD65 0xBD7F) -- Lo  [27] HANGUL SYLLABLE BYOG..HANGUL SYLLABLE BYOH
+        , List.map Char.fromCode (List.range 0xBD81 0xBD9B) -- Lo  [27] HANGUL SYLLABLE BUG..HANGUL SYLLABLE BUH
+        , List.map Char.fromCode (List.range 0xBD9D 0xBDB7) -- Lo  [27] HANGUL SYLLABLE BWEOG..HANGUL SYLLABLE BWEOH
+        , List.map Char.fromCode (List.range 0xBDB9 0xBDD3) -- Lo  [27] HANGUL SYLLABLE BWEG..HANGUL SYLLABLE BWEH
+        , List.map Char.fromCode (List.range 0xBDD5 0xBDEF) -- Lo  [27] HANGUL SYLLABLE BWIG..HANGUL SYLLABLE BWIH
+        , List.map Char.fromCode (List.range 0xBDF1 0xBE0B) -- Lo  [27] HANGUL SYLLABLE BYUG..HANGUL SYLLABLE BYUH
+        , List.map Char.fromCode (List.range 0xBE0D 0xBE27) -- Lo  [27] HANGUL SYLLABLE BEUG..HANGUL SYLLABLE BEUH
+        , List.map Char.fromCode (List.range 0xBE29 0xBE43) -- Lo  [27] HANGUL SYLLABLE BYIG..HANGUL SYLLABLE BYIH
+        , List.map Char.fromCode (List.range 0xBE45 0xBE5F) -- Lo  [27] HANGUL SYLLABLE BIG..HANGUL SYLLABLE BIH
+        , List.map Char.fromCode (List.range 0xBE61 0xBE7B) -- Lo  [27] HANGUL SYLLABLE BBAG..HANGUL SYLLABLE BBAH
+        , List.map Char.fromCode (List.range 0xBE7D 0xBE97) -- Lo  [27] HANGUL SYLLABLE BBAEG..HANGUL SYLLABLE BBAEH
+        , List.map Char.fromCode (List.range 0xBE99 0xBEB3) -- Lo  [27] HANGUL SYLLABLE BBYAG..HANGUL SYLLABLE BBYAH
+        , List.map Char.fromCode (List.range 0xBEB5 0xBECF) -- Lo  [27] HANGUL SYLLABLE BBYAEG..HANGUL SYLLABLE BBYAEH
+        , List.map Char.fromCode (List.range 0xBED1 0xBEEB) -- Lo  [27] HANGUL SYLLABLE BBEOG..HANGUL SYLLABLE BBEOH
+        , List.map Char.fromCode (List.range 0xBEED 0xBF07) -- Lo  [27] HANGUL SYLLABLE BBEG..HANGUL SYLLABLE BBEH
+        , List.map Char.fromCode (List.range 0xBF09 0xBF23) -- Lo  [27] HANGUL SYLLABLE BBYEOG..HANGUL SYLLABLE BBYEOH
+        , List.map Char.fromCode (List.range 0xBF25 0xBF3F) -- Lo  [27] HANGUL SYLLABLE BBYEG..HANGUL SYLLABLE BBYEH
+        , List.map Char.fromCode (List.range 0xBF41 0xBF5B) -- Lo  [27] HANGUL SYLLABLE BBOG..HANGUL SYLLABLE BBOH
+        , List.map Char.fromCode (List.range 0xBF5D 0xBF77) -- Lo  [27] HANGUL SYLLABLE BBWAG..HANGUL SYLLABLE BBWAH
+        , List.map Char.fromCode (List.range 0xBF79 0xBF93) -- Lo  [27] HANGUL SYLLABLE BBWAEG..HANGUL SYLLABLE BBWAEH
+        , List.map Char.fromCode (List.range 0xBF95 0xBFAF) -- Lo  [27] HANGUL SYLLABLE BBOEG..HANGUL SYLLABLE BBOEH
+        , List.map Char.fromCode (List.range 0xBFB1 0xBFCB) -- Lo  [27] HANGUL SYLLABLE BBYOG..HANGUL SYLLABLE BBYOH
+        , List.map Char.fromCode (List.range 0xBFCD 0xBFE7) -- Lo  [27] HANGUL SYLLABLE BBUG..HANGUL SYLLABLE BBUH
+        , List.map Char.fromCode (List.range 0xBFE9 0xC003) -- Lo  [27] HANGUL SYLLABLE BBWEOG..HANGUL SYLLABLE BBWEOH
+        , List.map Char.fromCode (List.range 0xC005 0xC01F) -- Lo  [27] HANGUL SYLLABLE BBWEG..HANGUL SYLLABLE BBWEH
+        , List.map Char.fromCode (List.range 0xC021 0xC03B) -- Lo  [27] HANGUL SYLLABLE BBWIG..HANGUL SYLLABLE BBWIH
+        , List.map Char.fromCode (List.range 0xC03D 0xC057) -- Lo  [27] HANGUL SYLLABLE BBYUG..HANGUL SYLLABLE BBYUH
+        , List.map Char.fromCode (List.range 0xC059 0xC073) -- Lo  [27] HANGUL SYLLABLE BBEUG..HANGUL SYLLABLE BBEUH
+        , List.map Char.fromCode (List.range 0xC075 0xC08F) -- Lo  [27] HANGUL SYLLABLE BBYIG..HANGUL SYLLABLE BBYIH
+        , List.map Char.fromCode (List.range 0xC091 0xC0AB) -- Lo  [27] HANGUL SYLLABLE BBIG..HANGUL SYLLABLE BBIH
+        , List.map Char.fromCode (List.range 0xC0AD 0xC0C7) -- Lo  [27] HANGUL SYLLABLE SAG..HANGUL SYLLABLE SAH
+        , List.map Char.fromCode (List.range 0xC0C9 0xC0E3) -- Lo  [27] HANGUL SYLLABLE SAEG..HANGUL SYLLABLE SAEH
+        , List.map Char.fromCode (List.range 0xC0E5 0xC0FF) -- Lo  [27] HANGUL SYLLABLE SYAG..HANGUL SYLLABLE SYAH
+        , List.map Char.fromCode (List.range 0xC101 0xC11B) -- Lo  [27] HANGUL SYLLABLE SYAEG..HANGUL SYLLABLE SYAEH
+        , List.map Char.fromCode (List.range 0xC11D 0xC137) -- Lo  [27] HANGUL SYLLABLE SEOG..HANGUL SYLLABLE SEOH
+        , List.map Char.fromCode (List.range 0xC139 0xC153) -- Lo  [27] HANGUL SYLLABLE SEG..HANGUL SYLLABLE SEH
+        , List.map Char.fromCode (List.range 0xC155 0xC16F) -- Lo  [27] HANGUL SYLLABLE SYEOG..HANGUL SYLLABLE SYEOH
+        , List.map Char.fromCode (List.range 0xC171 0xC18B) -- Lo  [27] HANGUL SYLLABLE SYEG..HANGUL SYLLABLE SYEH
+        , List.map Char.fromCode (List.range 0xC18D 0xC1A7) -- Lo  [27] HANGUL SYLLABLE SOG..HANGUL SYLLABLE SOH
+        , List.map Char.fromCode (List.range 0xC1A9 0xC1C3) -- Lo  [27] HANGUL SYLLABLE SWAG..HANGUL SYLLABLE SWAH
+        , List.map Char.fromCode (List.range 0xC1C5 0xC1DF) -- Lo  [27] HANGUL SYLLABLE SWAEG..HANGUL SYLLABLE SWAEH
+        , List.map Char.fromCode (List.range 0xC1E1 0xC1FB) -- Lo  [27] HANGUL SYLLABLE SOEG..HANGUL SYLLABLE SOEH
+        , List.map Char.fromCode (List.range 0xC1FD 0xC217) -- Lo  [27] HANGUL SYLLABLE SYOG..HANGUL SYLLABLE SYOH
+        , List.map Char.fromCode (List.range 0xC219 0xC233) -- Lo  [27] HANGUL SYLLABLE SUG..HANGUL SYLLABLE SUH
+        , List.map Char.fromCode (List.range 0xC235 0xC24F) -- Lo  [27] HANGUL SYLLABLE SWEOG..HANGUL SYLLABLE SWEOH
+        , List.map Char.fromCode (List.range 0xC251 0xC26B) -- Lo  [27] HANGUL SYLLABLE SWEG..HANGUL SYLLABLE SWEH
+        , List.map Char.fromCode (List.range 0xC26D 0xC287) -- Lo  [27] HANGUL SYLLABLE SWIG..HANGUL SYLLABLE SWIH
+        , List.map Char.fromCode (List.range 0xC289 0xC2A3) -- Lo  [27] HANGUL SYLLABLE SYUG..HANGUL SYLLABLE SYUH
+        , List.map Char.fromCode (List.range 0xC2A5 0xC2BF) -- Lo  [27] HANGUL SYLLABLE SEUG..HANGUL SYLLABLE SEUH
+        , List.map Char.fromCode (List.range 0xC2C1 0xC2DB) -- Lo  [27] HANGUL SYLLABLE SYIG..HANGUL SYLLABLE SYIH
+        , List.map Char.fromCode (List.range 0xC2DD 0xC2F7) -- Lo  [27] HANGUL SYLLABLE SIG..HANGUL SYLLABLE SIH
+        , List.map Char.fromCode (List.range 0xC2F9 0xC313) -- Lo  [27] HANGUL SYLLABLE SSAG..HANGUL SYLLABLE SSAH
+        , List.map Char.fromCode (List.range 0xC315 0xC32F) -- Lo  [27] HANGUL SYLLABLE SSAEG..HANGUL SYLLABLE SSAEH
+        , List.map Char.fromCode (List.range 0xC331 0xC34B) -- Lo  [27] HANGUL SYLLABLE SSYAG..HANGUL SYLLABLE SSYAH
+        , List.map Char.fromCode (List.range 0xC34D 0xC367) -- Lo  [27] HANGUL SYLLABLE SSYAEG..HANGUL SYLLABLE SSYAEH
+        , List.map Char.fromCode (List.range 0xC369 0xC383) -- Lo  [27] HANGUL SYLLABLE SSEOG..HANGUL SYLLABLE SSEOH
+        , List.map Char.fromCode (List.range 0xC385 0xC39F) -- Lo  [27] HANGUL SYLLABLE SSEG..HANGUL SYLLABLE SSEH
+        , List.map Char.fromCode (List.range 0xC3A1 0xC3BB) -- Lo  [27] HANGUL SYLLABLE SSYEOG..HANGUL SYLLABLE SSYEOH
+        , List.map Char.fromCode (List.range 0xC3BD 0xC3D7) -- Lo  [27] HANGUL SYLLABLE SSYEG..HANGUL SYLLABLE SSYEH
+        , List.map Char.fromCode (List.range 0xC3D9 0xC3F3) -- Lo  [27] HANGUL SYLLABLE SSOG..HANGUL SYLLABLE SSOH
+        , List.map Char.fromCode (List.range 0xC3F5 0xC40F) -- Lo  [27] HANGUL SYLLABLE SSWAG..HANGUL SYLLABLE SSWAH
+        , List.map Char.fromCode (List.range 0xC411 0xC42B) -- Lo  [27] HANGUL SYLLABLE SSWAEG..HANGUL SYLLABLE SSWAEH
+        , List.map Char.fromCode (List.range 0xC42D 0xC447) -- Lo  [27] HANGUL SYLLABLE SSOEG..HANGUL SYLLABLE SSOEH
+        , List.map Char.fromCode (List.range 0xC449 0xC463) -- Lo  [27] HANGUL SYLLABLE SSYOG..HANGUL SYLLABLE SSYOH
+        , List.map Char.fromCode (List.range 0xC465 0xC47F) -- Lo  [27] HANGUL SYLLABLE SSUG..HANGUL SYLLABLE SSUH
+        , List.map Char.fromCode (List.range 0xC481 0xC49B) -- Lo  [27] HANGUL SYLLABLE SSWEOG..HANGUL SYLLABLE SSWEOH
+        , List.map Char.fromCode (List.range 0xC49D 0xC4B7) -- Lo  [27] HANGUL SYLLABLE SSWEG..HANGUL SYLLABLE SSWEH
+        , List.map Char.fromCode (List.range 0xC4B9 0xC4D3) -- Lo  [27] HANGUL SYLLABLE SSWIG..HANGUL SYLLABLE SSWIH
+        , List.map Char.fromCode (List.range 0xC4D5 0xC4EF) -- Lo  [27] HANGUL SYLLABLE SSYUG..HANGUL SYLLABLE SSYUH
+        , List.map Char.fromCode (List.range 0xC4F1 0xC50B) -- Lo  [27] HANGUL SYLLABLE SSEUG..HANGUL SYLLABLE SSEUH
+        , List.map Char.fromCode (List.range 0xC50D 0xC527) -- Lo  [27] HANGUL SYLLABLE SSYIG..HANGUL SYLLABLE SSYIH
+        , List.map Char.fromCode (List.range 0xC529 0xC543) -- Lo  [27] HANGUL SYLLABLE SSIG..HANGUL SYLLABLE SSIH
+        , List.map Char.fromCode (List.range 0xC545 0xC55F) -- Lo  [27] HANGUL SYLLABLE AG..HANGUL SYLLABLE AH
+        , List.map Char.fromCode (List.range 0xC561 0xC57B) -- Lo  [27] HANGUL SYLLABLE AEG..HANGUL SYLLABLE AEH
+        , List.map Char.fromCode (List.range 0xC57D 0xC597) -- Lo  [27] HANGUL SYLLABLE YAG..HANGUL SYLLABLE YAH
+        , List.map Char.fromCode (List.range 0xC599 0xC5B3) -- Lo  [27] HANGUL SYLLABLE YAEG..HANGUL SYLLABLE YAEH
+        , List.map Char.fromCode (List.range 0xC5B5 0xC5CF) -- Lo  [27] HANGUL SYLLABLE EOG..HANGUL SYLLABLE EOH
+        , List.map Char.fromCode (List.range 0xC5D1 0xC5EB) -- Lo  [27] HANGUL SYLLABLE EG..HANGUL SYLLABLE EH
+        , List.map Char.fromCode (List.range 0xC5ED 0xC607) -- Lo  [27] HANGUL SYLLABLE YEOG..HANGUL SYLLABLE YEOH
+        , List.map Char.fromCode (List.range 0xC609 0xC623) -- Lo  [27] HANGUL SYLLABLE YEG..HANGUL SYLLABLE YEH
+        , List.map Char.fromCode (List.range 0xC625 0xC63F) -- Lo  [27] HANGUL SYLLABLE OG..HANGUL SYLLABLE OH
+        , List.map Char.fromCode (List.range 0xC641 0xC65B) -- Lo  [27] HANGUL SYLLABLE WAG..HANGUL SYLLABLE WAH
+        , List.map Char.fromCode (List.range 0xC65D 0xC677) -- Lo  [27] HANGUL SYLLABLE WAEG..HANGUL SYLLABLE WAEH
+        , List.map Char.fromCode (List.range 0xC679 0xC693) -- Lo  [27] HANGUL SYLLABLE OEG..HANGUL SYLLABLE OEH
+        , List.map Char.fromCode (List.range 0xC695 0xC6AF) -- Lo  [27] HANGUL SYLLABLE YOG..HANGUL SYLLABLE YOH
+        , List.map Char.fromCode (List.range 0xC6B1 0xC6CB) -- Lo  [27] HANGUL SYLLABLE UG..HANGUL SYLLABLE UH
+        , List.map Char.fromCode (List.range 0xC6CD 0xC6E7) -- Lo  [27] HANGUL SYLLABLE WEOG..HANGUL SYLLABLE WEOH
+        , List.map Char.fromCode (List.range 0xC6E9 0xC703) -- Lo  [27] HANGUL SYLLABLE WEG..HANGUL SYLLABLE WEH
+        , List.map Char.fromCode (List.range 0xC705 0xC71F) -- Lo  [27] HANGUL SYLLABLE WIG..HANGUL SYLLABLE WIH
+        , List.map Char.fromCode (List.range 0xC721 0xC73B) -- Lo  [27] HANGUL SYLLABLE YUG..HANGUL SYLLABLE YUH
+        , List.map Char.fromCode (List.range 0xC73D 0xC757) -- Lo  [27] HANGUL SYLLABLE EUG..HANGUL SYLLABLE EUH
+        , List.map Char.fromCode (List.range 0xC759 0xC773) -- Lo  [27] HANGUL SYLLABLE YIG..HANGUL SYLLABLE YIH
+        , List.map Char.fromCode (List.range 0xC775 0xC78F) -- Lo  [27] HANGUL SYLLABLE IG..HANGUL SYLLABLE IH
+        , List.map Char.fromCode (List.range 0xC791 0xC7AB) -- Lo  [27] HANGUL SYLLABLE JAG..HANGUL SYLLABLE JAH
+        , List.map Char.fromCode (List.range 0xC7AD 0xC7C7) -- Lo  [27] HANGUL SYLLABLE JAEG..HANGUL SYLLABLE JAEH
+        , List.map Char.fromCode (List.range 0xC7C9 0xC7E3) -- Lo  [27] HANGUL SYLLABLE JYAG..HANGUL SYLLABLE JYAH
+        , List.map Char.fromCode (List.range 0xC7E5 0xC7FF) -- Lo  [27] HANGUL SYLLABLE JYAEG..HANGUL SYLLABLE JYAEH
+        , List.map Char.fromCode (List.range 0xC801 0xC81B) -- Lo  [27] HANGUL SYLLABLE JEOG..HANGUL SYLLABLE JEOH
+        , List.map Char.fromCode (List.range 0xC81D 0xC837) -- Lo  [27] HANGUL SYLLABLE JEG..HANGUL SYLLABLE JEH
+        , List.map Char.fromCode (List.range 0xC839 0xC853) -- Lo  [27] HANGUL SYLLABLE JYEOG..HANGUL SYLLABLE JYEOH
+        , List.map Char.fromCode (List.range 0xC855 0xC86F) -- Lo  [27] HANGUL SYLLABLE JYEG..HANGUL SYLLABLE JYEH
+        , List.map Char.fromCode (List.range 0xC871 0xC88B) -- Lo  [27] HANGUL SYLLABLE JOG..HANGUL SYLLABLE JOH
+        , List.map Char.fromCode (List.range 0xC88D 0xC8A7) -- Lo  [27] HANGUL SYLLABLE JWAG..HANGUL SYLLABLE JWAH
+        , List.map Char.fromCode (List.range 0xC8A9 0xC8C3) -- Lo  [27] HANGUL SYLLABLE JWAEG..HANGUL SYLLABLE JWAEH
+        , List.map Char.fromCode (List.range 0xC8C5 0xC8DF) -- Lo  [27] HANGUL SYLLABLE JOEG..HANGUL SYLLABLE JOEH
+        , List.map Char.fromCode (List.range 0xC8E1 0xC8FB) -- Lo  [27] HANGUL SYLLABLE JYOG..HANGUL SYLLABLE JYOH
+        , List.map Char.fromCode (List.range 0xC8FD 0xC917) -- Lo  [27] HANGUL SYLLABLE JUG..HANGUL SYLLABLE JUH
+        , List.map Char.fromCode (List.range 0xC919 0xC933) -- Lo  [27] HANGUL SYLLABLE JWEOG..HANGUL SYLLABLE JWEOH
+        , List.map Char.fromCode (List.range 0xC935 0xC94F) -- Lo  [27] HANGUL SYLLABLE JWEG..HANGUL SYLLABLE JWEH
+        , List.map Char.fromCode (List.range 0xC951 0xC96B) -- Lo  [27] HANGUL SYLLABLE JWIG..HANGUL SYLLABLE JWIH
+        , List.map Char.fromCode (List.range 0xC96D 0xC987) -- Lo  [27] HANGUL SYLLABLE JYUG..HANGUL SYLLABLE JYUH
+        , List.map Char.fromCode (List.range 0xC989 0xC9A3) -- Lo  [27] HANGUL SYLLABLE JEUG..HANGUL SYLLABLE JEUH
+        , List.map Char.fromCode (List.range 0xC9A5 0xC9BF) -- Lo  [27] HANGUL SYLLABLE JYIG..HANGUL SYLLABLE JYIH
+        , List.map Char.fromCode (List.range 0xC9C1 0xC9DB) -- Lo  [27] HANGUL SYLLABLE JIG..HANGUL SYLLABLE JIH
+        , List.map Char.fromCode (List.range 0xC9DD 0xC9F7) -- Lo  [27] HANGUL SYLLABLE JJAG..HANGUL SYLLABLE JJAH
+        , List.map Char.fromCode (List.range 0xC9F9 0xCA13) -- Lo  [27] HANGUL SYLLABLE JJAEG..HANGUL SYLLABLE JJAEH
+        , List.map Char.fromCode (List.range 0xCA15 0xCA2F) -- Lo  [27] HANGUL SYLLABLE JJYAG..HANGUL SYLLABLE JJYAH
+        , List.map Char.fromCode (List.range 0xCA31 0xCA4B) -- Lo  [27] HANGUL SYLLABLE JJYAEG..HANGUL SYLLABLE JJYAEH
+        , List.map Char.fromCode (List.range 0xCA4D 0xCA67) -- Lo  [27] HANGUL SYLLABLE JJEOG..HANGUL SYLLABLE JJEOH
+        , List.map Char.fromCode (List.range 0xCA69 0xCA83) -- Lo  [27] HANGUL SYLLABLE JJEG..HANGUL SYLLABLE JJEH
+        , List.map Char.fromCode (List.range 0xCA85 0xCA9F) -- Lo  [27] HANGUL SYLLABLE JJYEOG..HANGUL SYLLABLE JJYEOH
+        , List.map Char.fromCode (List.range 0xCAA1 0xCABB) -- Lo  [27] HANGUL SYLLABLE JJYEG..HANGUL SYLLABLE JJYEH
+        , List.map Char.fromCode (List.range 0xCABD 0xCAD7) -- Lo  [27] HANGUL SYLLABLE JJOG..HANGUL SYLLABLE JJOH
+        , List.map Char.fromCode (List.range 0xCAD9 0xCAF3) -- Lo  [27] HANGUL SYLLABLE JJWAG..HANGUL SYLLABLE JJWAH
+        , List.map Char.fromCode (List.range 0xCAF5 0xCB0F) -- Lo  [27] HANGUL SYLLABLE JJWAEG..HANGUL SYLLABLE JJWAEH
+        , List.map Char.fromCode (List.range 0xCB11 0xCB2B) -- Lo  [27] HANGUL SYLLABLE JJOEG..HANGUL SYLLABLE JJOEH
+        , List.map Char.fromCode (List.range 0xCB2D 0xCB47) -- Lo  [27] HANGUL SYLLABLE JJYOG..HANGUL SYLLABLE JJYOH
+        , List.map Char.fromCode (List.range 0xCB49 0xCB63) -- Lo  [27] HANGUL SYLLABLE JJUG..HANGUL SYLLABLE JJUH
+        , List.map Char.fromCode (List.range 0xCB65 0xCB7F) -- Lo  [27] HANGUL SYLLABLE JJWEOG..HANGUL SYLLABLE JJWEOH
+        , List.map Char.fromCode (List.range 0xCB81 0xCB9B) -- Lo  [27] HANGUL SYLLABLE JJWEG..HANGUL SYLLABLE JJWEH
+        , List.map Char.fromCode (List.range 0xCB9D 0xCBB7) -- Lo  [27] HANGUL SYLLABLE JJWIG..HANGUL SYLLABLE JJWIH
+        , List.map Char.fromCode (List.range 0xCBB9 0xCBD3) -- Lo  [27] HANGUL SYLLABLE JJYUG..HANGUL SYLLABLE JJYUH
+        , List.map Char.fromCode (List.range 0xCBD5 0xCBEF) -- Lo  [27] HANGUL SYLLABLE JJEUG..HANGUL SYLLABLE JJEUH
+        , List.map Char.fromCode (List.range 0xCBF1 0xCC0B) -- Lo  [27] HANGUL SYLLABLE JJYIG..HANGUL SYLLABLE JJYIH
+        , List.map Char.fromCode (List.range 0xCC0D 0xCC27) -- Lo  [27] HANGUL SYLLABLE JJIG..HANGUL SYLLABLE JJIH
+        , List.map Char.fromCode (List.range 0xCC29 0xCC43) -- Lo  [27] HANGUL SYLLABLE CAG..HANGUL SYLLABLE CAH
+        , List.map Char.fromCode (List.range 0xCC45 0xCC5F) -- Lo  [27] HANGUL SYLLABLE CAEG..HANGUL SYLLABLE CAEH
+        , List.map Char.fromCode (List.range 0xCC61 0xCC7B) -- Lo  [27] HANGUL SYLLABLE CYAG..HANGUL SYLLABLE CYAH
+        , List.map Char.fromCode (List.range 0xCC7D 0xCC97) -- Lo  [27] HANGUL SYLLABLE CYAEG..HANGUL SYLLABLE CYAEH
+        , List.map Char.fromCode (List.range 0xCC99 0xCCB3) -- Lo  [27] HANGUL SYLLABLE CEOG..HANGUL SYLLABLE CEOH
+        , List.map Char.fromCode (List.range 0xCCB5 0xCCCF) -- Lo  [27] HANGUL SYLLABLE CEG..HANGUL SYLLABLE CEH
+        , List.map Char.fromCode (List.range 0xCCD1 0xCCEB) -- Lo  [27] HANGUL SYLLABLE CYEOG..HANGUL SYLLABLE CYEOH
+        , List.map Char.fromCode (List.range 0xCCED 0xCD07) -- Lo  [27] HANGUL SYLLABLE CYEG..HANGUL SYLLABLE CYEH
+        , List.map Char.fromCode (List.range 0xCD09 0xCD23) -- Lo  [27] HANGUL SYLLABLE COG..HANGUL SYLLABLE COH
+        , List.map Char.fromCode (List.range 0xCD25 0xCD3F) -- Lo  [27] HANGUL SYLLABLE CWAG..HANGUL SYLLABLE CWAH
+        , List.map Char.fromCode (List.range 0xCD41 0xCD5B) -- Lo  [27] HANGUL SYLLABLE CWAEG..HANGUL SYLLABLE CWAEH
+        , List.map Char.fromCode (List.range 0xCD5D 0xCD77) -- Lo  [27] HANGUL SYLLABLE COEG..HANGUL SYLLABLE COEH
+        , List.map Char.fromCode (List.range 0xCD79 0xCD93) -- Lo  [27] HANGUL SYLLABLE CYOG..HANGUL SYLLABLE CYOH
+        , List.map Char.fromCode (List.range 0xCD95 0xCDAF) -- Lo  [27] HANGUL SYLLABLE CUG..HANGUL SYLLABLE CUH
+        , List.map Char.fromCode (List.range 0xCDB1 0xCDCB) -- Lo  [27] HANGUL SYLLABLE CWEOG..HANGUL SYLLABLE CWEOH
+        , List.map Char.fromCode (List.range 0xCDCD 0xCDE7) -- Lo  [27] HANGUL SYLLABLE CWEG..HANGUL SYLLABLE CWEH
+        , List.map Char.fromCode (List.range 0xCDE9 0xCE03) -- Lo  [27] HANGUL SYLLABLE CWIG..HANGUL SYLLABLE CWIH
+        , List.map Char.fromCode (List.range 0xCE05 0xCE1F) -- Lo  [27] HANGUL SYLLABLE CYUG..HANGUL SYLLABLE CYUH
+        , List.map Char.fromCode (List.range 0xCE21 0xCE3B) -- Lo  [27] HANGUL SYLLABLE CEUG..HANGUL SYLLABLE CEUH
+        , List.map Char.fromCode (List.range 0xCE3D 0xCE57) -- Lo  [27] HANGUL SYLLABLE CYIG..HANGUL SYLLABLE CYIH
+        , List.map Char.fromCode (List.range 0xCE59 0xCE73) -- Lo  [27] HANGUL SYLLABLE CIG..HANGUL SYLLABLE CIH
+        , List.map Char.fromCode (List.range 0xCE75 0xCE8F) -- Lo  [27] HANGUL SYLLABLE KAG..HANGUL SYLLABLE KAH
+        , List.map Char.fromCode (List.range 0xCE91 0xCEAB) -- Lo  [27] HANGUL SYLLABLE KAEG..HANGUL SYLLABLE KAEH
+        , List.map Char.fromCode (List.range 0xCEAD 0xCEC7) -- Lo  [27] HANGUL SYLLABLE KYAG..HANGUL SYLLABLE KYAH
+        , List.map Char.fromCode (List.range 0xCEC9 0xCEE3) -- Lo  [27] HANGUL SYLLABLE KYAEG..HANGUL SYLLABLE KYAEH
+        , List.map Char.fromCode (List.range 0xCEE5 0xCEFF) -- Lo  [27] HANGUL SYLLABLE KEOG..HANGUL SYLLABLE KEOH
+        , List.map Char.fromCode (List.range 0xCF01 0xCF1B) -- Lo  [27] HANGUL SYLLABLE KEG..HANGUL SYLLABLE KEH
+        , List.map Char.fromCode (List.range 0xCF1D 0xCF37) -- Lo  [27] HANGUL SYLLABLE KYEOG..HANGUL SYLLABLE KYEOH
+        , List.map Char.fromCode (List.range 0xCF39 0xCF53) -- Lo  [27] HANGUL SYLLABLE KYEG..HANGUL SYLLABLE KYEH
+        , List.map Char.fromCode (List.range 0xCF55 0xCF6F) -- Lo  [27] HANGUL SYLLABLE KOG..HANGUL SYLLABLE KOH
+        , List.map Char.fromCode (List.range 0xCF71 0xCF8B) -- Lo  [27] HANGUL SYLLABLE KWAG..HANGUL SYLLABLE KWAH
+        , List.map Char.fromCode (List.range 0xCF8D 0xCFA7) -- Lo  [27] HANGUL SYLLABLE KWAEG..HANGUL SYLLABLE KWAEH
+        , List.map Char.fromCode (List.range 0xCFA9 0xCFC3) -- Lo  [27] HANGUL SYLLABLE KOEG..HANGUL SYLLABLE KOEH
+        , List.map Char.fromCode (List.range 0xCFC5 0xCFDF) -- Lo  [27] HANGUL SYLLABLE KYOG..HANGUL SYLLABLE KYOH
+        , List.map Char.fromCode (List.range 0xCFE1 0xCFFB) -- Lo  [27] HANGUL SYLLABLE KUG..HANGUL SYLLABLE KUH
+        , List.map Char.fromCode (List.range 0xCFFD 0xD017) -- Lo  [27] HANGUL SYLLABLE KWEOG..HANGUL SYLLABLE KWEOH
+        , List.map Char.fromCode (List.range 0xD019 0xD033) -- Lo  [27] HANGUL SYLLABLE KWEG..HANGUL SYLLABLE KWEH
+        , List.map Char.fromCode (List.range 0xD035 0xD04F) -- Lo  [27] HANGUL SYLLABLE KWIG..HANGUL SYLLABLE KWIH
+        , List.map Char.fromCode (List.range 0xD051 0xD06B) -- Lo  [27] HANGUL SYLLABLE KYUG..HANGUL SYLLABLE KYUH
+        , List.map Char.fromCode (List.range 0xD06D 0xD087) -- Lo  [27] HANGUL SYLLABLE KEUG..HANGUL SYLLABLE KEUH
+        , List.map Char.fromCode (List.range 0xD089 0xD0A3) -- Lo  [27] HANGUL SYLLABLE KYIG..HANGUL SYLLABLE KYIH
+        , List.map Char.fromCode (List.range 0xD0A5 0xD0BF) -- Lo  [27] HANGUL SYLLABLE KIG..HANGUL SYLLABLE KIH
+        , List.map Char.fromCode (List.range 0xD0C1 0xD0DB) -- Lo  [27] HANGUL SYLLABLE TAG..HANGUL SYLLABLE TAH
+        , List.map Char.fromCode (List.range 0xD0DD 0xD0F7) -- Lo  [27] HANGUL SYLLABLE TAEG..HANGUL SYLLABLE TAEH
+        , List.map Char.fromCode (List.range 0xD0F9 0xD113) -- Lo  [27] HANGUL SYLLABLE TYAG..HANGUL SYLLABLE TYAH
+        , List.map Char.fromCode (List.range 0xD115 0xD12F) -- Lo  [27] HANGUL SYLLABLE TYAEG..HANGUL SYLLABLE TYAEH
+        , List.map Char.fromCode (List.range 0xD131 0xD14B) -- Lo  [27] HANGUL SYLLABLE TEOG..HANGUL SYLLABLE TEOH
+        , List.map Char.fromCode (List.range 0xD14D 0xD167) -- Lo  [27] HANGUL SYLLABLE TEG..HANGUL SYLLABLE TEH
+        , List.map Char.fromCode (List.range 0xD169 0xD183) -- Lo  [27] HANGUL SYLLABLE TYEOG..HANGUL SYLLABLE TYEOH
+        , List.map Char.fromCode (List.range 0xD185 0xD19F) -- Lo  [27] HANGUL SYLLABLE TYEG..HANGUL SYLLABLE TYEH
+        , List.map Char.fromCode (List.range 0xD1A1 0xD1BB) -- Lo  [27] HANGUL SYLLABLE TOG..HANGUL SYLLABLE TOH
+        , List.map Char.fromCode (List.range 0xD1BD 0xD1D7) -- Lo  [27] HANGUL SYLLABLE TWAG..HANGUL SYLLABLE TWAH
+        , List.map Char.fromCode (List.range 0xD1D9 0xD1F3) -- Lo  [27] HANGUL SYLLABLE TWAEG..HANGUL SYLLABLE TWAEH
+        , List.map Char.fromCode (List.range 0xD1F5 0xD20F) -- Lo  [27] HANGUL SYLLABLE TOEG..HANGUL SYLLABLE TOEH
+        , List.map Char.fromCode (List.range 0xD211 0xD22B) -- Lo  [27] HANGUL SYLLABLE TYOG..HANGUL SYLLABLE TYOH
+        , List.map Char.fromCode (List.range 0xD22D 0xD247) -- Lo  [27] HANGUL SYLLABLE TUG..HANGUL SYLLABLE TUH
+        , List.map Char.fromCode (List.range 0xD249 0xD263) -- Lo  [27] HANGUL SYLLABLE TWEOG..HANGUL SYLLABLE TWEOH
+        , List.map Char.fromCode (List.range 0xD265 0xD27F) -- Lo  [27] HANGUL SYLLABLE TWEG..HANGUL SYLLABLE TWEH
+        , List.map Char.fromCode (List.range 0xD281 0xD29B) -- Lo  [27] HANGUL SYLLABLE TWIG..HANGUL SYLLABLE TWIH
+        , List.map Char.fromCode (List.range 0xD29D 0xD2B7) -- Lo  [27] HANGUL SYLLABLE TYUG..HANGUL SYLLABLE TYUH
+        , List.map Char.fromCode (List.range 0xD2B9 0xD2D3) -- Lo  [27] HANGUL SYLLABLE TEUG..HANGUL SYLLABLE TEUH
+        , List.map Char.fromCode (List.range 0xD2D5 0xD2EF) -- Lo  [27] HANGUL SYLLABLE TYIG..HANGUL SYLLABLE TYIH
+        , List.map Char.fromCode (List.range 0xD2F1 0xD30B) -- Lo  [27] HANGUL SYLLABLE TIG..HANGUL SYLLABLE TIH
+        , List.map Char.fromCode (List.range 0xD30D 0xD327) -- Lo  [27] HANGUL SYLLABLE PAG..HANGUL SYLLABLE PAH
+        , List.map Char.fromCode (List.range 0xD329 0xD343) -- Lo  [27] HANGUL SYLLABLE PAEG..HANGUL SYLLABLE PAEH
+        , List.map Char.fromCode (List.range 0xD345 0xD35F) -- Lo  [27] HANGUL SYLLABLE PYAG..HANGUL SYLLABLE PYAH
+        , List.map Char.fromCode (List.range 0xD361 0xD37B) -- Lo  [27] HANGUL SYLLABLE PYAEG..HANGUL SYLLABLE PYAEH
+        , List.map Char.fromCode (List.range 0xD37D 0xD397) -- Lo  [27] HANGUL SYLLABLE PEOG..HANGUL SYLLABLE PEOH
+        , List.map Char.fromCode (List.range 0xD399 0xD3B3) -- Lo  [27] HANGUL SYLLABLE PEG..HANGUL SYLLABLE PEH
+        , List.map Char.fromCode (List.range 0xD3B5 0xD3CF) -- Lo  [27] HANGUL SYLLABLE PYEOG..HANGUL SYLLABLE PYEOH
+        , List.map Char.fromCode (List.range 0xD3D1 0xD3EB) -- Lo  [27] HANGUL SYLLABLE PYEG..HANGUL SYLLABLE PYEH
+        , List.map Char.fromCode (List.range 0xD3ED 0xD407) -- Lo  [27] HANGUL SYLLABLE POG..HANGUL SYLLABLE POH
+        , List.map Char.fromCode (List.range 0xD409 0xD423) -- Lo  [27] HANGUL SYLLABLE PWAG..HANGUL SYLLABLE PWAH
+        , List.map Char.fromCode (List.range 0xD425 0xD43F) -- Lo  [27] HANGUL SYLLABLE PWAEG..HANGUL SYLLABLE PWAEH
+        , List.map Char.fromCode (List.range 0xD441 0xD45B) -- Lo  [27] HANGUL SYLLABLE POEG..HANGUL SYLLABLE POEH
+        , List.map Char.fromCode (List.range 0xD45D 0xD477) -- Lo  [27] HANGUL SYLLABLE PYOG..HANGUL SYLLABLE PYOH
+        , List.map Char.fromCode (List.range 0xD479 0xD493) -- Lo  [27] HANGUL SYLLABLE PUG..HANGUL SYLLABLE PUH
+        , List.map Char.fromCode (List.range 0xD495 0xD4AF) -- Lo  [27] HANGUL SYLLABLE PWEOG..HANGUL SYLLABLE PWEOH
+        , List.map Char.fromCode (List.range 0xD4B1 0xD4CB) -- Lo  [27] HANGUL SYLLABLE PWEG..HANGUL SYLLABLE PWEH
+        , List.map Char.fromCode (List.range 0xD4CD 0xD4E7) -- Lo  [27] HANGUL SYLLABLE PWIG..HANGUL SYLLABLE PWIH
+        , List.map Char.fromCode (List.range 0xD4E9 0xD503) -- Lo  [27] HANGUL SYLLABLE PYUG..HANGUL SYLLABLE PYUH
+        , List.map Char.fromCode (List.range 0xD505 0xD51F) -- Lo  [27] HANGUL SYLLABLE PEUG..HANGUL SYLLABLE PEUH
+        , List.map Char.fromCode (List.range 0xD521 0xD53B) -- Lo  [27] HANGUL SYLLABLE PYIG..HANGUL SYLLABLE PYIH
+        , List.map Char.fromCode (List.range 0xD53D 0xD557) -- Lo  [27] HANGUL SYLLABLE PIG..HANGUL SYLLABLE PIH
+        , List.map Char.fromCode (List.range 0xD559 0xD573) -- Lo  [27] HANGUL SYLLABLE HAG..HANGUL SYLLABLE HAH
+        , List.map Char.fromCode (List.range 0xD575 0xD58F) -- Lo  [27] HANGUL SYLLABLE HAEG..HANGUL SYLLABLE HAEH
+        , List.map Char.fromCode (List.range 0xD591 0xD5AB) -- Lo  [27] HANGUL SYLLABLE HYAG..HANGUL SYLLABLE HYAH
+        , List.map Char.fromCode (List.range 0xD5AD 0xD5C7) -- Lo  [27] HANGUL SYLLABLE HYAEG..HANGUL SYLLABLE HYAEH
+        , List.map Char.fromCode (List.range 0xD5C9 0xD5E3) -- Lo  [27] HANGUL SYLLABLE HEOG..HANGUL SYLLABLE HEOH
+        , List.map Char.fromCode (List.range 0xD5E5 0xD5FF) -- Lo  [27] HANGUL SYLLABLE HEG..HANGUL SYLLABLE HEH
+        , List.map Char.fromCode (List.range 0xD601 0xD61B) -- Lo  [27] HANGUL SYLLABLE HYEOG..HANGUL SYLLABLE HYEOH
+        , List.map Char.fromCode (List.range 0xD61D 0xD637) -- Lo  [27] HANGUL SYLLABLE HYEG..HANGUL SYLLABLE HYEH
+        , List.map Char.fromCode (List.range 0xD639 0xD653) -- Lo  [27] HANGUL SYLLABLE HOG..HANGUL SYLLABLE HOH
+        , List.map Char.fromCode (List.range 0xD655 0xD66F) -- Lo  [27] HANGUL SYLLABLE HWAG..HANGUL SYLLABLE HWAH
+        , List.map Char.fromCode (List.range 0xD671 0xD68B) -- Lo  [27] HANGUL SYLLABLE HWAEG..HANGUL SYLLABLE HWAEH
+        , List.map Char.fromCode (List.range 0xD68D 0xD6A7) -- Lo  [27] HANGUL SYLLABLE HOEG..HANGUL SYLLABLE HOEH
+        , List.map Char.fromCode (List.range 0xD6A9 0xD6C3) -- Lo  [27] HANGUL SYLLABLE HYOG..HANGUL SYLLABLE HYOH
+        , List.map Char.fromCode (List.range 0xD6C5 0xD6DF) -- Lo  [27] HANGUL SYLLABLE HUG..HANGUL SYLLABLE HUH
+        , List.map Char.fromCode (List.range 0xD6E1 0xD6FB) -- Lo  [27] HANGUL SYLLABLE HWEOG..HANGUL SYLLABLE HWEOH
+        , List.map Char.fromCode (List.range 0xD6FD 0xD717) -- Lo  [27] HANGUL SYLLABLE HWEG..HANGUL SYLLABLE HWEH
+        , List.map Char.fromCode (List.range 0xD719 0xD733) -- Lo  [27] HANGUL SYLLABLE HWIG..HANGUL SYLLABLE HWIH
+        , List.map Char.fromCode (List.range 0xD735 0xD74F) -- Lo  [27] HANGUL SYLLABLE HYUG..HANGUL SYLLABLE HYUH
+        , List.map Char.fromCode (List.range 0xD751 0xD76B) -- Lo  [27] HANGUL SYLLABLE HEUG..HANGUL SYLLABLE HEUH
+        , List.map Char.fromCode (List.range 0xD76D 0xD787) -- Lo  [27] HANGUL SYLLABLE HYIG..HANGUL SYLLABLE HYIH
+        , List.map Char.fromCode (List.range 0xD789 0xD7A3) -- Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
+        ]

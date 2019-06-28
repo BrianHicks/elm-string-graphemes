@@ -18,27 +18,38 @@ if class_ not in classes:
     sys.exit(1)
 
 out = []
-out.append('module {} exposing (match, parser)'.format(module))
+out.append('module {} exposing (chars, parser)'.format(module))
 out.append('import Parser exposing (Parser)')
+out.append('import Set exposing (Set)')
 out.append('parser : Parser ()')
-out.append('parser = Parser.chompIf match')
-out.append('match : Char -> Bool')
-out.append('match char =')
-out.append('    let c = Char.toCode char in')
+out.append('parser = Parser.chompIf (\c -> Set.member c chars)')
+
+# CHARS
+
+out.append('chars : Set Char')
+out.append('chars = (Set.fromList << List.concat) [')
+
+def elm_char(hex_codepoint):
+    return "'\\u{%s}'" % hex_codepoint
 
 for (i, match) in enumerate(classes[class_]):
     if match['kind'] == 'range':
-        code = '(c >= 0x{} && c <= 0x{})'.format(match['start'], match['end'])
+        code = 'List.map Char.fromCode (List.range 0x{} 0x{})'.format(
+            match['start'],
+            match['end'],
+        )
     elif match['kind'] == 'single':
-        code = '(c == 0x{})'.format(match['codepoint'])
-    else:
-        print("I don't know how to deal with a '{}' match!".format(match['kind']))
-        sys.exit(1)
+        code = '[ {} ]'.format(elm_char(match['codepoint']))
 
-    out.append('    {}{}'.format(
-        '|| ' if i > 0 else '',
+    out.append('    {}{} -- {}'.format(
+        ', ' if i > 0 else '',
         code,
+        match['comment'],
     ))
+
+out.append('    ]')
+
+# write out the final result
 
 with open(args.destination, 'w') as fh:
     fh.write('\n'.join(out))

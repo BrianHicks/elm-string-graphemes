@@ -1,17 +1,16 @@
-module String.Segmentation.Regional_Indicator exposing (match, parser)
+module String.Segmentation.Regional_Indicator exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    c >= 0x0001F1E6 && c <= 0x0001F1FF
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ List.map Char.fromCode (List.range 0x0001F1E6 0x0001F1FF) -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
+        ]

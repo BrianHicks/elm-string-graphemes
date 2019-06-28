@@ -1,10 +1,11 @@
 module String.SegmentationSpec exposing (graphemesSpec)
 
-import Data.Control as Control
-import Data.Prepend as Prepend
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer)
+import Set exposing (Set)
 import String.Segmentation as Segmentation
+import String.Segmentation.Control as Control
+import String.Segmentation.Prepend as Prepend
 import Test exposing (..)
 
 
@@ -40,9 +41,10 @@ expectSplit c1 c2 =
         |> Expect.equal (Ok [ c1, c2 ])
 
 
-charsFuzzer : List Char -> Fuzzer String
+charsFuzzer : Set Char -> Fuzzer String
 charsFuzzer chars =
     chars
+        |> Set.toList
         |> List.map (Fuzz.constant << String.fromList << List.singleton)
         |> Fuzz.oneOf
 

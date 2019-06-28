@@ -1,27 +1,26 @@
-module String.Segmentation.Prepend exposing (match, parser)
+module String.Segmentation.Prepend exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    (c >= 0x0600 && c <= 0x0605)
-        || (c == 0x06DD)
-        || (c == 0x070F)
-        || (c == 0x08E2)
-        || (c == 0x0D4E)
-        || (c == 0x000110BD)
-        || (c == 0x000110CD)
-        || (c >= 0x000111C2 && c <= 0x000111C3)
-        || (c == 0x00011A3A)
-        || (c >= 0x00011A84 && c <= 0x00011A89)
-        || (c == 0x00011D46)
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ List.map Char.fromCode (List.range 0x0600 0x0605) -- Cf   [6] ARABIC NUMBER SIGN..ARABIC NUMBER MARK ABOVE
+        , [ '\u{06DD}' ] -- Cf       ARABIC END OF AYAH
+        , [ '\u{070F}' ] -- Cf       SYRIAC ABBREVIATION MARK
+        , [ '\u{08E2}' ] -- Cf       ARABIC DISPUTED END OF AYAH
+        , [ 'ൎ' ] -- Lo       MALAYALAM LETTER DOT REPH
+        , [ '\u{110BD}' ] -- Cf       KAITHI NUMBER SIGN
+        , [ '\u{110CD}' ] -- Cf       KAITHI NUMBER SIGN ABOVE
+        , List.map Char.fromCode (List.range 0x000111C2 0x000111C3) -- Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
+        , [ '\u{11A3A}' ] -- Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
+        , List.map Char.fromCode (List.range 0x00011A84 0x00011A89) -- Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
+        , [ '\u{11D46}' ] -- Lo       MASARAM GONDI REPHA
+        ]

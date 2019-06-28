@@ -1,17 +1,16 @@
-module String.Segmentation.CR exposing (match, parser)
+module String.Segmentation.CR exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    c == 0x0D
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ [ '\u{000D}' ] -- Cc       <control-000D>
+        ]

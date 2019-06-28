@@ -1,415 +1,414 @@
-module String.Segmentation.LV exposing (match, parser)
+module String.Segmentation.LV exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    (c == 0xAC00)
-        || (c == 0xAC1C)
-        || (c == 0xAC38)
-        || (c == 0xAC54)
-        || (c == 0xAC70)
-        || (c == 0xAC8C)
-        || (c == 0xACA8)
-        || (c == 0xACC4)
-        || (c == 0xACE0)
-        || (c == 0xACFC)
-        || (c == 0xAD18)
-        || (c == 0xAD34)
-        || (c == 0xAD50)
-        || (c == 0xAD6C)
-        || (c == 0xAD88)
-        || (c == 0xADA4)
-        || (c == 0xADC0)
-        || (c == 0xADDC)
-        || (c == 0xADF8)
-        || (c == 0xAE14)
-        || (c == 0xAE30)
-        || (c == 0xAE4C)
-        || (c == 0xAE68)
-        || (c == 0xAE84)
-        || (c == 0xAEA0)
-        || (c == 0xAEBC)
-        || (c == 0xAED8)
-        || (c == 0xAEF4)
-        || (c == 0xAF10)
-        || (c == 0xAF2C)
-        || (c == 0xAF48)
-        || (c == 0xAF64)
-        || (c == 0xAF80)
-        || (c == 0xAF9C)
-        || (c == 0xAFB8)
-        || (c == 0xAFD4)
-        || (c == 0xAFF0)
-        || (c == 0xB00C)
-        || (c == 0xB028)
-        || (c == 0xB044)
-        || (c == 0xB060)
-        || (c == 0xB07C)
-        || (c == 0xB098)
-        || (c == 0xB0B4)
-        || (c == 0xB0D0)
-        || (c == 0xB0EC)
-        || (c == 0xB108)
-        || (c == 0xB124)
-        || (c == 0xB140)
-        || (c == 0xB15C)
-        || (c == 0xB178)
-        || (c == 0xB194)
-        || (c == 0xB1B0)
-        || (c == 0xB1CC)
-        || (c == 0xB1E8)
-        || (c == 0xB204)
-        || (c == 0xB220)
-        || (c == 0xB23C)
-        || (c == 0xB258)
-        || (c == 0xB274)
-        || (c == 0xB290)
-        || (c == 0xB2AC)
-        || (c == 0xB2C8)
-        || (c == 0xB2E4)
-        || (c == 0xB300)
-        || (c == 0xB31C)
-        || (c == 0xB338)
-        || (c == 0xB354)
-        || (c == 0xB370)
-        || (c == 0xB38C)
-        || (c == 0xB3A8)
-        || (c == 0xB3C4)
-        || (c == 0xB3E0)
-        || (c == 0xB3FC)
-        || (c == 0xB418)
-        || (c == 0xB434)
-        || (c == 0xB450)
-        || (c == 0xB46C)
-        || (c == 0xB488)
-        || (c == 0xB4A4)
-        || (c == 0xB4C0)
-        || (c == 0xB4DC)
-        || (c == 0xB4F8)
-        || (c == 0xB514)
-        || (c == 0xB530)
-        || (c == 0xB54C)
-        || (c == 0xB568)
-        || (c == 0xB584)
-        || (c == 0xB5A0)
-        || (c == 0xB5BC)
-        || (c == 0xB5D8)
-        || (c == 0xB5F4)
-        || (c == 0xB610)
-        || (c == 0xB62C)
-        || (c == 0xB648)
-        || (c == 0xB664)
-        || (c == 0xB680)
-        || (c == 0xB69C)
-        || (c == 0xB6B8)
-        || (c == 0xB6D4)
-        || (c == 0xB6F0)
-        || (c == 0xB70C)
-        || (c == 0xB728)
-        || (c == 0xB744)
-        || (c == 0xB760)
-        || (c == 0xB77C)
-        || (c == 0xB798)
-        || (c == 0xB7B4)
-        || (c == 0xB7D0)
-        || (c == 0xB7EC)
-        || (c == 0xB808)
-        || (c == 0xB824)
-        || (c == 0xB840)
-        || (c == 0xB85C)
-        || (c == 0xB878)
-        || (c == 0xB894)
-        || (c == 0xB8B0)
-        || (c == 0xB8CC)
-        || (c == 0xB8E8)
-        || (c == 0xB904)
-        || (c == 0xB920)
-        || (c == 0xB93C)
-        || (c == 0xB958)
-        || (c == 0xB974)
-        || (c == 0xB990)
-        || (c == 0xB9AC)
-        || (c == 0xB9C8)
-        || (c == 0xB9E4)
-        || (c == 0xBA00)
-        || (c == 0xBA1C)
-        || (c == 0xBA38)
-        || (c == 0xBA54)
-        || (c == 0xBA70)
-        || (c == 0xBA8C)
-        || (c == 0xBAA8)
-        || (c == 0xBAC4)
-        || (c == 0xBAE0)
-        || (c == 0xBAFC)
-        || (c == 0xBB18)
-        || (c == 0xBB34)
-        || (c == 0xBB50)
-        || (c == 0xBB6C)
-        || (c == 0xBB88)
-        || (c == 0xBBA4)
-        || (c == 0xBBC0)
-        || (c == 0xBBDC)
-        || (c == 0xBBF8)
-        || (c == 0xBC14)
-        || (c == 0xBC30)
-        || (c == 0xBC4C)
-        || (c == 0xBC68)
-        || (c == 0xBC84)
-        || (c == 0xBCA0)
-        || (c == 0xBCBC)
-        || (c == 0xBCD8)
-        || (c == 0xBCF4)
-        || (c == 0xBD10)
-        || (c == 0xBD2C)
-        || (c == 0xBD48)
-        || (c == 0xBD64)
-        || (c == 0xBD80)
-        || (c == 0xBD9C)
-        || (c == 0xBDB8)
-        || (c == 0xBDD4)
-        || (c == 0xBDF0)
-        || (c == 0xBE0C)
-        || (c == 0xBE28)
-        || (c == 0xBE44)
-        || (c == 0xBE60)
-        || (c == 0xBE7C)
-        || (c == 0xBE98)
-        || (c == 0xBEB4)
-        || (c == 0xBED0)
-        || (c == 0xBEEC)
-        || (c == 0xBF08)
-        || (c == 0xBF24)
-        || (c == 0xBF40)
-        || (c == 0xBF5C)
-        || (c == 0xBF78)
-        || (c == 0xBF94)
-        || (c == 0xBFB0)
-        || (c == 0xBFCC)
-        || (c == 0xBFE8)
-        || (c == 0xC004)
-        || (c == 0xC020)
-        || (c == 0xC03C)
-        || (c == 0xC058)
-        || (c == 0xC074)
-        || (c == 0xC090)
-        || (c == 0xC0AC)
-        || (c == 0xC0C8)
-        || (c == 0xC0E4)
-        || (c == 0xC100)
-        || (c == 0xC11C)
-        || (c == 0xC138)
-        || (c == 0xC154)
-        || (c == 0xC170)
-        || (c == 0xC18C)
-        || (c == 0xC1A8)
-        || (c == 0xC1C4)
-        || (c == 0xC1E0)
-        || (c == 0xC1FC)
-        || (c == 0xC218)
-        || (c == 0xC234)
-        || (c == 0xC250)
-        || (c == 0xC26C)
-        || (c == 0xC288)
-        || (c == 0xC2A4)
-        || (c == 0xC2C0)
-        || (c == 0xC2DC)
-        || (c == 0xC2F8)
-        || (c == 0xC314)
-        || (c == 0xC330)
-        || (c == 0xC34C)
-        || (c == 0xC368)
-        || (c == 0xC384)
-        || (c == 0xC3A0)
-        || (c == 0xC3BC)
-        || (c == 0xC3D8)
-        || (c == 0xC3F4)
-        || (c == 0xC410)
-        || (c == 0xC42C)
-        || (c == 0xC448)
-        || (c == 0xC464)
-        || (c == 0xC480)
-        || (c == 0xC49C)
-        || (c == 0xC4B8)
-        || (c == 0xC4D4)
-        || (c == 0xC4F0)
-        || (c == 0xC50C)
-        || (c == 0xC528)
-        || (c == 0xC544)
-        || (c == 0xC560)
-        || (c == 0xC57C)
-        || (c == 0xC598)
-        || (c == 0xC5B4)
-        || (c == 0xC5D0)
-        || (c == 0xC5EC)
-        || (c == 0xC608)
-        || (c == 0xC624)
-        || (c == 0xC640)
-        || (c == 0xC65C)
-        || (c == 0xC678)
-        || (c == 0xC694)
-        || (c == 0xC6B0)
-        || (c == 0xC6CC)
-        || (c == 0xC6E8)
-        || (c == 0xC704)
-        || (c == 0xC720)
-        || (c == 0xC73C)
-        || (c == 0xC758)
-        || (c == 0xC774)
-        || (c == 0xC790)
-        || (c == 0xC7AC)
-        || (c == 0xC7C8)
-        || (c == 0xC7E4)
-        || (c == 0xC800)
-        || (c == 0xC81C)
-        || (c == 0xC838)
-        || (c == 0xC854)
-        || (c == 0xC870)
-        || (c == 0xC88C)
-        || (c == 0xC8A8)
-        || (c == 0xC8C4)
-        || (c == 0xC8E0)
-        || (c == 0xC8FC)
-        || (c == 0xC918)
-        || (c == 0xC934)
-        || (c == 0xC950)
-        || (c == 0xC96C)
-        || (c == 0xC988)
-        || (c == 0xC9A4)
-        || (c == 0xC9C0)
-        || (c == 0xC9DC)
-        || (c == 0xC9F8)
-        || (c == 0xCA14)
-        || (c == 0xCA30)
-        || (c == 0xCA4C)
-        || (c == 0xCA68)
-        || (c == 0xCA84)
-        || (c == 0xCAA0)
-        || (c == 0xCABC)
-        || (c == 0xCAD8)
-        || (c == 0xCAF4)
-        || (c == 0xCB10)
-        || (c == 0xCB2C)
-        || (c == 0xCB48)
-        || (c == 0xCB64)
-        || (c == 0xCB80)
-        || (c == 0xCB9C)
-        || (c == 0xCBB8)
-        || (c == 0xCBD4)
-        || (c == 0xCBF0)
-        || (c == 0xCC0C)
-        || (c == 0xCC28)
-        || (c == 0xCC44)
-        || (c == 0xCC60)
-        || (c == 0xCC7C)
-        || (c == 0xCC98)
-        || (c == 0xCCB4)
-        || (c == 0xCCD0)
-        || (c == 0xCCEC)
-        || (c == 0xCD08)
-        || (c == 0xCD24)
-        || (c == 0xCD40)
-        || (c == 0xCD5C)
-        || (c == 0xCD78)
-        || (c == 0xCD94)
-        || (c == 0xCDB0)
-        || (c == 0xCDCC)
-        || (c == 0xCDE8)
-        || (c == 0xCE04)
-        || (c == 0xCE20)
-        || (c == 0xCE3C)
-        || (c == 0xCE58)
-        || (c == 0xCE74)
-        || (c == 0xCE90)
-        || (c == 0xCEAC)
-        || (c == 0xCEC8)
-        || (c == 0xCEE4)
-        || (c == 0xCF00)
-        || (c == 0xCF1C)
-        || (c == 0xCF38)
-        || (c == 0xCF54)
-        || (c == 0xCF70)
-        || (c == 0xCF8C)
-        || (c == 0xCFA8)
-        || (c == 0xCFC4)
-        || (c == 0xCFE0)
-        || (c == 0xCFFC)
-        || (c == 0xD018)
-        || (c == 0xD034)
-        || (c == 0xD050)
-        || (c == 0xD06C)
-        || (c == 0xD088)
-        || (c == 0xD0A4)
-        || (c == 0xD0C0)
-        || (c == 0xD0DC)
-        || (c == 0xD0F8)
-        || (c == 0xD114)
-        || (c == 0xD130)
-        || (c == 0xD14C)
-        || (c == 0xD168)
-        || (c == 0xD184)
-        || (c == 0xD1A0)
-        || (c == 0xD1BC)
-        || (c == 0xD1D8)
-        || (c == 0xD1F4)
-        || (c == 0xD210)
-        || (c == 0xD22C)
-        || (c == 0xD248)
-        || (c == 0xD264)
-        || (c == 0xD280)
-        || (c == 0xD29C)
-        || (c == 0xD2B8)
-        || (c == 0xD2D4)
-        || (c == 0xD2F0)
-        || (c == 0xD30C)
-        || (c == 0xD328)
-        || (c == 0xD344)
-        || (c == 0xD360)
-        || (c == 0xD37C)
-        || (c == 0xD398)
-        || (c == 0xD3B4)
-        || (c == 0xD3D0)
-        || (c == 0xD3EC)
-        || (c == 0xD408)
-        || (c == 0xD424)
-        || (c == 0xD440)
-        || (c == 0xD45C)
-        || (c == 0xD478)
-        || (c == 0xD494)
-        || (c == 0xD4B0)
-        || (c == 0xD4CC)
-        || (c == 0xD4E8)
-        || (c == 0xD504)
-        || (c == 0xD520)
-        || (c == 0xD53C)
-        || (c == 0xD558)
-        || (c == 0xD574)
-        || (c == 0xD590)
-        || (c == 0xD5AC)
-        || (c == 0xD5C8)
-        || (c == 0xD5E4)
-        || (c == 0xD600)
-        || (c == 0xD61C)
-        || (c == 0xD638)
-        || (c == 0xD654)
-        || (c == 0xD670)
-        || (c == 0xD68C)
-        || (c == 0xD6A8)
-        || (c == 0xD6C4)
-        || (c == 0xD6E0)
-        || (c == 0xD6FC)
-        || (c == 0xD718)
-        || (c == 0xD734)
-        || (c == 0xD750)
-        || (c == 0xD76C)
-        || (c == 0xD788)
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ [ '가' ] -- Lo       HANGUL SYLLABLE GA
+        , [ '개' ] -- Lo       HANGUL SYLLABLE GAE
+        , [ '갸' ] -- Lo       HANGUL SYLLABLE GYA
+        , [ '걔' ] -- Lo       HANGUL SYLLABLE GYAE
+        , [ '거' ] -- Lo       HANGUL SYLLABLE GEO
+        , [ '게' ] -- Lo       HANGUL SYLLABLE GE
+        , [ '겨' ] -- Lo       HANGUL SYLLABLE GYEO
+        , [ '계' ] -- Lo       HANGUL SYLLABLE GYE
+        , [ '고' ] -- Lo       HANGUL SYLLABLE GO
+        , [ '과' ] -- Lo       HANGUL SYLLABLE GWA
+        , [ '괘' ] -- Lo       HANGUL SYLLABLE GWAE
+        , [ '괴' ] -- Lo       HANGUL SYLLABLE GOE
+        , [ '교' ] -- Lo       HANGUL SYLLABLE GYO
+        , [ '구' ] -- Lo       HANGUL SYLLABLE GU
+        , [ '궈' ] -- Lo       HANGUL SYLLABLE GWEO
+        , [ '궤' ] -- Lo       HANGUL SYLLABLE GWE
+        , [ '귀' ] -- Lo       HANGUL SYLLABLE GWI
+        , [ '규' ] -- Lo       HANGUL SYLLABLE GYU
+        , [ '그' ] -- Lo       HANGUL SYLLABLE GEU
+        , [ '긔' ] -- Lo       HANGUL SYLLABLE GYI
+        , [ '기' ] -- Lo       HANGUL SYLLABLE GI
+        , [ '까' ] -- Lo       HANGUL SYLLABLE GGA
+        , [ '깨' ] -- Lo       HANGUL SYLLABLE GGAE
+        , [ '꺄' ] -- Lo       HANGUL SYLLABLE GGYA
+        , [ '꺠' ] -- Lo       HANGUL SYLLABLE GGYAE
+        , [ '꺼' ] -- Lo       HANGUL SYLLABLE GGEO
+        , [ '께' ] -- Lo       HANGUL SYLLABLE GGE
+        , [ '껴' ] -- Lo       HANGUL SYLLABLE GGYEO
+        , [ '꼐' ] -- Lo       HANGUL SYLLABLE GGYE
+        , [ '꼬' ] -- Lo       HANGUL SYLLABLE GGO
+        , [ '꽈' ] -- Lo       HANGUL SYLLABLE GGWA
+        , [ '꽤' ] -- Lo       HANGUL SYLLABLE GGWAE
+        , [ '꾀' ] -- Lo       HANGUL SYLLABLE GGOE
+        , [ '꾜' ] -- Lo       HANGUL SYLLABLE GGYO
+        , [ '꾸' ] -- Lo       HANGUL SYLLABLE GGU
+        , [ '꿔' ] -- Lo       HANGUL SYLLABLE GGWEO
+        , [ '꿰' ] -- Lo       HANGUL SYLLABLE GGWE
+        , [ '뀌' ] -- Lo       HANGUL SYLLABLE GGWI
+        , [ '뀨' ] -- Lo       HANGUL SYLLABLE GGYU
+        , [ '끄' ] -- Lo       HANGUL SYLLABLE GGEU
+        , [ '끠' ] -- Lo       HANGUL SYLLABLE GGYI
+        , [ '끼' ] -- Lo       HANGUL SYLLABLE GGI
+        , [ '나' ] -- Lo       HANGUL SYLLABLE NA
+        , [ '내' ] -- Lo       HANGUL SYLLABLE NAE
+        , [ '냐' ] -- Lo       HANGUL SYLLABLE NYA
+        , [ '냬' ] -- Lo       HANGUL SYLLABLE NYAE
+        , [ '너' ] -- Lo       HANGUL SYLLABLE NEO
+        , [ '네' ] -- Lo       HANGUL SYLLABLE NE
+        , [ '녀' ] -- Lo       HANGUL SYLLABLE NYEO
+        , [ '녜' ] -- Lo       HANGUL SYLLABLE NYE
+        , [ '노' ] -- Lo       HANGUL SYLLABLE NO
+        , [ '놔' ] -- Lo       HANGUL SYLLABLE NWA
+        , [ '놰' ] -- Lo       HANGUL SYLLABLE NWAE
+        , [ '뇌' ] -- Lo       HANGUL SYLLABLE NOE
+        , [ '뇨' ] -- Lo       HANGUL SYLLABLE NYO
+        , [ '누' ] -- Lo       HANGUL SYLLABLE NU
+        , [ '눠' ] -- Lo       HANGUL SYLLABLE NWEO
+        , [ '눼' ] -- Lo       HANGUL SYLLABLE NWE
+        , [ '뉘' ] -- Lo       HANGUL SYLLABLE NWI
+        , [ '뉴' ] -- Lo       HANGUL SYLLABLE NYU
+        , [ '느' ] -- Lo       HANGUL SYLLABLE NEU
+        , [ '늬' ] -- Lo       HANGUL SYLLABLE NYI
+        , [ '니' ] -- Lo       HANGUL SYLLABLE NI
+        , [ '다' ] -- Lo       HANGUL SYLLABLE DA
+        , [ '대' ] -- Lo       HANGUL SYLLABLE DAE
+        , [ '댜' ] -- Lo       HANGUL SYLLABLE DYA
+        , [ '댸' ] -- Lo       HANGUL SYLLABLE DYAE
+        , [ '더' ] -- Lo       HANGUL SYLLABLE DEO
+        , [ '데' ] -- Lo       HANGUL SYLLABLE DE
+        , [ '뎌' ] -- Lo       HANGUL SYLLABLE DYEO
+        , [ '뎨' ] -- Lo       HANGUL SYLLABLE DYE
+        , [ '도' ] -- Lo       HANGUL SYLLABLE DO
+        , [ '돠' ] -- Lo       HANGUL SYLLABLE DWA
+        , [ '돼' ] -- Lo       HANGUL SYLLABLE DWAE
+        , [ '되' ] -- Lo       HANGUL SYLLABLE DOE
+        , [ '됴' ] -- Lo       HANGUL SYLLABLE DYO
+        , [ '두' ] -- Lo       HANGUL SYLLABLE DU
+        , [ '둬' ] -- Lo       HANGUL SYLLABLE DWEO
+        , [ '뒈' ] -- Lo       HANGUL SYLLABLE DWE
+        , [ '뒤' ] -- Lo       HANGUL SYLLABLE DWI
+        , [ '듀' ] -- Lo       HANGUL SYLLABLE DYU
+        , [ '드' ] -- Lo       HANGUL SYLLABLE DEU
+        , [ '듸' ] -- Lo       HANGUL SYLLABLE DYI
+        , [ '디' ] -- Lo       HANGUL SYLLABLE DI
+        , [ '따' ] -- Lo       HANGUL SYLLABLE DDA
+        , [ '때' ] -- Lo       HANGUL SYLLABLE DDAE
+        , [ '땨' ] -- Lo       HANGUL SYLLABLE DDYA
+        , [ '떄' ] -- Lo       HANGUL SYLLABLE DDYAE
+        , [ '떠' ] -- Lo       HANGUL SYLLABLE DDEO
+        , [ '떼' ] -- Lo       HANGUL SYLLABLE DDE
+        , [ '뗘' ] -- Lo       HANGUL SYLLABLE DDYEO
+        , [ '뗴' ] -- Lo       HANGUL SYLLABLE DDYE
+        , [ '또' ] -- Lo       HANGUL SYLLABLE DDO
+        , [ '똬' ] -- Lo       HANGUL SYLLABLE DDWA
+        , [ '뙈' ] -- Lo       HANGUL SYLLABLE DDWAE
+        , [ '뙤' ] -- Lo       HANGUL SYLLABLE DDOE
+        , [ '뚀' ] -- Lo       HANGUL SYLLABLE DDYO
+        , [ '뚜' ] -- Lo       HANGUL SYLLABLE DDU
+        , [ '뚸' ] -- Lo       HANGUL SYLLABLE DDWEO
+        , [ '뛔' ] -- Lo       HANGUL SYLLABLE DDWE
+        , [ '뛰' ] -- Lo       HANGUL SYLLABLE DDWI
+        , [ '뜌' ] -- Lo       HANGUL SYLLABLE DDYU
+        , [ '뜨' ] -- Lo       HANGUL SYLLABLE DDEU
+        , [ '띄' ] -- Lo       HANGUL SYLLABLE DDYI
+        , [ '띠' ] -- Lo       HANGUL SYLLABLE DDI
+        , [ '라' ] -- Lo       HANGUL SYLLABLE RA
+        , [ '래' ] -- Lo       HANGUL SYLLABLE RAE
+        , [ '랴' ] -- Lo       HANGUL SYLLABLE RYA
+        , [ '럐' ] -- Lo       HANGUL SYLLABLE RYAE
+        , [ '러' ] -- Lo       HANGUL SYLLABLE REO
+        , [ '레' ] -- Lo       HANGUL SYLLABLE RE
+        , [ '려' ] -- Lo       HANGUL SYLLABLE RYEO
+        , [ '례' ] -- Lo       HANGUL SYLLABLE RYE
+        , [ '로' ] -- Lo       HANGUL SYLLABLE RO
+        , [ '롸' ] -- Lo       HANGUL SYLLABLE RWA
+        , [ '뢔' ] -- Lo       HANGUL SYLLABLE RWAE
+        , [ '뢰' ] -- Lo       HANGUL SYLLABLE ROE
+        , [ '료' ] -- Lo       HANGUL SYLLABLE RYO
+        , [ '루' ] -- Lo       HANGUL SYLLABLE RU
+        , [ '뤄' ] -- Lo       HANGUL SYLLABLE RWEO
+        , [ '뤠' ] -- Lo       HANGUL SYLLABLE RWE
+        , [ '뤼' ] -- Lo       HANGUL SYLLABLE RWI
+        , [ '류' ] -- Lo       HANGUL SYLLABLE RYU
+        , [ '르' ] -- Lo       HANGUL SYLLABLE REU
+        , [ '릐' ] -- Lo       HANGUL SYLLABLE RYI
+        , [ '리' ] -- Lo       HANGUL SYLLABLE RI
+        , [ '마' ] -- Lo       HANGUL SYLLABLE MA
+        , [ '매' ] -- Lo       HANGUL SYLLABLE MAE
+        , [ '먀' ] -- Lo       HANGUL SYLLABLE MYA
+        , [ '먜' ] -- Lo       HANGUL SYLLABLE MYAE
+        , [ '머' ] -- Lo       HANGUL SYLLABLE MEO
+        , [ '메' ] -- Lo       HANGUL SYLLABLE ME
+        , [ '며' ] -- Lo       HANGUL SYLLABLE MYEO
+        , [ '몌' ] -- Lo       HANGUL SYLLABLE MYE
+        , [ '모' ] -- Lo       HANGUL SYLLABLE MO
+        , [ '뫄' ] -- Lo       HANGUL SYLLABLE MWA
+        , [ '뫠' ] -- Lo       HANGUL SYLLABLE MWAE
+        , [ '뫼' ] -- Lo       HANGUL SYLLABLE MOE
+        , [ '묘' ] -- Lo       HANGUL SYLLABLE MYO
+        , [ '무' ] -- Lo       HANGUL SYLLABLE MU
+        , [ '뭐' ] -- Lo       HANGUL SYLLABLE MWEO
+        , [ '뭬' ] -- Lo       HANGUL SYLLABLE MWE
+        , [ '뮈' ] -- Lo       HANGUL SYLLABLE MWI
+        , [ '뮤' ] -- Lo       HANGUL SYLLABLE MYU
+        , [ '므' ] -- Lo       HANGUL SYLLABLE MEU
+        , [ '믜' ] -- Lo       HANGUL SYLLABLE MYI
+        , [ '미' ] -- Lo       HANGUL SYLLABLE MI
+        , [ '바' ] -- Lo       HANGUL SYLLABLE BA
+        , [ '배' ] -- Lo       HANGUL SYLLABLE BAE
+        , [ '뱌' ] -- Lo       HANGUL SYLLABLE BYA
+        , [ '뱨' ] -- Lo       HANGUL SYLLABLE BYAE
+        , [ '버' ] -- Lo       HANGUL SYLLABLE BEO
+        , [ '베' ] -- Lo       HANGUL SYLLABLE BE
+        , [ '벼' ] -- Lo       HANGUL SYLLABLE BYEO
+        , [ '볘' ] -- Lo       HANGUL SYLLABLE BYE
+        , [ '보' ] -- Lo       HANGUL SYLLABLE BO
+        , [ '봐' ] -- Lo       HANGUL SYLLABLE BWA
+        , [ '봬' ] -- Lo       HANGUL SYLLABLE BWAE
+        , [ '뵈' ] -- Lo       HANGUL SYLLABLE BOE
+        , [ '뵤' ] -- Lo       HANGUL SYLLABLE BYO
+        , [ '부' ] -- Lo       HANGUL SYLLABLE BU
+        , [ '붜' ] -- Lo       HANGUL SYLLABLE BWEO
+        , [ '붸' ] -- Lo       HANGUL SYLLABLE BWE
+        , [ '뷔' ] -- Lo       HANGUL SYLLABLE BWI
+        , [ '뷰' ] -- Lo       HANGUL SYLLABLE BYU
+        , [ '브' ] -- Lo       HANGUL SYLLABLE BEU
+        , [ '븨' ] -- Lo       HANGUL SYLLABLE BYI
+        , [ '비' ] -- Lo       HANGUL SYLLABLE BI
+        , [ '빠' ] -- Lo       HANGUL SYLLABLE BBA
+        , [ '빼' ] -- Lo       HANGUL SYLLABLE BBAE
+        , [ '뺘' ] -- Lo       HANGUL SYLLABLE BBYA
+        , [ '뺴' ] -- Lo       HANGUL SYLLABLE BBYAE
+        , [ '뻐' ] -- Lo       HANGUL SYLLABLE BBEO
+        , [ '뻬' ] -- Lo       HANGUL SYLLABLE BBE
+        , [ '뼈' ] -- Lo       HANGUL SYLLABLE BBYEO
+        , [ '뼤' ] -- Lo       HANGUL SYLLABLE BBYE
+        , [ '뽀' ] -- Lo       HANGUL SYLLABLE BBO
+        , [ '뽜' ] -- Lo       HANGUL SYLLABLE BBWA
+        , [ '뽸' ] -- Lo       HANGUL SYLLABLE BBWAE
+        , [ '뾔' ] -- Lo       HANGUL SYLLABLE BBOE
+        , [ '뾰' ] -- Lo       HANGUL SYLLABLE BBYO
+        , [ '뿌' ] -- Lo       HANGUL SYLLABLE BBU
+        , [ '뿨' ] -- Lo       HANGUL SYLLABLE BBWEO
+        , [ '쀄' ] -- Lo       HANGUL SYLLABLE BBWE
+        , [ '쀠' ] -- Lo       HANGUL SYLLABLE BBWI
+        , [ '쀼' ] -- Lo       HANGUL SYLLABLE BBYU
+        , [ '쁘' ] -- Lo       HANGUL SYLLABLE BBEU
+        , [ '쁴' ] -- Lo       HANGUL SYLLABLE BBYI
+        , [ '삐' ] -- Lo       HANGUL SYLLABLE BBI
+        , [ '사' ] -- Lo       HANGUL SYLLABLE SA
+        , [ '새' ] -- Lo       HANGUL SYLLABLE SAE
+        , [ '샤' ] -- Lo       HANGUL SYLLABLE SYA
+        , [ '섀' ] -- Lo       HANGUL SYLLABLE SYAE
+        , [ '서' ] -- Lo       HANGUL SYLLABLE SEO
+        , [ '세' ] -- Lo       HANGUL SYLLABLE SE
+        , [ '셔' ] -- Lo       HANGUL SYLLABLE SYEO
+        , [ '셰' ] -- Lo       HANGUL SYLLABLE SYE
+        , [ '소' ] -- Lo       HANGUL SYLLABLE SO
+        , [ '솨' ] -- Lo       HANGUL SYLLABLE SWA
+        , [ '쇄' ] -- Lo       HANGUL SYLLABLE SWAE
+        , [ '쇠' ] -- Lo       HANGUL SYLLABLE SOE
+        , [ '쇼' ] -- Lo       HANGUL SYLLABLE SYO
+        , [ '수' ] -- Lo       HANGUL SYLLABLE SU
+        , [ '숴' ] -- Lo       HANGUL SYLLABLE SWEO
+        , [ '쉐' ] -- Lo       HANGUL SYLLABLE SWE
+        , [ '쉬' ] -- Lo       HANGUL SYLLABLE SWI
+        , [ '슈' ] -- Lo       HANGUL SYLLABLE SYU
+        , [ '스' ] -- Lo       HANGUL SYLLABLE SEU
+        , [ '싀' ] -- Lo       HANGUL SYLLABLE SYI
+        , [ '시' ] -- Lo       HANGUL SYLLABLE SI
+        , [ '싸' ] -- Lo       HANGUL SYLLABLE SSA
+        , [ '쌔' ] -- Lo       HANGUL SYLLABLE SSAE
+        , [ '쌰' ] -- Lo       HANGUL SYLLABLE SSYA
+        , [ '썌' ] -- Lo       HANGUL SYLLABLE SSYAE
+        , [ '써' ] -- Lo       HANGUL SYLLABLE SSEO
+        , [ '쎄' ] -- Lo       HANGUL SYLLABLE SSE
+        , [ '쎠' ] -- Lo       HANGUL SYLLABLE SSYEO
+        , [ '쎼' ] -- Lo       HANGUL SYLLABLE SSYE
+        , [ '쏘' ] -- Lo       HANGUL SYLLABLE SSO
+        , [ '쏴' ] -- Lo       HANGUL SYLLABLE SSWA
+        , [ '쐐' ] -- Lo       HANGUL SYLLABLE SSWAE
+        , [ '쐬' ] -- Lo       HANGUL SYLLABLE SSOE
+        , [ '쑈' ] -- Lo       HANGUL SYLLABLE SSYO
+        , [ '쑤' ] -- Lo       HANGUL SYLLABLE SSU
+        , [ '쒀' ] -- Lo       HANGUL SYLLABLE SSWEO
+        , [ '쒜' ] -- Lo       HANGUL SYLLABLE SSWE
+        , [ '쒸' ] -- Lo       HANGUL SYLLABLE SSWI
+        , [ '쓔' ] -- Lo       HANGUL SYLLABLE SSYU
+        , [ '쓰' ] -- Lo       HANGUL SYLLABLE SSEU
+        , [ '씌' ] -- Lo       HANGUL SYLLABLE SSYI
+        , [ '씨' ] -- Lo       HANGUL SYLLABLE SSI
+        , [ '아' ] -- Lo       HANGUL SYLLABLE A
+        , [ '애' ] -- Lo       HANGUL SYLLABLE AE
+        , [ '야' ] -- Lo       HANGUL SYLLABLE YA
+        , [ '얘' ] -- Lo       HANGUL SYLLABLE YAE
+        , [ '어' ] -- Lo       HANGUL SYLLABLE EO
+        , [ '에' ] -- Lo       HANGUL SYLLABLE E
+        , [ '여' ] -- Lo       HANGUL SYLLABLE YEO
+        , [ '예' ] -- Lo       HANGUL SYLLABLE YE
+        , [ '오' ] -- Lo       HANGUL SYLLABLE O
+        , [ '와' ] -- Lo       HANGUL SYLLABLE WA
+        , [ '왜' ] -- Lo       HANGUL SYLLABLE WAE
+        , [ '외' ] -- Lo       HANGUL SYLLABLE OE
+        , [ '요' ] -- Lo       HANGUL SYLLABLE YO
+        , [ '우' ] -- Lo       HANGUL SYLLABLE U
+        , [ '워' ] -- Lo       HANGUL SYLLABLE WEO
+        , [ '웨' ] -- Lo       HANGUL SYLLABLE WE
+        , [ '위' ] -- Lo       HANGUL SYLLABLE WI
+        , [ '유' ] -- Lo       HANGUL SYLLABLE YU
+        , [ '으' ] -- Lo       HANGUL SYLLABLE EU
+        , [ '의' ] -- Lo       HANGUL SYLLABLE YI
+        , [ '이' ] -- Lo       HANGUL SYLLABLE I
+        , [ '자' ] -- Lo       HANGUL SYLLABLE JA
+        , [ '재' ] -- Lo       HANGUL SYLLABLE JAE
+        , [ '쟈' ] -- Lo       HANGUL SYLLABLE JYA
+        , [ '쟤' ] -- Lo       HANGUL SYLLABLE JYAE
+        , [ '저' ] -- Lo       HANGUL SYLLABLE JEO
+        , [ '제' ] -- Lo       HANGUL SYLLABLE JE
+        , [ '져' ] -- Lo       HANGUL SYLLABLE JYEO
+        , [ '졔' ] -- Lo       HANGUL SYLLABLE JYE
+        , [ '조' ] -- Lo       HANGUL SYLLABLE JO
+        , [ '좌' ] -- Lo       HANGUL SYLLABLE JWA
+        , [ '좨' ] -- Lo       HANGUL SYLLABLE JWAE
+        , [ '죄' ] -- Lo       HANGUL SYLLABLE JOE
+        , [ '죠' ] -- Lo       HANGUL SYLLABLE JYO
+        , [ '주' ] -- Lo       HANGUL SYLLABLE JU
+        , [ '줘' ] -- Lo       HANGUL SYLLABLE JWEO
+        , [ '줴' ] -- Lo       HANGUL SYLLABLE JWE
+        , [ '쥐' ] -- Lo       HANGUL SYLLABLE JWI
+        , [ '쥬' ] -- Lo       HANGUL SYLLABLE JYU
+        , [ '즈' ] -- Lo       HANGUL SYLLABLE JEU
+        , [ '즤' ] -- Lo       HANGUL SYLLABLE JYI
+        , [ '지' ] -- Lo       HANGUL SYLLABLE JI
+        , [ '짜' ] -- Lo       HANGUL SYLLABLE JJA
+        , [ '째' ] -- Lo       HANGUL SYLLABLE JJAE
+        , [ '쨔' ] -- Lo       HANGUL SYLLABLE JJYA
+        , [ '쨰' ] -- Lo       HANGUL SYLLABLE JJYAE
+        , [ '쩌' ] -- Lo       HANGUL SYLLABLE JJEO
+        , [ '쩨' ] -- Lo       HANGUL SYLLABLE JJE
+        , [ '쪄' ] -- Lo       HANGUL SYLLABLE JJYEO
+        , [ '쪠' ] -- Lo       HANGUL SYLLABLE JJYE
+        , [ '쪼' ] -- Lo       HANGUL SYLLABLE JJO
+        , [ '쫘' ] -- Lo       HANGUL SYLLABLE JJWA
+        , [ '쫴' ] -- Lo       HANGUL SYLLABLE JJWAE
+        , [ '쬐' ] -- Lo       HANGUL SYLLABLE JJOE
+        , [ '쬬' ] -- Lo       HANGUL SYLLABLE JJYO
+        , [ '쭈' ] -- Lo       HANGUL SYLLABLE JJU
+        , [ '쭤' ] -- Lo       HANGUL SYLLABLE JJWEO
+        , [ '쮀' ] -- Lo       HANGUL SYLLABLE JJWE
+        , [ '쮜' ] -- Lo       HANGUL SYLLABLE JJWI
+        , [ '쮸' ] -- Lo       HANGUL SYLLABLE JJYU
+        , [ '쯔' ] -- Lo       HANGUL SYLLABLE JJEU
+        , [ '쯰' ] -- Lo       HANGUL SYLLABLE JJYI
+        , [ '찌' ] -- Lo       HANGUL SYLLABLE JJI
+        , [ '차' ] -- Lo       HANGUL SYLLABLE CA
+        , [ '채' ] -- Lo       HANGUL SYLLABLE CAE
+        , [ '챠' ] -- Lo       HANGUL SYLLABLE CYA
+        , [ '챼' ] -- Lo       HANGUL SYLLABLE CYAE
+        , [ '처' ] -- Lo       HANGUL SYLLABLE CEO
+        , [ '체' ] -- Lo       HANGUL SYLLABLE CE
+        , [ '쳐' ] -- Lo       HANGUL SYLLABLE CYEO
+        , [ '쳬' ] -- Lo       HANGUL SYLLABLE CYE
+        , [ '초' ] -- Lo       HANGUL SYLLABLE CO
+        , [ '촤' ] -- Lo       HANGUL SYLLABLE CWA
+        , [ '쵀' ] -- Lo       HANGUL SYLLABLE CWAE
+        , [ '최' ] -- Lo       HANGUL SYLLABLE COE
+        , [ '쵸' ] -- Lo       HANGUL SYLLABLE CYO
+        , [ '추' ] -- Lo       HANGUL SYLLABLE CU
+        , [ '춰' ] -- Lo       HANGUL SYLLABLE CWEO
+        , [ '췌' ] -- Lo       HANGUL SYLLABLE CWE
+        , [ '취' ] -- Lo       HANGUL SYLLABLE CWI
+        , [ '츄' ] -- Lo       HANGUL SYLLABLE CYU
+        , [ '츠' ] -- Lo       HANGUL SYLLABLE CEU
+        , [ '츼' ] -- Lo       HANGUL SYLLABLE CYI
+        , [ '치' ] -- Lo       HANGUL SYLLABLE CI
+        , [ '카' ] -- Lo       HANGUL SYLLABLE KA
+        , [ '캐' ] -- Lo       HANGUL SYLLABLE KAE
+        , [ '캬' ] -- Lo       HANGUL SYLLABLE KYA
+        , [ '컈' ] -- Lo       HANGUL SYLLABLE KYAE
+        , [ '커' ] -- Lo       HANGUL SYLLABLE KEO
+        , [ '케' ] -- Lo       HANGUL SYLLABLE KE
+        , [ '켜' ] -- Lo       HANGUL SYLLABLE KYEO
+        , [ '켸' ] -- Lo       HANGUL SYLLABLE KYE
+        , [ '코' ] -- Lo       HANGUL SYLLABLE KO
+        , [ '콰' ] -- Lo       HANGUL SYLLABLE KWA
+        , [ '쾌' ] -- Lo       HANGUL SYLLABLE KWAE
+        , [ '쾨' ] -- Lo       HANGUL SYLLABLE KOE
+        , [ '쿄' ] -- Lo       HANGUL SYLLABLE KYO
+        , [ '쿠' ] -- Lo       HANGUL SYLLABLE KU
+        , [ '쿼' ] -- Lo       HANGUL SYLLABLE KWEO
+        , [ '퀘' ] -- Lo       HANGUL SYLLABLE KWE
+        , [ '퀴' ] -- Lo       HANGUL SYLLABLE KWI
+        , [ '큐' ] -- Lo       HANGUL SYLLABLE KYU
+        , [ '크' ] -- Lo       HANGUL SYLLABLE KEU
+        , [ '킈' ] -- Lo       HANGUL SYLLABLE KYI
+        , [ '키' ] -- Lo       HANGUL SYLLABLE KI
+        , [ '타' ] -- Lo       HANGUL SYLLABLE TA
+        , [ '태' ] -- Lo       HANGUL SYLLABLE TAE
+        , [ '탸' ] -- Lo       HANGUL SYLLABLE TYA
+        , [ '턔' ] -- Lo       HANGUL SYLLABLE TYAE
+        , [ '터' ] -- Lo       HANGUL SYLLABLE TEO
+        , [ '테' ] -- Lo       HANGUL SYLLABLE TE
+        , [ '텨' ] -- Lo       HANGUL SYLLABLE TYEO
+        , [ '톄' ] -- Lo       HANGUL SYLLABLE TYE
+        , [ '토' ] -- Lo       HANGUL SYLLABLE TO
+        , [ '톼' ] -- Lo       HANGUL SYLLABLE TWA
+        , [ '퇘' ] -- Lo       HANGUL SYLLABLE TWAE
+        , [ '퇴' ] -- Lo       HANGUL SYLLABLE TOE
+        , [ '툐' ] -- Lo       HANGUL SYLLABLE TYO
+        , [ '투' ] -- Lo       HANGUL SYLLABLE TU
+        , [ '퉈' ] -- Lo       HANGUL SYLLABLE TWEO
+        , [ '퉤' ] -- Lo       HANGUL SYLLABLE TWE
+        , [ '튀' ] -- Lo       HANGUL SYLLABLE TWI
+        , [ '튜' ] -- Lo       HANGUL SYLLABLE TYU
+        , [ '트' ] -- Lo       HANGUL SYLLABLE TEU
+        , [ '틔' ] -- Lo       HANGUL SYLLABLE TYI
+        , [ '티' ] -- Lo       HANGUL SYLLABLE TI
+        , [ '파' ] -- Lo       HANGUL SYLLABLE PA
+        , [ '패' ] -- Lo       HANGUL SYLLABLE PAE
+        , [ '퍄' ] -- Lo       HANGUL SYLLABLE PYA
+        , [ '퍠' ] -- Lo       HANGUL SYLLABLE PYAE
+        , [ '퍼' ] -- Lo       HANGUL SYLLABLE PEO
+        , [ '페' ] -- Lo       HANGUL SYLLABLE PE
+        , [ '펴' ] -- Lo       HANGUL SYLLABLE PYEO
+        , [ '폐' ] -- Lo       HANGUL SYLLABLE PYE
+        , [ '포' ] -- Lo       HANGUL SYLLABLE PO
+        , [ '퐈' ] -- Lo       HANGUL SYLLABLE PWA
+        , [ '퐤' ] -- Lo       HANGUL SYLLABLE PWAE
+        , [ '푀' ] -- Lo       HANGUL SYLLABLE POE
+        , [ '표' ] -- Lo       HANGUL SYLLABLE PYO
+        , [ '푸' ] -- Lo       HANGUL SYLLABLE PU
+        , [ '풔' ] -- Lo       HANGUL SYLLABLE PWEO
+        , [ '풰' ] -- Lo       HANGUL SYLLABLE PWE
+        , [ '퓌' ] -- Lo       HANGUL SYLLABLE PWI
+        , [ '퓨' ] -- Lo       HANGUL SYLLABLE PYU
+        , [ '프' ] -- Lo       HANGUL SYLLABLE PEU
+        , [ '픠' ] -- Lo       HANGUL SYLLABLE PYI
+        , [ '피' ] -- Lo       HANGUL SYLLABLE PI
+        , [ '하' ] -- Lo       HANGUL SYLLABLE HA
+        , [ '해' ] -- Lo       HANGUL SYLLABLE HAE
+        , [ '햐' ] -- Lo       HANGUL SYLLABLE HYA
+        , [ '햬' ] -- Lo       HANGUL SYLLABLE HYAE
+        , [ '허' ] -- Lo       HANGUL SYLLABLE HEO
+        , [ '헤' ] -- Lo       HANGUL SYLLABLE HE
+        , [ '혀' ] -- Lo       HANGUL SYLLABLE HYEO
+        , [ '혜' ] -- Lo       HANGUL SYLLABLE HYE
+        , [ '호' ] -- Lo       HANGUL SYLLABLE HO
+        , [ '화' ] -- Lo       HANGUL SYLLABLE HWA
+        , [ '홰' ] -- Lo       HANGUL SYLLABLE HWAE
+        , [ '회' ] -- Lo       HANGUL SYLLABLE HOE
+        , [ '효' ] -- Lo       HANGUL SYLLABLE HYO
+        , [ '후' ] -- Lo       HANGUL SYLLABLE HU
+        , [ '훠' ] -- Lo       HANGUL SYLLABLE HWEO
+        , [ '훼' ] -- Lo       HANGUL SYLLABLE HWE
+        , [ '휘' ] -- Lo       HANGUL SYLLABLE HWI
+        , [ '휴' ] -- Lo       HANGUL SYLLABLE HYU
+        , [ '흐' ] -- Lo       HANGUL SYLLABLE HEU
+        , [ '희' ] -- Lo       HANGUL SYLLABLE HYI
+        , [ '히' ] -- Lo       HANGUL SYLLABLE HI
+        ]

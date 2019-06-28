@@ -1,17 +1,16 @@
-module String.Segmentation.ZWJ exposing (match, parser)
+module String.Segmentation.ZWJ exposing (chars, parser)
 
 import Parser exposing (Parser)
+import Set exposing (Set)
 
 
 parser : Parser ()
 parser =
-    Parser.chompIf match
+    Parser.chompIf (\c -> Set.member c chars)
 
 
-match : Char -> Bool
-match char =
-    let
-        c =
-            Char.toCode char
-    in
-    c == 0x200D
+chars : Set Char
+chars =
+    (Set.fromList << List.concat)
+        [ [ '\u{200D}' ] -- Cf       ZERO WIDTH JOINER
+        ]
