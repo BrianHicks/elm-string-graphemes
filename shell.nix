@@ -13,5 +13,6 @@ stdenv.mkDerivation {
     elmPackages.elm-format
     git
     gnumake
+    python37
   ];
 }
