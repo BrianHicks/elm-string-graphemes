@@ -15,11 +15,9 @@ graphemes input =
 graphemesLoop : List String -> Parser (Step (List String) (List String))
 graphemesLoop current =
     Parser.oneOf
-        [ grapheme current (backtrackable CR.parser |. LF.parser)
-        , grapheme current CR.parser
-        , grapheme current LF.parser
-        , grapheme current Control.parser
-        , grapheme current Prepend.parser
+        [ sequences
+            |> List.map (grapheme current)
+            |> Parser.oneOf
         , Parser.map (\_ -> Done (List.reverse current)) Parser.end
         ]
 
@@ -29,3 +27,13 @@ grapheme rest parser =
     parser
         |> Parser.getChompedString
         |> Parser.map (\new -> Loop (new :: rest))
+
+
+sequences : List (Parser ())
+sequences =
+    [ backtrackable CR.parser |. LF.parser
+    , CR.parser
+    , LF.parser
+    , Control.parser
+    , Prepend.parser
+    ]
