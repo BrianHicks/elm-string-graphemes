@@ -33,3 +33,8 @@ data/GraphemeBreakProperty.json: data/GraphemeBreakProperty.txt script/ucd_to_js
 data/GraphemeBreakTest.txt:
 	@mkdir -p $(@D)
 	curl https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.txt > $@
+
+# benchmarks
+
+size-benchmarks/report.txt: generated $(shell find src size-benchmarks -name '*.elm') size-benchmarks/stats.py
+	cd $(@D); ./stats.py > $(@F)
