@@ -1,6 +1,6 @@
 module String.Segmentation.Hangul exposing (parser)
 
-import Parser exposing ((|.), Parser, Step(..), backtrackable, chompWhile, oneOf)
+import Parser exposing ((|.), Parser, backtrackable, chompWhile, oneOf)
 import String.Segmentation.Data.L as L
 import String.Segmentation.Data.LV as LV
 import String.Segmentation.Data.LVT as LVT
