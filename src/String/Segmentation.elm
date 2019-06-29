@@ -6,6 +6,7 @@ import String.Segmentation.Data.Control as Control
 import String.Segmentation.Data.LF as LF
 import String.Segmentation.Data.Prepend as Prepend
 import String.Segmentation.Hangul as Hangul
+import String.Segmentation.XPicto as XPicto
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to
@@ -52,6 +53,7 @@ sequences =
     , Control.parser
     , Prepend.parser
     , Hangul.parser
+    , XPicto.parser
 
     -- if we don't match any of these, we don't have a special case and can
     -- ignore the character
