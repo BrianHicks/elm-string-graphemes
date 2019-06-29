@@ -1,8 +1,8 @@
-module String.Segmentation.LF exposing (chars, match, parser)
+module String.Segmentation.Data.ZWJ exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/LF.elm` instead!
+Run `make src/String/Segmentation/Data/ZWJ.elm` instead!
 
 -}
 
@@ -24,5 +24,5 @@ match c =
 chars : RangeSet Char
 chars =
     RangeSet.fromList
-        [ Range.point '\n' -- Cc       <control-000A>
+        [ Range.point '\u{200D}' -- Cf       ZERO WIDTH JOINER
         ]

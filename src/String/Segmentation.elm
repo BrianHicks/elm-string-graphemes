@@ -1,11 +1,11 @@
 module String.Segmentation exposing (graphemes)
 
 import Parser exposing ((|.), (|=), Parser, Step(..), backtrackable, loop)
-import String.Segmentation.CR as CR
-import String.Segmentation.Control as Control
+import String.Segmentation.Data.CR as CR
+import String.Segmentation.Data.Control as Control
+import String.Segmentation.Data.LF as LF
+import String.Segmentation.Data.Prepend as Prepend
 import String.Segmentation.Hangul as Hangul
-import String.Segmentation.LF as LF
-import String.Segmentation.Prepend as Prepend
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to

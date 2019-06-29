@@ -1,8 +1,8 @@
-module String.Segmentation.LVT exposing (chars, match, parser)
+module String.Segmentation.Data.LVT exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/LVT.elm` instead!
+Run `make src/String/Segmentation/Data/LVT.elm` instead!
 
 -}
 

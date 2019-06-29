@@ -1,8 +1,8 @@
-module String.Segmentation.T exposing (chars, match, parser)
+module String.Segmentation.Data.V exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/T.elm` instead!
+Run `make src/String/Segmentation/Data/V.elm` instead!
 
 -}
 
@@ -24,6 +24,6 @@ match c =
 chars : RangeSet Char
 chars =
     RangeSet.fromList
-        [ Range.range 'ᆨ' 'ᇿ' -- Lo  [88] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG SSANGNIEUN
-        , Range.range 'ퟋ' 'ퟻ' -- Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
+        [ Range.range 'ᅠ' 'ᆧ' -- Lo  [72] HANGUL JUNGSEONG FILLER..HANGUL JUNGSEONG O-YAE
+        , Range.range 'ힰ' 'ퟆ' -- Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
         ]

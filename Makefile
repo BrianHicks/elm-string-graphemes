@@ -8,9 +8,9 @@ test: generated
 	elm-test
 
 .PHONY: generated
-generated: $(foreach class,CR LF Control Prepend Regional_Indicator L V T LV LVT Extended_Pictographic Extend SpacingMark ZWJ,src/String/Segmentation/$(class).elm) tests/GraphemeBreakTest.elm
+generated: $(foreach class,CR LF Control Prepend Regional_Indicator L V T LV LVT Extended_Pictographic Extend SpacingMark ZWJ,src/String/Segmentation/Data/$(class).elm) tests/GraphemeBreakTest.elm
 
-src/String/Segmentation/%.elm: data/GraphemeBreakProperty.json script/generate-matcher.py
+src/String/Segmentation/Data/%.elm: data/GraphemeBreakProperty.json script/generate-matcher.py
 	@mkdir -p $(@D)
 	python script/generate-matcher.py $@ < $<
 	elm-format --yes $@

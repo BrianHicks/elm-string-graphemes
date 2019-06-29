@@ -1,8 +1,8 @@
-module String.Segmentation.CR exposing (chars, match, parser)
+module String.Segmentation.Data.CR exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/CR.elm` instead!
+Run `make src/String/Segmentation/Data/CR.elm` instead!
 
 -}
 

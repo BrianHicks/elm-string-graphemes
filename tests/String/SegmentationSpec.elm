@@ -5,8 +5,8 @@ import Fuzz exposing (Fuzzer, list, oneOf)
 import RangeSetFuzzer
 import Set exposing (Set)
 import String.Segmentation as Segmentation
-import String.Segmentation.Control as Control
-import String.Segmentation.Prepend as Prepend
+import String.Segmentation.Data.Control as Control
+import String.Segmentation.Data.Prepend as Prepend
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
 import String.Segmentation.RangeSet.Range as Range
 import Test exposing (..)

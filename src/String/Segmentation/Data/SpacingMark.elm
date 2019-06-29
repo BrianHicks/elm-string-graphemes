@@ -1,8 +1,8 @@
-module String.Segmentation.SpacingMark exposing (chars, match, parser)
+module String.Segmentation.Data.SpacingMark exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/SpacingMark.elm` instead!
+Run `make src/String/Segmentation/Data/SpacingMark.elm` instead!
 
 -}
 

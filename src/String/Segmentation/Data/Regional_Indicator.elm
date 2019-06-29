@@ -1,8 +1,8 @@
-module String.Segmentation.Regional_Indicator exposing (chars, match, parser)
+module String.Segmentation.Data.Regional_Indicator exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/Regional_Indicator.elm` instead!
+Run `make src/String/Segmentation/Data/Regional_Indicator.elm` instead!
 
 -}
 

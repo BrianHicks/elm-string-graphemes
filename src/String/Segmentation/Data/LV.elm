@@ -1,8 +1,8 @@
-module String.Segmentation.LV exposing (chars, match, parser)
+module String.Segmentation.Data.LV exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/LV.elm` instead!
+Run `make src/String/Segmentation/Data/LV.elm` instead!
 
 -}
 

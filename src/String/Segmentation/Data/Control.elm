@@ -1,8 +1,8 @@
-module String.Segmentation.Control exposing (chars, match, parser)
+module String.Segmentation.Data.Control exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/Control.elm` instead!
+Run `make src/String/Segmentation/Data/Control.elm` instead!
 
 -}
 

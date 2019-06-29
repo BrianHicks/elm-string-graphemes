@@ -1,8 +1,8 @@
-module String.Segmentation.Prepend exposing (chars, match, parser)
+module String.Segmentation.Data.Prepend exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/Prepend.elm` instead!
+Run `make src/String/Segmentation/Data/Prepend.elm` instead!
 
 -}
 
