@@ -1,0 +1,3 @@
+Optimized:	86.08kb to 151.68kb	(+65.60kb)
+Uglified:	34.67kb to 60.35kb	(+25.68kb)
+Gzipped:	11.55kb to 20.18kb	(+8.63kb)
