@@ -28,7 +28,7 @@ out.append('-}')
 
 out.append('import Parser exposing (Parser)')
 out.append('import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)')
-out.append('import String.Segmentation.RangeSet.Range as Range')
+out.append('import String.Segmentation.RangeSet.Range as Range exposing (Range)')
 
 out.append('parser : Parser ()')
 out.append('parser = Parser.chompIf match')
@@ -38,35 +38,49 @@ out.append('match c = RangeSet.member c chars')
 
 # CHARS
 
-out.append('chars : RangeSet Char')
-out.append('chars = RangeSet.fromList [')
-
-
 def elm_char(codepoint):
     return "'\\u{%s}'" % codepoint
 
+ranges = []
+points = []
 
 for (i, match) in enumerate(classes[class_]):
     if match['kind'] == 'range':
-        code = 'Range.range {} {}'.format(
+        ranges.append('({}, {}) -- {}'.format(
             elm_char(match['start']),
             elm_char(match['end']),
-        )
+            match['comment'],
+        ))
     elif match['kind'] == 'single':
-        code = 'Range.point {}'.format(
+        points.append('{} -- {}'.format(
             elm_char(match['codepoint']),
-        )
+            match['comment'],
+        ))
     else:
         print('I don\'t know how to handle a "{}"!'.format(match['kind']))
         sys.exit(1)
 
-    out.append('    {}{} -- {}'.format(
-        ',' if i > 0 else '',
-        code,
-        match['comment'],
-    ))
+out.append('chars : RangeSet Char')
+if ranges and points:
+    out.append('chars = RangeSet.fromList (points ++ ranges)')
+elif ranges:
+    out.append('chars = RangeSet.fromList ranges')
+elif points:
+    out.append('chars = RangeSet.fromList points')
+else:
+    out.append('chars = Debug.todo "no chars for this class! What?"')
 
-out.append('    ]')
+if points:
+    out.append('points : List (Range Char)')
+    out.append('points = List.map Range.point [')
+    out.append('\n    ,'.join(points))
+    out.append('    ]')
+
+if ranges:
+    out.append('ranges : List (Range Char)')
+    out.append('ranges = List.map (\\(low, high) -> Range.range low high) [')
+    out.append('\n    ,'.join(ranges))
+    out.append('    ]')
 
 # write out the final result
 

@@ -8,7 +8,7 @@ Run `make src/String/Segmentation/Data/T.elm` instead!
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -23,7 +23,12 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList
-        [ Range.range 'ᆨ' 'ᇿ' -- Lo  [88] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG SSANGNIEUN
-        , Range.range 'ퟋ' 'ퟻ' -- Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
+    RangeSet.fromList ranges
+
+
+ranges : List (Range Char)
+ranges =
+    List.map (\( low, high ) -> Range.range low high)
+        [ ( 'ᆨ', 'ᇿ' ) -- Lo  [88] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG SSANGNIEUN
+        , ( 'ퟋ', 'ퟻ' ) -- Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
         ]

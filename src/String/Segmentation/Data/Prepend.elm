@@ -8,7 +8,7 @@ Run `make src/String/Segmentation/Data/Prepend.elm` instead!
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -23,16 +23,27 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList
-        [ Range.range '\u{0600}' '\u{0605}' -- Cf   [6] ARABIC NUMBER SIGN..ARABIC NUMBER MARK ABOVE
-        , Range.point '\u{06DD}' -- Cf       ARABIC END OF AYAH
-        , Range.point '\u{070F}' -- Cf       SYRIAC ABBREVIATION MARK
-        , Range.point '\u{08E2}' -- Cf       ARABIC DISPUTED END OF AYAH
-        , Range.point 'ൎ' -- Lo       MALAYALAM LETTER DOT REPH
-        , Range.point '\u{110BD}' -- Cf       KAITHI NUMBER SIGN
-        , Range.point '\u{110CD}' -- Cf       KAITHI NUMBER SIGN ABOVE
-        , Range.range '𑇂' '𑇃' -- Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
-        , Range.point '\u{11A3A}' -- Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
-        , Range.range '\u{11A84}' '\u{11A89}' -- Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
-        , Range.point '\u{11D46}' -- Lo       MASARAM GONDI REPHA
+    RangeSet.fromList (points ++ ranges)
+
+
+points : List (Range Char)
+points =
+    List.map Range.point
+        [ '\u{06DD}' -- Cf       ARABIC END OF AYAH
+        , '\u{070F}' -- Cf       SYRIAC ABBREVIATION MARK
+        , '\u{08E2}' -- Cf       ARABIC DISPUTED END OF AYAH
+        , 'ൎ' -- Lo       MALAYALAM LETTER DOT REPH
+        , '\u{110BD}' -- Cf       KAITHI NUMBER SIGN
+        , '\u{110CD}' -- Cf       KAITHI NUMBER SIGN ABOVE
+        , '\u{11A3A}' -- Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
+        , '\u{11D46}' -- Lo       MASARAM GONDI REPHA
+        ]
+
+
+ranges : List (Range Char)
+ranges =
+    List.map (\( low, high ) -> Range.range low high)
+        [ ( '\u{0600}', '\u{0605}' ) -- Cf   [6] ARABIC NUMBER SIGN..ARABIC NUMBER MARK ABOVE
+        , ( '𑇂', '𑇃' ) -- Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
+        , ( '\u{11A84}', '\u{11A89}' ) -- Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
         ]

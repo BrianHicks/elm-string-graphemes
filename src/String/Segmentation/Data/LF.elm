@@ -8,7 +8,7 @@ Run `make src/String/Segmentation/Data/LF.elm` instead!
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -23,6 +23,11 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList
-        [ Range.point '\n' -- Cc       <control-000A>
+    RangeSet.fromList points
+
+
+points : List (Range Char)
+points =
+    List.map Range.point
+        [ '\n' -- Cc       <control-000A>
         ]

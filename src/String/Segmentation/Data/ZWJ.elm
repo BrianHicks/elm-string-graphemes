@@ -8,7 +8,7 @@ Run `make src/String/Segmentation/Data/ZWJ.elm` instead!
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -23,6 +23,11 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList
-        [ Range.point '\u{200D}' -- Cf       ZERO WIDTH JOINER
+    RangeSet.fromList points
+
+
+points : List (Range Char)
+points =
+    List.map Range.point
+        [ '\u{200D}' -- Cf       ZERO WIDTH JOINER
         ]

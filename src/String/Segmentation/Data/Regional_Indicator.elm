@@ -8,7 +8,7 @@ Run `make src/String/Segmentation/Data/Regional_Indicator.elm` instead!
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -23,6 +23,11 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList
-        [ Range.range '🇦' '🇿' -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
+    RangeSet.fromList ranges
+
+
+ranges : List (Range Char)
+ranges =
+    List.map (\( low, high ) -> Range.range low high)
+        [ ( '🇦', '🇿' ) -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
         ]

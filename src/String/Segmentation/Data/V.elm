@@ -8,7 +8,7 @@ Run `make src/String/Segmentation/Data/V.elm` instead!
 
 import Parser exposing (Parser)
 import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Segmentation.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -23,7 +23,12 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList
-        [ Range.range 'ᅠ' 'ᆧ' -- Lo  [72] HANGUL JUNGSEONG FILLER..HANGUL JUNGSEONG O-YAE
-        , Range.range 'ힰ' 'ퟆ' -- Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
+    RangeSet.fromList ranges
+
+
+ranges : List (Range Char)
+ranges =
+    List.map (\( low, high ) -> Range.range low high)
+        [ ( 'ᅠ', 'ᆧ' ) -- Lo  [72] HANGUL JUNGSEONG FILLER..HANGUL JUNGSEONG O-YAE
+        , ( 'ힰ', 'ퟆ' ) -- Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
         ]
