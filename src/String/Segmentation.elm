@@ -69,6 +69,7 @@ sequences =
     , lv
     , lvt
     , extendedPictographic
+    , zwj
     , other
     ]
 
@@ -207,6 +208,11 @@ extendedPictographic =
 zwj : Parser ()
 zwj =
     ZWJ.parser
+        |. oneOfOrBreak
+            [ lazy (\_ -> extend)
+            , lazy (\_ -> spacingMark)
+            , lazy (\_ -> zwj)
+            ]
 
 
 other : Parser ()

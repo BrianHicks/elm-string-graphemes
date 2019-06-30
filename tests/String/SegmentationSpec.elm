@@ -158,6 +158,13 @@ graphemesSpec =
                 , spacingMark = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "ZWJ"
+            zwjCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 
