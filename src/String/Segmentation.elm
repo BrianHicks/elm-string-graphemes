@@ -50,6 +50,7 @@ grapheme rest parser =
 sequences : List (Parser ())
 sequences =
     [ cr
+    , lf
     , other
     ]
 
