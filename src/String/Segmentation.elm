@@ -75,11 +75,6 @@ lf =
 -- no further rules!
 
 
-spacingMark : Parser ()
-spacingMark =
-    SpacingMark.parser
-
-
 extend : Parser ()
 extend =
     Extend.parser
@@ -118,6 +113,16 @@ prepend =
             -- , extPic
             , zwj
             , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
+            ]
+
+
+spacingMark : Parser ()
+spacingMark =
+    SpacingMark.parser
+        |. oneOfOrBreak
+            [ lazy (\_ -> extend)
+            , lazy (\_ -> spacingMark)
+            , zwj
             ]
 
 

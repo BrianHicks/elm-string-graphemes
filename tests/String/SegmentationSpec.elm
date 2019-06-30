@@ -99,6 +99,13 @@ graphemesSpec =
                 , extendedPictographic = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "spacing mark"
+            spacingMarkCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 
