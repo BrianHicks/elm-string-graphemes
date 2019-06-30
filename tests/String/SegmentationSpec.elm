@@ -83,6 +83,22 @@ graphemesSpec =
                 , spacingMark = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "prepend character"
+            prependCharacter
+            { noFollowing
+                | other = NoBreak
+                , extend = NoBreak
+                , regionalIndicator = NoBreak
+                , prepend = NoBreak
+                , spacingMark = NoBreak
+                , l = NoBreak
+                , v = NoBreak
+                , t = NoBreak
+                , lv = NoBreak
+                , lvt = NoBreak
+                , extendedPictographic = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 

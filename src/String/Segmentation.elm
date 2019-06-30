@@ -1,6 +1,6 @@
 module String.Segmentation exposing (graphemes)
 
-import Parser exposing ((|.), (|=), Parser, Step(..), backtrackable, lazy, loop, oneOf)
+import Parser exposing (..)
 import String.Segmentation.Data.CR as CR
 import String.Segmentation.Data.Control as Control
 import String.Segmentation.Data.Extend as Extend
@@ -56,6 +56,7 @@ sequences =
     , Control.parser
     , extend
     , regionalIndicator
+    , prepend
     , other
     ]
 
@@ -97,6 +98,26 @@ regionalIndicator =
             , lazy (\_ -> regionalIndicator)
             , spacingMark
             , zwj
+            ]
+
+
+prepend : Parser ()
+prepend =
+    Prepend.parser
+        |. oneOfOrBreak
+            [ extend
+            , regionalIndicator
+            , lazy (\_ -> prepend)
+            , spacingMark
+
+            -- , l
+            -- , v
+            -- , t
+            -- , lv
+            -- , lvt
+            -- , extPic
+            , zwj
+            , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
             ]
 
 
