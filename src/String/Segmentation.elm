@@ -6,6 +6,7 @@ import String.Segmentation.Data.Control as Control
 import String.Segmentation.Data.Extend as Extend
 import String.Segmentation.Data.LF as LF
 import String.Segmentation.Data.Prepend as Prepend
+import String.Segmentation.Data.Regional_Indicator as RegionalIndicator
 import String.Segmentation.Data.SpacingMark as SpacingMark
 import String.Segmentation.Data.ZWJ as ZWJ
 import String.Segmentation.Hangul as Hangul
@@ -54,6 +55,7 @@ sequences =
     , lf
     , Control.parser
     , extend
+    , regionalIndicator
     , other
     ]
 
@@ -82,6 +84,17 @@ extend =
     Extend.parser
         |. oneOfOrBreak
             [ lazy (\_ -> extend)
+            , spacingMark
+            , zwj
+            ]
+
+
+regionalIndicator : Parser ()
+regionalIndicator =
+    RegionalIndicator.parser
+        |. oneOfOrBreak
+            [ extend
+            , lazy (\_ -> regionalIndicator)
             , spacingMark
             , zwj
             ]

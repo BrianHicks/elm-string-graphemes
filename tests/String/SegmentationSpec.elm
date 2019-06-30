@@ -75,6 +75,14 @@ graphemesSpec =
                 , spacingMark = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "regional indicator character"
+            regionalIndicatorCharacter
+            { noFollowing
+                | extend = NoBreak
+                , regionalIndicator = NoBreak
+                , spacingMark = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 
