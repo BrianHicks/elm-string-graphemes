@@ -134,6 +134,15 @@ graphemesSpec =
                 , t = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "Hangul LV"
+            lvCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , v = NoBreak
+                , t = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 

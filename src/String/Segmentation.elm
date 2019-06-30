@@ -65,6 +65,7 @@ sequences =
     , l
     , v
     , t
+    , lv
     , other
     ]
 
@@ -112,8 +113,8 @@ prepend =
             , l
             , v
             , t
+            , lv
 
-            -- , lv
             -- , lvt
             -- , extPic
             , zwj
@@ -171,6 +172,13 @@ t =
 lv : Parser ()
 lv =
     LV.parser
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
+            , v
+            , t
+            , zwj
+            ]
 
 
 lvt : Parser ()
