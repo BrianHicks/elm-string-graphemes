@@ -68,6 +68,13 @@ graphemesSpec =
         , describeFollowing "control character"
             controlCharacter
             noFollowing
+        , describeFollowing "extend character"
+            extendCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 
