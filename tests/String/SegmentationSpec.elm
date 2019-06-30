@@ -151,6 +151,13 @@ graphemesSpec =
                 , t = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "extended pictographic"
+            extendedPictographicCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 

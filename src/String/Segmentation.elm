@@ -4,6 +4,7 @@ import Parser exposing (..)
 import String.Segmentation.Data.CR as CR
 import String.Segmentation.Data.Control as Control
 import String.Segmentation.Data.Extend as Extend
+import String.Segmentation.Data.Extended_Pictographic as ExtendedPictographic
 import String.Segmentation.Data.L as L
 import String.Segmentation.Data.LF as LF
 import String.Segmentation.Data.LV as LV
@@ -67,6 +68,7 @@ sequences =
     , t
     , lv
     , lvt
+    , extendedPictographic
     , other
     ]
 
@@ -116,8 +118,7 @@ prepend =
             , t
             , lv
             , lvt
-
-            -- , extPic
+            , extendedPictographic
             , zwj
             , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
             ]
@@ -189,6 +190,16 @@ lvt =
             [ extend
             , spacingMark
             , t
+            , zwj
+            ]
+
+
+extendedPictographic : Parser ()
+extendedPictographic =
+    ExtendedPictographic.parser
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
             , zwj
             ]
 
