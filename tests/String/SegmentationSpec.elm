@@ -27,144 +27,131 @@ import Test exposing (..)
 graphemesSpec : Test
 graphemesSpec =
     describe "graphemes"
-        -- [ describe "line breaks get broken"
-        --     [ test "breaks on CRLF" <| \_ -> expectIdentity "\u{000D}\n"
-        --     , test "breaks on CR" <| \_ -> expectIdentity "\u{000D}"
-        --     , test "breaks on LF" <| \_ -> expectIdentity "\n"
-        --     , test "LFCR is two characters" <|
-        --         \_ ->
-        --             "\n\u{000D}"
-        --                 |> Segmentation.graphemes
-        --                 |> Expect.equal (Ok [ "\n", "\u{000D}" ])
-        --     ]
-        -- , describe "control characters"
-        --     [ fuzz2 controlCharacter controlCharacter "always form new segments" expectSplit ]
-        -- , describe "prepend characters"
-        --     [ fuzz2 prependCharacter prependCharacter "always form new segments" expectSplit ]
-        -- , describe "hangul"
-        --     [ test "is parsed properly" <|
-        --         \_ ->
-        --             -- https://stqpkiraradongjae.bandcamp.com/album/sarah
-        --             "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
-        --                 |> Segmentation.graphemes
-        --                 |> Expect.equal (Ok [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ])
-        --     ]
-        -- ]
-        [ describeFollowing "other character"
-            otherCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "carriage return"
-            crCharacter
-            { noFollowing
-                | lf = NoBreak
-            }
-        , describeFollowing "line feed"
-            lfCharacter
-            noFollowing
-        , describeFollowing "control character"
-            controlCharacter
-            noFollowing
-        , describeFollowing "extend character"
-            extendCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "regional indicator character"
-            regionalIndicatorCharacter
-            { noFollowing
-                | extend = NoBreak
-                , regionalIndicator = NoBreak
-                , spacingMark = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "prepend character"
-            prependCharacter
-            { noFollowing
-                | other = NoBreak
-                , extend = NoBreak
-                , regionalIndicator = NoBreak
-                , prepend = NoBreak
-                , spacingMark = NoBreak
-                , l = NoBreak
-                , v = NoBreak
-                , t = NoBreak
-                , lv = NoBreak
-                , lvt = NoBreak
-                , extendedPictographic = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "spacing mark"
-            spacingMarkCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "Hangul L"
-            lCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , l = NoBreak
-                , v = NoBreak
-                , lv = NoBreak
-                , lvt = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "Hangul V"
-            vCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , v = NoBreak
-                , t = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "Hangul T"
-            tCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , t = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "Hangul LV"
-            lvCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , v = NoBreak
-                , t = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "Hangul LVT"
-            lvtCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , t = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "extended pictographic"
-            extendedPictographicCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , zwj = NoBreak
-            }
-        , describeFollowing "ZWJ"
-            zwjCharacter
-            { noFollowing
-                | extend = NoBreak
-                , spacingMark = NoBreak
-                , zwj = NoBreak
-            }
+        [ describe "real world strings"
+            [ test "hangul is parsed properly" <|
+                \_ ->
+                    -- https://stqpkiraradongjae.bandcamp.com/album/sarah
+                    "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
+                        |> Segmentation.graphemes
+                        |> Expect.equal (Ok [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ])
+            ]
+        , describe "2-character combinations"
+            [ describeFollowing "carriage return"
+                crCharacter
+                { noFollowing
+                    | lf = NoBreak
+                }
+            , describeFollowing "line feed"
+                lfCharacter
+                noFollowing
+            , describeFollowing "control character"
+                controlCharacter
+                noFollowing
+            , describeFollowing "extend character"
+                extendCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "regional indicator character"
+                regionalIndicatorCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , regionalIndicator = NoBreak
+                    , spacingMark = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "prepend character"
+                prependCharacter
+                { noFollowing
+                    | other = NoBreak
+                    , extend = NoBreak
+                    , regionalIndicator = NoBreak
+                    , prepend = NoBreak
+                    , spacingMark = NoBreak
+                    , l = NoBreak
+                    , v = NoBreak
+                    , t = NoBreak
+                    , lv = NoBreak
+                    , lvt = NoBreak
+                    , extendedPictographic = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "spacing mark"
+                spacingMarkCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "Hangul L"
+                lCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , l = NoBreak
+                    , v = NoBreak
+                    , lv = NoBreak
+                    , lvt = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "Hangul V"
+                vCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , v = NoBreak
+                    , t = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "Hangul T"
+                tCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , t = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "Hangul LV"
+                lvCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , v = NoBreak
+                    , t = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "Hangul LVT"
+                lvtCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , t = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "extended pictographic"
+                extendedPictographicCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "ZWJ"
+                zwjCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , zwj = NoBreak
+                }
+            , describeFollowing "other character"
+                otherCharacter
+                { noFollowing
+                    | extend = NoBreak
+                    , spacingMark = NoBreak
+                    , zwj = NoBreak
+                }
+            ]
         ]
 
 
