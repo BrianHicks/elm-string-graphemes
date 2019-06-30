@@ -49,17 +49,23 @@ grapheme rest parser =
 
 sequences : List (Parser ())
 sequences =
-    [ other ]
+    [ cr
+    , other
+    ]
 
 
-other : Parser ()
-other =
-    Parser.chompIf (\_ -> True)
-        |. oneOf
-            [ extend
-            , spacingMark
-            , Parser.succeed ()
-            ]
+cr : Parser ()
+cr =
+    CR.parser |. oneOfOrBreak [ lf ]
+
+
+lf : Parser ()
+lf =
+    LF.parser
+
+
+
+-- no further rules!
 
 
 spacingMark : Parser ()
@@ -70,3 +76,17 @@ spacingMark =
 extend : Parser ()
 extend =
     Extend.parser
+
+
+other : Parser ()
+other =
+    Parser.chompIf (\_ -> True)
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
+            ]
+
+
+oneOfOrBreak : List (Parser ()) -> Parser ()
+oneOfOrBreak rules =
+    oneOf (rules ++ [ Parser.succeed () ])
