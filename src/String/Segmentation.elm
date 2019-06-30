@@ -4,12 +4,16 @@ import Parser exposing (..)
 import String.Segmentation.Data.CR as CR
 import String.Segmentation.Data.Control as Control
 import String.Segmentation.Data.Extend as Extend
+import String.Segmentation.Data.L as L
 import String.Segmentation.Data.LF as LF
+import String.Segmentation.Data.LV as LV
+import String.Segmentation.Data.LVT as LVT
 import String.Segmentation.Data.Prepend as Prepend
 import String.Segmentation.Data.Regional_Indicator as RegionalIndicator
 import String.Segmentation.Data.SpacingMark as SpacingMark
+import String.Segmentation.Data.T as T
+import String.Segmentation.Data.V as V
 import String.Segmentation.Data.ZWJ as ZWJ
-import String.Segmentation.Hangul as Hangul
 import String.Segmentation.XPicto as XPicto
 
 
@@ -57,6 +61,8 @@ sequences =
     , extend
     , regionalIndicator
     , prepend
+    , spacingMark
+    , l
     , other
     ]
 
@@ -101,8 +107,8 @@ prepend =
             , regionalIndicator
             , lazy (\_ -> prepend)
             , spacingMark
+            , l
 
-            -- , l
             -- , v
             -- , t
             -- , lv
@@ -121,6 +127,35 @@ spacingMark =
             , lazy (\_ -> spacingMark)
             , zwj
             ]
+
+
+l : Parser ()
+l =
+    L.parser
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
+            , lazy (\_ -> l)
+            , v
+            , lv
+            , lvt
+            , zwj
+            ]
+
+
+v : Parser ()
+v =
+    V.parser
+
+
+lv : Parser ()
+lv =
+    LV.parser
+
+
+lvt : Parser ()
+lvt =
+    LVT.parser
 
 
 zwj : Parser ()
