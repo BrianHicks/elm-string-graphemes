@@ -104,6 +104,24 @@ graphemesSpec =
             , extendedPictographic = Break
             , zwj = Break
             }
+        , describeFollowing "control character"
+            controlCharacter
+            { other = Break
+            , cr = Break
+            , lf = Break
+            , control = Break
+            , extend = Break
+            , regionalIndicator = Break
+            , prepend = Break
+            , spacingMark = Break
+            , l = Break
+            , v = Break
+            , t = Break
+            , lv = Break
+            , lvt = Break
+            , extendedPictographic = Break
+            , zwj = Break
+            }
         ]
 
 

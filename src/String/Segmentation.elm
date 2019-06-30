@@ -51,6 +51,7 @@ sequences : List (Parser ())
 sequences =
     [ cr
     , lf
+    , Control.parser
     , other
     ]
 
