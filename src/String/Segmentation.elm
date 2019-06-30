@@ -64,6 +64,7 @@ sequences =
     , spacingMark
     , l
     , v
+    , t
     , other
     ]
 
@@ -110,8 +111,8 @@ prepend =
             , spacingMark
             , l
             , v
+            , t
 
-            -- , t
             -- , lv
             -- , lvt
             -- , extPic
@@ -159,6 +160,12 @@ v =
 t : Parser ()
 t =
     T.parser
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
+            , lazy (\_ -> t)
+            , zwj
+            ]
 
 
 lv : Parser ()

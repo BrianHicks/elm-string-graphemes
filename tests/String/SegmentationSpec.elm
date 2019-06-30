@@ -126,6 +126,14 @@ graphemesSpec =
                 , t = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "Hangul T"
+            tCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , t = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 
