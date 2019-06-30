@@ -68,11 +68,8 @@ cr =
 
 lf : Parser ()
 lf =
+    -- no further rules!
     LF.parser
-
-
-
--- no further rules!
 
 
 extend : Parser ()
