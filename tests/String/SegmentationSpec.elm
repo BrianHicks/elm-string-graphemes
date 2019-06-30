@@ -52,82 +52,47 @@ graphemesSpec =
         -- ]
         [ describeFollowing "other character"
             otherCharacter
-            { other = Break
-            , cr = Break
-            , lf = Break
-            , control = Break
-            , extend = NoBreak
-            , regionalIndicator = Break
-            , prepend = Break
-            , spacingMark = NoBreak
-            , l = Break
-            , v = Break
-            , t = Break
-            , lv = Break
-            , lvt = Break
-            , extendedPictographic = Break
-            , zwj = Break
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , zwj = NoBreak
             }
         , describeFollowing "carriage return"
             crCharacter
-            { other = Break
-            , cr = Break
-            , lf = NoBreak
-            , control = Break
-            , extend = Break
-            , regionalIndicator = Break
-            , prepend = Break
-            , spacingMark = Break
-            , l = Break
-            , v = Break
-            , t = Break
-            , lv = Break
-            , lvt = Break
-            , extendedPictographic = Break
-            , zwj = Break
+            { noFollowing
+                | lf = NoBreak
             }
         , describeFollowing "line feed"
             lfCharacter
-            { other = Break
-            , cr = Break
-            , lf = Break
-            , control = Break
-            , extend = Break
-            , regionalIndicator = Break
-            , prepend = Break
-            , spacingMark = Break
-            , l = Break
-            , v = Break
-            , t = Break
-            , lv = Break
-            , lvt = Break
-            , extendedPictographic = Break
-            , zwj = Break
-            }
+            noFollowing
         , describeFollowing "control character"
             controlCharacter
-            { other = Break
-            , cr = Break
-            , lf = Break
-            , control = Break
-            , extend = Break
-            , regionalIndicator = Break
-            , prepend = Break
-            , spacingMark = Break
-            , l = Break
-            , v = Break
-            , t = Break
-            , lv = Break
-            , lvt = Break
-            , extendedPictographic = Break
-            , zwj = Break
-            }
+            noFollowing
         ]
 
 
 type Break
     = Break
     | NoBreak
+
+
+noFollowing =
+    { other = Break
+    , cr = Break
+    , lf = Break
+    , control = Break
+    , extend = Break
+    , regionalIndicator = Break
+    , prepend = Break
+    , spacingMark = Break
+    , l = Break
+    , v = Break
+    , t = Break
+    , lv = Break
+    , lvt = Break
+    , extendedPictographic = Break
+    , zwj = Break
+    }
 
 
 describeFollowing :

@@ -7,6 +7,7 @@ import String.Segmentation.Data.Extend as Extend
 import String.Segmentation.Data.LF as LF
 import String.Segmentation.Data.Prepend as Prepend
 import String.Segmentation.Data.SpacingMark as SpacingMark
+import String.Segmentation.Data.ZWJ as ZWJ
 import String.Segmentation.Hangul as Hangul
 import String.Segmentation.XPicto as XPicto
 
@@ -80,12 +81,18 @@ extend =
     Extend.parser
 
 
+zwj : Parser ()
+zwj =
+    ZWJ.parser
+
+
 other : Parser ()
 other =
     Parser.chompIf (\_ -> True)
         |. oneOfOrBreak
             [ extend
             , spacingMark
+            , zwj
             ]
 
 
