@@ -152,6 +152,99 @@ graphemesSpec =
                     , zwj = NoBreak
                 }
             ]
+        , describe "rules"
+            (List.map
+                (\( name, fuzzer ) ->
+                    fuzz fuzzer name <|
+                        \sequence ->
+                            sequence
+                                |> String.join ""
+                                |> Segmentation.graphemes
+                                |> Expect.equal (Ok sequence)
+                )
+                [ -- rule numbers from -- https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.html
+                  -- rules 0.2 and 0.3 deal with the bounds of the string; we don't
+                  -- explicitly need to model these.
+                  ( "rule 3.0"
+                  , Fuzz.map2 (\cr lf -> [ cr ++ lf ])
+                        crCharacter
+                        lfCharacter
+                  )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 4.0"
+                  , Fuzz.map2 (\control anything -> [ control, anything ])
+                        controlCharacter
+                        otherCharacter
+                  )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 5.0"
+                  , Fuzz.map2 (\anything control -> [ anything, control ])
+                        otherCharacter
+                        controlCharacter
+                  )
+                , ( "rule 6.0"
+                  , Fuzz.map2 (\l otherHangul -> [ l ++ otherHangul ])
+                        lCharacter
+                        (Fuzz.oneOf
+                            [ lCharacter
+                            , vCharacter
+                            , lvCharacter
+                            , lvtCharacter
+                            ]
+                        )
+                  )
+                , ( "rule 7.0"
+                  , Fuzz.map2 (\a b -> [ a ++ b ])
+                        (Fuzz.oneOf
+                            [ lvCharacter
+                            , vCharacter
+                            ]
+                        )
+                        (Fuzz.oneOf
+                            [ vCharacter
+                            , tCharacter
+                            ]
+                        )
+                  )
+                , ( "rule 8.0"
+                  , Fuzz.map2 (\a b -> [ a ++ b ])
+                        (Fuzz.oneOf
+                            [ lvCharacter
+                            , lvtCharacter
+                            ]
+                        )
+                        tCharacter
+                  )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 9.0"
+                  , Fuzz.map2 (\anything zwj -> [ anything ++ zwj ])
+                        otherCharacter
+                        zwjCharacter
+                  )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 9.1"
+                  , Fuzz.map2 (\anything spacingMark -> [ anything ++ spacingMark ])
+                        otherCharacter
+                        spacingMarkCharacter
+                  )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 9.2"
+                  , Fuzz.map2 (\prepend anything -> [ prepend ++ anything ])
+                        prependCharacter
+                        otherCharacter
+                  )
+
+                -- Nope, no rule 10. Why? Has to do with the numbering in the
+                -- spec the rules are numbered based on.
+                , ( "rule 11.0"
+                  , Fuzz.map4 (\xp1 extends zwj xp2 -> [ xp1 ++ String.join "" extends ++ zwj ++ xp2 ])
+                        extendedPictographicCharacter
+                        (Fuzz.list extendCharacter)
+                        zwjCharacter
+                        extendedPictographicCharacter
+                  )
+                ]
+            )
         ]
 
 
