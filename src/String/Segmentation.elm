@@ -1,10 +1,12 @@
 module String.Segmentation exposing (graphemes)
 
-import Parser exposing ((|.), (|=), Parser, Step(..), backtrackable, loop)
+import Parser exposing ((|.), (|=), Parser, Step(..), backtrackable, loop, oneOf)
 import String.Segmentation.Data.CR as CR
 import String.Segmentation.Data.Control as Control
+import String.Segmentation.Data.Extend as Extend
 import String.Segmentation.Data.LF as LF
 import String.Segmentation.Data.Prepend as Prepend
+import String.Segmentation.Data.SpacingMark as SpacingMark
 import String.Segmentation.Hangul as Hangul
 import String.Segmentation.XPicto as XPicto
 
@@ -47,15 +49,24 @@ grapheme rest parser =
 
 sequences : List (Parser ())
 sequences =
-    [ backtrackable CR.parser |. LF.parser
-    , CR.parser
-    , LF.parser
-    , Control.parser
-    , Prepend.parser
-    , Hangul.parser
-    , XPicto.parser
+    [ other ]
 
-    -- if we don't match any of these, we don't have a special case and can
-    -- ignore the character
-    , Parser.chompIf (\_ -> True)
-    ]
+
+other : Parser ()
+other =
+    Parser.chompIf (\_ -> True)
+        |. oneOf
+            [ extend
+            , spacingMark
+            , Parser.succeed ()
+            ]
+
+
+spacingMark : Parser ()
+spacingMark =
+    SpacingMark.parser
+
+
+extend : Parser ()
+extend =
+    Extend.parser
