@@ -66,6 +66,7 @@ sequences =
     , v
     , t
     , lv
+    , lvt
     , other
     ]
 
@@ -114,8 +115,8 @@ prepend =
             , v
             , t
             , lv
+            , lvt
 
-            -- , lvt
             -- , extPic
             , zwj
             , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
@@ -184,6 +185,12 @@ lv =
 lvt : Parser ()
 lvt =
     LVT.parser
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
+            , t
+            , zwj
+            ]
 
 
 zwj : Parser ()

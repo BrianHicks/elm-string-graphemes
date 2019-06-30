@@ -143,6 +143,14 @@ graphemesSpec =
                 , t = NoBreak
                 , zwj = NoBreak
             }
+        , describeFollowing "Hangul LVT"
+            lvtCharacter
+            { noFollowing
+                | extend = NoBreak
+                , spacingMark = NoBreak
+                , t = NoBreak
+                , zwj = NoBreak
+            }
         ]
 
 
