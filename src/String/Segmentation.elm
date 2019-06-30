@@ -63,6 +63,7 @@ sequences =
     , prepend
     , spacingMark
     , l
+    , v
     , other
     ]
 
@@ -108,8 +109,8 @@ prepend =
             , lazy (\_ -> prepend)
             , spacingMark
             , l
+            , v
 
-            -- , v
             -- , t
             -- , lv
             -- , lvt
@@ -146,6 +147,18 @@ l =
 v : Parser ()
 v =
     V.parser
+        |. oneOfOrBreak
+            [ extend
+            , spacingMark
+            , lazy (\_ -> v)
+            , t
+            , zwj
+            ]
+
+
+t : Parser ()
+t =
+    T.parser
 
 
 lv : Parser ()
