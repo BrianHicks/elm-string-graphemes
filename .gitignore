@@ -1,3 +1,5 @@
+/benchmarks/*.html
+/benchmarks/elm-stuff
 /data/GraphemeBreakProperty.json
 /elm-stuff
 /size-benchmarks/*.gz

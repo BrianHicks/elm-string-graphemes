@@ -38,3 +38,6 @@ data/GraphemeBreakTest.txt:
 
 size-benchmarks/report.txt: generated $(shell find src size-benchmarks -name '*.elm') size-benchmarks/stats.py
 	cd $(@D); ./stats.py > $(@F)
+
+benchmarks/benchmark.html: generated $(shell find src benchmarks -name '*.elm')
+	cd $(@D); elm make --output=$(@F) src/Main.elm
