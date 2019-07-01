@@ -34,6 +34,23 @@ graphemesSpec =
                     "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
                         |> Segmentation.graphemes
                         |> Expect.equal (Ok [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ])
+            , test "zalgo, sure, why not" <|
+                \_ ->
+                    -- do not adjust your editor, this is proper zalgo
+                    -- text. Check it out in different editors! For example,
+                    -- emacs renders all the diacritics as separate
+                    -- characters. Vim shows it how a browser would!
+                    "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
+                        |> Segmentation.graphemes
+                        |> Expect.equal
+                            (Ok
+                                [ "z̴̙͒"
+                                , "ả̴̫̼̫̀̅"
+                                , "ĺ̴̔̿͜"
+                                , "g̷̨͇͉̊͐̚"
+                                , "o̶̳̣̯͌̓"
+                                ]
+                            )
             ]
         , describe "2-character combinations"
             [ describeFollowing "carriage return"
