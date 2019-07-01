@@ -19,6 +19,7 @@ in
     buildInputs = [
       elmPackages.elm
       elmPackages.elm-format
+      elmTools.elm-analyse
       elmTools.elm-test
       git
       gnumake

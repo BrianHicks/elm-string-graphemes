@@ -15,7 +15,6 @@ import String.Segmentation.Data.SpacingMark as SpacingMark
 import String.Segmentation.Data.T as T
 import String.Segmentation.Data.V as V
 import String.Segmentation.Data.ZWJ as ZWJ
-import String.Segmentation.XPicto as XPicto
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to
