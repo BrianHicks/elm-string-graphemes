@@ -25,4 +25,4 @@ match c =
 chars : RangeSet Char
 chars =
     (Result.withDefault RangeSet.empty << Parser.run Data.parser)
-        "1\u{000D}"
+        "1\r"
