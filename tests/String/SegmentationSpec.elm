@@ -249,6 +249,14 @@ graphemesSpec =
                         regionalIndicatorCharacter
                         regionalIndicatorCharacter
                   )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 13.0"
+                  , Fuzz.map4 (\notRi ris ri1 ri2 -> notRi :: ris ++ [ ri1 ++ ri2 ])
+                        otherCharacter
+                        (list (Fuzz.map2 (++) regionalIndicatorCharacter regionalIndicatorCharacter))
+                        regionalIndicatorCharacter
+                        regionalIndicatorCharacter
+                  )
                 ]
             )
         ]
