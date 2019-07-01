@@ -34,6 +34,11 @@ graphemesSpec =
                     "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
                         |> Graphemes.graphemes
                         |> Expect.equal (Ok [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ])
+            , test "skin tone and gender modifiers on emoji" <|
+                \_ ->
+                    "\u{1F9B8}\u{1F3FD}\u{200D}♂️"
+                        |> Graphemes.graphemes
+                        |> Expect.equal (Ok [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ])
             , test "zalgo, sure, why not" <|
                 \_ ->
                     -- do not adjust your editor, this is proper zalgo
