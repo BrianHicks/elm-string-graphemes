@@ -1,26 +1,26 @@
-module String.SegmentationSpec exposing (graphemesSpec)
+module String.GraphemesSpec exposing (graphemesSpec)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, list, oneOf)
 import RangeSetFuzzer
 import Set exposing (Set)
-import String.Segmentation as Segmentation
-import String.Segmentation.Data.CR as CR
-import String.Segmentation.Data.Control as Control
-import String.Segmentation.Data.Extend as Extend
-import String.Segmentation.Data.Extended_Pictographic as ExtendedPictographic
-import String.Segmentation.Data.L as L
-import String.Segmentation.Data.LF as LF
-import String.Segmentation.Data.LV as LV
-import String.Segmentation.Data.LVT as LVT
-import String.Segmentation.Data.Prepend as Prepend
-import String.Segmentation.Data.Regional_Indicator as RegionalIndicator
-import String.Segmentation.Data.SpacingMark as SpacingMark
-import String.Segmentation.Data.T as T
-import String.Segmentation.Data.V as V
-import String.Segmentation.Data.ZWJ as ZWJ
-import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Graphemes as Graphemes
+import String.Graphemes.Data.CR as CR
+import String.Graphemes.Data.Control as Control
+import String.Graphemes.Data.Extend as Extend
+import String.Graphemes.Data.Extended_Pictographic as ExtendedPictographic
+import String.Graphemes.Data.L as L
+import String.Graphemes.Data.LF as LF
+import String.Graphemes.Data.LV as LV
+import String.Graphemes.Data.LVT as LVT
+import String.Graphemes.Data.Prepend as Prepend
+import String.Graphemes.Data.Regional_Indicator as RegionalIndicator
+import String.Graphemes.Data.SpacingMark as SpacingMark
+import String.Graphemes.Data.T as T
+import String.Graphemes.Data.V as V
+import String.Graphemes.Data.ZWJ as ZWJ
+import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
+import String.Graphemes.RangeSet.Range as Range
 import Test exposing (..)
 
 
@@ -32,7 +32,7 @@ graphemesSpec =
                 \_ ->
                     -- https://stqpkiraradongjae.bandcamp.com/album/sarah
                     "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
-                        |> Segmentation.graphemes
+                        |> Graphemes.graphemes
                         |> Expect.equal (Ok [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ])
             , test "zalgo, sure, why not" <|
                 \_ ->
@@ -41,7 +41,7 @@ graphemesSpec =
                     -- emacs renders all the diacritics as separate
                     -- characters. Vim shows it how a browser would!
                     "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
-                        |> Segmentation.graphemes
+                        |> Graphemes.graphemes
                         |> Expect.equal
                             (Ok
                                 [ "z̴̙͒"
@@ -176,7 +176,7 @@ graphemesSpec =
                         \sequence ->
                             sequence
                                 |> String.join ""
-                                |> Segmentation.graphemes
+                                |> Graphemes.graphemes
                                 |> Expect.equal (Ok sequence)
                 )
                 [ -- rule numbers from -- https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.html
@@ -369,13 +369,13 @@ breakTest first second break name =
 
 expectIdentity : String -> Expectation
 expectIdentity s =
-    Expect.equal (Ok [ s ]) (Segmentation.graphemes s)
+    Expect.equal (Ok [ s ]) (Graphemes.graphemes s)
 
 
 expectSplit : String -> String -> Expectation
 expectSplit c1 c2 =
     (c1 ++ c2)
-        |> Segmentation.graphemes
+        |> Graphemes.graphemes
         |> Expect.equal (Ok [ c1, c2 ])
 
 

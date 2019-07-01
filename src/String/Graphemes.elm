@@ -1,20 +1,20 @@
-module String.Segmentation exposing (graphemes)
+module String.Graphemes exposing (graphemes)
 
 import Parser exposing (..)
-import String.Segmentation.Data.CR as CR
-import String.Segmentation.Data.Control as Control
-import String.Segmentation.Data.Extend as Extend
-import String.Segmentation.Data.Extended_Pictographic as ExtendedPictographic
-import String.Segmentation.Data.L as L
-import String.Segmentation.Data.LF as LF
-import String.Segmentation.Data.LV as LV
-import String.Segmentation.Data.LVT as LVT
-import String.Segmentation.Data.Prepend as Prepend
-import String.Segmentation.Data.Regional_Indicator as RegionalIndicator
-import String.Segmentation.Data.SpacingMark as SpacingMark
-import String.Segmentation.Data.T as T
-import String.Segmentation.Data.V as V
-import String.Segmentation.Data.ZWJ as ZWJ
+import String.Graphemes.Data.CR as CR
+import String.Graphemes.Data.Control as Control
+import String.Graphemes.Data.Extend as Extend
+import String.Graphemes.Data.Extended_Pictographic as ExtendedPictographic
+import String.Graphemes.Data.L as L
+import String.Graphemes.Data.LF as LF
+import String.Graphemes.Data.LV as LV
+import String.Graphemes.Data.LVT as LVT
+import String.Graphemes.Data.Prepend as Prepend
+import String.Graphemes.Data.Regional_Indicator as RegionalIndicator
+import String.Graphemes.Data.SpacingMark as SpacingMark
+import String.Graphemes.Data.T as T
+import String.Graphemes.Data.V as V
+import String.Graphemes.Data.ZWJ as ZWJ
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to

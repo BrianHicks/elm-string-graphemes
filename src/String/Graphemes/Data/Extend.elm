@@ -1,14 +1,14 @@
-module String.Segmentation.Data.Extend exposing (chars, match, parser)
+module String.Graphemes.Data.Extend exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/Data/Extend.elm` instead!
+Run `make src/String/Graphemes/Data/Extend.elm` instead!
 
 -}
 
 import Parser exposing (Parser)
-import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range exposing (Range)
+import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
+import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()

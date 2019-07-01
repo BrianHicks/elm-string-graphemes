@@ -1,6 +1,6 @@
-module String.Segmentation.RangeSet exposing (RangeSet, fromList, insert, member, toList)
+module String.Graphemes.RangeSet exposing (RangeSet, fromList, insert, member, toList)
 
-import String.Segmentation.RangeSet.Range as Range exposing (Range)
+import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
 
 {-| Longer-term, this may make sense to release as a separate package.

@@ -1,14 +1,14 @@
-module String.Segmentation.Data.Extended_Pictographic exposing (chars, match, parser)
+module String.Graphemes.Data.Extended_Pictographic exposing (chars, match, parser)
 
 {-| Hey, this module was generated automatically. Please don't edit it.
 
-Run `make src/String/Segmentation/Data/Extended_Pictographic.elm` instead!
+Run `make src/String/Graphemes/Data/Extended_Pictographic.elm` instead!
 
 -}
 
 import Parser exposing (Parser)
-import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range exposing (Range)
+import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
+import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
 
 parser : Parser ()

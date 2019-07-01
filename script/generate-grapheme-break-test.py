@@ -21,7 +21,7 @@ out.append('-}')
 
 out.append('import Expect')
 out.append('import Test exposing (..)')
-out.append('import String.Segmentation as Segmentation')
+out.append('import String.Graphemes as Grapheme')
 
 out.append('spec : Test')
 out.append('spec = ')
@@ -34,7 +34,7 @@ test = textwrap.dedent('''\
     test "{index}: {comment}" <|
         \\_ ->
             {start_string}
-                |> Segmentation.graphemes
+                |> Grapheme.graphemes
                 |> Expect.equal ({end_strings})
 ''')
 

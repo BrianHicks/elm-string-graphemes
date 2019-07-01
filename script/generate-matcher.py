@@ -27,8 +27,8 @@ out.append('')
 out.append('-}')
 
 out.append('import Parser exposing (Parser)')
-out.append('import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)')
-out.append('import String.Segmentation.RangeSet.Range as Range exposing (Range)')
+out.append('import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)')
+out.append('import String.Graphemes.RangeSet.Range as Range exposing (Range)')
 
 out.append('parser : Parser ()')
 out.append('parser = Parser.chompIf match')

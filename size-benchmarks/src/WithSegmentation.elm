@@ -1,7 +1,7 @@
 module WithSegmentation exposing (main)
 
 import Html exposing (Html)
-import String.Segmentation as Segmentation
+import String.Graphemes as Segmentation
 
 
 main : Html msg

@@ -33,7 +33,7 @@ This means we can operate at three levels:
    Operations like `String.foldl` operate here.
 3. **the grapheme level.**
    Here, our skin tone and gender are only one character.
-   Operations like `String.Graphemes.toList` operate here.
+   Operations like `String.Graphemess.toList` operate here.
 
 ### So when should I use this library?
 

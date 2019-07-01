@@ -1,8 +1,8 @@
 module RangeSetFuzzer exposing (fromChars)
 
 import Fuzz exposing (Fuzzer)
-import String.Segmentation.RangeSet as RangeSet exposing (RangeSet)
-import String.Segmentation.RangeSet.Range as Range
+import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
+import String.Graphemes.RangeSet.Range as Range
 
 
 fromChars : RangeSet Char -> Fuzzer String
