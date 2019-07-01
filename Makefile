@@ -7,6 +7,10 @@ all: generated
 test: generated
 	elm-test
 
+.PHONY: ci
+ci: test size-benchmarks/report.txt
+	test -z "$(shell git diff)"
+
 .PHONY: generated
 generated: $(foreach class,CR LF Control Prepend Regional_Indicator L V T LV LVT Extended_Pictographic Extend SpacingMark ZWJ,src/String/Segmentation/Data/$(class).elm) tests/GraphemeBreakTest.elm
 
