@@ -18,69 +18,62 @@ if class_ not in classes:
     sys.exit(1)
 
 out = []
-out.append('module {} exposing (chars, parser, match)'.format(module))
-
+out.append('module {} exposing (chars, match, parser)'.format(module))
+out.append('')
 out.append('{-| Hey, this module was generated automatically. Please don\'t edit it.')
 out.append('')
 out.append('Run `make {}` instead!'.format(args.destination))
 out.append('')
 out.append('-}')
-
+out.append('')
 out.append('import Parser exposing (Parser)')
+out.append('import String.Graphemes.Data as Data')
 out.append('import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)')
 out.append('import String.Graphemes.RangeSet.Range as Range exposing (Range)')
-
+out.append('')
+out.append('')
 out.append('parser : Parser ()')
-out.append('parser = Parser.chompIf match')
-
+out.append('parser =')
+out.append('    Parser.chompIf match')
+out.append('')
+out.append('')
 out.append('match : Char -> Bool')
-out.append('match c = RangeSet.member c chars')
+out.append('match c =')
+out.append('    RangeSet.member c chars')
+out.append('')
+out.append('')
 
 # CHARS
 
-def elm_char(codepoint):
-    return "'\\u{%s}'" % codepoint
+chars = []
 
-ranges = []
-points = []
+def elm_char(char):
+    if char == '\n':
+        return '\\n'
+    elif char == '\r':
+        return '\\r'
+    elif char == '"':
+        return '\\"'
+    elif char == '\\':
+        return '\\\\'
+    elif class_ == 'Control':
+        return '\\u{%s}' % hex(ord(char))[2:].zfill(4)
+    else:
+        return char
 
 for (i, match) in enumerate(classes[class_]):
     if match['kind'] == 'range':
-        ranges.append('({}, {}) -- {}'.format(
-            elm_char(match['start']),
-            elm_char(match['end']),
-            match['comment'],
-        ))
+        chars.append('2{}{}'.format(elm_char(match['start']), elm_char(match['end'])))
     elif match['kind'] == 'single':
-        points.append('{} -- {}'.format(
-            elm_char(match['codepoint']),
-            match['comment'],
-        ))
+        chars.append('1{}'.format(elm_char(match['codepoint'])))
     else:
         print('I don\'t know how to handle a "{}"!'.format(match['kind']))
         sys.exit(1)
 
 out.append('chars : RangeSet Char')
-if ranges and points:
-    out.append('chars = RangeSet.fromList (points ++ ranges)')
-elif ranges:
-    out.append('chars = RangeSet.fromList ranges')
-elif points:
-    out.append('chars = RangeSet.fromList points')
-else:
-    out.append('chars = Debug.todo "no chars for this class! What?"')
-
-if points:
-    out.append('points : List (Range Char)')
-    out.append('points = List.map Range.point [')
-    out.append('\n    ,'.join(points))
-    out.append('    ]')
-
-if ranges:
-    out.append('ranges : List (Range Char)')
-    out.append('ranges = List.map (\\(low, high) -> Range.range low high) [')
-    out.append('\n    ,'.join(ranges))
-    out.append('    ]')
+out.append('chars =')
+out.append('    (Result.withDefault RangeSet.empty << Parser.run Data.parser)')
+out.append('        "{}"'.format(''.join(chars)))
 
 # write out the final result
 

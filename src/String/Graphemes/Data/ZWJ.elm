@@ -7,6 +7,7 @@ Run `make src/String/Graphemes/Data/ZWJ.elm` instead!
 -}
 
 import Parser exposing (Parser)
+import String.Graphemes.Data as Data
 import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
 import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
@@ -23,11 +24,5 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList points
-
-
-points : List (Range Char)
-points =
-    List.map Range.point
-        [ '\u{200D}' -- Cf       ZERO WIDTH JOINER
-        ]
+    (Result.withDefault RangeSet.empty << Parser.run Data.parser)
+        "1‍"

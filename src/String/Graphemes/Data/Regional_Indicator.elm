@@ -7,6 +7,7 @@ Run `make src/String/Graphemes/Data/Regional_Indicator.elm` instead!
 -}
 
 import Parser exposing (Parser)
+import String.Graphemes.Data as Data
 import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
 import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
@@ -23,11 +24,5 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList ranges
-
-
-ranges : List (Range Char)
-ranges =
-    List.map (\( low, high ) -> Range.range low high)
-        [ ( '🇦', '🇿' ) -- So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
-        ]
+    (Result.withDefault RangeSet.empty << Parser.run Data.parser)
+        "2🇦🇿"

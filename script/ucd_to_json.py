@@ -18,14 +18,14 @@ for line in sys.stdin.read().split('\n'):
     if data['end'] is not None:
         out = {
             'kind': 'range',
-            'start': data['start'],
-            'end': data['end'],
+            'start': chr(int(data['start'], 16)),
+            'end': chr(int(data['end'], 16)),
             'comment': data['comment'],
         }
     else:
         out = {
             'kind': 'single',
-            'codepoint': data['start'],
+            'codepoint': chr(int(data['start'], 16)),
             'comment': data['comment'],
         }
 

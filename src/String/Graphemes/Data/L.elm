@@ -7,6 +7,7 @@ Run `make src/String/Graphemes/Data/L.elm` instead!
 -}
 
 import Parser exposing (Parser)
+import String.Graphemes.Data as Data
 import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
 import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
@@ -23,12 +24,5 @@ match c =
 
 chars : RangeSet Char
 chars =
-    RangeSet.fromList ranges
-
-
-ranges : List (Range Char)
-ranges =
-    List.map (\( low, high ) -> Range.range low high)
-        [ ( 'ᄀ', 'ᅟ' ) -- Lo  [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER
-        , ( 'ꥠ', 'ꥼ' ) -- Lo  [29] HANGUL CHOSEONG TIKEUT-MIEUM..HANGUL CHOSEONG SSANGYEORINHIEUH
-        ]
+    (Result.withDefault RangeSet.empty << Parser.run Data.parser)
+        "2ᄀᅟ2ꥠꥼ"

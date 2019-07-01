@@ -17,7 +17,6 @@ generated: $(foreach class,CR LF Control Prepend Regional_Indicator L V T LV LVT
 src/String/Graphemes/Data/%.elm: data/GraphemeBreakProperty.json script/generate-matcher.py
 	@mkdir -p $(@D)
 	python script/generate-matcher.py $@ < $<
-	elm-format --yes $@
 
 tests/GraphemeBreakTest.elm: data/GraphemeBreakTest.txt script/generate-grapheme-break-test.py
 	python script/generate-grapheme-break-test.py $@ < $<
