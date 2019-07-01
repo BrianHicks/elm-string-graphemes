@@ -100,7 +100,7 @@ regionalIndicator =
     RegionalIndicator.parser
         |. oneOfOrBreak
             [ extend
-            , lazy (\_ -> regionalIndicator)
+            , RegionalIndicator.parser
             , spacingMark
             , zwj
             ]

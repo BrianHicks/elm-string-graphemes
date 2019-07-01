@@ -243,6 +243,12 @@ graphemesSpec =
                         zwjCharacter
                         extendedPictographicCharacter
                   )
+                , ( "rule 12.0"
+                  , Fuzz.map3 (\ris ri1 ri2 -> ris ++ [ ri1 ++ ri2 ])
+                        (list (Fuzz.map2 (++) regionalIndicatorCharacter regionalIndicatorCharacter))
+                        regionalIndicatorCharacter
+                        regionalIndicatorCharacter
+                  )
                 ]
             )
         ]
