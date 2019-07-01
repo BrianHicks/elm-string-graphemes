@@ -28,7 +28,12 @@ graphemesSpec : Test
 graphemesSpec =
     describe "graphemes"
         [ describe "real world strings"
-            [ test "hangul is parsed properly" <|
+            [ test "Hangul 'bumblebee' is parsed properly" <|
+                \_ ->
+                    "꿀벌"
+                        |> Graphemes.graphemes
+                        |> Expect.equal (Ok [ "꿀", "벌" ])
+            , test "real-world Hangul is parsed properly" <|
                 \_ ->
                     -- https://stqpkiraradongjae.bandcamp.com/album/sarah
                     "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
