@@ -9,6 +9,8 @@ main : BenchmarkProgram
 main =
     program <|
         Benchmark.describe "unicode segmentation"
-            [ benchmark "hangul"
-                (\_ -> Segmentation.graphemes "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다")
+            [ benchmark "plain text"
+                (\_ -> Segmentation.graphemes "123456")
+            , benchmark "emoji"
+                (\_ -> Segmentation.graphemes "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
             ]
