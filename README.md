@@ -1,3 +1,15 @@
+🏗 This library isn't published yet!
+It will be soon, but don't depend on it just yet.
+I'm just opening it up now to get CI going.
+
+Things left to do:
+
+- [ ] make a nice public API
+- [ ] minimize the amount of space needed (right now it's ~28.82kb uglified and ~9.81kb gzipped, which I am pretty sure I can get way lower)
+- [ ] make it much faster. Right now it's using a naive binary search tree that ends up being linear time (😱.) We can *certainly* do better there.
+
+---
+
 # Graphemes
 
 Do string operations based on grapheme boundaries instead of characters or bytes.
