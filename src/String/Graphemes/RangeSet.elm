@@ -1,4 +1,4 @@
-module String.Graphemes.RangeSet exposing (RangeSet, fromList, insert, member, toList)
+module String.Graphemes.RangeSet exposing (RangeSet, empty, fromList, insert, member, toList)
 
 import String.Graphemes.RangeSet.Range as Range exposing (Range)
 
@@ -8,6 +8,11 @@ import String.Graphemes.RangeSet.Range as Range exposing (Range)
 type RangeSet comparable
     = Branch (Range comparable) (RangeSet comparable) (RangeSet comparable)
     | Empty
+
+
+empty : RangeSet comparable
+empty =
+    Empty
 
 
 fromList : List (Range comparable) -> RangeSet comparable
