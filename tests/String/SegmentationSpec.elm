@@ -257,6 +257,12 @@ graphemesSpec =
                         regionalIndicatorCharacter
                         regionalIndicatorCharacter
                   )
+                , -- TODO: need a way to generate valid sequences recursively to properly test
+                  ( "rule 999.0"
+                  , Fuzz.map2 (\a b -> [ a, b ])
+                        otherCharacter
+                        otherCharacter
+                  )
                 ]
             )
         ]
