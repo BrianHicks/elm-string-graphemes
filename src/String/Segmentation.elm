@@ -199,7 +199,11 @@ extendedPictographic : Parser ()
 extendedPictographic =
     ExtendedPictographic.parser
         |. oneOfOrBreak
-            [ extend
+            [ zeroOrMore Extend.parser
+                |. ZWJ.parser
+                |. lazy (\_ -> extendedPictographic)
+                |> backtrackable
+            , extend
             , spacingMark
             , zwj
             ]
@@ -228,3 +232,14 @@ other =
 oneOfOrBreak : List (Parser ()) -> Parser ()
 oneOfOrBreak rules =
     oneOf (rules ++ [ Parser.succeed () ])
+
+
+zeroOrMore : Parser () -> Parser ()
+zeroOrMore parser =
+    loop ()
+        (\_ ->
+            oneOf
+                [ Parser.map (\_ -> Loop ()) parser
+                , Parser.succeed (Done ())
+                ]
+        )
