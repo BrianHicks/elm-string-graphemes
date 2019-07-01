@@ -101,6 +101,7 @@ regionalIndicator =
         |. oneOfOrBreak
             [ extend
             , RegionalIndicator.parser
+                |. oneOfOrBreak [ zwj ]
             , spacingMark
             , zwj
             ]
