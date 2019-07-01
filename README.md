@@ -1,5 +1,5 @@
 🏗 This library isn't published yet!
-It will be soon, but don't depend on it just yet.
+It will be soon, but don't depend on it until then.
 I'm just opening it up now to get CI going.
 
 Things left to do:
