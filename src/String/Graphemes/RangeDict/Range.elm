@@ -1,4 +1,4 @@
-module String.Graphemes.RangeSet.Range exposing (Order(..), Range, combine, compare, lowerBound, point, range, upperBound)
+module String.Graphemes.RangeDict.Range exposing (Order(..), Range, combine, compare, lowerBound, point, range, upperBound)
 
 
 type Range comparable

@@ -4,8 +4,8 @@ import Expect
 import Fuzz exposing (Fuzzer, list)
 import Parser
 import String.Graphemes.Data as Data
-import String.Graphemes.RangeSet as RangeSet
-import String.Graphemes.RangeSet.Range as Range exposing (Range)
+import String.Graphemes.RangeDict as RangeDict
+import String.Graphemes.RangeDict.Range as Range exposing (Range)
 import Test exposing (..)
 
 
@@ -22,7 +22,7 @@ spec =
                 output =
                     pairs
                         |> List.map Tuple.first
-                        |> RangeSet.fromList
+                        |> RangeDict.fromList
             in
             input
                 |> Parser.run Data.parser

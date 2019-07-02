@@ -1,33 +1,33 @@
-module String.Graphemes.RangeSet exposing (RangeSet, empty, fromList, insert, member, toList)
+module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, insert, member, toList)
 
-import String.Graphemes.RangeSet.Range as Range exposing (Range)
+import String.Graphemes.RangeDict.Range as Range exposing (Range)
 
 
 {-| Longer-term, this may make sense to release as a separate package.
 -}
-type RangeSet comparable
-    = Branch Int (Range comparable) (RangeSet comparable) (RangeSet comparable)
+type RangeDict comparable
+    = Branch Int (Range comparable) (RangeDict comparable) (RangeDict comparable)
     | Empty
 
 
-empty : RangeSet comparable
+empty : RangeDict comparable
 empty =
     Empty
 
 
-branch : Range comparable -> RangeSet comparable -> RangeSet comparable -> RangeSet comparable
+branch : Range comparable -> RangeDict comparable -> RangeDict comparable -> RangeDict comparable
 branch range lt gt =
     Branch (max (height lt) (height gt) + 1) range lt gt
 
 
-fromList : List (Range comparable) -> RangeSet comparable
+fromList : List (Range comparable) -> RangeDict comparable
 fromList =
     List.foldl insert Empty
 
 
-toList : RangeSet comparable -> List (Range comparable)
-toList rangeSet =
-    case rangeSet of
+toList : RangeDict comparable -> List (Range comparable)
+toList rangeDict =
+    case rangeDict of
         Empty ->
             []
 
@@ -35,7 +35,7 @@ toList rangeSet =
             toList lt ++ (here :: toList gt)
 
 
-insert : Range comparable -> RangeSet comparable -> RangeSet comparable
+insert : Range comparable -> RangeDict comparable -> RangeDict comparable
 insert range set =
     -- TODO: removing overlaps (but it doesn't matter a lot for our use case)
     case set of
@@ -61,14 +61,14 @@ insert range set =
                     branch combined lt gt
 
 
-member : comparable -> RangeSet comparable -> Bool
-member what rangeSet =
-    memberHelp (Range.point what) rangeSet
+member : comparable -> RangeDict comparable -> Bool
+member what rangeDict =
+    memberHelp (Range.point what) rangeDict
 
 
-memberHelp : Range comparable -> RangeSet comparable -> Bool
-memberHelp range rangeSet =
-    case rangeSet of
+memberHelp : Range comparable -> RangeDict comparable -> Bool
+memberHelp range rangeDict =
+    case rangeDict of
         Empty ->
             False
 
@@ -87,34 +87,34 @@ memberHelp range rangeSet =
                     True
 
 
-balance : RangeSet comparable -> RangeSet comparable
-balance rangeSet =
-    case rangeSet of
+balance : RangeDict comparable -> RangeDict comparable
+balance rangeDict =
+    case rangeDict of
         Empty ->
-            rangeSet
+            rangeDict
 
         Branch _ here lt gt ->
-            if heightDiff rangeSet == -2 && heightDiff lt == 1 then
+            if heightDiff rangeDict == -2 && heightDiff lt == 1 then
                 -- left leaning branch with right-leaning left subtree.
                 branch here (rotateLeft lt) gt |> rotateRight
 
-            else if heightDiff rangeSet < -1 then
-                rotateRight rangeSet
+            else if heightDiff rangeDict < -1 then
+                rotateRight rangeDict
 
-            else if heightDiff rangeSet == 2 && heightDiff gt == -1 then
+            else if heightDiff rangeDict == 2 && heightDiff gt == -1 then
                 -- right leaning branch with left-leaning right subtree.
                 branch here lt (rotateRight gt) |> rotateLeft
 
-            else if heightDiff rangeSet > 1 then
-                rotateLeft rangeSet
+            else if heightDiff rangeDict > 1 then
+                rotateLeft rangeDict
 
             else
-                rangeSet
+                rangeDict
 
 
-height : RangeSet comparable -> Int
-height rangeSet =
-    case rangeSet of
+height : RangeDict comparable -> Int
+height rangeDict =
+    case rangeDict of
         Empty ->
             0
 
@@ -122,9 +122,9 @@ height rangeSet =
             height_
 
 
-heightDiff : RangeSet comparable -> Int
-heightDiff rangeSet =
-    case rangeSet of
+heightDiff : RangeDict comparable -> Int
+heightDiff rangeDict =
+    case rangeDict of
         Empty ->
             0
 
@@ -132,21 +132,21 @@ heightDiff rangeSet =
             height gt - height lt
 
 
-rotateLeft : RangeSet comparable -> RangeSet comparable
-rotateLeft rangeSet =
-    case rangeSet of
+rotateLeft : RangeDict comparable -> RangeDict comparable
+rotateLeft rangeDict =
+    case rangeDict of
         Branch _ head lessThans (Branch _ subHead betweens greaterThans) ->
             branch subHead (branch head lessThans betweens) greaterThans
 
         _ ->
-            rangeSet
+            rangeDict
 
 
-rotateRight : RangeSet comparable -> RangeSet comparable
-rotateRight rangeSet =
-    case rangeSet of
+rotateRight : RangeDict comparable -> RangeDict comparable
+rotateRight rangeDict =
+    case rangeDict of
         Branch _ head (Branch _ subHead lessThans betweens) greaterThans ->
             branch subHead lessThans (branch head betweens greaterThans)
 
         _ ->
-            rangeSet
+            rangeDict

@@ -8,8 +8,8 @@ Run `make src/String/Graphemes/Data/L.elm` instead!
 
 import Parser exposing (Parser)
 import String.Graphemes.Data as Data
-import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
-import String.Graphemes.RangeSet.Range as Range exposing (Range)
+import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
+import String.Graphemes.RangeDict.Range as Range exposing (Range)
 
 
 parser : Parser ()
@@ -19,10 +19,10 @@ parser =
 
 match : Char -> Bool
 match c =
-    RangeSet.member c chars
+    RangeDict.member c chars
 
 
-chars : RangeSet Char
+chars : RangeDict Char
 chars =
-    (Result.withDefault RangeSet.empty << Parser.run Data.parser)
+    (Result.withDefault RangeDict.empty << Parser.run Data.parser)
         "2ᄀᅟ2ꥠꥼ"

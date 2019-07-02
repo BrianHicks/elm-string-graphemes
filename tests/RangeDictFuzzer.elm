@@ -1,14 +1,14 @@
-module RangeSetFuzzer exposing (fromChars)
+module RangeDictFuzzer exposing (fromChars)
 
 import Fuzz exposing (Fuzzer)
-import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
-import String.Graphemes.RangeSet.Range as Range
+import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
+import String.Graphemes.RangeDict.Range as Range
 
 
-fromChars : RangeSet Char -> Fuzzer String
+fromChars : RangeDict Char -> Fuzzer String
 fromChars chars =
     chars
-        |> RangeSet.toList
+        |> RangeDict.toList
         |> List.map
             (\range ->
                 Fuzz.map

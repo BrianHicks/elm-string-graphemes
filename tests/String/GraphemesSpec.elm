@@ -2,7 +2,7 @@ module String.GraphemesSpec exposing (graphemesSpec)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, list, oneOf)
-import RangeSetFuzzer
+import RangeDictFuzzer
 import Set exposing (Set)
 import String.Graphemes as Graphemes
 import String.Graphemes.Data.CR as CR
@@ -19,8 +19,8 @@ import String.Graphemes.Data.SpacingMark as SpacingMark
 import String.Graphemes.Data.T as T
 import String.Graphemes.Data.V as V
 import String.Graphemes.Data.ZWJ as ZWJ
-import String.Graphemes.RangeSet as RangeSet exposing (RangeSet)
-import String.Graphemes.RangeSet.Range as Range
+import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
+import String.Graphemes.RangeDict.Range as Range
 import Test exposing (..)
 
 
@@ -398,69 +398,69 @@ otherCharacter =
 
 crCharacter : Fuzzer String
 crCharacter =
-    RangeSetFuzzer.fromChars CR.chars
+    RangeDictFuzzer.fromChars CR.chars
 
 
 lfCharacter : Fuzzer String
 lfCharacter =
-    RangeSetFuzzer.fromChars LF.chars
+    RangeDictFuzzer.fromChars LF.chars
 
 
 controlCharacter : Fuzzer String
 controlCharacter =
-    RangeSetFuzzer.fromChars Control.chars
+    RangeDictFuzzer.fromChars Control.chars
 
 
 prependCharacter : Fuzzer String
 prependCharacter =
-    RangeSetFuzzer.fromChars Prepend.chars
+    RangeDictFuzzer.fromChars Prepend.chars
 
 
 extendCharacter : Fuzzer String
 extendCharacter =
-    RangeSetFuzzer.fromChars Extend.chars
+    RangeDictFuzzer.fromChars Extend.chars
 
 
 regionalIndicatorCharacter : Fuzzer String
 regionalIndicatorCharacter =
-    RangeSetFuzzer.fromChars RegionalIndicator.chars
+    RangeDictFuzzer.fromChars RegionalIndicator.chars
 
 
 spacingMarkCharacter : Fuzzer String
 spacingMarkCharacter =
-    RangeSetFuzzer.fromChars SpacingMark.chars
+    RangeDictFuzzer.fromChars SpacingMark.chars
 
 
 lCharacter : Fuzzer String
 lCharacter =
-    RangeSetFuzzer.fromChars L.chars
+    RangeDictFuzzer.fromChars L.chars
 
 
 vCharacter : Fuzzer String
 vCharacter =
-    RangeSetFuzzer.fromChars V.chars
+    RangeDictFuzzer.fromChars V.chars
 
 
 tCharacter : Fuzzer String
 tCharacter =
-    RangeSetFuzzer.fromChars T.chars
+    RangeDictFuzzer.fromChars T.chars
 
 
 lvCharacter : Fuzzer String
 lvCharacter =
-    RangeSetFuzzer.fromChars LV.chars
+    RangeDictFuzzer.fromChars LV.chars
 
 
 lvtCharacter : Fuzzer String
 lvtCharacter =
-    RangeSetFuzzer.fromChars LVT.chars
+    RangeDictFuzzer.fromChars LVT.chars
 
 
 extendedPictographicCharacter : Fuzzer String
 extendedPictographicCharacter =
-    RangeSetFuzzer.fromChars ExtendedPictographic.chars
+    RangeDictFuzzer.fromChars ExtendedPictographic.chars
 
 
 zwjCharacter : Fuzzer String
 zwjCharacter =
-    RangeSetFuzzer.fromChars ZWJ.chars
+    RangeDictFuzzer.fromChars ZWJ.chars

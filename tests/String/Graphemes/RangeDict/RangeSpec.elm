@@ -1,8 +1,8 @@
-module String.Graphemes.RangeSet.RangeSpec exposing (compareSpec)
+module String.Graphemes.RangeDict.RangeSpec exposing (compareSpec)
 
 import Expect
 import Fuzz exposing (Fuzzer)
-import String.Graphemes.RangeSet.Range as Range exposing (..)
+import String.Graphemes.RangeDict.Range as Range exposing (..)
 import Test exposing (..)
 
 
