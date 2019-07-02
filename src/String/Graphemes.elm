@@ -1,6 +1,7 @@
 module String.Graphemes exposing (graphemes)
 
 import Parser exposing (..)
+import String.Graphemes.Data as Data exposing (Class(..))
 import String.Graphemes.Data.CR as CR
 import String.Graphemes.Data.Control as Control
 import String.Graphemes.Data.Extend as Extend
@@ -15,6 +16,7 @@ import String.Graphemes.Data.SpacingMark as SpacingMark
 import String.Graphemes.Data.T as T
 import String.Graphemes.Data.V as V
 import String.Graphemes.Data.ZWJ as ZWJ
+import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to
@@ -39,9 +41,7 @@ graphemes input =
 graphemesLoop : List String -> Parser (Step (List String) (List String))
 graphemesLoop current =
     Parser.oneOf
-        [ sequences
-            |> List.map (grapheme current)
-            |> Parser.oneOf
+        [ grapheme current sequence
         , Parser.map (\_ -> Done (List.reverse current)) Parser.end
         ]
 
@@ -53,149 +53,255 @@ grapheme rest parser =
         |> Parser.map (\new -> Loop (new :: rest))
 
 
-sequences : List (Parser ())
-sequences =
-    [ cr
-    , lf
-    , Control.parser
-    , extend
-    , regionalIndicator
-    , prepend
-    , spacingMark
-    , l
-    , v
-    , t
-    , lv
-    , lvt
-    , extendedPictographic
-    , zwj
-    , other
-    ]
+classes : RangeDict Char Data.Class
+classes =
+    List.foldl
+        RangeDict.union
+        RangeDict.empty
+        [ CR.chars
+        , LF.chars
+        , Control.chars
+        , Extend.chars
+        , RegionalIndicator.chars
+        , Prepend.chars
+        , SpacingMark.chars
+        , L.chars
+        , V.chars
+        , T.chars
+        , LV.chars
+        , LVT.chars
+        , ExtendedPictographic.chars
+        , ZWJ.chars
+        ]
 
 
-cr : Parser ()
-cr =
-    CR.parser |. oneOfOrBreak [ lf ]
+sequence : Parser ()
+sequence =
+    -- [ cr
+    -- , lf
+    -- , Control.parser
+    -- , extend
+    -- , regionalIndicator
+    -- , prepend
+    -- , spacingMark
+    -- , l
+    -- , v
+    -- , t
+    -- , lv
+    -- , lvt
+    -- , extendedPictographic
+    -- , zwj
+    -- , other
+    -- ]
+    Parser.andThen
+        (\charString ->
+            case
+                charString
+                    |> Data.stringToChar
+                    |> Maybe.andThen (\char -> RangeDict.get char classes)
+            of
+                Just CR ->
+                    -- only non-breaking CR sequence is CR/LF
+                    oneOfOrBreak [ LF.parser ]
 
+                Just LF ->
+                    -- we break after LF characters no matter what, and we've
+                    -- already chomped it, so we don't need to do anything here!
+                    Parser.succeed ()
 
-lf : Parser ()
-lf =
-    -- no further rules!
-    LF.parser
+                Just Control ->
+                    -- control characters break no matter what, and we've
+                    -- already chomped it, so we don't need to do anything here!
+                    Parser.succeed ()
+
+                Just Extend ->
+                    extendFollowing
+
+                Just RegionalIndicator ->
+                    regionalIndicatorFollowing
+
+                Just Prepend ->
+                    prependFollowing
+
+                Just SpacingMark ->
+                    spacingMarkFollowing
+
+                Just L ->
+                    lFollowing
+
+                Just V ->
+                    vFollowing
+
+                Just T ->
+                    tFollowing
+
+                Just LV ->
+                    lvFollowing
+
+                Just LVT ->
+                    lvtFollowing
+
+                Just ExtendedPictographic ->
+                    extendedPictographicFollowing
+
+                Just ZWJ ->
+                    zwjFollowing
+
+                Nothing ->
+                    oneOfOrBreak [ extendSpacingMarkZWJ ]
+        )
+        (Parser.getChompedString (Parser.chompIf (\_ -> True)))
 
 
 extend : Parser ()
 extend =
-    Extend.parser |. oneOfOrBreak [ extendSpacingMarkZWJ ]
+    Extend.parser |. extendFollowing
+
+
+extendFollowing : Parser ()
+extendFollowing =
+    oneOfOrBreak [ extendSpacingMarkZWJ ]
 
 
 regionalIndicator : Parser ()
 regionalIndicator =
-    RegionalIndicator.parser
-        |. oneOfOrBreak
-            [ RegionalIndicator.parser
-                |. oneOfOrBreak [ zwj ]
-            , extendSpacingMarkZWJ
-            ]
+    RegionalIndicator.parser |. regionalIndicatorFollowing
+
+
+regionalIndicatorFollowing : Parser ()
+regionalIndicatorFollowing =
+    oneOfOrBreak
+        [ RegionalIndicator.parser
+            |. oneOfOrBreak [ zwj ]
+        , extendSpacingMarkZWJ
+        ]
 
 
 prepend : Parser ()
 prepend =
-    Prepend.parser
-        |. oneOfOrBreak
-            [ regionalIndicator
-            , lazy (\_ -> prepend)
-            , l
-            , v
-            , t
-            , lv
-            , lvt
-            , extendedPictographic
-            , extendSpacingMarkZWJ
-            , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
-            ]
+    Prepend.parser |. prependFollowing
+
+
+prependFollowing : Parser ()
+prependFollowing =
+    oneOfOrBreak
+        [ regionalIndicator
+        , lazy (\_ -> prepend)
+        , l
+        , v
+        , t
+        , lv
+        , lvt
+        , extendedPictographic
+        , extendSpacingMarkZWJ
+        , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
+        ]
 
 
 spacingMark : Parser ()
 spacingMark =
-    SpacingMark.parser |. oneOfOrBreak [ extendSpacingMarkZWJ ]
+    SpacingMark.parser |. spacingMarkFollowing
+
+
+spacingMarkFollowing : Parser ()
+spacingMarkFollowing =
+    oneOfOrBreak [ extendSpacingMarkZWJ ]
 
 
 l : Parser ()
 l =
-    L.parser
-        |. oneOfOrBreak
-            [ lazy (\_ -> l)
-            , v
-            , lv
-            , lvt
-            , extendSpacingMarkZWJ
-            ]
+    L.parser |. lFollowing
+
+
+lFollowing : Parser ()
+lFollowing =
+    oneOfOrBreak
+        [ lazy (\_ -> l)
+        , v
+        , lv
+        , lvt
+        , extendSpacingMarkZWJ
+        ]
 
 
 v : Parser ()
 v =
-    V.parser
-        |. oneOfOrBreak
-            [ lazy (\_ -> v)
-            , t
-            , extendSpacingMarkZWJ
-            ]
+    V.parser |. vFollowing
+
+
+vFollowing : Parser ()
+vFollowing =
+    oneOfOrBreak
+        [ lazy (\_ -> v)
+        , t
+        , extendSpacingMarkZWJ
+        ]
 
 
 t : Parser ()
 t =
-    T.parser
-        |. oneOfOrBreak
-            [ lazy (\_ -> t)
-            , extendSpacingMarkZWJ
-            ]
+    T.parser |. tFollowing
+
+
+tFollowing : Parser ()
+tFollowing =
+    oneOfOrBreak
+        [ lazy (\_ -> t)
+        , extendSpacingMarkZWJ
+        ]
 
 
 lv : Parser ()
 lv =
-    LV.parser
-        |. oneOfOrBreak
-            [ v
-            , t
-            , extendSpacingMarkZWJ
-            ]
+    LV.parser |. lvFollowing
+
+
+lvFollowing : Parser ()
+lvFollowing =
+    oneOfOrBreak
+        [ v
+        , t
+        , extendSpacingMarkZWJ
+        ]
 
 
 lvt : Parser ()
 lvt =
-    LVT.parser
-        |. oneOfOrBreak
-            [ t
-            , extendSpacingMarkZWJ
-            ]
+    LVT.parser |. lvtFollowing
+
+
+lvtFollowing : Parser ()
+lvtFollowing =
+    oneOfOrBreak
+        [ t
+        , extendSpacingMarkZWJ
+        ]
 
 
 extendedPictographic : Parser ()
 extendedPictographic =
-    ExtendedPictographic.parser
-        |. oneOfOrBreak
-            [ zeroOrMore Extend.parser
-                |. ZWJ.parser
-                |. lazy (\_ -> extendedPictographic)
-                |> backtrackable
-            , extendSpacingMarkZWJ
-            ]
+    ExtendedPictographic.parser |. extendedPictographicFollowing
+
+
+extendedPictographicFollowing : Parser ()
+extendedPictographicFollowing =
+    oneOfOrBreak
+        [ zeroOrMore Extend.parser
+            |. ZWJ.parser
+            |. lazy (\_ -> extendedPictographic)
+            |> backtrackable
+        , extendSpacingMarkZWJ
+        ]
 
 
 zwj : Parser ()
 zwj =
-    ZWJ.parser |. oneOfOrBreak [ extendSpacingMarkZWJ ]
+    ZWJ.parser |. zwjFollowing
 
 
-other : Parser ()
-other =
-    Parser.chompIf (\_ -> True)
-        |. oneOfOrBreak
-            [ extend
-            , spacingMark
-            , zwj
-            ]
+zwjFollowing : Parser ()
+zwjFollowing =
+    oneOfOrBreak [ extendSpacingMarkZWJ ]
 
 
 extendSpacingMarkZWJ : Parser ()

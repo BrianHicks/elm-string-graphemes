@@ -1,4 +1,4 @@
-module String.Graphemes.Data exposing (Class(..), parser)
+module String.Graphemes.Data exposing (Class(..), parser, stringToChar)
 
 import Parser exposing (..)
 import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
