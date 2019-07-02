@@ -43,8 +43,8 @@ encoded =
                 String.fromList [ '2', Char.fromCode (min a b), Char.fromCode (max a b) ]
             )
         )
-        (Fuzz.intRange 0 0x0010FFFF)
-        (Fuzz.intRange 0 0x0010FFFF)
+        (Fuzz.intRange 0 10000)
+        (Fuzz.intRange 0 10000)
 
 
 shortList : Fuzzer a -> Fuzzer (List a)
