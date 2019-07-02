@@ -1,2 +1,6 @@
 language: nix
 script: ./ci.sh
+
+cache:
+  directories:
+    - /nix
