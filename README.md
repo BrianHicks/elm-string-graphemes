@@ -68,11 +68,6 @@ Here are some reasons you should do this work with graphemes:
   For example, in Spanish, papa (potato) is different than papá (father.)
   Don't make your users call their dad a potato!
 
-- [Hangul, the writing system of Korean](https://en.wikipedia.org/wiki/Hangul), is amazing.
-  It's phoenetic and combines characters into a grid to form words.
-  For example, honeybee is written "꿀벌".
-  If you operate at the *character* level instead of the grapheme level, it'll come out "ㄲㅜㄹㅂㅓㄹ."
-
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
