@@ -1,4 +1,4 @@
-module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, insert, member, toList, union)
+module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, get, insert, member, toList, union)
 
 import String.Graphemes.RangeDict.Range as Range exposing (Range)
 
@@ -71,30 +71,40 @@ insert range value set =
                     branch combined value lt gt
 
 
-member : comparable -> RangeDict comparable value -> Bool
-member what rangeDict =
-    memberHelp (Range.point what) rangeDict
+get : comparable -> RangeDict comparable value -> Maybe value
+get what rangeDict =
+    getHelp (Range.point what) rangeDict
 
 
-memberHelp : Range comparable -> RangeDict comparable value -> Bool
-memberHelp range rangeDict =
+getHelp : Range comparable -> RangeDict comparable value -> Maybe value
+getHelp range rangeDict =
     case rangeDict of
         Empty ->
-            False
+            Nothing
 
-        Branch height_ here _ lt gt ->
+        Branch height_ here value lt gt ->
             case Range.compare range here of
                 Range.LT ->
-                    memberHelp range gt
+                    getHelp range gt
 
                 Range.GT ->
-                    memberHelp range lt
+                    getHelp range lt
 
                 Range.EQ ->
-                    True
+                    Just value
 
                 Range.Overlapping ->
-                    True
+                    Just value
+
+
+member : comparable -> RangeDict comparable value -> Bool
+member what rangeDict =
+    case get what rangeDict of
+        Nothing ->
+            False
+
+        Just _ ->
+            True
 
 
 balance : RangeDict comparable value -> RangeDict comparable value
