@@ -86,23 +86,16 @@ lf =
 
 extend : Parser ()
 extend =
-    Extend.parser
-        |. oneOfOrBreak
-            [ lazy (\_ -> extend)
-            , spacingMark
-            , zwj
-            ]
+    Extend.parser |. oneOfOrBreak [ extendSpacingMarkZWJ ]
 
 
 regionalIndicator : Parser ()
 regionalIndicator =
     RegionalIndicator.parser
         |. oneOfOrBreak
-            [ extend
-            , RegionalIndicator.parser
+            [ RegionalIndicator.parser
                 |. oneOfOrBreak [ zwj ]
-            , spacingMark
-            , zwj
+            , extendSpacingMarkZWJ
             ]
 
 
@@ -110,42 +103,33 @@ prepend : Parser ()
 prepend =
     Prepend.parser
         |. oneOfOrBreak
-            [ extend
-            , regionalIndicator
+            [ regionalIndicator
             , lazy (\_ -> prepend)
-            , spacingMark
             , l
             , v
             , t
             , lv
             , lvt
             , extendedPictographic
-            , zwj
+            , extendSpacingMarkZWJ
             , chompIf (\c -> not (CR.match c || LF.match c || Control.match c))
             ]
 
 
 spacingMark : Parser ()
 spacingMark =
-    SpacingMark.parser
-        |. oneOfOrBreak
-            [ lazy (\_ -> extend)
-            , lazy (\_ -> spacingMark)
-            , zwj
-            ]
+    SpacingMark.parser |. oneOfOrBreak [ extendSpacingMarkZWJ ]
 
 
 l : Parser ()
 l =
     L.parser
         |. oneOfOrBreak
-            [ extend
-            , spacingMark
-            , lazy (\_ -> l)
+            [ lazy (\_ -> l)
             , v
             , lv
             , lvt
-            , zwj
+            , extendSpacingMarkZWJ
             ]
 
 
@@ -153,11 +137,9 @@ v : Parser ()
 v =
     V.parser
         |. oneOfOrBreak
-            [ extend
-            , spacingMark
-            , lazy (\_ -> v)
+            [ lazy (\_ -> v)
             , t
-            , zwj
+            , extendSpacingMarkZWJ
             ]
 
 
@@ -165,10 +147,8 @@ t : Parser ()
 t =
     T.parser
         |. oneOfOrBreak
-            [ extend
-            , spacingMark
-            , lazy (\_ -> t)
-            , zwj
+            [ lazy (\_ -> t)
+            , extendSpacingMarkZWJ
             ]
 
 
@@ -176,11 +156,9 @@ lv : Parser ()
 lv =
     LV.parser
         |. oneOfOrBreak
-            [ extend
-            , spacingMark
-            , v
+            [ v
             , t
-            , zwj
+            , extendSpacingMarkZWJ
             ]
 
 
@@ -188,10 +166,8 @@ lvt : Parser ()
 lvt =
     LVT.parser
         |. oneOfOrBreak
-            [ extend
-            , spacingMark
-            , t
-            , zwj
+            [ t
+            , extendSpacingMarkZWJ
             ]
 
 
@@ -203,20 +179,13 @@ extendedPictographic =
                 |. ZWJ.parser
                 |. lazy (\_ -> extendedPictographic)
                 |> backtrackable
-            , extend
-            , spacingMark
-            , zwj
+            , extendSpacingMarkZWJ
             ]
 
 
 zwj : Parser ()
 zwj =
-    ZWJ.parser
-        |. oneOfOrBreak
-            [ lazy (\_ -> extend)
-            , lazy (\_ -> spacingMark)
-            , lazy (\_ -> zwj)
-            ]
+    ZWJ.parser |. oneOfOrBreak [ extendSpacingMarkZWJ ]
 
 
 other : Parser ()
@@ -227,6 +196,15 @@ other =
             , spacingMark
             , zwj
             ]
+
+
+extendSpacingMarkZWJ : Parser ()
+extendSpacingMarkZWJ =
+    oneOf
+        [ lazy (\_ -> extend)
+        , lazy (\_ -> spacingMark)
+        , lazy (\_ -> zwj)
+        ]
 
 
 oneOfOrBreak : List (Parser ()) -> Parser ()
