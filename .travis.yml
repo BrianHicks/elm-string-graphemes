@@ -3,4 +3,4 @@ script: ./ci.sh
 
 cache:
   directories:
-    - /nix
+    - /nix/store
