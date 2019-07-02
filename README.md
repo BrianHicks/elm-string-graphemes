@@ -66,7 +66,7 @@ Here are some reasons you should do this work with graphemes:
   Think again!
   They're crucial to understanding in a lot of languages!
   For example, in Spanish, papa (potato) is different than papá (father.)
-  Don't make your users call their dad "potato"!
+  Don't make your users call their dad a potato!
 
 - [Hangul, the writing system of Korean](https://en.wikipedia.org/wiki/Hangul), is amazing.
   It's phoenetic and combines characters into a grid to form words.
