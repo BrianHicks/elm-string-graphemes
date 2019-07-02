@@ -9,8 +9,14 @@ main : BenchmarkProgram
 main =
     program <|
         Benchmark.describe "unicode segmentation"
-            [ benchmark "plain text"
+            [ Benchmark.compare "plain text"
+                "characters"
+                (\_ -> String.toList "123456")
+                "graphemes"
                 (\_ -> Segmentation.graphemes "123456")
-            , benchmark "emoji"
+            , Benchmark.compare "emoji"
+                "characters"
+                (\_ -> String.toList "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
+                "graphemes"
                 (\_ -> Segmentation.graphemes "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
             ]
