@@ -5,13 +5,13 @@ import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 import String.Graphemes.RangeDict.Range as Range
 
 
-parser : Parser (RangeDict Char)
-parser =
-    loop RangeDict.empty looper
+parser : a -> Parser (RangeDict Char a)
+parser value =
+    loop RangeDict.empty (looper value)
 
 
-looper : RangeDict Char -> Parser (Step (RangeDict Char) (RangeDict Char))
-looper rangeSet =
+looper : a -> RangeDict Char a -> Parser (Step (RangeDict Char a) (RangeDict Char a))
+looper value rangeSet =
     oneOf
         [ Parser.succeed identity
             |. token "1"
@@ -19,7 +19,7 @@ looper rangeSet =
             |> andThen
                 (stringToChar
                     >> Maybe.map Range.point
-                    >> Maybe.map (\point -> RangeDict.insert point rangeSet)
+                    >> Maybe.map (\point -> RangeDict.insert point value rangeSet)
                     >> Maybe.map Loop
                     >> Maybe.map Parser.succeed
                     >> Maybe.withDefault (Parser.problem "got a nothing for a point parser")
@@ -33,7 +33,7 @@ looper rangeSet =
                     Maybe.map2 Range.range
                         (stringToChar low)
                         (stringToChar high)
-                        |> Maybe.map (\range -> RangeDict.insert range rangeSet)
+                        |> Maybe.map (\range -> RangeDict.insert range value rangeSet)
                         |> Maybe.map Loop
                         |> Maybe.map Parser.succeed
                         |> Maybe.withDefault (Parser.problem "get a nothing for a pair parser")

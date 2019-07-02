@@ -22,7 +22,7 @@ match c =
     RangeDict.member c chars
 
 
-chars : RangeDict Char
+chars : RangeDict Char ()
 chars =
-    (Result.withDefault RangeDict.empty << Parser.run Data.parser)
+    (Result.withDefault RangeDict.empty << Parser.run (Data.parser ()))
         "2🇦🇿"

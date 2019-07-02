@@ -5,10 +5,11 @@ import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 import String.Graphemes.RangeDict.Range as Range
 
 
-fromChars : RangeDict Char -> Fuzzer String
+fromChars : RangeDict Char a -> Fuzzer String
 fromChars chars =
     chars
         |> RangeDict.toList
+        |> List.map Tuple.first
         |> List.map
             (\range ->
                 Fuzz.map
