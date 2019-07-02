@@ -1,4 +1,4 @@
-module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, insert, member, toList)
+module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, insert, member, toList, union)
 
 import String.Graphemes.RangeDict.Range as Range exposing (Range)
 
@@ -33,6 +33,13 @@ toList rangeDict =
 
         Branch _ here value lt gt ->
             toList lt ++ (( here, value ) :: toList gt)
+
+
+{-| combine two RangeDicts. The first value's ranges take precedence.
+-}
+union : RangeDict comparable value -> RangeDict comparable value -> RangeDict comparable value
+union a b =
+    List.foldl (\( range_, value ) -> insert range_ value) b (toList a)
 
 
 insert : Range comparable -> value -> RangeDict comparable value -> RangeDict comparable value
