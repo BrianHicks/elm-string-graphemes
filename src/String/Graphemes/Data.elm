@@ -1,11 +1,28 @@
-module String.Graphemes.Data exposing (parser)
+module String.Graphemes.Data exposing (Class(..), parser)
 
 import Parser exposing (..)
 import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 import String.Graphemes.RangeDict.Range as Range
 
 
-parser : a -> Parser (RangeDict Char a)
+type Class
+    = CR
+    | LF
+    | Control
+    | Prepend
+    | RegionalIndicator
+    | L
+    | V
+    | T
+    | LV
+    | LVT
+    | ExtendedPictographic
+    | Extend
+    | SpacingMark
+    | ZWJ
+
+
+parser : Class -> Parser (RangeDict Char Class)
 parser value =
     loop RangeDict.empty (looper value)
 

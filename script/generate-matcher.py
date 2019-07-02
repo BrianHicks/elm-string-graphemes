@@ -70,9 +70,11 @@ for (i, match) in enumerate(classes[class_]):
         print('I don\'t know how to handle a "{}"!'.format(match['kind']))
         sys.exit(1)
 
-out.append('chars : RangeDict Char ()')
+out.append('chars : RangeDict Char Data.Class')
 out.append('chars =')
-out.append('    (Result.withDefault RangeDict.empty << Parser.run (Data.parser ()))')
+out.append('    (Result.withDefault RangeDict.empty << Parser.run (Data.parser Data.{}))'.format(
+    class_.replace('_', ''),
+))
 out.append('        "{}"'.format(''.join(chars)))
 
 # write out the final result

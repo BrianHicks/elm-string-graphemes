@@ -21,11 +21,11 @@ spec =
 
                 output =
                     pairs
-                        |> List.map (Tuple.mapSecond (always ()))
+                        |> List.map (Tuple.mapSecond (always Data.Extend))
                         |> RangeDict.fromList
             in
             input
-                |> Parser.run (Data.parser ())
+                |> Parser.run (Data.parser Data.Extend)
                 |> Expect.equal (Ok output)
 
 
