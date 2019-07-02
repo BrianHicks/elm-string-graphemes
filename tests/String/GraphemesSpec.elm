@@ -46,10 +46,9 @@ graphemesSpec =
                         |> Expect.equal (Ok [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ])
             , test "zalgo, sure, why not" <|
                 \_ ->
-                    -- do not adjust your editor, this is proper zalgo
-                    -- text. Check it out in different editors! For example,
-                    -- emacs renders all the diacritics as separate
-                    -- characters. Vim shows it how a browser would!
+                    -- some editors do not render this correctly. It should be
+                    -- the word "zalgo" with a bunch of diacritics above and
+                    -- below. Vim does this properly, the browser does too.
                     "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
                         |> Graphemes.graphemes
                         |> Expect.equal
