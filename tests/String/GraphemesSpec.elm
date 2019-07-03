@@ -42,6 +42,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.reverse s)
                     (Graphemes.reverse s)
+        , fuzz2 (Fuzz.intRange -100 100) Fuzz.string "repeat" <|
+            \i s ->
+                Expect.equal
+                    (String.repeat i s)
+                    (Graphemes.repeat i s)
         ]
 
 
