@@ -1,6 +1,6 @@
 module String.Graphemes exposing
     ( isEmpty, length, reverse, repeat, replace
-    , append
+    , append, concat
     , graphemes, toList
     )
 
@@ -16,7 +16,7 @@ package README for more information on motivation.
 
 # Building and Splitting
 
-@docs append
+@docs append, concat
 
 -}
 
@@ -119,6 +119,16 @@ this.
 append : String -> String -> String
 append =
     String.append
+
+
+{-| Concatenate many strings into one.
+
+    concat [ "never", "the", "less" ] --> "nevertheless"
+
+-}
+concat : List String -> String
+concat =
+    String.concat
 
 
 {-| TODO: docs

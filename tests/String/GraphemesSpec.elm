@@ -60,6 +60,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.append a b)
                     (Graphemes.append a b)
+        , fuzz (Fuzz.list Fuzz.string) "concat" <|
+            \strings ->
+                Expect.equal
+                    (String.concat strings)
+                    (Graphemes.concat strings)
         ]
 
 
