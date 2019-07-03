@@ -13,10 +13,10 @@ main =
                 "characters"
                 (\_ -> String.toList "123456")
                 "graphemes"
-                (\_ -> Segmentation.graphemes "123456")
+                (\_ -> Segmentation.toList "123456")
             , Benchmark.compare "emoji"
                 "characters"
                 (\_ -> String.toList "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
                 "graphemes"
-                (\_ -> Segmentation.graphemes "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
+                (\_ -> Segmentation.toList "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
             ]
