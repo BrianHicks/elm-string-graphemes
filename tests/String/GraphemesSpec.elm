@@ -26,6 +26,9 @@ import Test exposing (..)
 
 compatibilitySpec : Test
 compatibilitySpec =
+    -- TODO: some of these may be slightly flakey if the fuzzer ever manages to
+    -- create a valid multi-byte sequence. Probably should test for that
+    -- explicitly or guard against it.
     describe "compatibility with elm/core String"
         [ fuzz Fuzz.string "isEmpty" <|
             \s ->
