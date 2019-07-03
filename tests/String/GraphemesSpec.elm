@@ -65,6 +65,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.concat strings)
                     (Graphemes.concat strings)
+        , fuzz2 Fuzz.string Fuzz.string "split" <|
+            \a b ->
+                Expect.equal
+                    (String.split a b)
+                    (Graphemes.split a b)
         ]
 
 
