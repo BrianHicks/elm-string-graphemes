@@ -120,6 +120,10 @@ shouldBreakBefore chars nextChar =
         ( [ Just LVT ], Just T ) ->
             False
 
+        -- Emoji modification sequences
+        ( (Just ZWJ) :: rest, Just ExtendedPictographic ) ->
+            shouldBreakForRule11 rest
+
         -- other than special cases handled above, everything breaks on ZWJ,
         -- SpacingMark, and Extend
         ( _, Just ZWJ ) ->
@@ -129,6 +133,25 @@ shouldBreakBefore chars nextChar =
             False
 
         ( _, Just Extend ) ->
+            False
+
+        _ ->
+            True
+
+
+{-| Rule 11 looks like this: `ExtPict Extend* ZWJ ExtPict`
+
+We already handle the terminal ZWJ and ExtPict above, so we just need to deal
+with the list of Extend and the initial ExtPict.
+
+-}
+shouldBreakForRule11 : List (Maybe Class) -> Bool
+shouldBreakForRule11 classes_ =
+    case classes_ of
+        (Just Extend) :: rest ->
+            shouldBreakForRule11 rest
+
+        [ Just ExtendedPictographic ] ->
             False
 
         _ ->

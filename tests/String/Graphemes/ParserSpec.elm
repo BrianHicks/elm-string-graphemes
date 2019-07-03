@@ -262,13 +262,13 @@ foldlSpec =
 
                 -- Nope, no rule 10. Why? Has to do with the numbering in the
                 -- spec the rules are numbered based on.
-                -- , ( "rule 11.0"
-                --   , Fuzz.map4 (\xp1 extends zwj xp2 -> [ xp1 ++ String.join "" extends ++ zwj ++ xp2 ])
-                --         extendedPictographicCharacter
-                --         (Fuzz.list extendCharacter)
-                --         zwjCharacter
-                --         extendedPictographicCharacter
-                --   )
+                , ( "rule 11.0"
+                  , Fuzz.map4 (\xp1 extends zwj xp2 -> [ xp1 ++ String.join "" extends ++ zwj ++ xp2 ])
+                        extendedPictographicCharacter
+                        (Fuzz.list extendCharacter)
+                        zwjCharacter
+                        extendedPictographicCharacter
+                  )
                 , ( "rule 12.0"
                   , Fuzz.map3 (\ris ri1 ri2 -> ris ++ [ ri1 ++ ri2 ])
                         (list (Fuzz.map2 (++) regionalIndicatorCharacter regionalIndicatorCharacter))
