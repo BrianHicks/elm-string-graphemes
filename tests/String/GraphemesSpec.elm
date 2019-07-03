@@ -55,6 +55,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.replace from to source)
                     (Graphemes.replace from to source)
+        , fuzz2 Fuzz.string Fuzz.string "append" <|
+            \a b ->
+                Expect.equal
+                    (String.append a b)
+                    (Graphemes.append a b)
         ]
 
 

@@ -1,5 +1,6 @@
 module String.Graphemes exposing
     ( isEmpty, length, reverse, repeat, replace
+    , append
     , graphemes, toList
     )
 
@@ -11,6 +12,11 @@ dealing with text that the user sees, work at the grapheme level. See the
 package README for more information on motivation.
 
 @docs isEmpty, length, reverse, repeat, replace
+
+
+# Building and Splitting
+
+@docs append
 
 -}
 
@@ -101,6 +107,18 @@ where that causes problems, please open an issue.
 replace : String -> String -> String -> String
 replace =
     String.replace
+
+
+{-| Append two strings. You can also use [the `(++)`
+operator](https://package.elm-lang.org/packages/elm/core/latest/Basics#++) to do
+this.
+
+    append "butter" "fly" --> "butterfly"
+
+-}
+append : String -> String -> String
+append =
+    String.append
 
 
 {-| TODO: docs
