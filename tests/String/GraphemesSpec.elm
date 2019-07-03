@@ -70,6 +70,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.split a b)
                     (Graphemes.split a b)
+        , fuzz2 Fuzz.string (Fuzz.list Fuzz.string) "join" <|
+            \joiner strings ->
+                Expect.equal
+                    (String.join joiner strings)
+                    (Graphemes.join joiner strings)
         ]
 
 

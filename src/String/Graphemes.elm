@@ -1,6 +1,6 @@
 module String.Graphemes exposing
     ( isEmpty, length, reverse, repeat, replace
-    , append, concat, split
+    , append, concat, split, join
     , graphemes, toList
     )
 
@@ -16,7 +16,7 @@ package README for more information on motivation.
 
 # Building and Splitting
 
-@docs append, concat, split
+@docs append, concat, split, join
 
 -}
 
@@ -141,6 +141,20 @@ concat =
 split : String -> String -> List String
 split =
     String.split
+
+
+{-| Put many strings together with a given separator.
+
+    join "a" [ "H", "w", "ii", "n" ] --> "Hawaiian"
+
+    join " " [ "cat", "dog", "cow" ] --> "cat dog cow"
+
+    join "/" [ "home", "evan", "Desktop" ] --> "home/evan/Desktop"
+
+-}
+join : String -> List String -> String
+join =
+    String.join
 
 
 {-| TODO: docs
