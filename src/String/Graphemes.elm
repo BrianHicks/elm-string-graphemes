@@ -1,5 +1,5 @@
 module String.Graphemes exposing
-    ( isEmpty
+    ( isEmpty, length
     , graphemes, toList
     )
 
@@ -10,7 +10,7 @@ text: emoji, for example, will not be split awkwardly. Basically, if you're
 dealing with text that the user sees, work at the grapheme level. See the
 package README for more information on motivation.
 
-@docs isEmpty
+@docs isEmpty, length
 
 -}
 
@@ -43,6 +43,19 @@ import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 isEmpty : String -> Bool
 isEmpty =
     String.isEmpty
+
+
+{-| Get the length of a string.
+
+    length "innumerable" --> 11
+
+    length "" --> 0
+
+-}
+length : String -> Int
+length =
+    -- TODO: foldl
+    graphemes >> List.length
 
 
 {-| TODO: docs

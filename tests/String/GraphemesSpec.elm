@@ -32,6 +32,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.isEmpty s)
                     (Graphemes.isEmpty s)
+        , fuzz Fuzz.string "length" <|
+            \s ->
+                Expect.equal
+                    (String.length s)
+                    (Graphemes.length s)
         ]
 
 
