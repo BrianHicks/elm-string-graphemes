@@ -1,7 +1,8 @@
 module String.Graphemes exposing
     ( isEmpty, length, reverse, repeat, replace
     , append, concat, split, join
-    , graphemes, toList
+    , toList
+    , graphemes
     )
 
 {-| The goal of this API is to recreate `elm/core`'s `String` module as
@@ -17,6 +18,11 @@ package README for more information on motivation.
 # Building and Splitting
 
 @docs append, concat, split, join
+
+
+# List Conversions
+
+@docs toList
 
 -}
 
@@ -157,7 +163,15 @@ join =
     String.join
 
 
-{-| TODO: docs
+{-| Convert a string to a list of characters.
+
+    toList "abc" --> ["a","b","c"]
+
+    toList "🙈🙉🙊" --> ["🙈","🙉","🙊"]
+
+**Note:** this is different from `String`! Graphemes can be more than one
+character wide, so we have to return `String`s here instead of `Char`s.
+
 -}
 toList : String -> List String
 toList =
