@@ -85,18 +85,18 @@ graphemesSpec =
             [ test "Hangul 'bumblebee' is parsed properly" <|
                 \_ ->
                     "꿀벌"
-                        |> Graphemes.graphemes
+                        |> Graphemes.toList
                         |> Expect.equal [ "꿀", "벌" ]
             , test "real-world Hangul is parsed properly" <|
                 \_ ->
                     -- https://stqpkiraradongjae.bandcamp.com/album/sarah
                     "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
-                        |> Graphemes.graphemes
+                        |> Graphemes.toList
                         |> Expect.equal [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ]
             , test "skin tone and gender modifiers on emoji" <|
                 \_ ->
                     "\u{1F9B8}\u{1F3FD}\u{200D}♂️"
-                        |> Graphemes.graphemes
+                        |> Graphemes.toList
                         |> Expect.equal [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ]
             , test "zalgo, sure, why not" <|
                 \_ ->
@@ -104,7 +104,7 @@ graphemesSpec =
                     -- the word "zalgo" with a bunch of diacritics above and
                     -- below. Vim does this properly, the browser does too.
                     "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
-                        |> Graphemes.graphemes
+                        |> Graphemes.toList
                         |> Expect.equal
                             [ "z̴̙͒"
                             , "ả̴̫̼̫̀̅"
@@ -237,7 +237,7 @@ graphemesSpec =
                         \sequence ->
                             sequence
                                 |> String.join ""
-                                |> Graphemes.graphemes
+                                |> Graphemes.toList
                                 |> Expect.equal sequence
                 )
                 [ -- rule numbers from -- https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.html
@@ -430,13 +430,13 @@ breakTest first second break name =
 
 expectIdentity : String -> Expectation
 expectIdentity s =
-    Expect.equal [ s ] (Graphemes.graphemes s)
+    Expect.equal [ s ] (Graphemes.toList s)
 
 
 expectSplit : String -> String -> Expectation
 expectSplit c1 c2 =
     (c1 ++ c2)
-        |> Graphemes.graphemes
+        |> Graphemes.toList
         |> Expect.equal [ c1, c2 ]
 
 

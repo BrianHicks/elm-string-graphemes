@@ -2,7 +2,6 @@ module String.Graphemes exposing
     ( isEmpty, length, reverse, repeat, replace
     , append, concat, split, join
     , toList
-    , graphemes
     )
 
 {-| The goal of this API is to recreate `elm/core`'s `String` module as
@@ -68,8 +67,7 @@ isEmpty =
 -}
 length : String -> Int
 length =
-    -- TODO: foldl
-    graphemes >> List.length
+    foldl (\_ len -> len + 1) 0
 
 
 {-| Reverse a string.
@@ -81,8 +79,7 @@ length =
 -}
 reverse : String -> String
 reverse =
-    -- TODO: foldl
-    graphemes >> List.reverse >> String.join ""
+    foldl (::) [] >> String.join ""
 
 
 {-| Repeat a string n times.
@@ -175,7 +172,7 @@ character wide, so we have to return `String`s here instead of `Char`s.
 -}
 toList : String -> List String
 toList =
-    graphemes
+    foldl (::) [] >> List.reverse
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to
@@ -192,25 +189,27 @@ algorithm](https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest
 if you're interested in learning more.
 
 -}
-graphemes : String -> List String
-graphemes input =
-    case Parser.run (loop [] graphemesLoop) input of
+foldl : (String -> a -> a) -> a -> String -> a
+foldl fn initial input =
+    case Parser.run (loop initial (graphemesLoop fn)) input of
         Ok output ->
             output
 
         Err _ ->
-            [ input ]
+            initial
 
 
 
 -- INTERNALS
 
 
-graphemesLoop : List String -> Parser (Step (List String) (List String))
-graphemesLoop current =
+graphemesLoop : (String -> a -> a) -> a -> Parser (Step a a)
+graphemesLoop fn current =
     Parser.oneOf
-        [ grapheme current sequence
-        , Parser.map (\_ -> Done (List.reverse current)) Parser.end
+        [ sequence
+            |> Parser.getChompedString
+            |> Parser.map (\new -> Loop (fn new current))
+        , Parser.map (\_ -> Done current) Parser.end
         ]
 
 
@@ -245,22 +244,6 @@ classes =
 
 sequence : Parser ()
 sequence =
-    -- [ cr
-    -- , lf
-    -- , Control.parser
-    -- , extend
-    -- , regionalIndicator
-    -- , prepend
-    -- , spacingMark
-    -- , l
-    -- , v
-    -- , t
-    -- , lv
-    -- , lvt
-    -- , extendedPictographic
-    -- , zwj
-    -- , other
-    -- ]
     Parser.andThen
         (\charString ->
             case
