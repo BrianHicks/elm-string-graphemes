@@ -9,7 +9,7 @@ test: generated
 	elm-test
 
 .PHONY: ci
-ci: test size-benchmarks/report.txt
+ci: test
 	test -z "$(shell git diff)"
 
 .PHONY: generated
@@ -39,15 +39,6 @@ data/GraphemeBreakTest.txt:
 	curl https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.txt > $@
 
 # benchmarks
-
-size-benchmarks/report.txt: generated $(shell find src size-benchmarks -name '*.elm') size-benchmarks/stats.py
-	cd $(@D); ./stats.py > $(@F)
-
-size-benchmarks/names-in-%.txt: size-benchmarks/%.js size-benchmarks/report.txt
-	grep -E '^var .+ =' $< | cut -f 2 -d ' ' | sort > $@
-
-size-benchmarks/new-names.txt: size-benchmarks/names-in-withoutSegmentation.txt size-benchmarks/names-in-withSegmentation.txt
-	grep -v size-benchmarks/names-in-withoutSegmentation.txt size-benchmarks/names-in-withSegmentation.txt > $@
 
 benchmarks/benchmark.html: generated $(shell find src benchmarks -name '*.elm')
 	cd $(@D); elm make --output=$(@F) src/Main.elm
