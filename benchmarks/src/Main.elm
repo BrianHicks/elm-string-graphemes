@@ -4,6 +4,7 @@ import Benchmark exposing (..)
 import Benchmark.Runner exposing (BenchmarkProgram, program)
 import Parser
 import String.Graphemes as Segmentation
+import String.Graphemes.Parser as Parser
 
 
 main : BenchmarkProgram
@@ -13,27 +14,11 @@ main =
             [ Benchmark.compare "plain text"
                 "characters"
                 (\_ -> String.toList "123456")
-                "graphemes"
-                (\_ -> Segmentation.toList "123456")
+                "parser"
+                (\_ -> Parser.foldl (::) [] "123456" |> List.reverse)
             , Benchmark.compare "emoji"
                 "characters"
                 (\_ -> String.toList "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
-                "graphemes"
-                (\_ -> Segmentation.toList "\u{1F9B8}\u{1F3FD}\u{200D}♂️")
-            , Benchmark.compare "foldls"
                 "parser"
-                (\_ ->
-                    Parser.run
-                        (Parser.loop []
-                            (\state ->
-                                Parser.oneOf
-                                    [ Parser.map (\_ -> Parser.Done state) Parser.end
-                                    , Parser.map (\c -> Parser.Loop (c :: state)) (Parser.getChompedString (Parser.chompIf (\_ -> True)))
-                                    ]
-                            )
-                        )
-                        "1234567890"
-                )
-                "foldl"
-                (\_ -> String.foldl (::) [] "1234567890")
+                (\_ -> Parser.foldl (::) [] "\u{1F9B8}\u{1F3FD}\u{200D}♂️" |> List.reverse)
             ]
