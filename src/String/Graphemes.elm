@@ -51,6 +51,8 @@ isEmpty =
 
     length "" --> 0
 
+    length "🇨🇦" --> 1
+
 -}
 length : String -> Int
 length =
