@@ -1,5 +1,13 @@
 module String.Graphemes exposing (graphemes)
 
+{-| The goal of this API is to faithfully recreate `elm/core`'s `String` module, but
+to operate on grapheme boundaries instead of bytes or characters. This can
+smooth out some edge cases when processing user-entered text: emoji, for
+example, will not be split awkwardly. Basically, if you're dealing with text
+that the user sees, work at the grapheme level. See the package README for more
+information on motivation.
+-}
+
 import Parser exposing (..)
 import String.Graphemes.Data as Data exposing (Class(..))
 import String.Graphemes.Data.CR as CR
