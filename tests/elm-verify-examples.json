@@ -1,0 +1,4 @@
+{
+    "root": "../src",
+    "tests": ["String.Graphemes", "./README.md"]
+}

@@ -1,4 +1,4 @@
-module String.GraphemesSpec exposing (graphemesSpec)
+module String.GraphemesSpec exposing (compatibilitySpec, graphemesSpec)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, list, oneOf)
@@ -22,6 +22,17 @@ import String.Graphemes.Data.ZWJ as ZWJ
 import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 import String.Graphemes.RangeDict.Range as Range
 import Test exposing (..)
+
+
+compatibilitySpec : Test
+compatibilitySpec =
+    describe "compatibility with elm/core String"
+        [ fuzz Fuzz.string "isEmpty" <|
+            \s ->
+                Expect.equal
+                    (String.isEmpty s)
+                    (Graphemes.isEmpty s)
+        ]
 
 
 graphemesSpec : Test

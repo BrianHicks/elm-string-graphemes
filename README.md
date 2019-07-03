@@ -16,9 +16,11 @@ Do string operations based on grapheme boundaries instead of characters or bytes
 Compare:
 
 ```elm
-String.toList "🦸🏽‍♂️" -- [ '🦸', '🏽', '\u{200D}', '♂', '\u{FE0F}' ]
+import String.Graphemes
 
-String.Graphemes.toList "🦸🏽‍♂️" -- [ "🦸🏽‍♂️" ]
+String.toList "🦸🏽‍♂️" --> [ '🦸', '🏽', '\u{200D}', '♂', '\u{FE0F}' ]
+
+String.Graphemes.toList "🦸🏽‍♂️" --> [ "🦸🏽‍♂️" ]
 ```
 
 ## What's going on here?

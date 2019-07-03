@@ -21,6 +21,7 @@ in
       elmPackages.elm-format
       elmTools.elm-analyse
       elmTools.elm-test
+      elmTools.elm-verify-examples
       git
       gnumake
       nodePackages.uglify-js

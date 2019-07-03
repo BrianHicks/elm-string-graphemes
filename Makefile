@@ -5,6 +5,7 @@ all: generated
 
 .PHONY: test
 test: generated
+	elm-verify-examples
 	elm-test
 
 .PHONY: ci

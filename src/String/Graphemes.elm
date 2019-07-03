@@ -1,4 +1,7 @@
-module String.Graphemes exposing (graphemes)
+module String.Graphemes exposing
+    ( isEmpty
+    , graphemes, toList
+    )
 
 {-| The goal of this API is to faithfully recreate `elm/core`'s `String` module, but
 to operate on grapheme boundaries instead of bytes or characters. This can
@@ -6,6 +9,9 @@ smooth out some edge cases when processing user-entered text: emoji, for
 example, will not be split awkwardly. Basically, if you're dealing with text
 that the user sees, work at the grapheme level. See the package README for more
 information on motivation.
+
+@docs isEmpty
+
 -}
 
 import Parser exposing (..)
@@ -25,6 +31,25 @@ import String.Graphemes.Data.T as T
 import String.Graphemes.Data.V as V
 import String.Graphemes.Data.ZWJ as ZWJ
 import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
+
+
+{-| Determine if a string is empty.
+
+    isEmpty "" --> True
+
+    isEmpty "the world" --> False
+
+-}
+isEmpty : String -> Bool
+isEmpty =
+    String.isEmpty
+
+
+{-| TODO: docs
+-}
+toList : String -> List String
+toList =
+    graphemes
 
 
 {-| Break a string into graphemes (the characters you percieve, as opposed to
@@ -49,6 +74,10 @@ graphemes input =
 
         Err _ ->
             [ input ]
+
+
+
+-- INTERNALS
 
 
 graphemesLoop : List String -> Parser (Step (List String) (List String))
