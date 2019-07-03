@@ -34,7 +34,7 @@ test = textwrap.dedent('''\
     test "{index}: {comment}" <|
         \\_ ->
             {start_string}
-                |> Grapheme.graphemes
+                |> Grapheme.toList
                 |> Expect.equal ({end_strings})
 ''')
 
