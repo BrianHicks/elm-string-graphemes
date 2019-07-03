@@ -29,39 +29,39 @@ toList =
 foldlSpec : Test
 foldlSpec =
     describe "graphemes"
-        [ -- describe "real world strings"
-          --   [ test "Hangul 'bumblebee' is parsed properly" <|
-          --       \_ ->
-          --           "꿀벌"
-          --               |> toList
-          --               |> Expect.equal [ "꿀", "벌" ]
-          --   , test "real-world Hangul is parsed properly" <|
-          --       \_ ->
-          --           -- https://stqpkiraradongjae.bandcamp.com/album/sarah
-          --           "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
-          --               |> toList
-          --               |> Expect.equal [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ]
-          --   , test "skin tone and gender modifiers on emoji" <|
-          --       \_ ->
-          --           "\u{1F9B8}\u{1F3FD}\u{200D}♂️"
-          --               |> toList
-          --               |> Expect.equal [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ]
-          --   , test "zalgo, sure, why not" <|
-          --       \_ ->
-          --           -- some editors do not render this correctly. It should be
-          --           -- the word "zalgo" with a bunch of diacritics above and
-          --           -- below. Vim does this properly, the browser does too.
-          --           "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
-          --               |> toList
-          --               |> Expect.equal
-          --                   [ "z̴̙͒"
-          --                   , "ả̴̫̼̫̀̅"
-          --                   , "ĺ̴̔̿͜"
-          --                   , "g̷̨͇͉̊͐̚"
-          --                   , "o̶̳̣̯͌̓"
-          --                   ]
-          --   ]
-          describe "2-character combinations"
+        [ describe "real world strings"
+            [ test "Hangul 'bumblebee' is parsed properly" <|
+                \_ ->
+                    "꿀벌"
+                        |> toList
+                        |> Expect.equal [ "꿀", "벌" ]
+            , test "real-world Hangul is parsed properly" <|
+                \_ ->
+                    -- https://stqpkiraradongjae.bandcamp.com/album/sarah
+                    "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
+                        |> toList
+                        |> Expect.equal [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ]
+            , test "skin tone and gender modifiers on emoji" <|
+                \_ ->
+                    "\u{1F9B8}\u{1F3FD}\u{200D}♂️"
+                        |> toList
+                        |> Expect.equal [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ]
+            , test "zalgo, sure, why not" <|
+                \_ ->
+                    -- some editors do not render this correctly. It should be
+                    -- the word "zalgo" with a bunch of diacritics above and
+                    -- below. Vim does this properly, the browser does too.
+                    "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
+                        |> toList
+                        |> Expect.equal
+                            [ "z̴̙͒"
+                            , "ả̴̫̼̫̀̅"
+                            , "ĺ̴̔̿͜"
+                            , "g̷̨͇͉̊͐̚"
+                            , "o̶̳̣̯͌̓"
+                            ]
+            ]
+        , describe "2-character combinations"
             [ describeFollowing "carriage return"
                 crCharacter
                 { breakForEverything
