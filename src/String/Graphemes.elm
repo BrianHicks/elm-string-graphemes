@@ -1,5 +1,5 @@
 module String.Graphemes exposing
-    ( isEmpty, length, reverse, repeat
+    ( isEmpty, length, reverse, repeat, replace
     , graphemes, toList
     )
 
@@ -10,7 +10,7 @@ text: emoji, for example, will not be split awkwardly. Basically, if you're
 dealing with text that the user sees, work at the grapheme level. See the
 package README for more information on motivation.
 
-@docs isEmpty, length, reverse, repeat
+@docs isEmpty, length, reverse, repeat, replace
 
 -}
 
@@ -81,6 +81,26 @@ reverse =
 repeat : Int -> String -> String
 repeat =
     String.repeat
+
+
+{-| Replace all occurrences of some substring.
+
+    replace "." "-" "Json.Decode.succeed" --> "Json-Decode-succeed"
+
+    replace "," "/" "a,b,c,d,e" --> "a/b/c/d/e"
+
+**Note:** If you need more advanced replacements, check out the
+[elm/parser](https://package.elm-lang.org/packages/elm/parser/latest) or
+[elm/regex](https://package.elm-lang.org/packages/elm/regex/latest) package.
+
+**Second note:** you might expect us to do something special with graphemes
+here. Nope! This transformation is extremely literal. If you have a use case
+where that causes problems, please open an issue.
+
+-}
+replace : String -> String -> String -> String
+replace =
+    String.replace
 
 
 {-| TODO: docs

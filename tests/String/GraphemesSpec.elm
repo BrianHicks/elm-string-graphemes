@@ -47,6 +47,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.repeat i s)
                     (Graphemes.repeat i s)
+        , fuzz3 Fuzz.string Fuzz.string Fuzz.string "replace" <|
+            \from to source ->
+                Expect.equal
+                    (String.replace from to source)
+                    (Graphemes.replace from to source)
         ]
 
 
