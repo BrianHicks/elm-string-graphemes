@@ -1,5 +1,5 @@
 module String.Graphemes exposing
-    ( isEmpty, length
+    ( isEmpty, length, reverse
     , graphemes, toList
     )
 
@@ -10,7 +10,7 @@ text: emoji, for example, will not be split awkwardly. Basically, if you're
 dealing with text that the user sees, work at the grapheme level. See the
 package README for more information on motivation.
 
-@docs isEmpty, length
+@docs isEmpty, length, reverse
 
 -}
 
@@ -58,6 +58,19 @@ length : String -> Int
 length =
     -- TODO: foldl
     graphemes >> List.length
+
+
+{-| Reverse a string.
+
+    reverse "stressed" --> "desserts"
+
+    reverse "🇨🇦🇲🇽" --> "🇲🇽🇨🇦"
+
+-}
+reverse : String -> String
+reverse =
+    -- TODO: foldl
+    graphemes >> List.reverse >> String.join ""
 
 
 {-| TODO: docs

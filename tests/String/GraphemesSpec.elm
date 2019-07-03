@@ -37,6 +37,11 @@ compatibilitySpec =
                 Expect.equal
                     (String.length s)
                     (Graphemes.length s)
+        , fuzz Fuzz.string "reverse" <|
+            \s ->
+                Expect.equal
+                    (String.reverse s)
+                    (Graphemes.reverse s)
         ]
 
 
