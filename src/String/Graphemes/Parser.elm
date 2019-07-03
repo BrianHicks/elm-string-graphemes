@@ -38,91 +38,93 @@ step fn char ( chars, state ) =
         [] ->
             ( [ char ], state )
 
-        _ ->
-            if shouldBreakBefore chars char then
+        last :: rest ->
+            if shouldBreakBefore last rest char then
                 ( [ char ], fn (String.fromList (List.reverse chars)) state )
 
             else
                 ( char :: chars, state )
 
 
-shouldBreakBefore : List Char -> Char -> Bool
-shouldBreakBefore chars nextChar =
+shouldBreakBefore : Char -> List Char -> Char -> Bool
+shouldBreakBefore lastChar restChars nextChar =
     case
-        ( List.map (\char -> RangeDict.get char classes) chars
+        ( RangeDict.get lastChar classes
         , RangeDict.get nextChar classes
         )
     of
         -- CR only extends for CRLF
-        ( [ Just CR ], Just LF ) ->
+        ( Just CR, Just LF ) ->
             False
 
-        ( [ Just CR ], _ ) ->
+        ( Just CR, _ ) ->
             True
 
         -- LF always breaks
-        ( [ Just LF ], _ ) ->
+        ( Just LF, _ ) ->
             True
 
         -- Control always breaks
-        ( [ Just Control ], _ ) ->
+        ( Just Control, _ ) ->
             True
 
         -- regional indicators form sequences of exactly two
-        ( [ Just RegionalIndicator ], Just RegionalIndicator ) ->
-            False
+        ( Just RegionalIndicator, Just RegionalIndicator ) ->
+            not (List.isEmpty restChars)
 
         -- prepend only breaks for CR, LF, and Control
-        ( [ Just Prepend ], Just CR ) ->
+        ( Just Prepend, Just CR ) ->
             True
 
-        ( [ Just Prepend ], Just LF ) ->
+        ( Just Prepend, Just LF ) ->
             True
 
-        ( [ Just Prepend ], Just Control ) ->
+        ( Just Prepend, Just Control ) ->
             True
 
-        ( [ Just Prepend ], _ ) ->
+        ( Just Prepend, _ ) ->
             False
 
         -- Hangul L
-        ( [ Just L ], Just L ) ->
+        ( Just L, Just L ) ->
             False
 
-        ( [ Just L ], Just V ) ->
+        ( Just L, Just V ) ->
             False
 
-        ( [ Just L ], Just LV ) ->
+        ( Just L, Just LV ) ->
             False
 
-        ( [ Just L ], Just LVT ) ->
+        ( Just L, Just LVT ) ->
             False
 
         -- Hangul V
-        ( [ Just V ], Just V ) ->
+        ( Just V, Just V ) ->
             False
 
-        ( [ Just V ], Just T ) ->
+        ( Just V, Just T ) ->
             False
 
         -- Hangul T
-        ( [ Just T ], Just T ) ->
+        ( Just T, Just T ) ->
             False
 
         -- Hangul LV
-        ( [ Just LV ], Just V ) ->
+        ( Just LV, Just V ) ->
             False
 
-        ( [ Just LV ], Just T ) ->
+        ( Just LV, Just T ) ->
             False
 
         -- Hangul LVT
-        ( [ Just LVT ], Just T ) ->
+        ( Just LVT, Just T ) ->
             False
 
         -- Emoji modification sequences
-        ( (Just ZWJ) :: rest, Just ExtendedPictographic ) ->
-            shouldBreakForRule11 rest
+        ( Just ZWJ, Just ExtendedPictographic ) ->
+            restChars
+                |> List.map (\c -> RangeDict.get c classes)
+                |> shouldBreakForRule11
 
         -- other than special cases handled above, everything breaks on ZWJ,
         -- SpacingMark, and Extend
