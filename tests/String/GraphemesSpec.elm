@@ -32,18 +32,18 @@ graphemesSpec =
                 \_ ->
                     "꿀벌"
                         |> Graphemes.graphemes
-                        |> Expect.equal (Ok [ "꿀", "벌" ])
+                        |> Expect.equal [ "꿀", "벌" ]
             , test "real-world Hangul is parsed properly" <|
                 \_ ->
                     -- https://stqpkiraradongjae.bandcamp.com/album/sarah
                     "당신이 키라라의 훌륭함을 잘 모르겠다면 문제는 당신에게 있다"
                         |> Graphemes.graphemes
-                        |> Expect.equal (Ok [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ])
+                        |> Expect.equal [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ]
             , test "skin tone and gender modifiers on emoji" <|
                 \_ ->
                     "\u{1F9B8}\u{1F3FD}\u{200D}♂️"
                         |> Graphemes.graphemes
-                        |> Expect.equal (Ok [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ])
+                        |> Expect.equal [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ]
             , test "zalgo, sure, why not" <|
                 \_ ->
                     -- some editors do not render this correctly. It should be
@@ -52,14 +52,12 @@ graphemesSpec =
                     "z̴̙͒ả̴̫̼̫̀̅ĺ̴̔̿͜g̷̨͇͉̊͐̚o̶̳̣̯͌̓"
                         |> Graphemes.graphemes
                         |> Expect.equal
-                            (Ok
-                                [ "z̴̙͒"
-                                , "ả̴̫̼̫̀̅"
-                                , "ĺ̴̔̿͜"
-                                , "g̷̨͇͉̊͐̚"
-                                , "o̶̳̣̯͌̓"
-                                ]
-                            )
+                            [ "z̴̙͒"
+                            , "ả̴̫̼̫̀̅"
+                            , "ĺ̴̔̿͜"
+                            , "g̷̨͇͉̊͐̚"
+                            , "o̶̳̣̯͌̓"
+                            ]
             ]
         , describe "2-character combinations"
             [ describeFollowing "carriage return"
@@ -186,7 +184,7 @@ graphemesSpec =
                             sequence
                                 |> String.join ""
                                 |> Graphemes.graphemes
-                                |> Expect.equal (Ok sequence)
+                                |> Expect.equal sequence
                 )
                 [ -- rule numbers from -- https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest.html
                   -- rules 0.2 and 0.3 deal with the bounds of the string; we don't
@@ -378,14 +376,14 @@ breakTest first second break name =
 
 expectIdentity : String -> Expectation
 expectIdentity s =
-    Expect.equal (Ok [ s ]) (Graphemes.graphemes s)
+    Expect.equal [ s ] (Graphemes.graphemes s)
 
 
 expectSplit : String -> String -> Expectation
 expectSplit c1 c2 =
     (c1 ++ c2)
         |> Graphemes.graphemes
-        |> Expect.equal (Ok [ c1, c2 ])
+        |> Expect.equal [ c1, c2 ]
 
 
 otherCharacter : Fuzzer String

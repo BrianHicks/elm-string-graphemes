@@ -33,9 +33,14 @@ algorithm](https://www.unicode.org/Public/12.1.0/ucd/auxiliary/GraphemeBreakTest
 if you're interested in learning more.
 
 -}
-graphemes : String -> Result (List Parser.DeadEnd) (List String)
+graphemes : String -> List String
 graphemes input =
-    Parser.run (loop [] graphemesLoop) input
+    case Parser.run (loop [] graphemesLoop) input of
+        Ok output ->
+            output
+
+        Err _ ->
+            [ input ]
 
 
 graphemesLoop : List String -> Parser (Step (List String) (List String))

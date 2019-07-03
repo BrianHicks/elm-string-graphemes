@@ -57,7 +57,7 @@ for (i, line) in enumerate(sys.stdin.read().split('\n')):
         index=i,
         comment=data['comment'],
         start_string='"{}"'.format(''.join(graphemes)),
-        end_strings='Ok [ {} ]'.format(', '.join('"{}"'.format(grapheme) for grapheme in graphemes))
+        end_strings='[ {} ]'.format(', '.join('"{}"'.format(grapheme) for grapheme in graphemes))
     ))
 
 
