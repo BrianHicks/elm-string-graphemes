@@ -1,7 +1,7 @@
 module String.GraphemesSpec exposing (compatibilitySpec)
 
 import Expect
-import Fuzz exposing (Fuzzer, int, list, string)
+import Fuzz exposing (Fuzzer, float, int, list, string)
 import String.Graphemes as Graphemes
 import Test exposing (..)
 
@@ -79,40 +79,165 @@ compatibilitySpec =
                 Expect.equal
                     (String.right offset string)
                     (Graphemes.right offset string)
-
-        -- , todo "dropLeft"
-        -- , todo "dropRight"
-        -- , todo "contains"
-        -- , todo "startsWith"
-        -- , todo "endsWith"
-        -- , todo "indexes"
-        -- , todo "indices"
-        -- , todo "toUpper"
-        -- , todo "toLower"
-        -- , todo "padLeft"
-        -- , todo "padRight"
-        -- , todo "trim"
-        -- , todo "trimLeft"
-        -- , todo "trimRight"
-        -- , todo "toInt"
-        -- , todo "fromInt"
-        -- , todo "toFloat"
-        -- , todo "fromFloat"
-        -- , todo "toList"
-        -- , todo "fromList"
-        -- , todo "fromChar"
-        -- , todo "cons"
-        -- , todo "uncons"
-        -- , todo "map"
-        -- , todo "filter"
-        -- , todo "foldl"
-        -- , todo "foldr"
-        -- , todo "any"
-        -- , todo "all"
+        , fuzz2 int simpleString "dropLeft" <|
+            \offset string ->
+                Expect.equal
+                    (String.dropLeft offset string)
+                    (Graphemes.dropLeft offset string)
+        , fuzz2 int simpleString "dropRight" <|
+            \offset string ->
+                Expect.equal
+                    (String.dropRight offset string)
+                    (Graphemes.dropRight offset string)
+        , fuzz2 simpleString simpleString "contains" <|
+            \a b ->
+                Expect.equal
+                    (String.contains a b)
+                    (Graphemes.contains a b)
+        , fuzz2 simpleString simpleString "startsWith" <|
+            \a b ->
+                Expect.equal
+                    (String.startsWith a b)
+                    (Graphemes.startsWith a b)
+        , fuzz2 simpleString simpleString "endsWith" <|
+            \a b ->
+                Expect.equal
+                    (String.endsWith a b)
+                    (Graphemes.endsWith a b)
+        , fuzz2 simpleString simpleString "indexes" <|
+            \a b ->
+                Expect.equal
+                    (String.indexes a b)
+                    (Graphemes.indexes a b)
+        , fuzz2 simpleString simpleString "indices" <|
+            \a b ->
+                Expect.equal
+                    (String.indices a b)
+                    (Graphemes.indices a b)
+        , fuzz simpleString "toUpper" <|
+            \string ->
+                Expect.equal
+                    (String.toUpper string)
+                    (Graphemes.toUpper string)
+        , fuzz simpleString "toLower" <|
+            \string ->
+                Expect.equal
+                    (String.toLower string)
+                    (Graphemes.toLower string)
+        , fuzz3 (Fuzz.intRange 0 1000) simpleChar simpleString "pad" <|
+            \howMuch what string ->
+                Expect.equal
+                    (String.pad howMuch what string)
+                    (Graphemes.pad howMuch what string)
+        , fuzz3 (Fuzz.intRange 0 1000) simpleChar simpleString "padLeft" <|
+            \howMuch what string ->
+                Expect.equal
+                    (String.padLeft howMuch what string)
+                    (Graphemes.padLeft howMuch what string)
+        , fuzz3 (Fuzz.intRange 0 1000) simpleChar simpleString "padRight" <|
+            \howMuch what string ->
+                Expect.equal
+                    (String.padRight howMuch what string)
+                    (Graphemes.padRight howMuch what string)
+        , fuzz simpleString "trim" <|
+            \string ->
+                Expect.equal
+                    (String.trim string)
+                    (Graphemes.trim string)
+        , fuzz simpleString "trimLeft" <|
+            \string ->
+                Expect.equal
+                    (String.trimLeft string)
+                    (Graphemes.trimLeft string)
+        , fuzz simpleString "trimRight" <|
+            \string ->
+                Expect.equal
+                    (String.trimRight string)
+                    (Graphemes.trimRight string)
+        , fuzz simpleString "toInt" <|
+            \string ->
+                Expect.equal
+                    (String.toInt string)
+                    (Graphemes.toInt string)
+        , fuzz int "fromInt" <|
+            \i ->
+                Expect.equal
+                    (String.fromInt i)
+                    (Graphemes.fromInt i)
+        , fuzz simpleString "toFloat" <|
+            \string ->
+                Expect.equal
+                    (String.toFloat string)
+                    (Graphemes.toFloat string)
+        , fuzz float "fromFloat" <|
+            \i ->
+                Expect.equal
+                    (String.fromFloat i)
+                    (Graphemes.fromFloat i)
+        , fuzz string "toList" <|
+            \string ->
+                Expect.equal
+                    (String.toList string |> List.map String.fromChar)
+                    (Graphemes.toList string)
+        , fuzz (list simpleChar) "fromList" <|
+            \chars ->
+                Expect.equal
+                    (String.fromList chars)
+                    (chars |> List.map String.fromChar |> Graphemes.fromList)
+        , fuzz simpleChar "fromChar" <|
+            \char ->
+                Expect.equal
+                    (String.fromChar char)
+                    (Graphemes.fromChar char)
+        , fuzz2 simpleChar simpleString "cons" <|
+            \char string ->
+                Expect.equal
+                    (String.cons char string)
+                    (Graphemes.cons char string)
+        , fuzz simpleString "uncons" <|
+            \string ->
+                Expect.equal
+                    (String.uncons string)
+                    (Graphemes.uncons string)
+        , fuzz simpleString "map" <|
+            \string ->
+                Expect.equal
+                    (String.map (always 'a') string)
+                    (Graphemes.map (always "a") string)
+        , fuzz simpleString "filter" <|
+            \string ->
+                Expect.equal
+                    (String.filter ((/=) '!') string)
+                    (Graphemes.filter ((/=) "!") string)
+        , fuzz simpleString "foldl" <|
+            \string ->
+                Expect.equal
+                    (String.foldl String.cons "" string)
+                    (Graphemes.foldl (++) "" string)
+        , fuzz simpleString "foldr" <|
+            \string ->
+                Expect.equal
+                    (String.foldr String.cons "" string)
+                    (Graphemes.foldr (++) "" string)
+        , fuzz simpleString "any" <|
+            \string ->
+                Expect.equal
+                    (String.any Char.isDigit string)
+                    (Graphemes.any (String.any Char.isDigit) string)
+        , fuzz simpleString "all" <|
+            \string ->
+                Expect.equal
+                    (String.all Char.isDigit string)
+                    (Graphemes.all (String.all Char.isDigit) string)
         ]
+
+
+simpleChar : Fuzzer Char
+simpleChar =
+    Fuzz.intRange (Char.toCode '!') (Char.toCode 'Z')
+        |> Fuzz.map Char.fromCode
 
 
 simpleString : Fuzzer String
 simpleString =
-    Fuzz.intRange (Char.toCode 'A') (Char.toCode 'Z')
-        |> Fuzz.map (Char.fromCode >> String.fromChar)
+    Fuzz.map String.fromList (list simpleChar)

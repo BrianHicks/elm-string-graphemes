@@ -519,18 +519,18 @@ toList =
     foldr (::) []
 
 
-{-| Convert a list of characters into a String. Can be useful if you
+{-| Convert a list of graphemes into a String. Can be useful if you
 want to create a string primarily by consing, perhaps for decoding
 something.
 
-    fromList [ 'a', 'b', 'c' ] --> "abc"
+    fromList [ "a", "b", "c" ] --> "abc"
 
-    fromList [ '🙈', '🙉', '🙊' ] --> "🙈🙉🙊"
+    fromList [ "🙈", "🙉", "🙊" ] --> "🙈🙉🙊"
 
 -}
-fromList : List Char -> String
+fromList : List String -> String
 fromList =
-    String.fromList
+    concat
 
 
 
@@ -576,19 +576,31 @@ uncons =
 
 {-| Transform every grapheme in a string
 -}
-map : (Char -> Char) -> String -> String
-map =
-    String.map
+map : (String -> String) -> String -> String
+map mapper string =
+    string
+        |> foldr (\grapheme acc -> mapper grapheme :: acc) []
+        |> String.concat
 
 
-{-| Keep only the characters that pass the test.
+{-| Keep only the graphemes that pass the test.
 
-    filter Char.isDigit "R2-D2" --> "22"
+    filter (String.all Char.isDigit) "R2-D2" --> "22"
 
 -}
-filter : (Char -> Bool) -> String -> String
-filter =
-    String.filter
+filter : (String -> Bool) -> String -> String
+filter test string =
+    string
+        |> foldr
+            (\grapheme acc ->
+                if test grapheme then
+                    grapheme :: acc
+
+                else
+                    acc
+            )
+            []
+        |> String.concat
 
 
 {-| Reduce a string from the left.
@@ -613,29 +625,29 @@ foldr fn state string =
         |> List.foldl fn state
 
 
-{-| Determine whether _any_ characters pass the test.
+{-| Determine whether _any_ graphemes pass the test.
 
-    any Char.isDigit "90210" --> True
+    any (String.all Char.isDigit) "90210" --> True
 
-    any Char.isDigit "R2-D2" --> True
+    any (String.all Char.isDigit) "R2-D2" --> True
 
-    any Char.isDigit "heart" --> False
-
--}
-any : (Char -> Bool) -> String -> Bool
-any =
-    String.any
-
-
-{-| Determine whether _all_ characters pass the test.
-
-    all Char.isDigit "90210" --> True
-
-    all Char.isDigit "R2-D2" --> False
-
-    all Char.isDigit "heart" --> False
+    any (String.all Char.isDigit) "heart" --> False
 
 -}
-all : (Char -> Bool) -> String -> Bool
-all =
-    String.all
+any : (String -> Bool) -> String -> Bool
+any test string =
+    foldl (\grapheme acc -> acc || test grapheme) False string
+
+
+{-| Determine whether _all_ graphemes pass the test.
+
+    all (String.all Char.isDigit) "90210" --> True
+
+    all (String.all Char.isDigit) "R2-D2" --> False
+
+    all (String.all Char.isDigit) "heart" --> False
+
+-}
+all : (String -> Bool) -> String -> Bool
+all test string =
+    foldl (\grapheme acc -> acc && test grapheme) True string
