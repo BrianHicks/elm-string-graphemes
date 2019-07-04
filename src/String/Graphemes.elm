@@ -172,6 +172,9 @@ concat =
 
     split "/" "home/evan/Desktop/" --> [ "home", "evan", "Desktop", "" ]
 
+**Note:** this will split a string very literally—including breaking grapheme
+boundaries. If this causes problems for you, please open an issue.
+
 -}
 split : String -> String -> List String
 split =
