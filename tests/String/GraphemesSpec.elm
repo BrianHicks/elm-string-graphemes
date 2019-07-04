@@ -1,5 +1,6 @@
 module String.GraphemesSpec exposing (spec)
 
+import Array
 import Expect
 import Fuzz exposing (Fuzzer, float, int, list, string)
 import String.Graphemes as Graphemes
@@ -243,6 +244,11 @@ spec =
                     |> String.concat
                     |> Graphemes.reverse
                     |> Expect.equal (String.concat (List.reverse graphemes))
+        , fuzz2 (Fuzz.map2 (\a b -> ( min a b, max a b )) int int) graphemesFuzzer "slice" <|
+            \( start, end ) graphemes ->
+                Expect.equal
+                    (graphemes |> String.concat |> Graphemes.slice start end)
+                    (graphemes |> Array.fromList |> Array.slice start end |> Array.toList |> String.concat)
         ]
 
 

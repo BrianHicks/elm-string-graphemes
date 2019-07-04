@@ -68,6 +68,7 @@ Cosmetic operations such as padding with extra characters or trimming whitespace
 
 -}
 
+import Array
 import String.Graphemes.Parser as Parser
 
 
@@ -232,8 +233,15 @@ are taken starting from the _end_ of the list.
 
 -}
 slice : Int -> Int -> String -> String
-slice =
-    String.slice
+slice start end string =
+    -- TODO: this is probably terribly slow. Once the conversion to graphemes is
+    -- all done, it should be made faster.
+    string
+        |> toList
+        |> Array.fromList
+        |> Array.slice start end
+        |> Array.toList
+        |> concat
 
 
 {-| Take _n_ characters from the left side of a string.
