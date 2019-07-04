@@ -1,6 +1,5 @@
-module String.Graphemes.Data exposing (Class(..), parser, stringToChar)
+module String.Graphemes.Data exposing (Class(..), parser)
 
-import Parser exposing (..)
 import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 import String.Graphemes.RangeDict.Range as Range
 
@@ -22,49 +21,49 @@ type Class
     | ZWJ
 
 
-parser : Class -> Parser (RangeDict Char Class)
-parser value =
-    loop RangeDict.empty (looper value)
+type ParserState
+    = Error String
+    | Empty
+    | One
+    | Two (Maybe Char)
 
 
-looper : a -> RangeDict Char a -> Parser (Step (RangeDict Char a) (RangeDict Char a))
-looper value rangeSet =
-    oneOf
-        [ Parser.succeed identity
-            |. token "1"
-            |= getChompedString (chompIf (\_ -> True))
-            |> andThen
-                (stringToChar
-                    >> Maybe.map Range.point
-                    >> Maybe.map (\point -> RangeDict.insert point value rangeSet)
-                    >> Maybe.map Loop
-                    >> Maybe.map Parser.succeed
-                    >> Maybe.withDefault (Parser.problem "got a nothing for a point parser")
-                )
-        , Parser.succeed Tuple.pair
-            |. token "2"
-            |= getChompedString (chompIf (\_ -> True))
-            |= getChompedString (chompIf (\_ -> True))
-            |> andThen
-                (\( low, high ) ->
-                    Maybe.map2 Range.range
-                        (stringToChar low)
-                        (stringToChar high)
-                        |> Maybe.map (\range -> RangeDict.insert range value rangeSet)
-                        |> Maybe.map Loop
-                        |> Maybe.map Parser.succeed
-                        |> Maybe.withDefault (Parser.problem "get a nothing for a pair parser")
-                )
-        , Parser.succeed (Done rangeSet)
-            |. end
-        ]
+parser : Class -> String -> Result String (RangeDict Char Class)
+parser value source =
+    case String.foldl (handleChar value) ( Empty, RangeDict.empty ) source of
+        ( Empty, out ) ->
+            Ok out
+
+        ( Error err, _ ) ->
+            Err err
+
+        ( One, _ ) ->
+            Err "ended with an empty One"
+
+        ( Two _, _ ) ->
+            Err "ended with an empty Two"
 
 
-stringToChar : String -> Maybe Char
-stringToChar string =
-    case String.toList string of
-        [ c ] ->
-            Just c
+handleChar : Class -> Char -> ( ParserState, RangeDict Char Class ) -> ( ParserState, RangeDict Char Class )
+handleChar value char ( parserState, rangeDict ) =
+    case ( parserState, char ) of
+        ( Error _, _ ) ->
+            ( parserState, rangeDict )
 
-        _ ->
-            Nothing
+        ( Empty, '1' ) ->
+            ( One, rangeDict )
+
+        ( Empty, '2' ) ->
+            ( Two Nothing, rangeDict )
+
+        ( Empty, _ ) ->
+            ( Error "expected to see a parsing directive like '1' or '2'", rangeDict )
+
+        ( One, _ ) ->
+            ( Empty, RangeDict.insert (Range.point char) value rangeDict )
+
+        ( Two Nothing, _ ) ->
+            ( Two (Just char), rangeDict )
+
+        ( Two (Just low), _ ) ->
+            ( Empty, RangeDict.insert (Range.range low char) value rangeDict )

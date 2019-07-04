@@ -2,7 +2,6 @@ module String.Graphemes.DataSpec exposing (spec)
 
 import Expect
 import Fuzz exposing (Fuzzer, list)
-import Parser
 import String.Graphemes.Data as Data
 import String.Graphemes.RangeDict as RangeDict
 import String.Graphemes.RangeDict.Range as Range exposing (Range)
@@ -25,7 +24,7 @@ spec =
                         |> RangeDict.fromList
             in
             input
-                |> Parser.run (Data.parser Data.Extend)
+                |> Data.parser Data.Extend
                 |> Expect.equal (Ok output)
 
 

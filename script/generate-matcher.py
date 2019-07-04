@@ -18,7 +18,7 @@ if class_ not in classes:
     sys.exit(1)
 
 out = []
-out.append('module {} exposing (chars, match, parser)'.format(module))
+out.append('module {} exposing (chars, match)'.format(module))
 out.append('')
 out.append('{-| Hey, this module was generated automatically. Please don\'t edit it.')
 out.append('')
@@ -26,15 +26,9 @@ out.append('Run `make {}` instead!'.format(args.destination))
 out.append('')
 out.append('-}')
 out.append('')
-out.append('import Parser exposing (Parser)')
 out.append('import String.Graphemes.Data as Data')
 out.append('import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)')
 out.append('import String.Graphemes.RangeDict.Range as Range exposing (Range)')
-out.append('')
-out.append('')
-out.append('parser : Parser ()')
-out.append('parser =')
-out.append('    Parser.chompIf match')
 out.append('')
 out.append('')
 out.append('match : Char -> Bool')
@@ -72,7 +66,7 @@ for (i, match) in enumerate(classes[class_]):
 
 out.append('chars : RangeDict Char Data.Class')
 out.append('chars =')
-out.append('    (Result.withDefault RangeDict.empty << Parser.run (Data.parser Data.{}))'.format(
+out.append('    (Result.withDefault RangeDict.empty << Data.parser Data.{})'.format(
     class_.replace('_', ''),
 ))
 out.append('        "{}"'.format(''.join(chars)))
