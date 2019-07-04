@@ -237,6 +237,12 @@ spec =
                     |> String.concat
                     |> Graphemes.length
                     |> Expect.equal (List.length graphemes)
+        , fuzz graphemesFuzzer "reverse respects graphemes" <|
+            \graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.reverse
+                    |> Expect.equal (String.concat (List.reverse graphemes))
         ]
 
 
