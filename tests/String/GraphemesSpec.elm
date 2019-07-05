@@ -199,7 +199,10 @@ spec =
             , fuzz simpleString "uncons" <|
                 \string ->
                     Expect.equal
-                        (String.uncons string)
+                        (string
+                            |> String.uncons
+                            |> Maybe.map (Tuple.mapFirst String.fromChar)
+                        )
                         (Graphemes.uncons string)
             , fuzz simpleString "map" <|
                 \string ->
@@ -316,6 +319,16 @@ spec =
                     |> String.concat
                     |> Graphemes.toList
                     |> Expect.equal graphemes
+        , fuzz graphemesFuzzer "uncons" <|
+            \graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.uncons
+                    |> Expect.equal
+                        (Maybe.map2 Tuple.pair
+                            (List.head graphemes)
+                            (List.tail graphemes |> Maybe.map Graphemes.concat)
+                        )
         ]
 
 
