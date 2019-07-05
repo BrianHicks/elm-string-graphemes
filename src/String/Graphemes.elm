@@ -416,8 +416,8 @@ pad n char string =
 
 -}
 padLeft : Int -> Char -> String -> String
-padLeft =
-    String.padLeft
+padLeft n char string =
+    repeat (n - length string) (fromChar char) ++ string
 
 
 {-| Pad a string on the right until it has a given length.
