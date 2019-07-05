@@ -115,6 +115,16 @@ Rather than introducing confusion ("it *should* segment here… why doesn't it?"
 That said, word and sentence segmentation rely on grapheme segmentation, so you're on the right track by asking this!
 [UAX #29](https://unicode.org/reports/tr29/) has guidance here.
 
+### Why not "fix" `elm/core`'s `String` instead of writing a new package?
+
+The `String` module solves a different—but overlapping—set of problems.
+For example, you do not always want to work with graphemes: sometimes you need to be able to decompose into codepoints or operate at the byte level.
+As usual, it's all tradeoffs.
+
+That said, if it eventually becomes obvious that merging into core would be a good thing we may do that.
+In that case, we would probably just keep equivalents of `String.Graphemes.uncons` and `String.Graphemes.foldl`.
+Everything else is implemented in terms of those two operations.
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
