@@ -1,6 +1,7 @@
 /benchmarks/*.html
 /benchmarks/elm-stuff
 /data/GraphemeBreakProperty.json
+/documentation.json
 /elm-stuff
 /size-benchmarks/*.gz
 /size-benchmarks/*.js

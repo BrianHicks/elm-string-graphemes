@@ -9,7 +9,7 @@ test: generated
 	elm-test
 
 .PHONY: ci
-ci: test
+ci: test documentation.json
 	test -z "$(shell git diff)"
 
 .PHONY: generated
@@ -22,6 +22,9 @@ src/String/Graphemes/Data/%.elm: data/GraphemeBreakProperty.json script/generate
 tests/GraphemeBreakTest.elm: data/GraphemeBreakTest.txt script/generate-grapheme-break-test.py
 	python script/generate-grapheme-break-test.py $@ < $<
 	elm-format --yes $@
+
+documentation.json: $(find src -name '*.elm') elm.json
+	elm make --docs $@
 
 # data
 
