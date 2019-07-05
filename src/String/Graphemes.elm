@@ -234,8 +234,9 @@ are taken starting from the _end_ of the list.
 -}
 slice : Int -> Int -> String -> String
 slice start end string =
-    -- TODO: this is probably terribly slow. Once the conversion to graphemes is
-    -- all done, it should be made faster.
+    -- performance note: this is actually way faster than calculating lengths
+    -- and using List.take and List.drop—like twice as fast in the non-negative
+    -- case and even faster when indexing from the end!
     string
         |> toList
         |> Array.fromList
