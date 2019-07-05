@@ -336,6 +336,12 @@ spec =
                         |> String.concat
                         |> Graphemes.map (always "a")
                         |> Expect.equal (String.repeat (List.length graphemes) "a")
+            , fuzz graphemesFuzzer "filter" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.filter (\g -> String.length g <= 1)
+                        |> Expect.equal (String.concat (List.filter (\g -> String.length g <= 1) graphemes))
             ]
         ]
 
