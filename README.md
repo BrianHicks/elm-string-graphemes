@@ -97,6 +97,15 @@ String.Graphemes.reverse "a\u{0308}o" --> "oa\u{0308}"
 String.reverse "a\u{0308}o" --> "o\u{0308}a"
 ```
 
+### Does this package do normalization?
+
+No, and it probably never will.
+It's a [whole 'nother spec](https://unicode.org/reports/tr15/#Norm_Forms) in the Unicode standard which doesn't really fit in this package.
+
+That said, it *looks* like you could implement it in a similar way as the internal `String.Graphemes.Parser`, so give it a go in a new package of your own!
+
+(n.b. normalization in this case means turning `"a\u{0308}"` into `"ä"`, usually for the purposes of improving equality checks.)
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
