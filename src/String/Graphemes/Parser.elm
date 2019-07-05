@@ -1,4 +1,4 @@
-module String.Graphemes.Parser exposing (foldl)
+module String.Graphemes.Parser exposing (foldl, uncons)
 
 import String.Graphemes.Data as Data exposing (Class(..))
 import String.Graphemes.Data.CR as CR
@@ -20,30 +20,66 @@ import String.Graphemes.RangeDict as RangeDict exposing (RangeDict)
 
 foldl : (String -> a -> a) -> a -> String -> a
 foldl fn initial string =
-    let
-        ( trailing, penultimateState ) =
-            String.foldl (step fn) ( [], initial ) string
-    in
-    case trailing of
-        [] ->
-            penultimateState
+    case string of
+        "" ->
+            initial
 
         _ ->
-            fn (String.fromList (List.reverse trailing)) penultimateState
+            let
+                ( chars, remaining ) =
+                    unconsHelp string []
+            in
+            foldl fn (fn (String.fromList (List.reverse chars)) initial) remaining
 
 
-step : (String -> a -> a) -> Char -> ( List Char, a ) -> ( List Char, a )
-step fn char ( chars, state ) =
-    case chars of
-        [] ->
-            ( [ char ], state )
+uncons : String -> Maybe ( String, String )
+uncons string =
+    case string of
+        "" ->
+            Nothing
 
-        last :: rest ->
-            if shouldBreakBefore last rest char then
-                ( [ char ], fn (String.fromList (List.reverse chars)) state )
+        _ ->
+            let
+                ( chars, remaining ) =
+                    unconsHelp string []
+            in
+            Just ( String.fromList (List.reverse chars), remaining )
+
+
+unconsHelp : String -> List Char -> ( List Char, String )
+unconsHelp str chars =
+    case ( String.uncons str, chars ) of
+        ( Nothing, [] ) ->
+            -- `String.uncons` returns `Nothing` when the first character is a
+            -- null byte. See https://github.com/elm/core/issues/1035.
+            if String.left 1 str == "\u{0000}" then
+                unconsHelp (String.dropLeft 1 str) [ '\u{0000}' ]
 
             else
-                ( char :: chars, state )
+                ( chars, "" )
+
+        ( Nothing, last :: rest ) ->
+            -- `String.uncons` returns `Nothing` when the first character is a
+            -- null byte. See https://github.com/elm/core/issues/1035.
+            if String.left 1 str == "\u{0000}" then
+                if shouldBreakBefore last rest '\u{0000}' then
+                    ( chars, str )
+
+                else
+                    unconsHelp (String.dropLeft 1 str) ('\u{0000}' :: chars)
+
+            else
+                ( chars, "" )
+
+        ( Just ( char, strTail ), [] ) ->
+            unconsHelp strTail [ char ]
+
+        ( Just ( char, strTail ), last :: rest ) ->
+            if shouldBreakBefore last rest char then
+                ( chars, str )
+
+            else
+                unconsHelp strTail (char :: chars)
 
 
 shouldBreakBefore : Char -> List Char -> Char -> Bool
