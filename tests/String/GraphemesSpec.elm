@@ -342,6 +342,18 @@ spec =
                         |> String.concat
                         |> Graphemes.filter (\g -> String.length g <= 1)
                         |> Expect.equal (String.concat (List.filter (\g -> String.length g <= 1) graphemes))
+            , fuzz graphemesFuzzer "any" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.any (String.all Char.isDigit)
+                        |> Expect.equal (List.any (String.all Char.isDigit) graphemes)
+            , fuzz graphemesFuzzer "all" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.all (String.all Char.isDigit)
+                        |> Expect.equal (List.all (String.all Char.isDigit) graphemes)
             ]
         ]
 
