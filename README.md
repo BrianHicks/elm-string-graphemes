@@ -1,15 +1,3 @@
-🏗 This library isn't published yet!
-It will be soon, but don't depend on it until then.
-I'm just opening it up now to get CI going.
-
-Things left to do:
-
-- [ ] make a nice public API
-- [x] ~~make it much faster. Right now it's using a naive binary search tree that ends up being linear time (😱.) We can *certainly* do better there.~~
-      Done! Now parsing graphemes is only 100x as slow as splitting characters. Good enough to start, and we'll continue to make it faster over time.
-
----
-
 # Graphemes
 
 Do string operations based on grapheme boundaries instead of characters or bytes.
