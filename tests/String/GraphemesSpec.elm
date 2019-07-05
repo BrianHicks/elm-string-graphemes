@@ -303,6 +303,13 @@ spec =
                     |> Graphemes.padLeft n padder
                     |> Graphemes.length
                     |> Expect.equal (max n (List.length graphemes))
+        , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "padRight" <|
+            \n padder graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.padRight n padder
+                    |> Graphemes.length
+                    |> Expect.equal (max n (List.length graphemes))
         ]
 
 

@@ -430,8 +430,8 @@ padLeft n char string =
 
 -}
 padRight : Int -> Char -> String -> String
-padRight =
-    String.padRight
+padRight n char string =
+    string ++ repeat (n - length string) (fromChar char)
 
 
 {-| Get rid of whitespace on both sides of a string.
