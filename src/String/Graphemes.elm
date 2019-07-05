@@ -597,18 +597,8 @@ pattern match on strings exactly as you would with lists.
 
 -}
 uncons : String -> Maybe ( String, String )
-uncons string =
-    -- TODO: performance! ouch! This walks the entire string every time, then
-    -- discards everything but the first grapheme.
-    case toList string of
-        [] ->
-            Nothing
-
-        [ head ] ->
-            Just ( head, "" )
-
-        head :: tail ->
-            Just ( head, concat tail )
+uncons =
+    Parser.uncons
 
 
 
