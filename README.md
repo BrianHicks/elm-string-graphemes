@@ -35,7 +35,7 @@ This means we can operate at three levels:
    Operations like `String.foldl` operate here.
 3. **the grapheme level.**
    Here, our skin tone and gender are only one character.
-   Operations like `String.Graphemess.toList` operate here.
+   Operations like `String.Graphemes.toList` operate here.
 
 ### So when should I use this library?
 
@@ -50,7 +50,7 @@ Here are some reasons you should do this work with graphemes:
   If you do the wrong thing with these sequences, you'll crash your user's browser.
 
 - If you operate at the *character* level, you will split skin tones and genders off of people emoji.
-  Your user entered this text pretty precisely in these cases, don't lose their meaning!
+  Your user entered this text precisely in these cases, don't lose their meaning!
 
 - Think you don't need those pesky marks above and below letters?
   Think again!
