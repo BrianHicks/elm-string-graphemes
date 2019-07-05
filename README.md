@@ -75,6 +75,12 @@ Here are some practical reasons you should work at the grapheme level in the bro
   For example, in Spanish, papa (potato) is different than papá (father.)
   Don't make your users call their dad a potato!
 
+## Frequently Asked Questions
+
+### What spec does this package implement?
+
+The [Grapheme Cluster Boundaries](https://unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) section of [UAX #29](https://unicode.org/reports/tr29/).
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
