@@ -265,6 +265,24 @@ spec =
                         |> Graphemes.slice 1 2
                         |> Expect.equal "🇺🇸"
             ]
+        , fuzz2 int graphemesFuzzer "left" <|
+            \n graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.left n
+                    |> Expect.equal (String.concat (List.take n graphemes))
+        , fuzz2 int graphemesFuzzer "right" <|
+            \n graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.right n
+                    |> Expect.equal (String.concat (List.drop (List.length graphemes - n) graphemes))
+        , fuzz2 int graphemesFuzzer "dropLeft" <|
+            \n graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.dropLeft n
+                    |> Expect.equal (String.concat (List.drop n graphemes))
         ]
 
 

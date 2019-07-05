@@ -250,8 +250,12 @@ slice start end string =
 
 -}
 left : Int -> String -> String
-left =
-    String.left
+left n string =
+    if n < 1 then
+        ""
+
+    else
+        slice 0 n string
 
 
 {-| Take _n_ characters from the right side of a string.
@@ -260,8 +264,12 @@ left =
 
 -}
 right : Int -> String -> String
-right =
-    String.right
+right n string =
+    if n < 1 then
+        ""
+
+    else
+        slice -n (length string) string
 
 
 {-| Drop _n_ characters from the left side of a string.
@@ -270,8 +278,12 @@ right =
 
 -}
 dropLeft : Int -> String -> String
-dropLeft =
-    String.dropLeft
+dropLeft n string =
+    if n < 1 then
+        string
+
+    else
+        slice n (length string) string
 
 
 {-| Drop _n_ characters from the right side of a string.
