@@ -292,8 +292,12 @@ dropLeft n string =
 
 -}
 dropRight : Int -> String -> String
-dropRight =
-    String.dropRight
+dropRight n string =
+    if n < 1 then
+        string
+
+    else
+        slice 0 -n string
 
 
 

@@ -283,6 +283,12 @@ spec =
                     |> String.concat
                     |> Graphemes.dropLeft n
                     |> Expect.equal (String.concat (List.drop n graphemes))
+        , fuzz2 int graphemesFuzzer "dropRight" <|
+            \n graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.dropRight n
+                    |> Expect.equal (String.concat (List.take (List.length graphemes - n) graphemes))
         ]
 
 
