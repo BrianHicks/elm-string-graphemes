@@ -289,6 +289,13 @@ spec =
                     |> String.concat
                     |> Graphemes.dropRight n
                     |> Expect.equal (String.concat (List.take (List.length graphemes - n) graphemes))
+        , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "pad" <|
+            \n padder graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.pad n padder
+                    |> Graphemes.length
+                    |> Expect.equal (max n (List.length graphemes))
         ]
 
 
@@ -314,11 +321,14 @@ flag =
     Fuzz.map2 (++) regionalIndicator regionalIndicator
 
 
+graphemeFuzzer : Fuzzer String
+graphemeFuzzer =
+    Fuzz.oneOf
+        [ flag
+        , Fuzz.map String.fromChar simpleChar
+        ]
+
+
 graphemesFuzzer : Fuzzer (List String)
 graphemesFuzzer =
-    list
-        (Fuzz.oneOf
-            [ flag
-            , Fuzz.map String.fromChar simpleChar
-            ]
-        )
+    list graphemeFuzzer

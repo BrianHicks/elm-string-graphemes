@@ -398,8 +398,12 @@ toLower =
 
 -}
 pad : Int -> Char -> String -> String
-pad =
-    String.pad
+pad n char string =
+    let
+        half =
+            Basics.toFloat (n - length string) / 2
+    in
+    repeat (ceiling half) (fromChar char) ++ string ++ repeat (floor half) (fromChar char)
 
 
 {-| Pad a string on the left until it has a given length.
