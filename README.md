@@ -106,6 +106,15 @@ That said, it *looks* like you could implement it in a similar way as the intern
 
 (n.b. normalization in this case means turning `"a\u{0308}"` into `"ä"`, usually for the purposes of improving equality checks.)
 
+### Does this package segment words or sentences?
+
+No, and it probably never will.
+Segmenting words and sentences is locale- and implementation-dependent, so it's really hard to address them in a general way.
+Rather than introducing confusion ("it *should* segment here… why doesn't it?") we only segment graphemes.
+
+That said, word and sentence segmentation rely on grapheme segmentation, so you're on the right track by asking this!
+[UAX #29](https://unicode.org/reports/tr29/) has guidance here.
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
