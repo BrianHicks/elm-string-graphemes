@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "BrianHicks/elm-string-graphemes",
-    "summary": "Do string operations based on graphemes instead of characters or bytes.",
+    "summary": "Do string operations based on graphemes instead of codepoints or bytes.",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "elm-version": "0.19.0 <= v < 0.20.0",

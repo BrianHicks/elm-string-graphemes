@@ -1,6 +1,6 @@
 # Graphemes
 
-Do string operations based on grapheme boundaries instead of characters or bytes.
+Do string operations based on graphemes instead of codepoints or bytes.
 Compare:
 
 ```elm
