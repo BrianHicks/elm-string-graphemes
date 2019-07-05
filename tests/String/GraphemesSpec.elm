@@ -310,6 +310,12 @@ spec =
                     |> Graphemes.padRight n padder
                     |> Graphemes.length
                     |> Expect.equal (max n (List.length graphemes))
+        , fuzz graphemesFuzzer "toList" <|
+            \graphemes ->
+                graphemes
+                    |> String.concat
+                    |> Graphemes.toList
+                    |> Expect.equal graphemes
         ]
 
 
