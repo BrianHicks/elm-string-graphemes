@@ -244,11 +244,27 @@ spec =
                     |> String.concat
                     |> Graphemes.reverse
                     |> Expect.equal (String.concat (List.reverse graphemes))
-        , fuzz2 (Fuzz.map2 (\a b -> ( min a b, max a b )) int int) graphemesFuzzer "slice" <|
-            \( start, end ) graphemes ->
-                Expect.equal
-                    (graphemes |> String.concat |> Graphemes.slice start end)
-                    (graphemes |> Array.fromList |> Array.slice start end |> Array.toList |> String.concat)
+        , describe "slice" <|
+            let
+                flags =
+                    "🇨🇦🇺🇸🇲🇽"
+            in
+            [ test "selecting a part from the front" <|
+                \_ ->
+                    flags
+                        |> Graphemes.slice 0 2
+                        |> Expect.equal "🇨🇦🇺🇸"
+            , test "selecting a part from the back" <|
+                \_ ->
+                    flags
+                        |> Graphemes.slice -2 3
+                        |> Expect.equal "🇺🇸🇲🇽"
+            , test "selecting a part in the middle" <|
+                \_ ->
+                    flags
+                        |> Graphemes.slice 1 2
+                        |> Expect.equal "🇺🇸"
+            ]
         ]
 
 
