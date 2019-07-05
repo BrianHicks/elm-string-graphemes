@@ -235,100 +235,102 @@ spec =
                         (String.all Char.isDigit string)
                         (Graphemes.all (String.all Char.isDigit) string)
             ]
-        , fuzz graphemesFuzzer "length produces the graphemes length" <|
-            \graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.length
-                    |> Expect.equal (List.length graphemes)
-        , fuzz graphemesFuzzer "reverse respects graphemes" <|
-            \graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.reverse
-                    |> Expect.equal (String.concat (List.reverse graphemes))
-        , describe "slice" <|
-            let
-                flags =
-                    "🇨🇦🇺🇸🇲🇽"
-            in
-            [ test "selecting a part from the front" <|
-                \_ ->
-                    flags
-                        |> Graphemes.slice 0 2
-                        |> Expect.equal "🇨🇦🇺🇸"
-            , test "selecting a part from the back" <|
-                \_ ->
-                    flags
-                        |> Graphemes.slice -2 3
-                        |> Expect.equal "🇺🇸🇲🇽"
-            , test "selecting a part in the middle" <|
-                \_ ->
-                    flags
-                        |> Graphemes.slice 1 2
-                        |> Expect.equal "🇺🇸"
+        , describe "make sure relevant functions work with graphemes"
+            [ fuzz graphemesFuzzer "length produces the graphemes length" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.length
+                        |> Expect.equal (List.length graphemes)
+            , fuzz graphemesFuzzer "reverse respects graphemes" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.reverse
+                        |> Expect.equal (String.concat (List.reverse graphemes))
+            , describe "slice" <|
+                let
+                    flags =
+                        "🇨🇦🇺🇸🇲🇽"
+                in
+                [ test "selecting a part from the front" <|
+                    \_ ->
+                        flags
+                            |> Graphemes.slice 0 2
+                            |> Expect.equal "🇨🇦🇺🇸"
+                , test "selecting a part from the back" <|
+                    \_ ->
+                        flags
+                            |> Graphemes.slice -2 3
+                            |> Expect.equal "🇺🇸🇲🇽"
+                , test "selecting a part in the middle" <|
+                    \_ ->
+                        flags
+                            |> Graphemes.slice 1 2
+                            |> Expect.equal "🇺🇸"
+                ]
+            , fuzz2 int graphemesFuzzer "left" <|
+                \n graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.left n
+                        |> Expect.equal (String.concat (List.take n graphemes))
+            , fuzz2 int graphemesFuzzer "right" <|
+                \n graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.right n
+                        |> Expect.equal (String.concat (List.drop (List.length graphemes - n) graphemes))
+            , fuzz2 int graphemesFuzzer "dropLeft" <|
+                \n graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.dropLeft n
+                        |> Expect.equal (String.concat (List.drop n graphemes))
+            , fuzz2 int graphemesFuzzer "dropRight" <|
+                \n graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.dropRight n
+                        |> Expect.equal (String.concat (List.take (List.length graphemes - n) graphemes))
+            , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "pad" <|
+                \n padder graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.pad n padder
+                        |> Graphemes.length
+                        |> Expect.equal (max n (List.length graphemes))
+            , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "padLeft" <|
+                \n padder graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.padLeft n padder
+                        |> Graphemes.length
+                        |> Expect.equal (max n (List.length graphemes))
+            , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "padRight" <|
+                \n padder graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.padRight n padder
+                        |> Graphemes.length
+                        |> Expect.equal (max n (List.length graphemes))
+            , fuzz graphemesFuzzer "toList" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.toList
+                        |> Expect.equal graphemes
+            , fuzz graphemesFuzzer "uncons" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.uncons
+                        |> Expect.equal
+                            (Maybe.map2 Tuple.pair
+                                (List.head graphemes)
+                                (List.tail graphemes |> Maybe.map Graphemes.concat)
+                            )
             ]
-        , fuzz2 int graphemesFuzzer "left" <|
-            \n graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.left n
-                    |> Expect.equal (String.concat (List.take n graphemes))
-        , fuzz2 int graphemesFuzzer "right" <|
-            \n graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.right n
-                    |> Expect.equal (String.concat (List.drop (List.length graphemes - n) graphemes))
-        , fuzz2 int graphemesFuzzer "dropLeft" <|
-            \n graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.dropLeft n
-                    |> Expect.equal (String.concat (List.drop n graphemes))
-        , fuzz2 int graphemesFuzzer "dropRight" <|
-            \n graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.dropRight n
-                    |> Expect.equal (String.concat (List.take (List.length graphemes - n) graphemes))
-        , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "pad" <|
-            \n padder graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.pad n padder
-                    |> Graphemes.length
-                    |> Expect.equal (max n (List.length graphemes))
-        , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "padLeft" <|
-            \n padder graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.padLeft n padder
-                    |> Graphemes.length
-                    |> Expect.equal (max n (List.length graphemes))
-        , fuzz3 (Fuzz.intRange 0 100) simpleChar graphemesFuzzer "padRight" <|
-            \n padder graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.padRight n padder
-                    |> Graphemes.length
-                    |> Expect.equal (max n (List.length graphemes))
-        , fuzz graphemesFuzzer "toList" <|
-            \graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.toList
-                    |> Expect.equal graphemes
-        , fuzz graphemesFuzzer "uncons" <|
-            \graphemes ->
-                graphemes
-                    |> String.concat
-                    |> Graphemes.uncons
-                    |> Expect.equal
-                        (Maybe.map2 Tuple.pair
-                            (List.head graphemes)
-                            (List.tail graphemes |> Maybe.map Graphemes.concat)
-                        )
         ]
 
 
