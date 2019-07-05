@@ -125,6 +125,17 @@ That said, if it eventually becomes obvious that merging into core would be a go
 In that case, we would probably just keep equivalents of `String.Graphemes.uncons` and `String.Graphemes.foldl`.
 Everything else is implemented in terms of those two operations.
 
+### Why a drop-in replacement? / Why does the code refer to `String` functions so much?
+
+Unless you've worked with unicode strings a lot, it can be tricky to know which level (bytes, codepoints, or graphemes) you're operating at with any given time.
+So instead of giving you the functions you *might* need, and leaving you to implement the rest on your own, we provide all of them and only change the ones where you'd run into trouble.
+
+But not *all* of the functions in `String` need to be modified.
+In those cases, we just pass through to the `String` functions!
+
+This way, you don't have to worry about it.
+You could potentially do `import String.Graphemes as String` in a module, fix the type errors, and all of a sudden all your string operations work with graphemes.
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
