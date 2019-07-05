@@ -81,6 +81,22 @@ Here are some practical reasons you should work at the grapheme level in the bro
 
 The [Grapheme Cluster Boundaries](https://unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) section of [UAX #29](https://unicode.org/reports/tr29/).
 
+### Does this package correctly reverse strings with diacritics?
+
+Yes!
+It reverses the order of the graphemes, not the codepoints.
+This means that it does not move diacritics around and emoji are perfectly safe.
+
+```elm
+import String.Graphemes
+
+-- äo without normalization
+String.Graphemes.reverse "a\u{0308}o" --> "oa\u{0308}"
+
+-- compare with String
+String.reverse "a\u{0308}o" --> "o\u{0308}a"
+```
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
