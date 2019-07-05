@@ -330,6 +330,12 @@ spec =
                                 (List.head graphemes)
                                 (List.tail graphemes |> Maybe.map Graphemes.concat)
                             )
+            , fuzz graphemesFuzzer "map" <|
+                \graphemes ->
+                    graphemes
+                        |> String.concat
+                        |> Graphemes.map (always "a")
+                        |> Expect.equal (String.repeat (List.length graphemes) "a")
             ]
         ]
 
