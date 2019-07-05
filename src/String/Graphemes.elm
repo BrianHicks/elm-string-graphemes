@@ -17,7 +17,7 @@ are enclosed in `"double quotes"`. Strings are _not_ lists of characters.
 
 # Strings
 
-@docs String, isEmpty, length, reverse, repeat, replace
+@docs isEmpty, length, reverse, repeat, replace
 
 
 # Building and Splitting
