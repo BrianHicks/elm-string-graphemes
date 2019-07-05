@@ -62,4 +62,6 @@ Here are some reasons you should do this work with graphemes:
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
 
+The documentation strings in `String.Graphemes` are derived from those in `elm/core`'s `String`, © 2019 Evan Czaplicki, and licensed under the BSD 3-Clause license.
+
 The grapheme break property data used here are © 2019 Unicode®, Inc., and licensed under their [terms of use](http://www.unicode.org/terms_of_use.html).
