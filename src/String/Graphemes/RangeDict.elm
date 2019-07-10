@@ -1,4 +1,4 @@
-module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, get, insert, member, toList, union)
+module String.Graphemes.RangeDict exposing (RangeDict, empty, fromList, get, getClosestRange, insert, lowerBound, member, toList, union, upperBound)
 
 import String.Graphemes.RangeDict.Range as Range exposing (Range)
 
@@ -105,6 +105,66 @@ member what rangeDict =
 
         Just _ ->
             True
+
+
+getClosestRange : comparable -> RangeDict comparable value -> Maybe (Range comparable)
+getClosestRange what rangeDict =
+    getClosestRangeHelp (Range.point what) rangeDict
+
+
+getClosestRangeHelp : Range comparable -> RangeDict comparable value -> Maybe (Range comparable)
+getClosestRangeHelp range rangeDict =
+    case rangeDict of
+        Empty ->
+            Nothing
+
+        Branch _ here _ lt gt ->
+            case Range.compare range here of
+                Range.LT ->
+                    if lt == Empty then
+                        Just here
+
+                    else
+                        getClosestRangeHelp range lt
+
+                Range.GT ->
+                    if gt == Empty then
+                        Just here
+
+                    else
+                        getClosestRangeHelp range gt
+
+                Range.EQ ->
+                    Just here
+
+                Range.Overlapping ->
+                    Just here
+
+
+lowerBound : RangeDict comparable value -> Maybe comparable
+lowerBound rangeDict =
+    case rangeDict of
+        Empty ->
+            Nothing
+
+        Branch _ here _ _ Empty ->
+            Just (Range.lowerBound here)
+
+        Branch _ _ _ _ lt ->
+            lowerBound lt
+
+
+upperBound : RangeDict comparable value -> Maybe comparable
+upperBound rangeDict =
+    case rangeDict of
+        Empty ->
+            Nothing
+
+        Branch _ here _ Empty _ ->
+            Just (Range.upperBound here)
+
+        Branch _ _ _ gt _ ->
+            upperBound gt
 
 
 balance : RangeDict comparable value -> RangeDict comparable value

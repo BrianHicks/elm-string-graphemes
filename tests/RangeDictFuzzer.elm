@@ -7,16 +7,24 @@ import String.Graphemes.RangeDict.Range as Range
 
 fromChars : RangeDict Char a -> Fuzzer String
 fromChars chars =
-    chars
-        |> RangeDict.toList
-        |> List.map Tuple.first
-        |> List.map
-            (\range ->
-                Fuzz.map
-                    (String.fromList << List.singleton << Char.fromCode)
-                    (Fuzz.intRange
-                        (Char.toCode (Range.lowerBound range))
-                        (Char.toCode (Range.upperBound range))
+    case ( RangeDict.lowerBound chars, RangeDict.upperBound chars ) of
+        ( Just lower, Just upper ) ->
+            Fuzz.intRange (Char.toCode lower) (Char.toCode upper)
+                |> Fuzz.map Char.fromCode
+                |> Fuzz.map
+                    (\charMaybeOutOfRange ->
+                        if RangeDict.member charMaybeOutOfRange chars then
+                            charMaybeOutOfRange
+
+                        else
+                            case RangeDict.getClosestRange charMaybeOutOfRange chars of
+                                Just range ->
+                                    Range.lowerBound range
+
+                                _ ->
+                                    lower
                     )
-            )
-        |> Fuzz.oneOf
+                |> Fuzz.map String.fromChar
+
+        _ ->
+            Fuzz.invalid "the provided RangeDict did not have a lower or upper range (was it empty?)"
