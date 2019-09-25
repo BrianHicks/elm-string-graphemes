@@ -136,6 +136,13 @@ In those cases, we just pass through to the `String` functions!
 This way, you don't have to worry about it.
 You could potentially do `import String.Graphemes as String` in a module, fix the type errors, and all of a sudden all your string operations work with graphemes.
 
+## Climate Action
+
+I want my open-source activities to support projects addressing the climate crisis (for example, projects in clean energy, public transit, reforestation, or sustainable agriculture.)
+If you are working on such a project, and find a bug or missing feature in any of my libraries, **please let me know and I will treat your issue as high priority.**
+I'd also be happy to support such projects in other ways.
+In particular, I've worked with Elm for a long time and would be happy to advise on your implementation.
+
 ## License
 
 This code in this project is licensed under the BSD 3-Clause license, located at LICENSE in the source.
