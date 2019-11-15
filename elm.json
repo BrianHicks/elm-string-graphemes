@@ -3,7 +3,7 @@
     "name": "BrianHicks/elm-string-graphemes",
     "summary": "Do string operations based on graphemes instead of codepoints or bytes.",
     "license": "BSD-3-Clause",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "exposed-modules": [
         "String.Graphemes"
     ],
