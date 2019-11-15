@@ -43,9 +43,9 @@ foldlSpec =
                         |> Expect.equal [ "당", "신", "이", " ", "키", "라", "라", "의", " ", "훌", "륭", "함", "을", " ", "잘", " ", "모", "르", "겠", "다", "면", " ", "문", "제", "는", " ", "당", "신", "에", "게", " ", "있", "다" ]
             , test "skin tone and gender modifiers on emoji" <|
                 \_ ->
-                    "\u{1F9B8}\u{1F3FD}\u{200D}♂️"
+                    "🦸🏽\u{200D}♂️"
                         |> toList
-                        |> Expect.equal [ "\u{1F9B8}\u{1F3FD}\u{200D}♂️" ]
+                        |> Expect.equal [ "🦸🏽\u{200D}♂️" ]
             , test "zalgo, sure, why not" <|
                 \_ ->
                     -- some editors do not render this correctly. It should be

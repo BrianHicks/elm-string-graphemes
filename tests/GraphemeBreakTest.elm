@@ -2986,34 +2986,34 @@ spec =
                     |> Expect.equal [ "a", "\u{0600}b" ]
         , test "618: ÷ [0.2] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) ÷ [0.3]" <|
             \_ ->
-                "👶\u{1F3FF}👶"
+                "👶🏿👶"
                     |> Grapheme.toList
-                    |> Expect.equal [ "👶\u{1F3FF}", "👶" ]
+                    |> Expect.equal [ "👶🏿", "👶" ]
         , test "619: ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) ÷ [0.3]" <|
             \_ ->
-                "a\u{1F3FF}👶"
+                "a🏿👶"
                     |> Grapheme.toList
-                    |> Expect.equal [ "a\u{1F3FF}", "👶" ]
+                    |> Expect.equal [ "a🏿", "👶" ]
         , test "620: ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]" <|
             \_ ->
-                "a\u{1F3FF}👶\u{200D}\u{1F6D1}"
+                "a🏿👶\u{200D}🛑"
                     |> Grapheme.toList
-                    |> Expect.equal [ "a\u{1F3FF}", "👶\u{200D}\u{1F6D1}" ]
+                    |> Expect.equal [ "a🏿", "👶\u{200D}🛑" ]
         , test "621: ÷ [0.2] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [0.3]" <|
             \_ ->
-                "👶\u{1F3FF}̈\u{200D}👶\u{1F3FF}"
+                "👶🏿̈\u{200D}👶🏿"
                     |> Grapheme.toList
-                    |> Expect.equal [ "👶\u{1F3FF}̈\u{200D}👶\u{1F3FF}" ]
+                    |> Expect.equal [ "👶🏿̈\u{200D}👶🏿" ]
         , test "622: ÷ [0.2] OCTAGONAL SIGN (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]" <|
             \_ ->
-                "\u{1F6D1}\u{200D}\u{1F6D1}"
+                "🛑\u{200D}🛑"
                     |> Grapheme.toList
-                    |> Expect.equal [ "\u{1F6D1}\u{200D}\u{1F6D1}" ]
+                    |> Expect.equal [ "🛑\u{200D}🛑" ]
         , test "623: ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]" <|
             \_ ->
-                "a\u{200D}\u{1F6D1}"
+                "a\u{200D}🛑"
                     |> Grapheme.toList
-                    |> Expect.equal [ "a\u{200D}", "\u{1F6D1}" ]
+                    |> Expect.equal [ "a\u{200D}", "🛑" ]
         , test "624: ÷ [0.2] UPPER BLADE SCISSORS (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] UPPER BLADE SCISSORS (Other) ÷ [0.3]" <|
             \_ ->
                 "✁\u{200D}✁"
