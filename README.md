@@ -11,6 +11,8 @@ String.toList "🦸🏽‍♂️" --> [ '🦸', '🏽', '\u{200D}', '♂', '\u{F
 String.Graphemes.toList "🦸🏽‍♂️" --> [ "🦸🏽‍♂️" ]
 ```
 
+This package currently supports **Unicode 12**, including **Emoji 12.1**.
+
 ## What's going on here? Graphemes? What are those?
 
 Unicode defines a system for encoding characters as numbers.
