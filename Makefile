@@ -4,9 +4,14 @@
 all: generated
 
 .PHONY: test
-test: generated
-	elm-verify-examples
-	elm-test
+test: generated node_modules
+	node_modules/.bin/elm-verify-examples
+	node_modules/.bin/elm-test
+
+node_modules: package.json package-lock.json
+node_modules:
+	npm install
+	touch -m $@
 
 .PHONY: ci
 ci: test documentation.json
