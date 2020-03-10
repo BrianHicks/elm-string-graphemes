@@ -19,4 +19,4 @@ match c =
 chars : RangeDict Char Data.Class
 chars =
     (Result.withDefault RangeDict.empty << Data.parser Data.Prepend)
-        "2؀؅1۝1܏1࣢1ൎ1𑂽1𑃍2𑇂𑇃1𑨺2𑪄𑪉1𑵆"
+        "2؀؅1۝1܏1࣢1ൎ1𑂽1𑃍2𑇂𑇃1𑤿1𑥁1𑨺2𑪄𑪉1𑵆"
