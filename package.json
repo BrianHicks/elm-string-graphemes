@@ -1,0 +1,26 @@
+{
+  "name": "elm-string-graphemes",
+  "version": "1.0.0",
+  "description": "Do string operations based on graphemes instead of codepoints or bytes. Compare:",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrianHicks/elm-string-graphemes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrianHicks/elm-string-graphemes/issues"
+  },
+  "homepage": "https://github.com/BrianHicks/elm-string-graphemes#readme",
+  "dependencies": {
+    "elm-test": "^0.19.1-revision2",
+    "elm-verify-examples": "^5.0.0"
+  }
+}

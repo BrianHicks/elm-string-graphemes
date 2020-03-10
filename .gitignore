@@ -3,6 +3,7 @@
 /data/GraphemeBreakProperty.json
 /documentation.json
 /elm-stuff
+/node_modules
 /size-benchmarks/*.gz
 /size-benchmarks/*.js
 /size-benchmarks/elm-stuff
