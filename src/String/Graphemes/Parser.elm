@@ -31,7 +31,6 @@ foldl fn initial string =
             in
             foldl fn (fn (String.fromList (List.reverse chars)) initial) remaining
 
-
 uncons : String -> Maybe ( String, String )
 uncons string =
     case string of
