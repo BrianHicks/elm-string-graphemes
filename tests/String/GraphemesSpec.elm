@@ -176,7 +176,7 @@ spec =
                     Expect.equal
                         (String.fromFloat i)
                         (Graphemes.fromFloat i)
-            , fuzz string "toList" <|
+            , fuzz simpleString "toList" <|
                 \string ->
                     Expect.equal
                         (String.toList string |> List.map String.fromChar)
