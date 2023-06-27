@@ -1,11 +1,11 @@
-# GraphemeBreakProperty-13.0.0.txt
-# Date: 2019-10-21, 14:30:35 GMT
-# © 2019 Unicode®, Inc.
+# GraphemeBreakProperty-15.0.0.txt
+# Date: 2022-04-27, 17:07:38 GMT
+# © 2022 Unicode®, Inc.
 # Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
+# For terms of use, see https://www.unicode.org/terms_of_use.html
 #
 # Unicode Character Database
-#   For documentation, see http://www.unicode.org/reports/tr44/
+#   For documentation, see https://www.unicode.org/reports/tr44/
 
 # ================================================
 
@@ -21,6 +21,7 @@
 0600..0605    ; Prepend # Cf   [6] ARABIC NUMBER SIGN..ARABIC NUMBER MARK ABOVE
 06DD          ; Prepend # Cf       ARABIC END OF AYAH
 070F          ; Prepend # Cf       SYRIAC ABBREVIATION MARK
+0890..0891    ; Prepend # Cf   [2] ARABIC POUND MARK ABOVE..ARABIC PIASTRE MARK ABOVE
 08E2          ; Prepend # Cf       ARABIC DISPUTED END OF AYAH
 0D4E          ; Prepend # Lo       MALAYALAM LETTER DOT REPH
 110BD         ; Prepend # Cf       KAITHI NUMBER SIGN
@@ -31,8 +32,9 @@
 11A3A         ; Prepend # Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
 11A84..11A89  ; Prepend # Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
 11D46         ; Prepend # Lo       MASARAM GONDI REPHA
+11F02         ; Prepend # Lo       KAWI SIGN REPHA
 
-# Total code points: 24
+# Total code points: 27
 
 # ================================================
 
@@ -66,7 +68,7 @@
 FEFF          ; Control # Cf       ZERO WIDTH NO-BREAK SPACE
 FFF0..FFF8    ; Control # Cn   [9] <reserved-FFF0>..<reserved-FFF8>
 FFF9..FFFB    ; Control # Cf   [3] INTERLINEAR ANNOTATION ANCHOR..INTERLINEAR ANNOTATION TERMINATOR
-13430..13438  ; Control # Cf   [9] EGYPTIAN HIEROGLYPH VERTICAL JOINER..EGYPTIAN HIEROGLYPH END SEGMENT
+13430..1343F  ; Control # Cf  [16] EGYPTIAN HIEROGLYPH VERTICAL JOINER..EGYPTIAN HIEROGLYPH END WALLED ENCLOSURE
 1BCA0..1BCA3  ; Control # Cf   [4] SHORTHAND FORMAT LETTER OVERLAP..SHORTHAND FORMAT UP STEP
 1D173..1D17A  ; Control # Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
 E0000         ; Control # Cn       <reserved-E0000>
@@ -75,7 +77,7 @@ E0002..E001F  ; Control # Cn  [30] <reserved-E0002>..<reserved-E001F>
 E0080..E00FF  ; Control # Cn [128] <reserved-E0080>..<reserved-E00FF>
 E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 
-# Total code points: 3886
+# Total code points: 3893
 
 # ================================================
 
@@ -104,7 +106,8 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 0825..0827    ; Extend # Mn   [3] SAMARITAN VOWEL SIGN SHORT A..SAMARITAN VOWEL SIGN U
 0829..082D    ; Extend # Mn   [5] SAMARITAN VOWEL SIGN LONG I..SAMARITAN MARK NEQUDAA
 0859..085B    ; Extend # Mn   [3] MANDAIC AFFRICATION MARK..MANDAIC GEMINATION MARK
-08D3..08E1    ; Extend # Mn  [15] ARABIC SMALL LOW WAW..ARABIC SMALL HIGH SIGN SAFHA
+0898..089F    ; Extend # Mn   [8] ARABIC SMALL HIGH WORD AL-JUZ..ARABIC HALF MADDA OVER MADDA
+08CA..08E1    ; Extend # Mn  [24] ARABIC SMALL HIGH FARSI YEH..ARABIC SMALL HIGH SIGN SAFHA
 08E3..0902    ; Extend # Mn  [32] ARABIC TURNED DAMMA BELOW..DEVANAGARI SIGN ANUSVARA
 093A          ; Extend # Mn       DEVANAGARI VOWEL SIGN OE
 093C          ; Extend # Mn       DEVANAGARI SIGN NUKTA
@@ -151,6 +154,7 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 0BD7          ; Extend # Mc       TAMIL AU LENGTH MARK
 0C00          ; Extend # Mn       TELUGU SIGN COMBINING CANDRABINDU ABOVE
 0C04          ; Extend # Mn       TELUGU SIGN COMBINING ANUSVARA ABOVE
+0C3C          ; Extend # Mn       TELUGU SIGN NUKTA
 0C3E..0C40    ; Extend # Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
 0C46..0C48    ; Extend # Mn   [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
 0C4A..0C4D    ; Extend # Mn   [4] TELUGU VOWEL SIGN O..TELUGU SIGN VIRAMA
@@ -182,7 +186,7 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 0E47..0E4E    ; Extend # Mn   [8] THAI CHARACTER MAITAIKHU..THAI CHARACTER YAMAKKAN
 0EB1          ; Extend # Mn       LAO VOWEL SIGN MAI KAN
 0EB4..0EBC    ; Extend # Mn   [9] LAO VOWEL SIGN I..LAO SEMIVOWEL SIGN LO
-0EC8..0ECD    ; Extend # Mn   [6] LAO TONE MAI EK..LAO NIGGAHITA
+0EC8..0ECE    ; Extend # Mn   [7] LAO TONE MAI EK..LAO YAMAKKAN
 0F18..0F19    ; Extend # Mn   [2] TIBETAN ASTROLOGICAL SIGN -KHYUD PA..TIBETAN ASTROLOGICAL SIGN SDONG TSHUGS
 0F35          ; Extend # Mn       TIBETAN MARK NGAS BZUNG NYI ZLA
 0F37          ; Extend # Mn       TIBETAN MARK NGAS BZUNG SGOR RTAGS
@@ -206,7 +210,7 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 109D          ; Extend # Mn       MYANMAR VOWEL SIGN AITON AI
 135D..135F    ; Extend # Mn   [3] ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK..ETHIOPIC COMBINING GEMINATION MARK
 1712..1714    ; Extend # Mn   [3] TAGALOG VOWEL SIGN I..TAGALOG SIGN VIRAMA
-1732..1734    ; Extend # Mn   [3] HANUNOO VOWEL SIGN I..HANUNOO SIGN PAMUDPOD
+1732..1733    ; Extend # Mn   [2] HANUNOO VOWEL SIGN I..HANUNOO VOWEL SIGN U
 1752..1753    ; Extend # Mn   [2] BUHID VOWEL SIGN I..BUHID VOWEL SIGN U
 1772..1773    ; Extend # Mn   [2] TAGBANWA VOWEL SIGN I..TAGBANWA VOWEL SIGN U
 17B4..17B5    ; Extend # Mn   [2] KHMER VOWEL INHERENT AQ..KHMER VOWEL INHERENT AA
@@ -215,6 +219,7 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 17C9..17D3    ; Extend # Mn  [11] KHMER SIGN MUUSIKATOAN..KHMER SIGN BATHAMASAT
 17DD          ; Extend # Mn       KHMER SIGN ATTHACAN
 180B..180D    ; Extend # Mn   [3] MONGOLIAN FREE VARIATION SELECTOR ONE..MONGOLIAN FREE VARIATION SELECTOR THREE
+180F          ; Extend # Mn       MONGOLIAN FREE VARIATION SELECTOR FOUR
 1885..1886    ; Extend # Mn   [2] MONGOLIAN LETTER ALI GALI BALUDA..MONGOLIAN LETTER ALI GALI THREE BALUDA
 18A9          ; Extend # Mn       MONGOLIAN LETTER ALI GALI DAGALGA
 1920..1922    ; Extend # Mn   [3] LIMBU VOWEL SIGN A..LIMBU VOWEL SIGN U
@@ -232,7 +237,7 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 1A7F          ; Extend # Mn       TAI THAM COMBINING CRYPTOGRAMMIC DOT
 1AB0..1ABD    ; Extend # Mn  [14] COMBINING DOUBLED CIRCUMFLEX ACCENT..COMBINING PARENTHESES BELOW
 1ABE          ; Extend # Me       COMBINING PARENTHESES OVERLAY
-1ABF..1AC0    ; Extend # Mn   [2] COMBINING LATIN SMALL LETTER W BELOW..COMBINING LATIN SMALL LETTER TURNED W BELOW
+1ABF..1ACE    ; Extend # Mn  [16] COMBINING LATIN SMALL LETTER W BELOW..COMBINING LATIN SMALL LETTER INSULAR T
 1B00..1B03    ; Extend # Mn   [4] BALINESE SIGN ULU RICEM..BALINESE SIGN SURANG
 1B34          ; Extend # Mn       BALINESE SIGN REREKAN
 1B35          ; Extend # Mc       BALINESE VOWEL SIGN TEDUNG
@@ -256,8 +261,7 @@ E01F0..E0FFF  ; Control # Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 1CED          ; Extend # Mn       VEDIC SIGN TIRYAK
 1CF4          ; Extend # Mn       VEDIC TONE CANDRA ABOVE
 1CF8..1CF9    ; Extend # Mn   [2] VEDIC TONE RING ABOVE..VEDIC TONE DOUBLE RING ABOVE
-1DC0..1DF9    ; Extend # Mn  [58] COMBINING DOTTED GRAVE ACCENT..COMBINING WIDE INVERTED BRIDGE BELOW
-1DFB..1DFF    ; Extend # Mn   [5] COMBINING DELETION MARK..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
+1DC0..1DFF    ; Extend # Mn  [64] COMBINING DOTTED GRAVE ACCENT..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
 200C          ; Extend # Cf       ZERO WIDTH NON-JOINER
 20D0..20DC    ; Extend # Mn  [13] COMBINING LEFT HARPOON ABOVE..COMBINING FOUR DOTS ABOVE
 20DD..20E0    ; Extend # Me   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
@@ -321,12 +325,17 @@ FF9E..FF9F    ; Extend # Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDT
 10AE5..10AE6  ; Extend # Mn   [2] MANICHAEAN ABBREVIATION MARK ABOVE..MANICHAEAN ABBREVIATION MARK BELOW
 10D24..10D27  ; Extend # Mn   [4] HANIFI ROHINGYA SIGN HARBAHAY..HANIFI ROHINGYA SIGN TASSI
 10EAB..10EAC  ; Extend # Mn   [2] YEZIDI COMBINING HAMZA MARK..YEZIDI COMBINING MADDA MARK
+10EFD..10EFF  ; Extend # Mn   [3] ARABIC SMALL LOW WORD SAKTA..ARABIC SMALL LOW WORD MADDA
 10F46..10F50  ; Extend # Mn  [11] SOGDIAN COMBINING DOT BELOW..SOGDIAN COMBINING STROKE BELOW
+10F82..10F85  ; Extend # Mn   [4] OLD UYGHUR COMBINING DOT ABOVE..OLD UYGHUR COMBINING TWO DOTS BELOW
 11001         ; Extend # Mn       BRAHMI SIGN ANUSVARA
 11038..11046  ; Extend # Mn  [15] BRAHMI VOWEL SIGN AA..BRAHMI VIRAMA
+11070         ; Extend # Mn       BRAHMI SIGN OLD TAMIL VIRAMA
+11073..11074  ; Extend # Mn   [2] BRAHMI VOWEL SIGN OLD TAMIL SHORT E..BRAHMI VOWEL SIGN OLD TAMIL SHORT O
 1107F..11081  ; Extend # Mn   [3] BRAHMI NUMBER JOINER..KAITHI SIGN ANUSVARA
 110B3..110B6  ; Extend # Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
 110B9..110BA  ; Extend # Mn   [2] KAITHI SIGN VIRAMA..KAITHI SIGN NUKTA
+110C2         ; Extend # Mn       KAITHI VOWEL SIGN VOCALIC R
 11100..11102  ; Extend # Mn   [3] CHAKMA SIGN CANDRABINDU..CHAKMA SIGN VISARGA
 11127..1112B  ; Extend # Mn   [5] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN UU
 1112D..11134  ; Extend # Mn   [8] CHAKMA VOWEL SIGN AI..CHAKMA MAAYYAA
@@ -339,6 +348,7 @@ FF9E..FF9F    ; Extend # Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDT
 11234         ; Extend # Mn       KHOJKI SIGN ANUSVARA
 11236..11237  ; Extend # Mn   [2] KHOJKI SIGN NUKTA..KHOJKI SIGN SHADDA
 1123E         ; Extend # Mn       KHOJKI SIGN SUKUN
+11241         ; Extend # Mn       KHOJKI VOWEL SIGN VOCALIC R
 112DF         ; Extend # Mn       KHUDAWADI SIGN ANUSVARA
 112E3..112EA  ; Extend # Mn   [8] KHUDAWADI VOWEL SIGN U..KHUDAWADI SIGN VIRAMA
 11300..11301  ; Extend # Mn   [2] GRANTHA SIGN COMBINING ANUSVARA ABOVE..GRANTHA SIGN CANDRABINDU
@@ -406,12 +416,20 @@ FF9E..FF9F    ; Extend # Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDT
 11D95         ; Extend # Mn       GUNJALA GONDI SIGN ANUSVARA
 11D97         ; Extend # Mn       GUNJALA GONDI VIRAMA
 11EF3..11EF4  ; Extend # Mn   [2] MAKASAR VOWEL SIGN I..MAKASAR VOWEL SIGN U
+11F00..11F01  ; Extend # Mn   [2] KAWI SIGN CANDRABINDU..KAWI SIGN ANUSVARA
+11F36..11F3A  ; Extend # Mn   [5] KAWI VOWEL SIGN I..KAWI VOWEL SIGN VOCALIC R
+11F40         ; Extend # Mn       KAWI VOWEL SIGN EU
+11F42         ; Extend # Mn       KAWI CONJOINER
+13440         ; Extend # Mn       EGYPTIAN HIEROGLYPH MIRROR HORIZONTALLY
+13447..13455  ; Extend # Mn  [15] EGYPTIAN HIEROGLYPH MODIFIER DAMAGED AT TOP START..EGYPTIAN HIEROGLYPH MODIFIER DAMAGED
 16AF0..16AF4  ; Extend # Mn   [5] BASSA VAH COMBINING HIGH TONE..BASSA VAH COMBINING HIGH-LOW TONE
 16B30..16B36  ; Extend # Mn   [7] PAHAWH HMONG MARK CIM TUB..PAHAWH HMONG MARK CIM TAUM
 16F4F         ; Extend # Mn       MIAO SIGN CONSONANT MODIFIER BAR
 16F8F..16F92  ; Extend # Mn   [4] MIAO TONE RIGHT..MIAO TONE BELOW
 16FE4         ; Extend # Mn       KHITAN SMALL SCRIPT FILLER
 1BC9D..1BC9E  ; Extend # Mn   [2] DUPLOYAN THICK LETTER SELECTOR..DUPLOYAN DOUBLE MARK
+1CF00..1CF2D  ; Extend # Mn  [46] ZNAMENNY COMBINING MARK GORAZDO NIZKO S KRYZHEM ON LEFT..ZNAMENNY COMBINING MARK KRYZH ON LEFT
+1CF30..1CF46  ; Extend # Mn  [23] ZNAMENNY COMBINING TONAL RANGE MARK MRACHNO..ZNAMENNY PRIZNAK MODIFIER ROG
 1D165         ; Extend # Mc       MUSICAL SYMBOL COMBINING STEM
 1D167..1D169  ; Extend # Mn   [3] MUSICAL SYMBOL COMBINING TREMOLO-1..MUSICAL SYMBOL COMBINING TREMOLO-3
 1D16E..1D172  ; Extend # Mc   [5] MUSICAL SYMBOL COMBINING FLAG-1..MUSICAL SYMBOL COMBINING FLAG-5
@@ -430,15 +448,18 @@ FF9E..FF9F    ; Extend # Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDT
 1E01B..1E021  ; Extend # Mn   [7] COMBINING GLAGOLITIC LETTER SHTA..COMBINING GLAGOLITIC LETTER YATI
 1E023..1E024  ; Extend # Mn   [2] COMBINING GLAGOLITIC LETTER YU..COMBINING GLAGOLITIC LETTER SMALL YUS
 1E026..1E02A  ; Extend # Mn   [5] COMBINING GLAGOLITIC LETTER YO..COMBINING GLAGOLITIC LETTER FITA
+1E08F         ; Extend # Mn       COMBINING CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
 1E130..1E136  ; Extend # Mn   [7] NYIAKENG PUACHUE HMONG TONE-B..NYIAKENG PUACHUE HMONG TONE-D
+1E2AE         ; Extend # Mn       TOTO SIGN RISING TONE
 1E2EC..1E2EF  ; Extend # Mn   [4] WANCHO TONE TUP..WANCHO TONE KOINI
+1E4EC..1E4EF  ; Extend # Mn   [4] NAG MUNDARI SIGN MUHOR..NAG MUNDARI SIGN SUTUH
 1E8D0..1E8D6  ; Extend # Mn   [7] MENDE KIKAKUI COMBINING NUMBER TEENS..MENDE KIKAKUI COMBINING NUMBER MILLIONS
 1E944..1E94A  ; Extend # Mn   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
 1F3FB..1F3FF  ; Extend # Sk   [5] EMOJI MODIFIER FITZPATRICK TYPE-1-2..EMOJI MODIFIER FITZPATRICK TYPE-6
 E0020..E007F  ; Extend # Cf  [96] TAG SPACE..CANCEL TAG
 E0100..E01EF  ; Extend # Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
 
-# Total code points: 1984
+# Total code points: 2130
 
 # ================================================
 
@@ -479,6 +500,7 @@ E0100..E01EF  ; Extend # Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
 0CC3..0CC4    ; SpacingMark # Mc   [2] KANNADA VOWEL SIGN VOCALIC R..KANNADA VOWEL SIGN VOCALIC RR
 0CC7..0CC8    ; SpacingMark # Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
 0CCA..0CCB    ; SpacingMark # Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
+0CF3          ; SpacingMark # Mc       KANNADA SIGN COMBINING ANUSVARA ABOVE RIGHT
 0D02..0D03    ; SpacingMark # Mc   [2] MALAYALAM SIGN ANUSVARA..MALAYALAM SIGN VISARGA
 0D3F..0D40    ; SpacingMark # Mc   [2] MALAYALAM VOWEL SIGN I..MALAYALAM VOWEL SIGN II
 0D46..0D48    ; SpacingMark # Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
@@ -495,6 +517,8 @@ E0100..E01EF  ; Extend # Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
 103B..103C    ; SpacingMark # Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
 1056..1057    ; SpacingMark # Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
 1084          ; SpacingMark # Mc       MYANMAR VOWEL SIGN SHAN E
+1715          ; SpacingMark # Mc       TAGALOG SIGN PAMUDPOD
+1734          ; SpacingMark # Mc       HANUNOO SIGN PAMUDPOD
 17B6          ; SpacingMark # Mc       KHMER VOWEL SIGN AA
 17BE..17C5    ; SpacingMark # Mc   [8] KHMER VOWEL SIGN OE..KHMER VOWEL SIGN AU
 17C7..17C8    ; SpacingMark # Mc   [2] KHMER SIGN REAHMUK..KHMER SIGN YUUKALEAPINTU
@@ -579,7 +603,6 @@ ABEC          ; SpacingMark # Mc       MEETEI MAYEK LUM IYEK
 116AC         ; SpacingMark # Mc       TAKRI SIGN VISARGA
 116AE..116AF  ; SpacingMark # Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
 116B6         ; SpacingMark # Mc       TAKRI SIGN VIRAMA
-11720..11721  ; SpacingMark # Mc   [2] AHOM VOWEL SIGN A..AHOM VOWEL SIGN AA
 11726         ; SpacingMark # Mc       AHOM VOWEL SIGN E
 1182C..1182E  ; SpacingMark # Mc   [3] DOGRA VOWEL SIGN AA..DOGRA VOWEL SIGN II
 11838         ; SpacingMark # Mc       DOGRA SIGN VISARGA
@@ -603,12 +626,16 @@ ABEC          ; SpacingMark # Mc       MEETEI MAYEK LUM IYEK
 11D93..11D94  ; SpacingMark # Mc   [2] GUNJALA GONDI VOWEL SIGN OO..GUNJALA GONDI VOWEL SIGN AU
 11D96         ; SpacingMark # Mc       GUNJALA GONDI SIGN VISARGA
 11EF5..11EF6  ; SpacingMark # Mc   [2] MAKASAR VOWEL SIGN E..MAKASAR VOWEL SIGN O
+11F03         ; SpacingMark # Mc       KAWI SIGN VISARGA
+11F34..11F35  ; SpacingMark # Mc   [2] KAWI VOWEL SIGN AA..KAWI VOWEL SIGN ALTERNATE AA
+11F3E..11F3F  ; SpacingMark # Mc   [2] KAWI VOWEL SIGN E..KAWI VOWEL SIGN AI
+11F41         ; SpacingMark # Mc       KAWI SIGN KILLER
 16F51..16F87  ; SpacingMark # Mc  [55] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN UI
 16FF0..16FF1  ; SpacingMark # Mc   [2] VIETNAMESE ALTERNATE READING MARK CA..VIETNAMESE ALTERNATE READING MARK NHAY
 1D166         ; SpacingMark # Mc       MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
 1D16D         ; SpacingMark # Mc       MUSICAL SYMBOL COMBINING AUGMENTATION DOT
 
-# Total code points: 388
+# Total code points: 395
 
 # ================================================
 
@@ -1447,15 +1474,15 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 
 # EOF
 # emoji-data.txt
-# Date: 2020-01-28, 20:52:38 GMT
-# © 2020 Unicode®, Inc.
+# Date: 2022-08-02, 00:26:10 GMT
+# © 2022 Unicode®, Inc.
 # Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
+# For terms of use, see https://www.unicode.org/terms_of_use.html
 #
 # Emoji Data for UTS #51
-# Version: 13.0
+# Used with Emoji Version 15.0 and subsequent minor revisions (if any)
 #
-# For documentation and usage, see http://www.unicode.org/reports/tr51
+# For documentation and usage, see https://www.unicode.org/reports/tr51
 #
 # Format: 
 # <codepoint(s)> ; <property> # <comments> 
@@ -1467,10 +1494,9 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 
 # ================================================
 
-# All omitted code points have Emoji=No 
-# @missing: 0000..10FFFF  ; Emoji ; No
+# All omitted code points have Emoji=No
 
-0023          ; Emoji                # E0.0   [1] (#️)       number sign
+0023          ; Emoji                # E0.0   [1] (#️)       hash sign
 002A          ; Emoji                # E0.0   [1] (*️)       asterisk
 0030..0039    ; Emoji                # E0.0  [10] (0️..9️)    digit zero..digit nine
 00A9          ; Emoji                # E0.6   [1] (©️)       copyright
@@ -1567,8 +1593,8 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 2747          ; Emoji                # E0.6   [1] (❇️)       sparkle
 274C          ; Emoji                # E0.6   [1] (❌)       cross mark
 274E          ; Emoji                # E0.6   [1] (❎)       cross mark button
-2753..2755    ; Emoji                # E0.6   [3] (❓..❕)    question mark..white exclamation mark
-2757          ; Emoji                # E0.6   [1] (❗)       exclamation mark
+2753..2755    ; Emoji                # E0.6   [3] (❓..❕)    red question mark..white exclamation mark
+2757          ; Emoji                # E0.6   [1] (❗)       red exclamation mark
 2763          ; Emoji                # E1.0   [1] (❣️)       heart exclamation
 2764          ; Emoji                # E0.6   [1] (❤️)       red heart
 2795..2797    ; Emoji                # E0.6   [3] (➕..➗)    plus..divide
@@ -1687,7 +1713,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F509         ; Emoji                # E1.0   [1] (🔉)       speaker medium volume
 1F50A..1F514  ; Emoji                # E0.6  [11] (🔊..🔔)    speaker high volume..bell
 1F515         ; Emoji                # E1.0   [1] (🔕)       bell with slash
-1F516..1F52B  ; Emoji                # E0.6  [22] (🔖..🔫)    bookmark..pistol
+1F516..1F52B  ; Emoji                # E0.6  [22] (🔖..🔫)    bookmark..water pistol
 1F52C..1F52D  ; Emoji                # E1.0   [2] (🔬..🔭)    microscope..telescope
 1F52E..1F53D  ; Emoji                # E0.6  [16] (🔮..🔽)    crystal ball..downwards button
 1F549..1F54A  ; Emoji                # E0.7   [2] (🕉️..🕊️)    om..dove
@@ -1742,7 +1768,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F62E..1F62F  ; Emoji                # E1.0   [2] (😮..😯)    face with open mouth..hushed face
 1F630..1F633  ; Emoji                # E0.6   [4] (😰..😳)    anxious face with sweat..flushed face
 1F634         ; Emoji                # E1.0   [1] (😴)       sleeping face
-1F635         ; Emoji                # E0.6   [1] (😵)       dizzy face
+1F635         ; Emoji                # E0.6   [1] (😵)       face with crossed-out eyes
 1F636         ; Emoji                # E1.0   [1] (😶)       face without mouth
 1F637..1F640  ; Emoji                # E0.6  [10] (😷..🙀)    face with medical mask..weary cat
 1F641..1F644  ; Emoji                # E1.0   [4] (🙁..🙄)    slightly frowning face..face with rolling eyes
@@ -1789,6 +1815,8 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F6D1..1F6D2  ; Emoji                # E3.0   [2] (🛑..🛒)    stop sign..shopping cart
 1F6D5         ; Emoji                # E12.0  [1] (🛕)       hindu temple
 1F6D6..1F6D7  ; Emoji                # E13.0  [2] (🛖..🛗)    hut..elevator
+1F6DC         ; Emoji                # E15.0  [1] (🛜)       wireless
+1F6DD..1F6DF  ; Emoji                # E14.0  [3] (🛝..🛟)    playground slide..ring buoy
 1F6E0..1F6E5  ; Emoji                # E0.7   [6] (🛠️..🛥️)    hammer and wrench..motor boat
 1F6E9         ; Emoji                # E0.7   [1] (🛩️)       small airplane
 1F6EB..1F6EC  ; Emoji                # E1.0   [2] (🛫..🛬)    airplane departure..airplane arrival
@@ -1800,6 +1828,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F6FA         ; Emoji                # E12.0  [1] (🛺)       auto rickshaw
 1F6FB..1F6FC  ; Emoji                # E13.0  [2] (🛻..🛼)    pickup truck..roller skate
 1F7E0..1F7EB  ; Emoji                # E12.0 [12] (🟠..🟫)    orange circle..brown square
+1F7F0         ; Emoji                # E14.0  [1] (🟰)       heavy equals sign
 1F90C         ; Emoji                # E13.0  [1] (🤌)       pinched fingers
 1F90D..1F90F  ; Emoji                # E12.0  [3] (🤍..🤏)    white heart..pinching hand
 1F910..1F918  ; Emoji                # E1.0   [9] (🤐..🤘)    zipper-mouth face..sign of the horns
@@ -1823,6 +1852,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F972         ; Emoji                # E13.0  [1] (🥲)       smiling face with tear
 1F973..1F976  ; Emoji                # E11.0  [4] (🥳..🥶)    partying face..cold face
 1F977..1F978  ; Emoji                # E13.0  [2] (🥷..🥸)    ninja..disguised face
+1F979         ; Emoji                # E14.0  [1] (🥹)       face holding back tears
 1F97A         ; Emoji                # E11.0  [1] (🥺)       pleading face
 1F97B         ; Emoji                # E12.0  [1] (🥻)       sari
 1F97C..1F97F  ; Emoji                # E11.0  [4] (🥼..🥿)    lab coat..flat shoe
@@ -1840,26 +1870,42 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F9C1..1F9C2  ; Emoji                # E11.0  [2] (🧁..🧂)    cupcake..salt
 1F9C3..1F9CA  ; Emoji                # E12.0  [8] (🧃..🧊)    beverage box..ice
 1F9CB         ; Emoji                # E13.0  [1] (🧋)       bubble tea
+1F9CC         ; Emoji                # E14.0  [1] (🧌)       troll
 1F9CD..1F9CF  ; Emoji                # E12.0  [3] (🧍..🧏)    person standing..deaf person
 1F9D0..1F9E6  ; Emoji                # E5.0  [23] (🧐..🧦)    face with monocle..socks
 1F9E7..1F9FF  ; Emoji                # E11.0 [25] (🧧..🧿)    red envelope..nazar amulet
 1FA70..1FA73  ; Emoji                # E12.0  [4] (🩰..🩳)    ballet shoes..shorts
 1FA74         ; Emoji                # E13.0  [1] (🩴)       thong sandal
+1FA75..1FA77  ; Emoji                # E15.0  [3] (🩵..🩷)    light blue heart..pink heart
 1FA78..1FA7A  ; Emoji                # E12.0  [3] (🩸..🩺)    drop of blood..stethoscope
+1FA7B..1FA7C  ; Emoji                # E14.0  [2] (🩻..🩼)    x-ray..crutch
 1FA80..1FA82  ; Emoji                # E12.0  [3] (🪀..🪂)    yo-yo..parachute
 1FA83..1FA86  ; Emoji                # E13.0  [4] (🪃..🪆)    boomerang..nesting dolls
+1FA87..1FA88  ; Emoji                # E15.0  [2] (🪇..🪈)    maracas..flute
 1FA90..1FA95  ; Emoji                # E12.0  [6] (🪐..🪕)    ringed planet..banjo
 1FA96..1FAA8  ; Emoji                # E13.0 [19] (🪖..🪨)    military helmet..rock
+1FAA9..1FAAC  ; Emoji                # E14.0  [4] (🪩..🪬)    mirror ball..hamsa
+1FAAD..1FAAF  ; Emoji                # E15.0  [3] (🪭..🪯)    folding hand fan..khanda
 1FAB0..1FAB6  ; Emoji                # E13.0  [7] (🪰..🪶)    fly..feather
+1FAB7..1FABA  ; Emoji                # E14.0  [4] (🪷..🪺)    lotus..nest with eggs
+1FABB..1FABD  ; Emoji                # E15.0  [3] (🪻..🪽)    hyacinth..wing
+1FABF         ; Emoji                # E15.0  [1] (🪿)       goose
 1FAC0..1FAC2  ; Emoji                # E13.0  [3] (🫀..🫂)    anatomical heart..people hugging
+1FAC3..1FAC5  ; Emoji                # E14.0  [3] (🫃..🫅)    pregnant man..person with crown
+1FACE..1FACF  ; Emoji                # E15.0  [2] (🫎..🫏)    moose..donkey
 1FAD0..1FAD6  ; Emoji                # E13.0  [7] (🫐..🫖)    blueberries..teapot
+1FAD7..1FAD9  ; Emoji                # E14.0  [3] (🫗..🫙)    pouring liquid..jar
+1FADA..1FADB  ; Emoji                # E15.0  [2] (🫚..🫛)    ginger root..pea pod
+1FAE0..1FAE7  ; Emoji                # E14.0  [8] (🫠..🫧)    melting face..bubbles
+1FAE8         ; Emoji                # E15.0  [1] (🫨)       shaking face
+1FAF0..1FAF6  ; Emoji                # E14.0  [7] (🫰..🫶)    hand with index finger and thumb crossed..heart hands
+1FAF7..1FAF8  ; Emoji                # E15.0  [2] (🫷..🫸)    leftwards pushing hand..rightwards pushing hand
 
-# Total elements: 1367
+# Total elements: 1424
 
 # ================================================
 
-# All omitted code points have Emoji_Presentation=No 
-# @missing: 0000..10FFFF  ; Emoji_Presentation ; No
+# All omitted code points have Emoji_Presentation=No
 
 231A..231B    ; Emoji_Presentation   # E0.6   [2] (⌚..⌛)    watch..hourglass done
 23E9..23EC    ; Emoji_Presentation   # E0.6   [4] (⏩..⏬)    fast-forward button..fast down button
@@ -1886,8 +1932,8 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 2728          ; Emoji_Presentation   # E0.6   [1] (✨)       sparkles
 274C          ; Emoji_Presentation   # E0.6   [1] (❌)       cross mark
 274E          ; Emoji_Presentation   # E0.6   [1] (❎)       cross mark button
-2753..2755    ; Emoji_Presentation   # E0.6   [3] (❓..❕)    question mark..white exclamation mark
-2757          ; Emoji_Presentation   # E0.6   [1] (❗)       exclamation mark
+2753..2755    ; Emoji_Presentation   # E0.6   [3] (❓..❕)    red question mark..white exclamation mark
+2757          ; Emoji_Presentation   # E0.6   [1] (❗)       red exclamation mark
 2795..2797    ; Emoji_Presentation   # E0.6   [3] (➕..➗)    plus..divide
 27B0          ; Emoji_Presentation   # E0.6   [1] (➰)       curly loop
 27BF          ; Emoji_Presentation   # E1.0   [1] (➿)       double curly loop
@@ -1981,7 +2027,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F509         ; Emoji_Presentation   # E1.0   [1] (🔉)       speaker medium volume
 1F50A..1F514  ; Emoji_Presentation   # E0.6  [11] (🔊..🔔)    speaker high volume..bell
 1F515         ; Emoji_Presentation   # E1.0   [1] (🔕)       bell with slash
-1F516..1F52B  ; Emoji_Presentation   # E0.6  [22] (🔖..🔫)    bookmark..pistol
+1F516..1F52B  ; Emoji_Presentation   # E0.6  [22] (🔖..🔫)    bookmark..water pistol
 1F52C..1F52D  ; Emoji_Presentation   # E1.0   [2] (🔬..🔭)    microscope..telescope
 1F52E..1F53D  ; Emoji_Presentation   # E0.6  [16] (🔮..🔽)    crystal ball..downwards button
 1F54B..1F54E  ; Emoji_Presentation   # E1.0   [4] (🕋..🕎)    kaaba..menorah
@@ -2017,7 +2063,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F62E..1F62F  ; Emoji_Presentation   # E1.0   [2] (😮..😯)    face with open mouth..hushed face
 1F630..1F633  ; Emoji_Presentation   # E0.6   [4] (😰..😳)    anxious face with sweat..flushed face
 1F634         ; Emoji_Presentation   # E1.0   [1] (😴)       sleeping face
-1F635         ; Emoji_Presentation   # E0.6   [1] (😵)       dizzy face
+1F635         ; Emoji_Presentation   # E0.6   [1] (😵)       face with crossed-out eyes
 1F636         ; Emoji_Presentation   # E1.0   [1] (😶)       face without mouth
 1F637..1F640  ; Emoji_Presentation   # E0.6  [10] (😷..🙀)    face with medical mask..weary cat
 1F641..1F644  ; Emoji_Presentation   # E1.0   [4] (🙁..🙄)    slightly frowning face..face with rolling eyes
@@ -2062,6 +2108,8 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F6D1..1F6D2  ; Emoji_Presentation   # E3.0   [2] (🛑..🛒)    stop sign..shopping cart
 1F6D5         ; Emoji_Presentation   # E12.0  [1] (🛕)       hindu temple
 1F6D6..1F6D7  ; Emoji_Presentation   # E13.0  [2] (🛖..🛗)    hut..elevator
+1F6DC         ; Emoji_Presentation   # E15.0  [1] (🛜)       wireless
+1F6DD..1F6DF  ; Emoji_Presentation   # E14.0  [3] (🛝..🛟)    playground slide..ring buoy
 1F6EB..1F6EC  ; Emoji_Presentation   # E1.0   [2] (🛫..🛬)    airplane departure..airplane arrival
 1F6F4..1F6F6  ; Emoji_Presentation   # E3.0   [3] (🛴..🛶)    kick scooter..canoe
 1F6F7..1F6F8  ; Emoji_Presentation   # E5.0   [2] (🛷..🛸)    sled..flying saucer
@@ -2069,6 +2117,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F6FA         ; Emoji_Presentation   # E12.0  [1] (🛺)       auto rickshaw
 1F6FB..1F6FC  ; Emoji_Presentation   # E13.0  [2] (🛻..🛼)    pickup truck..roller skate
 1F7E0..1F7EB  ; Emoji_Presentation   # E12.0 [12] (🟠..🟫)    orange circle..brown square
+1F7F0         ; Emoji_Presentation   # E14.0  [1] (🟰)       heavy equals sign
 1F90C         ; Emoji_Presentation   # E13.0  [1] (🤌)       pinched fingers
 1F90D..1F90F  ; Emoji_Presentation   # E12.0  [3] (🤍..🤏)    white heart..pinching hand
 1F910..1F918  ; Emoji_Presentation   # E1.0   [9] (🤐..🤘)    zipper-mouth face..sign of the horns
@@ -2092,6 +2141,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F972         ; Emoji_Presentation   # E13.0  [1] (🥲)       smiling face with tear
 1F973..1F976  ; Emoji_Presentation   # E11.0  [4] (🥳..🥶)    partying face..cold face
 1F977..1F978  ; Emoji_Presentation   # E13.0  [2] (🥷..🥸)    ninja..disguised face
+1F979         ; Emoji_Presentation   # E14.0  [1] (🥹)       face holding back tears
 1F97A         ; Emoji_Presentation   # E11.0  [1] (🥺)       pleading face
 1F97B         ; Emoji_Presentation   # E12.0  [1] (🥻)       sari
 1F97C..1F97F  ; Emoji_Presentation   # E11.0  [4] (🥼..🥿)    lab coat..flat shoe
@@ -2109,26 +2159,42 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F9C1..1F9C2  ; Emoji_Presentation   # E11.0  [2] (🧁..🧂)    cupcake..salt
 1F9C3..1F9CA  ; Emoji_Presentation   # E12.0  [8] (🧃..🧊)    beverage box..ice
 1F9CB         ; Emoji_Presentation   # E13.0  [1] (🧋)       bubble tea
+1F9CC         ; Emoji_Presentation   # E14.0  [1] (🧌)       troll
 1F9CD..1F9CF  ; Emoji_Presentation   # E12.0  [3] (🧍..🧏)    person standing..deaf person
 1F9D0..1F9E6  ; Emoji_Presentation   # E5.0  [23] (🧐..🧦)    face with monocle..socks
 1F9E7..1F9FF  ; Emoji_Presentation   # E11.0 [25] (🧧..🧿)    red envelope..nazar amulet
 1FA70..1FA73  ; Emoji_Presentation   # E12.0  [4] (🩰..🩳)    ballet shoes..shorts
 1FA74         ; Emoji_Presentation   # E13.0  [1] (🩴)       thong sandal
+1FA75..1FA77  ; Emoji_Presentation   # E15.0  [3] (🩵..🩷)    light blue heart..pink heart
 1FA78..1FA7A  ; Emoji_Presentation   # E12.0  [3] (🩸..🩺)    drop of blood..stethoscope
+1FA7B..1FA7C  ; Emoji_Presentation   # E14.0  [2] (🩻..🩼)    x-ray..crutch
 1FA80..1FA82  ; Emoji_Presentation   # E12.0  [3] (🪀..🪂)    yo-yo..parachute
 1FA83..1FA86  ; Emoji_Presentation   # E13.0  [4] (🪃..🪆)    boomerang..nesting dolls
+1FA87..1FA88  ; Emoji_Presentation   # E15.0  [2] (🪇..🪈)    maracas..flute
 1FA90..1FA95  ; Emoji_Presentation   # E12.0  [6] (🪐..🪕)    ringed planet..banjo
 1FA96..1FAA8  ; Emoji_Presentation   # E13.0 [19] (🪖..🪨)    military helmet..rock
+1FAA9..1FAAC  ; Emoji_Presentation   # E14.0  [4] (🪩..🪬)    mirror ball..hamsa
+1FAAD..1FAAF  ; Emoji_Presentation   # E15.0  [3] (🪭..🪯)    folding hand fan..khanda
 1FAB0..1FAB6  ; Emoji_Presentation   # E13.0  [7] (🪰..🪶)    fly..feather
+1FAB7..1FABA  ; Emoji_Presentation   # E14.0  [4] (🪷..🪺)    lotus..nest with eggs
+1FABB..1FABD  ; Emoji_Presentation   # E15.0  [3] (🪻..🪽)    hyacinth..wing
+1FABF         ; Emoji_Presentation   # E15.0  [1] (🪿)       goose
 1FAC0..1FAC2  ; Emoji_Presentation   # E13.0  [3] (🫀..🫂)    anatomical heart..people hugging
+1FAC3..1FAC5  ; Emoji_Presentation   # E14.0  [3] (🫃..🫅)    pregnant man..person with crown
+1FACE..1FACF  ; Emoji_Presentation   # E15.0  [2] (🫎..🫏)    moose..donkey
 1FAD0..1FAD6  ; Emoji_Presentation   # E13.0  [7] (🫐..🫖)    blueberries..teapot
+1FAD7..1FAD9  ; Emoji_Presentation   # E14.0  [3] (🫗..🫙)    pouring liquid..jar
+1FADA..1FADB  ; Emoji_Presentation   # E15.0  [2] (🫚..🫛)    ginger root..pea pod
+1FAE0..1FAE7  ; Emoji_Presentation   # E14.0  [8] (🫠..🫧)    melting face..bubbles
+1FAE8         ; Emoji_Presentation   # E15.0  [1] (🫨)       shaking face
+1FAF0..1FAF6  ; Emoji_Presentation   # E14.0  [7] (🫰..🫶)    hand with index finger and thumb crossed..heart hands
+1FAF7..1FAF8  ; Emoji_Presentation   # E15.0  [2] (🫷..🫸)    leftwards pushing hand..rightwards pushing hand
 
-# Total elements: 1148
+# Total elements: 1205
 
 # ================================================
 
-# All omitted code points have Emoji_Modifier=No 
-# @missing: 0000..10FFFF  ; Emoji_Modifier ; No
+# All omitted code points have Emoji_Modifier=No
 
 1F3FB..1F3FF  ; Emoji_Modifier       # E1.0   [5] (🏻..🏿)    light skin tone..dark skin tone
 
@@ -2136,8 +2202,7 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 
 # ================================================
 
-# All omitted code points have Emoji_Modifier_Base=No 
-# @missing: 0000..10FFFF  ; Emoji_Modifier_Base ; No
+# All omitted code points have Emoji_Modifier_Base=No
 
 261D          ; Emoji_Modifier_Base  # E0.6   [1] (☝️)       index pointing up
 26F9          ; Emoji_Modifier_Base  # E0.7   [1] (⛹️)       person bouncing ball
@@ -2186,15 +2251,17 @@ D789..D7A3    ; LVT # Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 1F9BB         ; Emoji_Modifier_Base  # E12.0  [1] (🦻)       ear with hearing aid
 1F9CD..1F9CF  ; Emoji_Modifier_Base  # E12.0  [3] (🧍..🧏)    person standing..deaf person
 1F9D1..1F9DD  ; Emoji_Modifier_Base  # E5.0  [13] (🧑..🧝)    person..elf
+1FAC3..1FAC5  ; Emoji_Modifier_Base  # E14.0  [3] (🫃..🫅)    pregnant man..person with crown
+1FAF0..1FAF6  ; Emoji_Modifier_Base  # E14.0  [7] (🫰..🫶)    hand with index finger and thumb crossed..heart hands
+1FAF7..1FAF8  ; Emoji_Modifier_Base  # E15.0  [2] (🫷..🫸)    leftwards pushing hand..rightwards pushing hand
 
-# Total elements: 122
+# Total elements: 134
 
 # ================================================
 
-# All omitted code points have Emoji_Component=No 
-# @missing: 0000..10FFFF  ; Emoji_Component ; No
+# All omitted code points have Emoji_Component=No
 
-0023          ; Emoji_Component      # E0.0   [1] (#️)       number sign
+0023          ; Emoji_Component      # E0.0   [1] (#️)       hash sign
 002A          ; Emoji_Component      # E0.0   [1] (*️)       asterisk
 0030..0039    ; Emoji_Component      # E0.0  [10] (0️..9️)    digit zero..digit nine
 200D          ; Emoji_Component      # E0.0   [1] (‍)        zero width joiner
@@ -2209,8 +2276,7 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 
 # ================================================
 
-# All omitted code points have Extended_Pictographic=No 
-# @missing: 0000..10FFFF  ; Extended_Pictographic ; No
+# All omitted code points have Extended_Pictographic=No
 
 00A9          ; Extended_Pictographic# E0.6   [1] (©️)       copyright
 00AE          ; Extended_Pictographic# E0.6   [1] (®️)       registered
@@ -2350,8 +2416,8 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 2747          ; Extended_Pictographic# E0.6   [1] (❇️)       sparkle
 274C          ; Extended_Pictographic# E0.6   [1] (❌)       cross mark
 274E          ; Extended_Pictographic# E0.6   [1] (❎)       cross mark button
-2753..2755    ; Extended_Pictographic# E0.6   [3] (❓..❕)    question mark..white exclamation mark
-2757          ; Extended_Pictographic# E0.6   [1] (❗)       exclamation mark
+2753..2755    ; Extended_Pictographic# E0.6   [3] (❓..❕)    red question mark..white exclamation mark
+2757          ; Extended_Pictographic# E0.6   [1] (❗)       red exclamation mark
 2763          ; Extended_Pictographic# E1.0   [1] (❣️)       heart exclamation
 2764          ; Extended_Pictographic# E0.6   [1] (❤️)       red heart
 2765..2767    ; Extended_Pictographic# E0.0   [3] (❥..❧)    ROTATED HEAVY BLACK HEART BULLET..ROTATED FLORAL HEART BULLET
@@ -2489,7 +2555,7 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 1F509         ; Extended_Pictographic# E1.0   [1] (🔉)       speaker medium volume
 1F50A..1F514  ; Extended_Pictographic# E0.6  [11] (🔊..🔔)    speaker high volume..bell
 1F515         ; Extended_Pictographic# E1.0   [1] (🔕)       bell with slash
-1F516..1F52B  ; Extended_Pictographic# E0.6  [22] (🔖..🔫)    bookmark..pistol
+1F516..1F52B  ; Extended_Pictographic# E0.6  [22] (🔖..🔫)    bookmark..water pistol
 1F52C..1F52D  ; Extended_Pictographic# E1.0   [2] (🔬..🔭)    microscope..telescope
 1F52E..1F53D  ; Extended_Pictographic# E0.6  [16] (🔮..🔽)    crystal ball..downwards button
 1F546..1F548  ; Extended_Pictographic# E0.0   [3] (🕆..🕈)    WHITE LATIN CROSS..CELTIC CROSS
@@ -2565,7 +2631,7 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 1F62E..1F62F  ; Extended_Pictographic# E1.0   [2] (😮..😯)    face with open mouth..hushed face
 1F630..1F633  ; Extended_Pictographic# E0.6   [4] (😰..😳)    anxious face with sweat..flushed face
 1F634         ; Extended_Pictographic# E1.0   [1] (😴)       sleeping face
-1F635         ; Extended_Pictographic# E0.6   [1] (😵)       dizzy face
+1F635         ; Extended_Pictographic# E0.6   [1] (😵)       face with crossed-out eyes
 1F636         ; Extended_Pictographic# E1.0   [1] (😶)       face without mouth
 1F637..1F640  ; Extended_Pictographic# E0.6  [10] (😷..🙀)    face with medical mask..weary cat
 1F641..1F644  ; Extended_Pictographic# E1.0   [4] (🙁..🙄)    slightly frowning face..face with rolling eyes
@@ -2614,7 +2680,9 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 1F6D3..1F6D4  ; Extended_Pictographic# E0.0   [2] (🛓..🛔)    STUPA..PAGODA
 1F6D5         ; Extended_Pictographic# E12.0  [1] (🛕)       hindu temple
 1F6D6..1F6D7  ; Extended_Pictographic# E13.0  [2] (🛖..🛗)    hut..elevator
-1F6D8..1F6DF  ; Extended_Pictographic# E0.0   [8] (🛘..🛟)    <reserved-1F6D8>..<reserved-1F6DF>
+1F6D8..1F6DB  ; Extended_Pictographic# E0.0   [4] (🛘..🛛)    <reserved-1F6D8>..<reserved-1F6DB>
+1F6DC         ; Extended_Pictographic# E15.0  [1] (🛜)       wireless
+1F6DD..1F6DF  ; Extended_Pictographic# E14.0  [3] (🛝..🛟)    playground slide..ring buoy
 1F6E0..1F6E5  ; Extended_Pictographic# E0.7   [6] (🛠️..🛥️)    hammer and wrench..motor boat
 1F6E6..1F6E8  ; Extended_Pictographic# E0.0   [3] (🛦..🛨)    UP-POINTING MILITARY AIRPLANE..UP-POINTING SMALL AIRPLANE
 1F6E9         ; Extended_Pictographic# E0.7   [1] (🛩️)       small airplane
@@ -2630,10 +2698,12 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 1F6FA         ; Extended_Pictographic# E12.0  [1] (🛺)       auto rickshaw
 1F6FB..1F6FC  ; Extended_Pictographic# E13.0  [2] (🛻..🛼)    pickup truck..roller skate
 1F6FD..1F6FF  ; Extended_Pictographic# E0.0   [3] (🛽..🛿)    <reserved-1F6FD>..<reserved-1F6FF>
-1F774..1F77F  ; Extended_Pictographic# E0.0  [12] (🝴..🝿)    <reserved-1F774>..<reserved-1F77F>
+1F774..1F77F  ; Extended_Pictographic# E0.0  [12] (🝴..🝿)    LOT OF FORTUNE..ORCUS
 1F7D5..1F7DF  ; Extended_Pictographic# E0.0  [11] (🟕..🟟)    CIRCLED TRIANGLE..<reserved-1F7DF>
 1F7E0..1F7EB  ; Extended_Pictographic# E12.0 [12] (🟠..🟫)    orange circle..brown square
-1F7EC..1F7FF  ; Extended_Pictographic# E0.0  [20] (🟬..🟿)    <reserved-1F7EC>..<reserved-1F7FF>
+1F7EC..1F7EF  ; Extended_Pictographic# E0.0   [4] (🟬..🟯)    <reserved-1F7EC>..<reserved-1F7EF>
+1F7F0         ; Extended_Pictographic# E14.0  [1] (🟰)       heavy equals sign
+1F7F1..1F7FF  ; Extended_Pictographic# E0.0  [15] (🟱..🟿)    <reserved-1F7F1>..<reserved-1F7FF>
 1F80C..1F80F  ; Extended_Pictographic# E0.0   [4] (🠌..🠏)    <reserved-1F80C>..<reserved-1F80F>
 1F848..1F84F  ; Extended_Pictographic# E0.0   [8] (🡈..🡏)    <reserved-1F848>..<reserved-1F84F>
 1F85A..1F85F  ; Extended_Pictographic# E0.0   [6] (🡚..🡟)    <reserved-1F85A>..<reserved-1F85F>
@@ -2662,7 +2732,7 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 1F972         ; Extended_Pictographic# E13.0  [1] (🥲)       smiling face with tear
 1F973..1F976  ; Extended_Pictographic# E11.0  [4] (🥳..🥶)    partying face..cold face
 1F977..1F978  ; Extended_Pictographic# E13.0  [2] (🥷..🥸)    ninja..disguised face
-1F979         ; Extended_Pictographic# E0.0   [1] (🥹)       <reserved-1F979>
+1F979         ; Extended_Pictographic# E14.0  [1] (🥹)       face holding back tears
 1F97A         ; Extended_Pictographic# E11.0  [1] (🥺)       pleading face
 1F97B         ; Extended_Pictographic# E12.0  [1] (🥻)       sari
 1F97C..1F97F  ; Extended_Pictographic# E11.0  [4] (🥼..🥿)    lab coat..flat shoe
@@ -2680,28 +2750,44 @@ E0020..E007F  ; Emoji_Component      # E0.0  [96] (󠀠..󠁿)      tag space..c
 1F9C1..1F9C2  ; Extended_Pictographic# E11.0  [2] (🧁..🧂)    cupcake..salt
 1F9C3..1F9CA  ; Extended_Pictographic# E12.0  [8] (🧃..🧊)    beverage box..ice
 1F9CB         ; Extended_Pictographic# E13.0  [1] (🧋)       bubble tea
-1F9CC         ; Extended_Pictographic# E0.0   [1] (🧌)       <reserved-1F9CC>
+1F9CC         ; Extended_Pictographic# E14.0  [1] (🧌)       troll
 1F9CD..1F9CF  ; Extended_Pictographic# E12.0  [3] (🧍..🧏)    person standing..deaf person
 1F9D0..1F9E6  ; Extended_Pictographic# E5.0  [23] (🧐..🧦)    face with monocle..socks
 1F9E7..1F9FF  ; Extended_Pictographic# E11.0 [25] (🧧..🧿)    red envelope..nazar amulet
 1FA00..1FA6F  ; Extended_Pictographic# E0.0 [112] (🨀..🩯)    NEUTRAL CHESS KING..<reserved-1FA6F>
 1FA70..1FA73  ; Extended_Pictographic# E12.0  [4] (🩰..🩳)    ballet shoes..shorts
 1FA74         ; Extended_Pictographic# E13.0  [1] (🩴)       thong sandal
-1FA75..1FA77  ; Extended_Pictographic# E0.0   [3] (🩵..🩷)    <reserved-1FA75>..<reserved-1FA77>
+1FA75..1FA77  ; Extended_Pictographic# E15.0  [3] (🩵..🩷)    light blue heart..pink heart
 1FA78..1FA7A  ; Extended_Pictographic# E12.0  [3] (🩸..🩺)    drop of blood..stethoscope
-1FA7B..1FA7F  ; Extended_Pictographic# E0.0   [5] (🩻..🩿)    <reserved-1FA7B>..<reserved-1FA7F>
+1FA7B..1FA7C  ; Extended_Pictographic# E14.0  [2] (🩻..🩼)    x-ray..crutch
+1FA7D..1FA7F  ; Extended_Pictographic# E0.0   [3] (🩽..🩿)    <reserved-1FA7D>..<reserved-1FA7F>
 1FA80..1FA82  ; Extended_Pictographic# E12.0  [3] (🪀..🪂)    yo-yo..parachute
 1FA83..1FA86  ; Extended_Pictographic# E13.0  [4] (🪃..🪆)    boomerang..nesting dolls
-1FA87..1FA8F  ; Extended_Pictographic# E0.0   [9] (🪇..🪏)    <reserved-1FA87>..<reserved-1FA8F>
+1FA87..1FA88  ; Extended_Pictographic# E15.0  [2] (🪇..🪈)    maracas..flute
+1FA89..1FA8F  ; Extended_Pictographic# E0.0   [7] (🪉..🪏)    <reserved-1FA89>..<reserved-1FA8F>
 1FA90..1FA95  ; Extended_Pictographic# E12.0  [6] (🪐..🪕)    ringed planet..banjo
 1FA96..1FAA8  ; Extended_Pictographic# E13.0 [19] (🪖..🪨)    military helmet..rock
-1FAA9..1FAAF  ; Extended_Pictographic# E0.0   [7] (🪩..🪯)    <reserved-1FAA9>..<reserved-1FAAF>
+1FAA9..1FAAC  ; Extended_Pictographic# E14.0  [4] (🪩..🪬)    mirror ball..hamsa
+1FAAD..1FAAF  ; Extended_Pictographic# E15.0  [3] (🪭..🪯)    folding hand fan..khanda
 1FAB0..1FAB6  ; Extended_Pictographic# E13.0  [7] (🪰..🪶)    fly..feather
-1FAB7..1FABF  ; Extended_Pictographic# E0.0   [9] (🪷..🪿)    <reserved-1FAB7>..<reserved-1FABF>
+1FAB7..1FABA  ; Extended_Pictographic# E14.0  [4] (🪷..🪺)    lotus..nest with eggs
+1FABB..1FABD  ; Extended_Pictographic# E15.0  [3] (🪻..🪽)    hyacinth..wing
+1FABE         ; Extended_Pictographic# E0.0   [1] (🪾)       <reserved-1FABE>
+1FABF         ; Extended_Pictographic# E15.0  [1] (🪿)       goose
 1FAC0..1FAC2  ; Extended_Pictographic# E13.0  [3] (🫀..🫂)    anatomical heart..people hugging
-1FAC3..1FACF  ; Extended_Pictographic# E0.0  [13] (🫃..🫏)    <reserved-1FAC3>..<reserved-1FACF>
+1FAC3..1FAC5  ; Extended_Pictographic# E14.0  [3] (🫃..🫅)    pregnant man..person with crown
+1FAC6..1FACD  ; Extended_Pictographic# E0.0   [8] (🫆..🫍)    <reserved-1FAC6>..<reserved-1FACD>
+1FACE..1FACF  ; Extended_Pictographic# E15.0  [2] (🫎..🫏)    moose..donkey
 1FAD0..1FAD6  ; Extended_Pictographic# E13.0  [7] (🫐..🫖)    blueberries..teapot
-1FAD7..1FAFF  ; Extended_Pictographic# E0.0  [41] (🫗..🫿)    <reserved-1FAD7>..<reserved-1FAFF>
+1FAD7..1FAD9  ; Extended_Pictographic# E14.0  [3] (🫗..🫙)    pouring liquid..jar
+1FADA..1FADB  ; Extended_Pictographic# E15.0  [2] (🫚..🫛)    ginger root..pea pod
+1FADC..1FADF  ; Extended_Pictographic# E0.0   [4] (🫜..🫟)    <reserved-1FADC>..<reserved-1FADF>
+1FAE0..1FAE7  ; Extended_Pictographic# E14.0  [8] (🫠..🫧)    melting face..bubbles
+1FAE8         ; Extended_Pictographic# E15.0  [1] (🫨)       shaking face
+1FAE9..1FAEF  ; Extended_Pictographic# E0.0   [7] (🫩..🫯)    <reserved-1FAE9>..<reserved-1FAEF>
+1FAF0..1FAF6  ; Extended_Pictographic# E14.0  [7] (🫰..🫶)    hand with index finger and thumb crossed..heart hands
+1FAF7..1FAF8  ; Extended_Pictographic# E15.0  [2] (🫷..🫸)    leftwards pushing hand..rightwards pushing hand
+1FAF9..1FAFF  ; Extended_Pictographic# E0.0   [7] (🫹..🫿)    <reserved-1FAF9>..<reserved-1FAFF>
 1FC00..1FFFD  ; Extended_Pictographic# E0.0[1022] (🰀..🿽)    <reserved-1FC00>..<reserved-1FFFD>
 
 # Total elements: 3537

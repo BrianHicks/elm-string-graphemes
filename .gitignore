@@ -10,3 +10,4 @@
 /size-benchmarks/names-in-withoutSegmentation.txt
 /size-benchmarks/new-names.txt
 /tests/VerifyExamples
+.direnv
